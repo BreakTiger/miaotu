@@ -1,10 +1,56 @@
-/**app.wxss**/
+/* 全局 */
+
 .container {
-  height: 100%;
+  width: 750rpx;
+  height: auto;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+}
+
+/* 弹性 */
+
+.flex {
   display: flex;
+}
+
+.col {
   flex-direction: column;
+}
+
+.fl-w {
+  flex-wrap: wrap;
+}
+
+.fl-align {
   align-items: center;
+}
+
+.fl-jc {
+  justify-content: center;
+}
+
+.fl-jsb {
   justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+}
+
+.fl-jsa {
+  justify-content: space-around;
+}
+
+.fl-jse {
+  justify-content: space-evenly;
+}
+
+.fl-jsd {
+  justify-content: flex-end;
+}
+
+/* 文字大小 */
+
+.f11 {
+  font-size: 11rpx;
+}
+
+.f14 {
+  font-size: 14rpx;
+}

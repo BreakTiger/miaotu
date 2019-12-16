@@ -1,14 +1,39 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/strategy/strategy",
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#1FAFF1",
+    "navigationBarTitleText": "喵途",
+    "navigationBarTextStyle": "white"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "##1FAFF1",
+    "list": [
+      {
+        "iconPath": "img/nav/nav-2.png",
+        "selectedIconPath": "img/nav/nav-1.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "img/nav/nav-4.png",
+        "selectedIconPath": "img/nav/nav-3.png",
+        "pagePath": "pages/strategy/strategy",
+        "text": "商城"
+      },
+      {
+        "iconPath": "img/nav/nav-6.png",
+        "selectedIconPath": "img/nav/nav-5.png",
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  }
 }
