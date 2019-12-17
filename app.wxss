@@ -112,3 +112,24 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
+
+
+/* 下边线 */
+
+.linebottom {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 500;
+  position: relative;
+}
+
+.linebottom::after {
+  content: '';
+  width: 72rpx;
+  height: 8rpx;
+  background: #ffd304;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  opacity: 0.7;
+}
