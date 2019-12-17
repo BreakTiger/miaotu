@@ -1,0 +1,30 @@
+/* 顶部搜索 */
+
+.search-line {
+  width: 100%;
+  padding: 8rpx 0;
+  position: fixed;
+  top: 0;
+}
+
+.locals {
+  margin-left: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.locals>image {
+  width: 14rpx;
+  height: 6rpx;
+  background: black;
+  margin-left: 8rpx;
+}
+
+.search-box {
+  width: 618rpx;
+  height: 60rpx;
+  margin-left: 10rpx;
+}
+
+.search-box>icon {
+  margin: 0 5rpx;
+}

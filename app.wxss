@@ -47,10 +47,36 @@
 
 /* 文字大小 */
 
-.f11 {
-  font-size: 11rpx;
+.f22 {
+  font-size: 22rpx;
 }
 
-.f14 {
-  font-size: 14rpx;
+.f28 {
+  font-size: 28rpx;
+}
+
+/* 文字颜色 */
+
+.c-ff {
+  color: #fff;
+}
+
+.c-C1 {
+  color: #c1c1c1;
+}
+
+/* 背景大小 */
+
+.b-ff {
+  background: #fff;
+}
+
+.b-F1 {
+  background: #1faff1;
+}
+
+/* 圆角 */
+
+.b_r200 {
+  border-radius: 200rpx;
 }

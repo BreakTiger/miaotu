@@ -1,6 +1,19 @@
 <!-- 首页 -->
 <view class="container flex col fl-align">
+  <!-- 置顶搜索栏 -->
+  <view class="search-line flex fl-align f28 b-F1">
+    <view class="locals flex fl-align c-ff">
+      <text>地点</text>
+      <image></image>
+    </view>
+    <view class="search-box flex fl-align b-ff b_r200">
+      <icon type="search" size="28" color="#C1C1C1" />
+      <text class="c-C1">搜索</text>
+    </view>
+  </view>
+
+
   <!-- 轮播图 -->
-  
+
   <!-- 导航 -->
 </view>
