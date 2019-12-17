@@ -28,3 +28,19 @@
 .search-box>icon {
   margin: 0 5rpx;
 }
+
+/* 轮播图 */
+
+.banner {
+  width: 100%;
+  height: 312rpx;
+  margin-top: 76rpx;
+  margin-bottom: 20rpx;
+}
+
+.sw_img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 导航 */
