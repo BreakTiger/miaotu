@@ -17,20 +17,20 @@
     "selectedColor": "##1FAFF1",
     "list": [
       {
-        "iconPath": "img/nav/nav-1.png",
-        "selectedIconPath": "img/nav/nav-4.png",
+        "iconPath": "img/tabber/icon-1.png",
+        "selectedIconPath": "img/tabber/icon-4.png",
         "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
-        "iconPath": "img/nav/nav-2.png",
-        "selectedIconPath": "img/nav/nav-5.png",
+        "iconPath": "img/tabber/icon-2.png",
+        "selectedIconPath": "img/tabber/icon-5.png",
         "pagePath": "pages/strategy/strategy",
         "text": "商城"
       },
       {
-        "iconPath": "img/nav/nav-3.png",
-        "selectedIconPath": "img/nav/nav-6.png",
+        "iconPath": "img/tabber/icon-3.png",
+        "selectedIconPath": "img/tabber/icon-6.png",
         "pagePath": "pages/mine/mine",
         "text": "我的"
       }
