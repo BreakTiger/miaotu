@@ -5,6 +5,7 @@
   padding: 8rpx 0;
   position: fixed;
   top: 0;
+  z-index: 10;
 }
 
 .locals {
@@ -97,10 +98,6 @@
 .seckill-title {
   height: 100%;
   text-indent: 224rpx;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
 }
 
 .seckill-right {
@@ -116,6 +113,8 @@
   border-radius: 12px;
 }
 
+/* 商品列表展示 */
+
 .goods-list-content {
   width: 100%;
 }
@@ -123,4 +122,64 @@
 .list-nav {
   width: 100%;
   height: 108rpx;
+}
+
+/* 下边线 */
+
+.linebottom {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 500;
+  position: relative;
+}
+
+.linebottom::after {
+  content: '';
+  width: 72rpx;
+  height: 8rpx;
+  background: #ffd304;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  opacity: 0.7;
+}
+
+.list-content {
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+
+.list-item {
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  width: 346rpx;
+  height: 488rpx;
+  border-radius: 16rpx;
+}
+
+.list-item>image {
+  width: 346rpx;
+  height: 344rpx;
+  border-radius: 16rpx 16rpx 0rpx 0rpx;
+}
+
+.list-titles {
+  width: 304rpx;
+  height: 60rpx;
+  margin-top: 10rpx;
+  margin-bottom: 26rpx;
+}
+
+.list-img {
+  width: 346rpx;
+  height: 344rpx;
+  
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.list-img>image{
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
 }
