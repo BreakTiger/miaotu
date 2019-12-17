@@ -2,7 +2,13 @@
   "pages": [
     "pages/index/index",
     "pages/strategy/strategy",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/index/place/place",
+    "pages/index/search/search",
+    "pages/index/group/group",
+    "pages/index/free/free",
+    "pages/index/tickets/tickets",
+    "pages/index/sign/sign"
   ],
   "window": {
     "backgroundTextStyle": "light",

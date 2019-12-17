@@ -2,11 +2,11 @@
 <view class="container flex col fl-align">
   <!-- 置顶搜索栏 -->
   <view class="search-line flex fl-align f28 b-F1">
-    <view class="locals flex fl-align c-ff">
+    <view class="locals flex fl-align c-ff" bindtap="toPlace">
       <text>地点</text>
       <image></image>
     </view>
-    <view class="search-box flex fl-align b-ff b_r200">
+    <view class="search-box flex fl-align b-ff b_r200" bindtap="toSearch">
       <icon type="search" size="28" color="#C1C1C1" />
       <text class="c-C1">搜索</text>
     </view>
@@ -21,7 +21,7 @@
   </swiper>
   <!-- 导航 -->
   <view class="nav-line flex fl-align fl-jsa">
-    <block wx:for="{{na_list}}" :wx:key="index">
+    <block wx:for="{{na_list}}" wx:key="index">
       <view class="nav-line-item flex col fl-align f22" data-url="{{item.path}}">
         <image src="{{item.icon}}"></image>
         <text>{{item.name}}</text>
@@ -98,7 +98,4 @@
     </view>
 
   </view>
-
-
-
 </view>

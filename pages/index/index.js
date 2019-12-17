@@ -50,7 +50,7 @@ Page({
       id: 6,
       name: '猎奇'
     }],
-    choice_one:1
+    choice_one: 1
   },
 
   /**
@@ -58,6 +58,18 @@ Page({
    */
   onLoad: function(options) {
 
+  },
+
+  toPlace: function() {
+    wx.navigateTo({
+      url: '/pages/index/place/place',
+    })
+  },
+
+  toSearch:function(){
+    wx.navigateTo({
+      url: '/pages/index/search/search',
+    })
   },
 
   /**
