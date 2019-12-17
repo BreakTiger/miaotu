@@ -47,6 +47,10 @@
 
 /* 文字大小 */
 
+.f20 {
+  font-size: 20rpx;
+}
+
 .f22 {
   font-size: 22rpx;
 }
@@ -65,6 +69,14 @@
   color: #c1c1c1;
 }
 
+.c-38 {
+  color: #fe2438;
+}
+
+.c-66 {
+  color: #666666;
+}
+
 /* 背景大小 */
 
 .b-ff {
@@ -73,6 +85,14 @@
 
 .b-F1 {
   background: #1faff1;
+}
+
+.b-2E {
+  background: #fb2e2e;
+}
+
+.b-F5 {
+  background: #f5f5f5;
 }
 
 /* 圆角 */

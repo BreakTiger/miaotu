@@ -11,26 +11,45 @@ Page({
   data: {
     sw_list: [1, 2], //轮播图
     na_list: [{
-        icon: '',
+        icon: '../../icon/group.png',
         name: '单身拼团',
         path: '',
       },
       {
-        icon: '',
+        icon: '../../icon/free.png',
         name: '助力免单',
         path: '',
       },
       {
-        icon: '',
+        icon: '../../icon/tickets.png',
         name: '门票砍价',
         path: '',
       },
       {
-        icon: '',
+        icon: '../../icon/sign.png',
         name: '现金签到',
         path: '',
       }
-    ]
+    ],
+    goodsnav: [{
+      id: 1,
+      name: '推荐'
+    }, {
+      id: 2,
+      name: '最新'
+    }, {
+      id: 3,
+      name: '本地'
+    }, {
+      id: 4,
+      name: '国外'
+    }, {
+      id: 5,
+      name: '小众'
+    }, {
+      id: 6,
+      name: '猎奇'
+    }, ]
   },
 
   /**

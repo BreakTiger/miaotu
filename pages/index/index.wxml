@@ -21,11 +21,44 @@
   </swiper>
   <!-- 导航 -->
   <view class="nav-line flex fl-align fl-jsa">
+    <block wx:for="{{na_list}}" :wx:key="index">
+      <view class="nav-line-item flex col fl-align f22" data-url="{{item.path}}">
+        <image src="{{item.icon}}"></image>
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+  <!-- 秒杀商品 -->
+  <view class="seckill-line flex fl-align">
+    <view class="seckill-left flex col fl-align">
+      <view class="seckill-left-line-one" style="position: relative;">
+        <view class="seckill-box b_r200 flex fl-align f20">
+          <text class="c-ff b-2E b_r200">爆款秒杀</text>
+          <text class="c-38">00:12:32</text>
+        </view>
+        <view class="seckill-title f28">日本岛旅游旅6天5晚旅游普吉纯玩半自由行跟团游亲子111111111111111111111</view>
+      </view>
+      <view class="seckill-left-line-two flex fl-align fl-jsb f20">
+        <text class="c-38">¥1235.00</text>
+        <text>23334人在抢</text>
+      </view>
+    </view>
+    <view class="seckill-right">
+      <image src="../../resources/1.png"></image>
+    </view>
+  </view>
+  <!-- 商品列表展示 -->
+  <view class="goods-list-content flex col fl-align b-F5">
 
-    <view class="nav-line-item">
-      <image src="icon/group.png"></image>
+    <!-- 导航 -->
+    <view class="list-nav flex fl-align fl-jsa c-66 f28">
+      <block wx:for="{{goodsnav}}" wx:key="index">
+        <text>{{item.name}}</text>
+      </block>
     </view>
 
-
   </view>
+
+
+
 </view>
