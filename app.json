@@ -9,7 +9,8 @@
     "pages/index/free/free",
     "pages/index/tickets/tickets",
     "pages/index/sign/sign",
-    "pages/index/seckill/seckill"
+    "pages/index/seckill/seckill",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

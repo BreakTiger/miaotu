@@ -1,2 +1,7 @@
-<!--pages/index/search/search.wxml-->
-<text>pages/index/search/search.wxml</text>
+<!-- 搜索 -->
+<view class="container flex col fl-align b-ff">
+  <!-- 搜索 -->
+  <view class="search-line flex fl-align">
+  
+  </view>
+</view>
