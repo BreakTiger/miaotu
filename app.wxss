@@ -1,8 +1,12 @@
 /* 全局 */
 
+page {
+  height: 100%;
+}
+
 .container {
   width: 750rpx;
-  height: auto;
+  height: 100%;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
 }
@@ -55,12 +59,16 @@
   font-size: 22rpx;
 }
 
-.f24{
+.f24 {
   font-size: 24rpx;
 }
 
 .f28 {
   font-size: 28rpx;
+}
+
+.f32 {
+  font-size: 32rpx;
 }
 
 /* 文字颜色 */
@@ -78,7 +86,17 @@
 }
 
 .c-66 {
-  color: #666666;
+  color: #666;
+}
+
+/* 文字粗细 */
+
+.f-w3 {
+  font-weight: 300;
+}
+
+.f-w5 {
+  font-weight: 500;
 }
 
 /* 背景大小 */
@@ -105,14 +123,12 @@
   border-radius: 200rpx;
 }
 
-
-.climp2{
+.climp2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
 }
-
 
 /* 下边线 */
 
@@ -132,4 +148,8 @@
   bottom: 0;
   left: 0;
   opacity: 0.7;
+}
+
+.t-ac {
+  text-align: center;
 }

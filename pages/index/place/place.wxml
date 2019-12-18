@@ -1,2 +1,24 @@
-<!--pages/index/place/place.wxml-->
-<text>pages/index/place/place.wxml</text>
+<view class="container flex fl-align">
+  <!-- 左边 -->
+  <view class="left-line flex col fl-align f28 c-66 b-F5">
+    <text class="{{choice_one==item.id?'lineleft':''}}" wx:for="{{leftlist}}" wx:key="index">{{item.name}}</text>
+  </view>
+  <!-- 右边 -->
+  <view class="right-line flex col fl-align">
+    <view class="search-line flex fl-align fl-jc b-ff">
+      <view class="search flex fl-align f24 c-66 b-F5 b_r200">
+        <icon type="search" size="30"></icon>
+        <text>搜索你喜欢的</text>
+      </view>
+    </view>
+    <view class="right-content flex fl-w">
+      <view class="right-list-item" wx:for="{{rightlist}}">
+        <image src="{{item.imgpath}}"></image>
+        <view class="right-list-item-info flex col fl-align fl-jc c-ff">
+          <text class="f32 f-w5">{{item.name}}</text>
+          <text class="f20 f-w3">{{item.spell}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

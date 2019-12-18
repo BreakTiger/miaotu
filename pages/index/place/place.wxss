@@ -1,1 +1,82 @@
-/* pages/index/place/place.wxss */
+/* 左边 */
+
+.left-line {
+  width: 188rpx;
+  height: 100%;
+}
+
+.left-line>text {
+  width: 100%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lineleft {
+  font-size: 32rpx;
+  font-weight: 500;
+  background: #fff;
+  color: #1faff1;
+  position: relative;
+}
+
+.lineleft::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  width: 8rpx;
+  height: 88rpx;
+  background: linear-gradient(#41d8f9, #1faff1);
+}
+
+/* 右边 */
+
+.right-line {
+  width: 562rpx;
+  height: 100%;
+  overflow: scroll;
+}
+
+.search-line {
+  width: 562rpx;
+  height: 88rpx;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10
+}
+
+.search {
+  width: 480rpx;
+  height: 52rpx;
+}
+
+.right-content {
+  width: 100%;
+  height: auto;
+  margin-top: 88rpx;
+}
+
+.right-list-item {
+  width: 250rpx;
+  height: 180rpx;
+  margin-left: 22rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.right-list-item>image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.right-list-item-info {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

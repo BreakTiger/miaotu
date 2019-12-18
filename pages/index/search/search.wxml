@@ -1,7 +1,30 @@
 <!-- 搜索 -->
 <view class="container flex col fl-align b-ff">
   <!-- 搜索 -->
-  <view class="search-line flex fl-align">
-  
+  <view class="search-line flex fl-align fl-jsa">
+    <view class="search-box flex fl-align b_r200 b-F5">
+      <icon type="search" size="28" color="#C1C1C1"></icon>
+      <input placeholder="搜你喜欢"></input>
+    </view>
+    <text class="f28">确定</text>
+  </view>
+  <!-- 历史搜索 -->
+  <view class="history flex col fl-align">
+    <view class="title-line flex fl-align fl-jsb">
+      <text class="f28">历史搜索</text>
+      <image class="delete"></image>
+    </view>
+    <view class="his-list flex fl-w">
+      <view class="list-item f24 b-F5" wx:for="{{hislist}}" wx:key="index">{{item.name}}</view>
+    </view>
+  </view>
+  <!-- 热门搜索 -->
+  <view class="hot flex col fl-align">
+    <view class="title-line flex fl-align">
+      <text class="f28">热门搜索</text>
+    </view>
+    <view class="hot-list flex fl-w">
+      <view class="list-item f24 b-F5" wx:for="{{hotlist}}" wx:key="index">{{item.name}}</view>
+    </view>
   </view>
 </view>

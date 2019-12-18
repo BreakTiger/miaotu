@@ -1,4 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "地点"
+  "navigationBarTitleText": "地点",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black"
 }
