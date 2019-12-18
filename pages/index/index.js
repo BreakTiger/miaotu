@@ -13,22 +13,22 @@ Page({
     na_list: [{
         icon: '../../icon/group.png',
         name: '单身拼团',
-        path: '',
+        path: '/pages/index/group/group',
       },
       {
         icon: '../../icon/free.png',
         name: '助力免单',
-        path: '',
+        path: '/pages/index/free/free',
       },
       {
         icon: '../../icon/tickets.png',
         name: '门票砍价',
-        path: '',
+        path: '/pages/index/tickets/tickets',
       },
       {
         icon: '../../icon/sign.png',
         name: '现金签到',
-        path: '',
+        path: '/pages/index/sign/sign',
       }
     ],
     goodsnav: [{
@@ -66,7 +66,7 @@ Page({
     })
   },
 
-  toSearch:function(){
+  toSearch: function() {
     wx.navigateTo({
       url: '/pages/index/search/search',
     })

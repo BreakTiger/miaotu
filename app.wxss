@@ -123,6 +123,10 @@ page {
   border-radius: 200rpx;
 }
 
+.b_r12{
+  border-radius: 12rpx;
+}
+
 .climp2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;

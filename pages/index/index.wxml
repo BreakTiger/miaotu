@@ -22,7 +22,7 @@
   <!-- 导航 -->
   <view class="nav-line flex fl-align fl-jsa">
     <block wx:for="{{na_list}}" wx:key="index">
-      <view class="nav-line-item flex col fl-align f22" data-url="{{item.path}}">
+      <view class="nav-line-item flex col fl-align f22">
         <image src="{{item.icon}}"></image>
         <text>{{item.name}}</text>
       </view>
