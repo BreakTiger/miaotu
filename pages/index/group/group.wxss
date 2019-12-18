@@ -36,6 +36,7 @@ page {
 .list-item {
   width: 710rpx;
   height: 270rpx;
+  margin-bottom: 16rpx;
 }
 
 .list-item>image {
@@ -88,8 +89,14 @@ page {
 }
 
 .join {
-  width: 98rpx;
+  width: 100rpx;
   height: 28rpx;
-  background: black;
   position: relative;
+}
+
+.join>image {
+  width: 28rpx;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
 }

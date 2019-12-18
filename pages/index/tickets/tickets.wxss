@@ -1,1 +1,49 @@
-/* pages/index/tickets/tickets.wxss */
+.container {
+  height: auto;
+}
+
+.top-banner {
+  width: 100%;
+  height: 418rpx;
+}
+
+.list-content {
+  width: 100%;
+  height: auto;
+  padding-bottom: 20rpx;
+  background: #FFC18E;
+}
+
+.list-item {
+  width: 346rpx;
+  height: 588rpx;
+  border-radius: 16rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.list-item>image {
+  width: 346rpx;
+  height: 344rpx;
+  border-radius: 16rpx 16rpx 0rpx 0rpx;
+}
+
+.list-item-title {
+  width: 304rpx;
+  height: 60rpx;
+  margin-top: 10rpx;
+  margin-bottom: 24rpx;
+}
+
+.price-line {
+  width: 304rpx;
+  margin-bottom: 22rpx;
+}
+
+.freeget {
+  line-height: 80rpx;
+  width: 304rpx;
+  height: 80rpx;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+  border-radius: 12rpx;
+}
