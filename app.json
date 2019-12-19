@@ -10,7 +10,8 @@
     "pages/index/tickets/tickets",
     "pages/index/sign/sign",
     "pages/index/seckill/seckill",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/index/goods/goods"
   ],
   "window": {
     "backgroundTextStyle": "light",
