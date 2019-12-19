@@ -13,7 +13,7 @@
   </view>
   <!-- 轮播图 -->
   <view class="banner flex col fl-align">
-    <swiper class="banner_box" indicator-dots="true" autoplay="true" indicator-active-color="#fff">
+    <swiper class="banner_box" indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="2000">
       <swiper-item wx:for="{{sw_list}}" wx:key="index">
         <image src="../../resources/1.png" class="sw_img"></image>
       </swiper-item>
