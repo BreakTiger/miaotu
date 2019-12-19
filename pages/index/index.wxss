@@ -35,18 +35,13 @@
 .banner {
   width: 100%;
   height: 312rpx;
-  margin-top: 76rpx;
+  margin-top: 75rpx;
   margin-bottom: 20rpx;
   border-radius: 100% 100% 100% 100% / 0 0 15% 15%;
   overflow: hidden;
 }
 
-.banner_box {
-  width: 100%;
-  height: 100%;
-}
-
-.sw_img {
+.banner_box, .sw_img, .seckill-right image, .list-img>image {
   width: 100%;
   height: 100%;
 }
@@ -65,7 +60,7 @@
 
 /* 秒杀 */
 
-.seckill-line, .goods-list-content {
+.seckill-line, .goods-list-content, .seckill-left-line-two {
   width: 100%;
 }
 
@@ -79,10 +74,6 @@
   width: 100%;
   height: 76.8rpx;
   margin-bottom: 50rpx;
-}
-
-.seckill-left-line-two {
-  width: 100%;
 }
 
 .seckill-box {
@@ -110,12 +101,6 @@
   margin-bottom: 24rpx;
 }
 
-.seckill-right image {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-}
-
 /* 商品列表展示 */
 
 .list-nav {
@@ -133,7 +118,6 @@
   margin-left: 20rpx;
   width: 346rpx;
   height: 488rpx;
-  border-radius: 16rpx;
 }
 
 .list-item>image {
@@ -144,7 +128,6 @@
 
 .list-titles {
   width: 304rpx;
-  height: 60rpx;
   margin-top: 10rpx;
   margin-bottom: 26rpx;
 }
@@ -154,10 +137,4 @@
   height: 344rpx;
   margin-top: 20rpx;
   margin-left: 20rpx;
-}
-
-.list-img>image {
-  width: 100%;
-  height: 100%;
-  border-radius: 16rpx;
 }

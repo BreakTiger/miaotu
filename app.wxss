@@ -144,6 +144,12 @@ page {
   border-radius: 12rpx;
 }
 
+.b_r16 {
+  border-radius: 16rpx;
+}
+
+/* 超出省略 */
+
 .climp2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
