@@ -12,21 +12,19 @@
     </view>
   </view>
   <!-- 轮播图 -->
-  <swiper class="banner" indicator-dots="true" autoplay="true" indicator-active-color="#fff">
-    <block wx:for="{{sw_list}}" wx:key="index">
-      <swiper-item>
+  <view class="banner flex col fl-align">
+    <swiper class="banner_box" indicator-dots="true" autoplay="true" indicator-active-color="#fff">
+      <swiper-item wx:for="{{sw_list}}" wx:key="index">
         <image src="../../resources/1.png" class="sw_img"></image>
       </swiper-item>
-    </block>
-  </swiper>
+    </swiper>
+  </view>
   <!-- 导航 -->
   <view class="nav-line flex fl-align fl-jsa">
-    <block wx:for="{{na_list}}" wx:key="index">
-      <view class="nav-line-item flex col fl-align f22">
-        <image src="{{item.icon}}"></image>
-        <text>{{item.name}}</text>
-      </view>
-    </block>
+    <view class="nav-line-item flex col fl-align f22" wx:for="{{na_list}}" wx:key="index" data-url="{{item.path}}" bindtap="toNav">
+      <image src="{{item.icon}}"></image>
+      <text>{{item.name}}</text>
+    </view>
   </view>
   <!-- 秒杀商品 -->
   <view class="seckill-line flex fl-align">
@@ -36,7 +34,7 @@
           <text class="c-ff b-2E b_r200">爆款秒杀</text>
           <text class="c-38">00:12:32</text>
         </view>
-        <view class="seckill-title climp2 f28">日本岛旅游旅6天5晚旅游普吉纯玩半自由行跟团游亲子111111111111111111111</view>
+        <view class="seckill-title climp2 f28">日本岛旅游旅6天5晚旅游普吉纯玩半自由 行跟团游亲子111111111111111111111</view>
       </view>
       <view class="seckill-left-line-two flex fl-align fl-jsb f20">
         <text class="c-38">¥1235.00</text>
@@ -59,7 +57,8 @@
     <view class="list-content flex fl-w b-F5">
       <view class="list-item flex col fl-align b-ff">
         <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）</view>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
         <view class="flex fl-align f28 c-38" style="width: 304rpx;">
           <text>¥234</text>
         </view>
@@ -69,33 +68,37 @@
       </view>
       <view class="list-item flex col fl-align b-ff">
         <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）</view>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
         <view class="flex fl-align f28 c-38" style="width: 304rpx;">
           <text>¥234</text>
         </view>
       </view>
       <view class="list-item flex col fl-align b-ff">
         <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）</view>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
         <view class="flex fl-align f28 c-38" style="width: 304rpx;">
           <text>¥234</text>
         </view>
       </view>
       <view class="list-item flex col fl-align b-ff">
         <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）</view>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
         <view class="flex fl-align f28 c-38" style="width: 304rpx;">
           <text>¥234</text>
         </view>
       </view>
       <view class="list-item flex col fl-align b-ff">
         <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）</view>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
         <view class="flex fl-align f28 c-38" style="width: 304rpx;">
           <text>¥234</text>
         </view>
       </view>
     </view>
-
   </view>
+
 </view>

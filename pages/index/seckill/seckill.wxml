@@ -1,2 +1,35 @@
-<!--pages/index/seckill/seckill.wxml-->
-<text>pages/index/seckill/seckill.wxml</text>
+<view class="container flex col fl-align">
+  <view class="top-line flex fl-align b-ff">
+    <image></image>
+    <view class="scroll-content">
+      <scroll-view scroll-x="true" class="scroll-list flex">
+        <view class="scroll-list-item {{item.isopen==true?'c-00':'c-66 '}}" wx:for="{{timelist}}" wx:key="index">
+          <text class="f-w6">{{item.time}}</text>
+          <text class="f20 f-w4 linebottoms" wx:if="{{item.isopen}}">抢购中</text>
+          <text class="f20 f-w4" wx:if="{{!item.isopen}}">即将开始</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="list-content flex col fl-align">
+    <view class="list-content-item flex fl-align fl-jsb b-ff" wx:for="{{goodslist}}" wx:key="index">
+      <image src="../../../resources/1.png"></image>
+      <view class="list-content-item-info flex col">
+        <view class="title-line climp2 c-45 f28">【最佳欧洲③】冰与雪之夏：霞慕尼 & 勃朗峰地区（Chamonix </view>
+        <text class="labers t-ac c-38 f20">爆款</text>
+        <text class="f28 c-38">￥125.00起</text>
+        <view class="state flex col fl-align">
+          <text class="c-66 f20">已拼234单</text>
+          <view class="flex col fl-align fl-jse b_r12 c-ff">
+            <text class="f24">去拼团</text>
+            <view class="flex fl-align fl-jsa">
+              <progress percent="50" activeColor="white" backgroundColor="rgba(255,255,255,0.5)" border-radius="190"></progress>
+              <text class="f18">50%</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>

@@ -6,7 +6,7 @@ page {
 
 .container {
   width: 750rpx;
-  height: 100%;
+  height: auto;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   overflow: auto;
@@ -52,6 +52,10 @@ page {
 
 /* 文字大小 */
 
+.f18 {
+  font-size: 18rpx;
+}
+
 .f20 {
   font-size: 20rpx;
 }
@@ -72,6 +76,10 @@ page {
   font-size: 32rpx;
 }
 
+.f40 {
+  font-size: 40rpx;
+}
+
 /* 文字颜色 */
 
 .c-ff {
@@ -90,6 +98,10 @@ page {
   color: #666;
 }
 
+.c-00 {
+  color: #000;
+}
+
 /* 文字粗细 */
 
 .f-w3 {
@@ -98,6 +110,10 @@ page {
 
 .f-w5 {
   font-weight: 500;
+}
+
+.f-w6 {
+  font-weight: 600;
 }
 
 /* 背景大小 */

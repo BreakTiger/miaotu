@@ -1,5 +1,5 @@
-.container {
-  height: auto;
+page {
+  background: #ffc18e;
 }
 
 .top-banner {
@@ -11,7 +11,6 @@
   width: 100%;
   height: auto;
   padding-bottom: 20rpx;
-  background: #FFC18E;
 }
 
 .list-item {

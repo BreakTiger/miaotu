@@ -45,7 +45,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/index/seckill/seckill",
+					"pathName": "pages/index/seckill/seckill",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }

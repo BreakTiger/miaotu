@@ -14,9 +14,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#1FAFF1",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "喵途",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
