@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    
   },
 
   /**
@@ -21,13 +21,13 @@ Page({
     })
   },
 
-  toShop:function(){
+  toShop: function() {
     wx.navigateTo({
       url: '/pages/index/goods/shop/shop',
     })
   },
 
-  toOrder:function(){
+  toOrder: function() {
     wx.navigateTo({
       url: '/pages/index/goods/goods_buy/goods_buy',
     })

@@ -1,8 +1,41 @@
 <view class="container flex col fl-align">
   <!-- 出发地 -->
-  <view class="  b-ff">
-  
+  <view class="depart b-ff flex col">
+    <text class="f32 c-00 f-w5">出发地</text>
+    <view class="depart-list flex fl-w">
+      <text class="t-ac c-66 b_r12 {{item.id==choice_two?'depart-list-item':''}}" wx:for="{{depart}}" wx:key="index">{{item.name}}</text>
+    </view>
   </view>
   <!-- 套餐类型 -->
-  <view class="type b-ff"></view>
+  <view class="type b-ff flex col">
+    <text class="f32 c-00 f-w5">套餐类型</text>
+    <view class="type-list flex fl-w">
+      <text class="c-66 b_r12 {{item.id==choice_two?'type-list-item':''}}" wx:for="{{types}}" wx:key="index">{{item.name}}</text>
+    </view>
+  </view>
+  <!-- 出发日期 -->
+  <view class="departure b-ff flex col">
+    <text class="f32 c-00 f-w5">出发日期</text>
+    <!-- 现在日期 -->
+    <view class="nowDates flex fl-align fl-jsb">
+      <text style="margin-left: 40rpx;">{{todayTime}}</text>
+      <view class="controls flex fl-align fl-jsb">
+        <image bindtap="lastMonth"></image>
+        <image bindtap="nextMonth"></image>
+      </view>
+    </view>
+    <!-- 日历 -->
+    <view class="calendar-content b-ff flex col fl-align">
+      <!-- 星期 -->
+      <view class="weeks flex fl-align fl-jsb">
+        <view class="flex fl-align fl-jc" wx:for="{{week}}" wx:key="index">{{item}}</view>
+      </view>
+      <!-- 日+价格 -->
+      <view class="days-content">
+
+      </view>
+
+    </view>
+
+  </view>
 </view>
