@@ -1,5 +1,4 @@
 <view class="container flex col fl-align">
-
   <view class="top-line flex fl-align fl-jsa b-ff">
     <text class="c-00 f28 f-w5 linebottom">商品</text>
     <text class="c-00 f28 f-w5">详情</text>
@@ -20,7 +19,48 @@
         <text>已售：12343</text>
       </view>
     </view>
-
+    <view class="laber-line">
+      <text class="labers c-38 f20 t-ac">限时立减</text>
+    </view>
+    <view class="hint c-38 f20">
+      <text class="b_r200 t-ac">秒杀预告</text>
+      <text>09-26  19:00开抢</text>
+    </view>
+  </view>
+  <view class="hint-line flex fl-align fl-jsa c-00">
+    <image></image>
+    <view class="f20 f-w5">二次确认</view>
+    <view class="climp2 f24 f-w3">付款成功后，需待上架二次确认是否可以出行，请至少提前三天预订</view>
+  </view>
+  <!-- 点评 -->
+  <view class="review flex col b-ff">
+    <text class="f32 c-00 f-w5">点评</text>
+    <view class="discuss flex fl-jsb">
+      <image></image>
+      <view class="f28 climp2">掌柜的服务态度真好，发货很快。商品质量也相当不错。太喜欢了，谢谢！</view>
+    </view>
+    <view class="allreview flex fl-align fl-jc f24">
+      <text>查看全部评价</text>
+      <image></image>
+    </view>
+  </view>
+  <!-- 店铺 -->
+  <view class="shoop-line flex fl-align fl-jsa b-ff">
+    <image class="b_r12"></image>
+    <view class="shop-info flex col fl-jse">
+      <text class="f28 c-00 f-w5 climp2">菜菜job旅游社</text>
+      <view class="flex fl-align fl-jsb">
+        <view class="flex fl-align">
+          <image></image>
+          <text class="c-66 f24 f-w3">入驻商家</text>
+        </view>
+        <view class="flex fl-align">
+          <image></image>
+          <text class="c-66 f24 f-w3">认证商家</text>
+        </view>
+      </view>
+    </view>
+    <view class="shops c-ff f24 b_r200 t-ac">店铺</view>
   </view>
 
 </view>

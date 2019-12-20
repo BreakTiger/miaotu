@@ -11,7 +11,8 @@
     "pages/index/sign/sign",
     "pages/index/seckill/seckill",
     "pages/login/login",
-    "pages/index/goods/goods"
+    "pages/index/goods/goods",
+    "pages/index/goods/shop/shop"
   ],
   "window": {
     "backgroundTextStyle": "light",
