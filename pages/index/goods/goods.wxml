@@ -39,13 +39,13 @@
       <image></image>
       <view class="f28 climp2">掌柜的服务态度真好，发货很快。商品质量也相当不错。太喜欢了，谢谢！</view>
     </view>
-    <view class="allreview flex fl-align fl-jc f24">
+    <view class="allreview flex fl-align fl-jc f24" bindtap="toEvaluate">
       <text>查看全部评价</text>
       <image></image>
     </view>
   </view>
   <!-- 店铺 -->
-  <view class="shoop-line flex fl-align fl-jsa b-ff">
+  <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop">
     <image class="b_r12"></image>
     <view class="shop-info flex col fl-jse">
       <text class="f28 c-00 f-w5 climp2">菜菜job旅游社</text>
@@ -62,5 +62,46 @@
     </view>
     <view class="shops c-ff f24 b_r200 t-ac">店铺</view>
   </view>
-
+  <!-- 简介 -->
+  <view class="abstract flex col fl-align b-ff">
+    <view class="f32 c-00 f-w5">产品简介</view>
+    <view class="f28 c-66 f-w4">请务必跟客服核实座位价格再付款！！ 请务必跟客服核实座位价格再付款！！ 加微信咨询：13114983600 咨询后付款 多种航空：搭乘全日空/日航/国航等航空，享受舒适的空中飞行体验 直飞航班：北京/天津直飞，一站直达，省去转机时间以及旅途劳累 行程自由：单机票产品，可根据自己的实际需求安排行程，任意搭配 开口航班：去程与回程是不同的目的地，无需走回头路，节省更多时间游玩 可少请假：出发时间包含全年假期，可少请假，适合不好请假的上班族
+    </view>
+  </view>
+  <!-- 交通信息 -->
+  <view class="traffic flex col fl-align b-ff">
+    <text class="f32 c-00 f-w5">交通信息</text>
+    <view class="f20 c-66 f-w3">交通信息仅供参考，最终以供应商确认为准，飞行时长以实际为准</view>
+    <!-- 富文本 -->
+    <view></view>
+  </view>
+  <!-- 景点详情 -->
+  <view class="attractions flex col fl-align b-ff">
+    <text class="f32 c-00 f-w5">景点详情</text>
+    <!-- 富文本 -->
+    <view></view>
+    <text class="f32 c-00 f-w5">购买需知道</text>
+    <!-- 富文本 -->
+    <view></view>
+  </view>
+  <!-- 回到顶部 -->
+  <view class="back flex fl-align fl-jc">
+    <image src="../../../icon/top.png"></image>
+  </view>
+  <!-- 底部栏 -->
+  <view class="tabbers flex fl-align b-ff">
+    <view class="icons flex col fl-align fl-jc">
+      <image src="../../../icon/talk.png"></image>
+      <text class="f20 c-66 f-w4">咨询</text>
+    </view>
+    <view class="icons flex col fl-align fl-jc">
+      <image src="../../../icon/collect.png"></image>
+      <text class="f20 c-66 f-w4">收藏</text>
+    </view>
+    <view class="icons flex col fl-align fl-jc">
+      <image src="../../../icon/share.png"></image>
+      <text class="f20 c-66 f-w4">分享</text>
+    </view>
+    <view class="get t-ac f32 c-ff b_r200" bindtap="toOrder">¥1600 立即预订</view>
+  </view>
 </view>

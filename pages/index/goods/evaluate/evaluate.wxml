@@ -1,0 +1,12 @@
+<view class="container flex col fl-align b-ff">
+  <view class="list-item flex fl-jsb" wx:for="{{list}}" wx:key="index">
+    <image></image>
+    <view class="item-info">
+      <view class="flex fl-align fl-jsb">
+        <text class="f24 c-66">菜菜猪</text>
+        <text class="f20 c-CC">2019-12-30</text>
+      </view>
+      <view class="f28 c-00">东京去啦六七次啦，这次价格很好。</view>
+    </view>
+  </view>
+</view>

@@ -47,9 +47,9 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/index/goods/goods",
-					"pathName": "pages/index/goods/goods",
+					"id": 0,
+					"name": "pages/index/goods/goods_buy/goods_buy",
+					"pathName": "pages/index/goods/goods_buy/goods_buy",
 					"query": "",
 					"scene": null
 				}
