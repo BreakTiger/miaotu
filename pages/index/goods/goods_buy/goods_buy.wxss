@@ -2,6 +2,8 @@ page {
   background: #f5f5f5;
 }
 
+/* 出发地 + 套餐类型 */
+
 .depart, .type {
   width: 100%;
   padding-top: 36rpx;
@@ -9,7 +11,7 @@ page {
   margin-bottom: 8rpx;
 }
 
-.depart>text, .type>text, .departure>text {
+.depart>text, .type>text, .departure>text, .buyNums>text {
   margin-left: 40rpx;
 }
 
@@ -46,6 +48,8 @@ page {
   color: #1faff1;
 }
 
+/* 日历 */
+
 .departure {
   width: 100%;
   margin-bottom: 8rpx;
@@ -73,10 +77,6 @@ page {
   background: black;
 }
 
-.calendar-content {
-  width: 100%;
-}
-
 .weeks {
   width: 100%;
 }
@@ -86,14 +86,86 @@ page {
   height: 68rpx;
 }
 
-.weeks>view:first-child {
+.calendar-content {
+  width: 100%;
+}
+
+.calendar-content-row {
+  width: 100%;
+  height: 68rpx;
+  margin: 10rpx 0;
+}
+
+.calendar-content-col {
+  width: 36px;
+  height: 100%;
+}
+
+.calendar-list-item {
+  width: 100%;
+  height: 100%;
+}
+
+/* 购买数量 */
+
+.buyNums {
+  width: 100%;
+  margin-bottom: 278rpx;
+}
+
+.buyNums>text {
+  padding-top: 36rpx;
+  padding-bottom: 16rpx;
+}
+
+.line {
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.line>text {
   margin-left: 40rpx;
 }
 
-.weeks>view:last-child {
+.number-control {
+  width: 164rpx;
+  height: 48rpx;
   margin-right: 40rpx;
 }
 
-.days-content {
+.number-control text {
+  width: 48rpx;
+  height: 100%;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+}
+
+.number-control input {
+  width: 48rpx;
+  height: 100%;
+}
+
+/* 底部栏 */
+
+.bottom-line {
   width: 100%;
+  padding: 16rpx 0;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+}
+
+.bottom-line>view:first-child {
+  margin-left: 40rpx;
+}
+
+.bottom-line>view:last-child {
+  margin-right: 40rpx;
+}
+
+.sure {
+  width: 300rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
 }

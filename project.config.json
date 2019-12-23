@@ -45,15 +45,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "pages/index/goods/goods_buy/goods_buy",
-					"pathName": "pages/index/goods/goods_buy/goods_buy",
-					"query": "",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

@@ -157,6 +157,13 @@ page {
   overflow: hidden;
 }
 
+.climp3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 /* 下边线 */
 
 .linebottom {
