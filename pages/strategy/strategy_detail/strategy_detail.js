@@ -1,4 +1,4 @@
-// pages/strategy/strategy.js
+// pages/strategy/strategy_detail/strategy_detail.js
 Page({
 
   /**

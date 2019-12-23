@@ -1,4 +1,4 @@
-// pages/strategy/strategy.js
+// pages/strategy/send/send.js
 Page({
 
   /**

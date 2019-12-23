@@ -45,7 +45,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/strategy/strategy",
+					"pathName": "pages/strategy/strategy",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }
