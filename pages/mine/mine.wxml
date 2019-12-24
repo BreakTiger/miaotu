@@ -46,7 +46,7 @@
     <text class="f28 c-00">我的游记</text>
     <view class="flex fl-align fl-jsb" bindtap="totravel">
       <view class="travel-image">
-        <image src="../../resources/2.png" wx:for="12345"></image>
+        <image src="../../resources/2.png" wx:for="12345" wx:key="index"></image>
       </view>
       <image></image>
     </view>
