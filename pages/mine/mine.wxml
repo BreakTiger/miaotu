@@ -30,7 +30,7 @@
     </view>
     <view class="card-content b_r12 flex fl-align fl-jsb">
       <text class="level-name f28 f-w5">大众会员</text>
-      <text class="up_member f20 c-66 b_r200 t-ac">升级会员 ></text>
+      <text class="up_member f20 c-66 b_r200 t-ac" bindtap="toUpmembers">升级会员 ></text>
     </view>
     <!-- 未登录 -->
   </view>
