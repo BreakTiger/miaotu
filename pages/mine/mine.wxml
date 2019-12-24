@@ -36,7 +36,7 @@
   </view>
   <!-- 导航栏 -->
   <view class="nav-content flex fl-align fl-jsa b-ff b_r12">
-    <view class="nav-list flex col fl-align" wx:for="{{nav}}" wx:key="index">
+    <view class="nav-list flex col fl-align" wx:for="{{nav}}" wx:key="index" bindtap="toNav" data-url="{{item.path}}">
       <image class="icons" src="{{item.icon}}"></image>
       <text class="f20 c-66">{{item.name}}</text>
     </view>
@@ -44,7 +44,7 @@
   <!-- 我的游记 -->
   <view class="travel flex fl-align fl-jsb b-ff b_r12">
     <text class="f28 c-00">我的游记</text>
-    <view class="flex fl-align fl-jsb">
+    <view class="flex fl-align fl-jsb" bindtap="totravel">
       <view class="travel-image">
         <image src="../../resources/2.png" wx:for="12345"></image>
       </view>
@@ -104,6 +104,4 @@
   <view class="send-btn b_r200 flex fl-align fl-jc" bindtap="tosend">
     <image></image>
   </view>
-
-
 </view>

@@ -17,7 +17,12 @@
     "pages/index/goods/goods_buy/goods_buy",
     "pages/index/goods/order/order",
     "pages/strategy/send/send",
-    "pages/strategy/strategy_detail/strategy_detail"
+    "pages/strategy/strategy_detail/strategy_detail",
+    "pages/mine/track/track",
+    "pages/mine/order/order",
+    "pages/mine/coupon/coupon",
+    "pages/mine/wallet/wallet",
+    "pages/mine/travel/travel"
   ],
   "window": {
     "backgroundTextStyle": "light",

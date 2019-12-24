@@ -13,25 +13,25 @@ Page({
         id: 1,
         icon: '../../icon/track.png',
         name: '足迹',
-        path: ''
+        path: '/pages/mine/track/track'
       },
       {
         id: 2,
         icon: '../../icon/order.png',
         name: '订单',
-        path: ''
+        path: '/pages/mine/order/order'
       },
       {
         id: 3,
         icon: '../../icon/certificates.png',
         name: '礼券',
-        path: ''
+        path: '/pages/mine/coupon/coupon'
       },
       {
         id: 4,
         icon: '../../icon/wallet.png',
         name: '钱包',
-        path: ''
+        path: '/pages/mine/wallet/wallet'
       }
     ]
   },
@@ -41,6 +41,19 @@ Page({
    */
   onLoad: function(options) {
 
+  },
+
+  toNav: function(e) {
+    var url = e.currentTarget.dataset.url
+    wx.navigateTo({
+      url: url,
+    })
+  },
+
+  totravel:function(){
+    wx.navigateTo({
+      url: '/pages/mine/travel/travel',
+    })
   },
 
   /**
