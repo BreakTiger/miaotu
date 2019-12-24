@@ -1,5 +1,8 @@
 //app.js
+import { ToastPannel } from './component/toastTest/toastTest'
+var fileData = require('/utils/config.js')
 App({
+  ToastPannel,
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -10,6 +13,30 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        var url = "https://mt.dt5555.cn/portal/Public/getOpenid"
+        wx.request({
+          url: url,
+          data: {code: res.code },
+          method: 'POST',
+          header: {
+            'content-type': 'application/json',
+          },
+          success: function (res) {
+            console.log(res.data)
+            wx.setStorage({
+              key: 'openid',
+              data: res.data.openid
+            })
+            wx.setStorage({
+              key: 'session_key',
+              data: res.data.session_key
+            })
+            wx.setStorage({
+              key: 'user_id',
+              data: res.data.id
+            })
+          }
+        })
       }
     })
     // 获取用户信息
@@ -32,6 +59,35 @@ App({
         }
       }
     })
+  },
+  //配置信息
+  configData: {
+    miaotu: fileData.miaotu,
+    titles: fileData.titles
+  },
+  //提示框
+  show: function (content, icon) {
+    wx.showToast({
+      title: content,
+      icon: icon,
+      duration: 2000
+    })
+
+    setTimeout(function () {
+      wx.hideToast()
+    }, 2000)
+  },
+  goTop: function (e) {  // 一键回到顶部
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
   },
   globalData: {
     userInfo: null

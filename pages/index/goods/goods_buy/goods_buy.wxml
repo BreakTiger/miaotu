@@ -1,3 +1,5 @@
+<import src="../../../../component/toastTest/toastTest.wxml" />
+<template is="toast" data="{{ ..._toast_ }}" />
 <view class="container flex col fl-align">
   <!-- 出发地 -->
   <view class="depart b-ff flex col">
