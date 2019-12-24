@@ -1,3 +1,5 @@
+<import src="../../../../component/toastTest/toastTest.wxml"/>
+<template is="toast" data="{{ ..._toast_ }}"/>
 <view class="container flex col fl-align">
   <!-- 出发地 -->
   <view class="  b-ff">
@@ -5,4 +7,5 @@
   </view>
   <!-- 套餐类型 -->
   <view class="type b-ff"></view>
+  <button bindtap="pay">立即购买</button>
 </view>
