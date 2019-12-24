@@ -100,7 +100,9 @@
         </view>
       </view>
     </view>
-
+  </view>
+  <view class="send-btn b_r200 flex fl-align fl-jc" bindtap="tosend">
+    <image></image>
   </view>
 
 
