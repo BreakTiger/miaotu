@@ -32,6 +32,12 @@ Page({
 
   },
 
+  tosend:function(){
+    wx.navigateTo({
+      url: '/pages/strategy/send/send',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

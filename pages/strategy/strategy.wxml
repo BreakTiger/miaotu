@@ -16,47 +16,67 @@
       <image src="../../resources/1.png"></image>
       <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
       </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
+      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
+        <view class="users flex fl-align">
+          <image></image>
+          <text>用户1</text>
+        </view>
+        <view class="likes flex fl-align">
+          <image></image>
+          <text>345</text>
+        </view>
       </view>
     </view>
     <view class="list-img">
       <image src="../../resources/1.png" class="b_r16"></image>
     </view>
-    <view class="list-item flex col fl-align b-ff">
+    <view class="list-item flex col fl-align b-ff b_r16">
       <image src="../../resources/1.png"></image>
       <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
       </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
+      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
+        <view class="users flex fl-align">
+          <image></image>
+          <text>用户1</text>
+        </view>
+        <view class="likes flex fl-align">
+          <image></image>
+          <text>345</text>
+        </view>
       </view>
     </view>
-    <view class="list-item flex col fl-align b-ff">
+    <view class="list-item flex col fl-align b-ff b_r16">
       <image src="../../resources/1.png"></image>
       <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
       </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
+      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
+        <view class="users flex fl-align">
+          <image></image>
+          <text>用户1</text>
+        </view>
+        <view class="likes flex fl-align">
+          <image></image>
+          <text>345</text>
+        </view>
       </view>
     </view>
-    <view class="list-item flex col fl-align b-ff">
+    <view class="list-item flex col fl-align b-ff b_r16">
       <image src="../../resources/1.png"></image>
       <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
       </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
-      </view>
-    </view>
-    <view class="list-item flex col fl-align b-ff">
-      <image src="../../resources/1.png"></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
+      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
+        <view class="users flex fl-align">
+          <image></image>
+          <text>用户1</text>
+        </view>
+        <view class="likes flex fl-align">
+          <image></image>
+          <text>345</text>
+        </view>
       </view>
     </view>
   </view>
-  <view class="send-btn b_r200 flex fl-align fl-jc">
+  <view class="send-btn b_r200 flex fl-align fl-jc" bindtap="tosend">
     <image></image>
   </view>
 </view>

@@ -25,7 +25,7 @@
     </view>
     <!-- 星期 -->
     <view class="weeks flex fl-align fl-jsb">
-      <view class="flex fl-align fl-jc" wx:for="" wx:key="index">{{item}}</view>
+      <view class="flex fl-align fl-jc" wx:for="MTWTFSS" wx:key="index">{{item}}</view>
     </view>
     <!-- 日历 -->
     <view class="calendar-content flex col fl-align b-ff">

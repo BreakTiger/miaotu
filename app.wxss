@@ -81,6 +81,9 @@ page {
 }
 
 /* 文字颜色 */
+.c-F1{
+  color: #1FAFF1
+}
 
 .c-ff {
   color: #fff;
@@ -116,6 +119,10 @@ page {
   font-weight: 600;
 }
 
+.f-wb{
+  font-weight: bold;
+}
+
 /* 背景大小 */
 
 .b-ff {
@@ -149,6 +156,12 @@ page {
 }
 
 /* 超出省略 */
+
+.clipm1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .climp2 {
   display: -webkit-box;
