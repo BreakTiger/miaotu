@@ -1,0 +1,64 @@
+<view class="container flex col fl-align">
+  <view class="article-item b-ff flex col" wx:for="123" wx:key="index">
+    <!-- 用户 -->
+    <view class="user-line flex fl-align fl-jsb">
+      <view class="user-info flex fl-align">
+        <image></image>
+        <text class="f24 c-66">用户1</text>
+      </view>
+      <view class="threepoint flex fl-align fl-jsb">
+        <view wx:for="123" wx:key="index"></view>
+      </view>
+    </view>
+    <!-- 攻略图片 -->
+    <image src="../../../resources/1.png" class="picture b_r12"></image>
+    <!-- 标题 -->
+    <view class="title f28 c-00 f-wb clipm1">京东三天两夜游标题</view>
+    <!-- 内容简介 -->
+    <view class="content climp2 f24" wx:if="{{!show}}">时隔四年，我终于又开始写攻略了。 因为孩子大了时隔四年，我终于又开始写攻略了。 因为孩子大了时隔四年，我终于又开始写攻略了。 因为孩子大了</view>
+    <!-- 全内容 -->
+    <view class="contents f24" wx:if="{{show}}">时隔四年，我终于又开始写攻略了。 因为孩子大了时隔四年，我终于又开始写攻略了。 因为孩子大了时隔四年，我终于又开始写攻略了。 因为孩子大了</view>
+    <!-- 展开 -->
+    <text class="open c-00 f24 f-wb">展开</text>
+    <!-- 日期 -->
+    <text class="f20">发表于2019-12-23</text>
+    <!-- 定位+评论+收藏 -->
+    <view class="line flex fl-align fl-jsb">
+      <!-- 定位 -->
+      <view class="location b_r200 flex fl-align">
+        <image></image>
+        <text class="f20 c-F1">京都</text>
+      </view>
+      <!-- 评论+收藏 -->
+      <view class="right_path flex fl-align">
+        <view class="flex">
+          <image class="icons" src="../../../icon/talk.png"></image>
+          <text class="f20 c-66">6</text>
+        </view>
+        <view class="flex" style="margin-left:30rpx;">
+          <image class="icons" src="../../../icon/collect.png"></image>
+          <text class="f20 c-66">6</text>
+        </view>
+      </view>
+    </view>
+    <!-- 评论框 -->
+    <view class="review b-F5 flex col fl-align">
+      <view class="review-line f24">
+        <text class="c-00">用户名称1：</text>
+        <text class="c-66">环境挺不错！！</text>
+      </view>
+      <view class="review-line f24">
+        <text class="c-00">用户名称2：</text>
+        <text class="c-66">环境挺不错！！</text>
+      </view>
+
+      <view class="review-line f20 c-66">
+        共6条评论
+      </view>
+
+    </view>
+
+
+
+  </view>
+</view>

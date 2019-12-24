@@ -14,7 +14,10 @@
     "pages/index/goods/goods",
     "pages/index/goods/shop/shop",
     "pages/index/goods/evaluate/evaluate",
-    "pages/index/goods/goods_buy/goods_buy"
+    "pages/index/goods/goods_buy/goods_buy",
+    "pages/index/goods/order/order",
+    "pages/strategy/send/send",
+    "pages/strategy/strategy_detail/strategy_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

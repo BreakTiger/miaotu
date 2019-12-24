@@ -56,8 +56,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/index/goods/goods_buy/goods_buy",
-					"pathName": "pages/index/goods/goods_buy/goods_buy",
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
 					"query": "",
 					"scene": null
 				}

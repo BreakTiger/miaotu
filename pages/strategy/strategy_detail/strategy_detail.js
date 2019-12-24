@@ -1,11 +1,11 @@
-// pages/index/goods/goods.js
+// pages/strategy/strategy_detail/strategy_detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    show: false
   },
 
   /**
@@ -13,24 +13,6 @@ Page({
    */
   onLoad: function(options) {
 
-  },
-
-  toEvaluate: function() {
-    wx.navigateTo({
-      url: '/pages/index/goods/evaluate/evaluate',
-    })
-  },
-
-  toShop: function() {
-    wx.navigateTo({
-      url: '/pages/index/goods/shop/shop',
-    })
-  },
-
-  toOrder: function() {
-    wx.navigateTo({
-      url: '/pages/index/goods/goods_buy/goods_buy',
-    })
   },
 
   /**

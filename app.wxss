@@ -81,6 +81,9 @@ page {
 }
 
 /* 文字颜色 */
+.c-F1{
+  color: #1FAFF1
+}
 
 .c-ff {
   color: #fff;
@@ -114,6 +117,10 @@ page {
 
 .f-w6 {
   font-weight: 600;
+}
+
+.f-wb{
+  font-weight: bold;
 }
 
 /* 背景大小 */
@@ -150,10 +157,23 @@ page {
 
 /* 超出省略 */
 
+.clipm1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .climp2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.climp3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
 }
 

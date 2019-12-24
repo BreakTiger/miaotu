@@ -1,11 +1,12 @@
-// pages/index/goods/goods.js
+// pages/index/goods/order/order.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    adult: 0,
+    child: 0
   },
 
   /**
@@ -13,24 +14,6 @@ Page({
    */
   onLoad: function(options) {
 
-  },
-
-  toEvaluate: function() {
-    wx.navigateTo({
-      url: '/pages/index/goods/evaluate/evaluate',
-    })
-  },
-
-  toShop: function() {
-    wx.navigateTo({
-      url: '/pages/index/goods/shop/shop',
-    })
-  },
-
-  toOrder: function() {
-    wx.navigateTo({
-      url: '/pages/index/goods/goods_buy/goods_buy',
-    })
   },
 
   /**

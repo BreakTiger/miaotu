@@ -1,0 +1,56 @@
+.title-line {
+  width: 670rpx;
+  margin: 68rpx 0;
+}
+
+.picture-content {
+  width: 680rpx;
+}
+
+.picture-content>image {
+  width: 206rpx;
+  height: 206rpx;
+  background: black;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+}
+
+.add-box {
+  width: 206rpx;
+  height: 206rpx;
+  border: 2rpx solid rgba(238, 235, 235, 1);
+}
+
+.add-box>image {
+  width: 100rpx;
+  height: 100rpx;
+  background: black;
+}
+
+.article {
+  width: 690rpx;
+  margin-top: 40rpx;
+}
+
+.localtion {
+  width: 670rpx;
+  padding: 28rpx 0;
+}
+
+.localtion>image {
+  width: 24rpx;
+  height: 32rpx;
+  background: black;
+  margin-right: 24rpx;
+}
+
+.sends {
+  width: 348rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+  position: fixed;
+  right: 20rpx;
+  bottom: 16rpx;
+  z-index: 10;
+}
