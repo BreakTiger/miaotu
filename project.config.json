@@ -56,8 +56,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/mine/wallet/wallet",
-					"pathName": "pages/mine/wallet/wallet",
+					"name": "pages/mine/travel/travel",
+					"pathName": "pages/mine/travel/travel",
 					"query": "",
 					"scene": null
 				},
@@ -72,13 +72,6 @@
 					"id": -1,
 					"name": "pages/mine/order/order",
 					"pathName": "pages/mine/order/order",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/login/login",
-					"pathName": "pages/login/login",
 					"query": "",
 					"scene": null
 				}
