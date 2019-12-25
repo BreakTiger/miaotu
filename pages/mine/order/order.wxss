@@ -28,3 +28,8 @@ page {
   left: calc((100% - 72rpx) / 2);
   opacity: 0.7;
 }
+
+.list-content {
+  width: 100%;
+  height: auto;
+}
