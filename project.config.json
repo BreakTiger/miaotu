@@ -55,9 +55,9 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/mine/user/user",
-					"pathName": "pages/mine/user/user",
+					"id": 0,
+					"name": "pages/mine/coupon/coupon",
+					"pathName": "pages/mine/coupon/coupon",
 					"query": "",
 					"scene": null
 				},

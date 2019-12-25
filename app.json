@@ -26,7 +26,10 @@
     "pages/mine/members/members",
     "pages/mine/order/apply/apply",
     "pages/mine/user/user",
-    "pages/mine/draw/draw"
+    "pages/mine/draw/draw",
+    "pages/mine/order/order_detail/order_detail",
+    "pages/mine/order/apply_detail/apply_detail",
+    "pages/mine/order/comments/comments"
   ],
   "window": {
     "backgroundTextStyle": "light",
