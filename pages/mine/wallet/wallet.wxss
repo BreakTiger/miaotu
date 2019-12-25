@@ -1,0 +1,16 @@
+page {
+  background: #f5f5f5;
+}
+
+.wallet {
+  width: 670rpx;
+  height: 280rpx;
+  /* border-radius: 24rpx; */
+  margin-top: 20rpx;
+  position: relative;
+}
+
+.wallet>image {
+  width: 100%;
+  height: 100%;
+}

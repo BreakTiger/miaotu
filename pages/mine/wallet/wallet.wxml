@@ -1,3 +1,7 @@
 <view class="container flex col fl-align">
 
+  <view class="wallet">
+    <image src="../../../resources/wallet.png"></image>
+  </view>
+
 </view>

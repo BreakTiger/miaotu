@@ -56,8 +56,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/mine/coupon/coupon",
-					"pathName": "pages/mine/coupon/coupon",
+					"name": "pages/mine/wallet/wallet",
+					"pathName": "pages/mine/wallet/wallet",
 					"query": "",
 					"scene": null
 				},
