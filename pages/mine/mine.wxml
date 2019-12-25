@@ -6,12 +6,27 @@
     <!-- 已经登录 -->
     <view class="user-info flex col fl-align" wx:if="{{login}}">
       <!-- 头像 -->
-      <image class="header" bindtap="toEdutor"></image>
-      <!-- 用户名+性别图标 -->
-      <view class="username flex fl-align fl-jc">
-        <text class="f32 f-wb">菜菜子Joe</text>
-        <image></image>
-      </view>
+      <!-- 已经登录 -->
+      <block wx:if='{{userInfo.nickName.length > 0}}'>
+        <image class="header" bindtap="toEdutor" src="{{userInfo.avatarUrl}}"></image>
+        <!-- 用户名+性别图标 -->
+        <view class="username flex fl-align fl-jc">
+          <text class="f32 f-wb">{{userInfo.nickName}}</text>
+          <!-- 男性 -->
+          <image wx:if="{{userInfo.gender == 1}}"></image>
+          <!-- 女性 -->
+          <image wx:if="{{userInfo.gender == 2}}"></image>
+          <!-- 未知 -->
+          <image wx:if="{{userInfo.gender == 0}}"></image>
+        </view>
+      </block>
+      <!-- <未登录> -->
+      <block wx:else>
+        <image class="header"></image>
+        <view class="username flex fl-align fl-jc">
+        <button class='f32 f-wb' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登陆/注册</button>
+        </view>
+      </block>
       <!-- 获赞+粉丝+关注 -->
       <view class="three-info flex fl-align">
         <view class="three-info-item flex col fl-align">

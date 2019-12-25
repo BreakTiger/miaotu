@@ -22,18 +22,17 @@ App({
             'content-type': 'application/json',
           },
           success: function (res) {
-            console.log(res.data)
             wx.setStorage({
               key: 'openid',
-              data: res.data.openid
+              data: res.data.data.openid
             })
             wx.setStorage({
               key: 'session_key',
-              data: res.data.session_key
+              data: res.data.data.session_key
             })
             wx.setStorage({
               key: 'user_id',
-              data: res.data.id
+              data: res.data.data.id
             })
           }
         })

@@ -1,1 +1,9 @@
-  <button class='denglu' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击微信一键登陆</button>
+<view class="container flex col fl-align">
+<!-- logo -->
+<image src="" class="logo-img b_r12"></image>
+<!-- 标题 -->
+<text class="f32 c-00">喵途小程序</text>
+<!-- 按钮 -->
+<button class="login-btn b_r200 c-ff" wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">小程序授权登录</button>
+<text class="f28 c-66">登录即表明您同意我们的《服务协议》</text>
+</view>

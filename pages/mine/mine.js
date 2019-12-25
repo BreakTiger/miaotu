@@ -8,7 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo:[],
     login: true,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     nav: [{
         id: 1,
         icon: '../../icon/track.png',
@@ -41,6 +43,40 @@ Page({
    */
   onLoad: function(options) {
 
+  },
+  bindGetUserInfo: function(e){
+    var openid = wx.getStorageSync('openid');
+    var info = e.detail.userInfo
+    var that = this
+    that.setData({
+      userInfo: info
+    })
+    wx.setStorage({
+      key: 'avatarUrl',
+      data: info.avatarUrl
+    })
+    wx.setStorage({
+      key: 'nickName',
+      data: info.nickName
+    })
+    // 1男；2女；0保密
+    wx.setStorage({
+      key: 'gender',   
+      data: info.gender
+    })
+    //更新用户数据
+    var url = app.configData.miaotu.api_url +"/portal/Public/user"
+    wx.request({
+      url: url,
+      data: { nickname: info.nickName, sex: info.gender, city: info.city, avatar: info.avatarUrl, openid: openid},
+      method: 'POST',
+      header: {
+        'content-type': 'application/json',
+      },
+      success: function (res) {
+        
+      }
+    })
   },
 
   toNav: function(e) {
