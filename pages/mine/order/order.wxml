@@ -1,0 +1,7 @@
+<view class="container flex col fl-align">
+
+  <view class="top-line-nav flex fl-align">
+    <text class="t-ac f28 c-66 {{item.id==choice_one?'linebottoms':''}}" wx:for="{{navlist}}" wx:key="index">{{item.name}}</text>
+  </view>
+
+</view>
