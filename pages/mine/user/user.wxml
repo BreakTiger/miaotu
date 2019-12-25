@@ -11,10 +11,8 @@
   <view class="line b-ff flex col fl-align">
     <view class="flex fl-align fl-jsb">
       <text class="f28 c-00 f-w4">用户昵称</text>
-
       <view class="flex fl-align">
         <text class="f24 c-66">设置</text>
-        <!-- <input type="text" placeholder="设置" class="username f24 c-66"></input> -->
         <image class="icon"></image>
       </view>
     </view>
@@ -22,12 +20,10 @@
   <view class="line b-ff flex col fl-align">
     <view class="flex fl-align fl-jsb">
       <text class="f28 c-00 f-w4">性别</text>
-      <picker range="{{gender}}">
-        <view class="flex fl-align">
-          <text class="f24 c-66">设置</text>
-          <image class="icon"></image>
-        </view>
-      </picker>
+      <view class="flex fl-align">
+        <text class="f24 c-66">设置</text>
+        <image class="icon"></image>
+      </view>
     </view>
   </view>
   <view class="line b-ff flex col fl-align">

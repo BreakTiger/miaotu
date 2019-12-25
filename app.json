@@ -25,7 +25,8 @@
     "pages/mine/travel/travel",
     "pages/mine/members/members",
     "pages/mine/order/apply/apply",
-    "pages/mine/user/user"
+    "pages/mine/user/user",
+    "pages/mine/draw/draw"
   ],
   "window": {
     "backgroundTextStyle": "light",
