@@ -1,1 +1,11 @@
-/* pages/mine/coupon/coupon.wxss */
+.coupon-item {
+  width: 710rpx;
+  height: 296rpx;
+  position: relative;
+  margin-top: 40rpx;
+}
+
+.coupon-item>image {
+  width: 100%;
+  height: 100%;
+}

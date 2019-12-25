@@ -23,7 +23,9 @@
     "pages/mine/coupon/coupon",
     "pages/mine/wallet/wallet",
     "pages/mine/travel/travel",
-    "pages/mine/members/members"
+    "pages/mine/members/members",
+    "pages/mine/order/apply/apply",
+    "pages/mine/user/user"
   ],
   "window": {
     "backgroundTextStyle": "light",

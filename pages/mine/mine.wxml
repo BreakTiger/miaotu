@@ -6,7 +6,7 @@
     <!-- 已经登录 -->
     <view class="user-info flex col fl-align" wx:if="{{login}}">
       <!-- 头像 -->
-      <image class="header"></image>
+      <image class="header" bindtap="toEdutor"></image>
       <!-- 用户名+性别图标 -->
       <view class="username flex fl-align fl-jc">
         <text class="f32 f-wb">菜菜子Joe</text>

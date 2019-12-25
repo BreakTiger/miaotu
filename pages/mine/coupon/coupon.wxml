@@ -1,2 +1,7 @@
-<!--pages/mine/coupon/coupon.wxml-->
-<text>pages/mine/coupon/coupon.wxml</text>
+<view class="container flex col fl-align">
+
+  <view class="coupon-item" wx:for="123" wx:key="index">
+    <image src="../../../resources/coupon.png"></image>
+  </view>
+
+</view>
