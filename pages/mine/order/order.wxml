@@ -3,7 +3,52 @@
     <text class="t-ac f28 c-66 {{item.id==choice_one?'linebottoms':''}}" wx:for="{{navlist}}" wx:key="index">{{item.name}}</text>
   </view>
   <view class="list-content flex col fl-align">
-    <view class="list-item b-ff flex col"></view>
+
+    <view class="list-item b-ff flex col fl-align" wx:for="123" wx:key="index">
+      <!-- 店铺名+订单状态 -->
+      <view class="line_one flex fl-align fl-jsb">
+        <view class="flex fl-align">
+          <image src="../../../icon/shop.png" class="shop"></image>
+          <text class="f28 c-00">菜菜旅行社</text>
+          <image src="../../../icon/go.png" class="go"></image>
+        </view>
+        <text class="f24 c-38">待付款</text>
+        <!-- <text class="f24 c-38">待评价</text> -->
+        <!-- <text class="f24 c-38">待分享，差2人</text> -->
+        <!-- <text class="f24 c-38">已完成</text> -->
+        <!-- <text class="f24 c-38">商家处理中…</text> -->
+      </view>
+      <!-- 商品信息 -->
+      <view class="goods flex fl-align">
+        <image src="../../../resources/2.png" class="goods-img"></image>
+        <view class="goods-info flex col fl-align fl-jse">
+          <view class="climp2 f24 c-00 f-w4">【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-3【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-3……</view>
+          <view class="flex fl-align fl-jsb f20 c-66">
+            <text>出行日期：2019-12-12</text>
+            <text>数量：1张</text>
+          </view>
+
+        </view>
+      </view>
+      <!-- 价格 -->
+      <view class="price flex fl-align f24">
+        <text class="c-00">合计：</text>
+        <text class="c-38">￥199</text>
+      </view>
+      <!-- 操作栏 -->
+      <view class="btn-line flex fl-align f24">
+        <view class="btn_one b_r200 t-ac c-F1">取消订单</view>
+        <view class="btn_two b_r200 t-ac c-ff">继续付款</view>
+        <!-- <view class="btn_one b_r200 t-ac c-F1">删除订单</view>
+        <view class="btn_one b_r200 t-ac c-F1">申请售后</view>
+        <view class="btn_two b_r200 t-ac c-ff">立即评价</view>
+        <view class="btn_two b_r200 t-ac c-ff">立即分享</view>
+        <view class="btn_two b_r200 t-ac c-ff">再次购买</view>
+        <view class="btn_one b_r200 t-ac c-F1">联系客服</view>
+        <view class="btn_two b_r200 t-ac c-ff">取消申请</view> -->
+      </view>
+    </view>
+
   </view>
 
 

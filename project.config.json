@@ -55,23 +55,16 @@
 			"current": -1,
 			"list": [
 				{
-					"id": 0,
-					"name": "pages/mine/wallet/wallet",
-					"pathName": "pages/mine/wallet/wallet",
+					"id": -1,
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 1,
-					"name": "pages/mine/attention/attention",
-					"pathName": "pages/mine/attention/attention",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
+					"name": "pages/mine/order/apply/apply",
+					"pathName": "pages/mine/order/apply/apply",
 					"query": "",
 					"scene": null
 				}

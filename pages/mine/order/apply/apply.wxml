@@ -1,2 +1,46 @@
-<!--pages/mine/order/apply/apply.wxml-->
-<text>pages/mine/order/apply/apply.wxml</text>
+<view class="container flex col fl-align">
+  <view class="top-content flex col fl-align b-ff">
+    <!-- 退款 -->
+    <view class="flex fl-align f28" style="height: 88rpx;border-bottom: 2rpx solid #f5f5f5;">
+      <text class="c-66">退款金额： </text>
+      <text class="c-38">￥12345</text>
+    </view>
+    <!-- 原因 -->
+    <view class="flex fl-align fl-jsb f28 c-66" style="height: 88rpx;">
+      <text>退款原因</text>
+      <picker>
+        <view>
+          <text>请选择原因</text>
+          <image src="../../../../icon/go.png" class="icon"></image>
+        </view>
+      </picker>
+    </view>
+    <!-- 上传图片 -->
+    <view class="upImg">
+      <image src="../../../../resources/addbox.png" class="add"></image>
+    </view>
+  </view>
+  <!-- 订单信息 -->
+  <view class="order-content flex col fl-align b-ff">
+    <!-- 标题 -->
+    <view class="title f32 c-00 f-wb">订单信息</view>
+    <!-- 订单商品 -->
+    <view class="order-goods flex fl-align fl-jsb">
+      <image src="../../../../resources/2.png" class="order-img"></image>
+      <view class="f28 c-00 climp3 f-wb">【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-30天往返含税机</view>
+    </view>
+    <view class="line flex fl-align f28 c-66">套餐类型：a.商务车环耳海存完</view>
+    <view class="line flex fl-align f28 c-66">成人票：1张</view>
+    <view class="line flex fl-align f28 c-66">出行日期：2019-12-14</view>
+    <view class="line flex fl-align f28 c-66">下单时间：2019-12-10 20:22</view>
+    <view class="line flex fl-align f28 c-66">合计：¥2344.77</view>
+    <view class="line flex fl-align f28 c-66">支付方式：微信支付</view>
+    <!-- 标题 -->
+    <view class="title f32 c-00 f-wb">签署人</view>
+    <view class="line flex fl-align f28 c-66">姓名：张三</view>
+    <view class="line flex fl-align f28 c-66">手机号：13923618873</view>
+    <view class="line flex fl-align f28 c-66">身份证号：452773833839392</view>
+  </view>
+  <!-- 提交 -->
+  <view class="btn f32 c-ff b_r200 t-ac">提交</view>
+</view>
