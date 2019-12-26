@@ -29,15 +29,15 @@
       </block>
       <!-- 获赞+粉丝+关注 -->
       <view class="three-info flex fl-align">
-        <view class="three-info-item flex col fl-align">
+        <view class="three-info-item flex col fl-align" bindtap="toAttention">
           <text class="f28">22345</text>
           <text class="f20">获赞</text>
         </view>
-        <view class="three-info-item flex col fl-align">
+        <view class="three-info-item flex col fl-align" bindtap="toAttention">
           <text class="f28">22345</text>
           <text class="f20">粉丝</text>
         </view>
-        <view class="three-info-item flex col fl-align">
+        <view class="three-info-item flex col fl-align" bindtap="toAttention">
           <text class="f28">22345</text>
           <text class="f20">关注</text>
         </view>

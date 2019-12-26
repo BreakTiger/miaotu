@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo:[],
+    userInfo: [],
     login: true,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     nav: [{
@@ -44,7 +44,8 @@ Page({
   onLoad: function(options) {
 
   },
-  bindGetUserInfo: function(e){
+  
+  bindGetUserInfo: function(e) {
     var openid = wx.getStorageSync('openid');
     var info = e.detail.userInfo
     var that = this
@@ -61,20 +62,26 @@ Page({
     })
     // 1男；2女；0保密
     wx.setStorage({
-      key: 'gender',   
+      key: 'gender',
       data: info.gender
     })
     //更新用户数据
-    var url = app.configData.miaotu.api_url +"/portal/Public/user"
+    var url = app.configData.miaotu.api_url + "/portal/Public/user"
     wx.request({
       url: url,
-      data: { nickname: info.nickName, sex: info.gender, city: info.city, avatar: info.avatarUrl, openid: openid},
+      data: {
+        nickname: info.nickName,
+        sex: info.gender,
+        city: info.city,
+        avatar: info.avatarUrl,
+        openid: openid
+      },
       method: 'POST',
       header: {
         'content-type': 'application/json',
       },
-      success: function (res) {
-        
+      success: function(res) {
+
       }
     })
   },
@@ -86,21 +93,27 @@ Page({
     })
   },
 
-  totravel:function(){
+  totravel: function() {
     wx.navigateTo({
       url: '/pages/mine/travel/travel',
     })
   },
 
-  toUpmembers:function(){
+  toUpmembers: function() {
     wx.navigateTo({
       url: '/pages/mine/members/members',
     })
   },
 
-  toEdutor:function(){
+  toEdutor: function() {
     wx.navigateTo({
       url: '/pages/mine/user/user',
+    })
+  },
+
+  toAttention: function() {
+    wx.navigateTo({
+      url: '/pages/mine/attention/attention',
     })
   },
 

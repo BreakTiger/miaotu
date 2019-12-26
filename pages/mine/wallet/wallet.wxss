@@ -2,10 +2,13 @@ page {
   background: #f5f5f5;
 }
 
+.container>view {
+  width: 100%；;
+}
+
 .wallet {
   width: 670rpx;
   height: 280rpx;
-  /* border-radius: 24rpx; */
   margin-top: 20rpx;
   position: relative;
 }
@@ -13,4 +16,42 @@ page {
 .wallet>image {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.wallet>view {
+  width: 100%;
+  position: absolute;
+  top: 65rpx;
+}
+
+.f72 {
+  font-size: 72rpx;
+}
+
+.extract {
+  width: 128rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  border: 2rpx solid rgba(255, 255, 255, 1);
+}
+
+.nav-line {
+  width: 480rpx;
+  height: 88rpx;
+}
+
+.list {
+  width: 670rpx;
+  height: 128rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.header {
+  width: 88rpx;
+  height: 88rpx;
+  background: black;
+  border-radius: 50%;
+  margin-right: 20rpx;
 }

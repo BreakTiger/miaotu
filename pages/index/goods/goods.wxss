@@ -125,12 +125,6 @@ page {
   margin-bottom: 18rpx;
 }
 
-.allreview>image {
-  width: 6rpx;
-  height: 16rpx;
-  background: black;
-  margin-left: 8rpx;
-}
 
 .shoop-line {
   width: 100%;

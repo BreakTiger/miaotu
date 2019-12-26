@@ -1,4 +1,4 @@
-// pages/mine/wallet/wallet.js
+// pages/mine/attention/attention.js
 Page({
 
   /**
@@ -7,17 +7,18 @@ Page({
   data: {
     nav: [{
         id: 1,
-        name: '全部'
+        name: '关注'
       },
       {
         id: 2,
-        name: '收入'
-      }, {
+        name: '粉丝'
+      },
+      {
         id: 3,
-        name: '支出'
+        name: '获赞'
       }
     ],
-    choice_one: 1
+    choice_one:1
   },
 
   /**

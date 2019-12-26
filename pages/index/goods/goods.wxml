@@ -39,10 +39,7 @@
       <image></image>
       <view class="f28 climp2">掌柜的服务态度真好，发货很快。商品质量也相当不错。太喜欢了，谢谢！</view>
     </view>
-    <view class="allreview flex fl-align fl-jc f24" bindtap="toEvaluate">
-      <text>查看全部评价</text>
-      <image></image>
-    </view>
+    <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate">查看全部评价 ></view>
   </view>
   <!-- 店铺 -->
   <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop">

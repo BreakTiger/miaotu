@@ -1,0 +1,36 @@
+page {
+  background: #f5f5f5;
+}
+
+.nav-line {
+  width: 450rpx;
+  height: 88rpx;
+}
+
+.list-item {
+  width: 100%;
+}
+
+.header {
+  width: 88rpx;
+  height: 88rpx;
+  background: black;
+  border-radius: 50%;
+}
+
+.list-item>view {
+  width: 614rpx;
+  height: 128rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.btn {
+  width: 148rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  background: #ccc;
+}
+
+.b_l {
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+}

@@ -22,7 +22,6 @@ page {
 .icon {
   width: 24rpx;
   height: 24rpx;
-  background: rgba(152, 149, 150, 1);
   margin-left: 10rpx;
 }
 

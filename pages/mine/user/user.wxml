@@ -4,7 +4,7 @@
       <text class="f28 c-66">头像</text>
       <view class="flex fl-align">
         <image class="header"></image>
-        <image class="icon"></image>
+        <image class="icon" src="../../../icon/go.png"></image>
       </view>
     </view>
   </view>
@@ -13,7 +13,7 @@
       <text class="f28 c-00 f-w4">用户昵称</text>
       <view class="flex fl-align">
         <text class="f24 c-66">设置</text>
-        <image class="icon"></image>
+        <image class="icon" src="../../../icon/go.png"></image>
       </view>
     </view>
   </view>
@@ -22,7 +22,7 @@
       <text class="f28 c-00 f-w4">性别</text>
       <view class="flex fl-align">
         <text class="f24 c-66">设置</text>
-        <image class="icon"></image>
+        <image class="icon" src="../../../icon/go.png"></image>
       </view>
     </view>
   </view>
@@ -32,7 +32,7 @@
       <picker mode="date">
         <view class="flex fl-align">
           <text class="f24 c-66">设置</text>
-          <image class="icon"></image>
+          <image class="icon" src="../../../icon/go.png"></image>
         </view>
       </picker>
     </view>
@@ -43,7 +43,7 @@
       <picker mode="region">
         <view class="flex fl-align">
           <text class="f24 c-66">设置</text>
-          <image class="icon"></image>
+          <image class="icon" src="../../../icon/go.png"></image>
         </view>
       </picker>
     </view>

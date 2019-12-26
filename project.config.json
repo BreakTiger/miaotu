@@ -63,6 +63,13 @@
 				},
 				{
 					"id": 1,
+					"name": "pages/mine/attention/attention",
+					"pathName": "pages/mine/attention/attention",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
 					"name": "pages/mine/mine",
 					"pathName": "pages/mine/mine",
 					"query": "",
