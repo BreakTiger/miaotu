@@ -1,2 +1,3 @@
-<!--pages/mine/order/order_detail/order_detail.wxml-->
-<text>pages/mine/order/order_detail/order_detail.wxml</text>
+<view class="container flex col fl-align">
+
+</view>
