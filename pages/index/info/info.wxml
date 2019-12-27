@@ -1,2 +1,14 @@
-<!--pages/index/info/info.wxml-->
-<text>pages/index/info/info.wxml</text>
+<view class="container flex col fl-align b-ff">
+
+  <view class="line flex fl-align fl-jsa" wx:for="123" wx:key="index">
+    <image class="header"></image>
+    <view class="flex col fl-align fl-jse">
+      <view class="flex fl-align fl-jsb">
+        <text class="f32 c-00 f-wb">会飞的猪猪</text>
+        <text class="f20 c-66">2019-12-12</text>
+      </view>
+      <view class="climp1 f28 c-66">消息内容限制一行消息内容限制一行内容限制…</view>
+    </view>
+  </view>
+
+</view>

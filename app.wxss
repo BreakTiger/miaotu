@@ -157,7 +157,7 @@ page {
 
 /* 超出省略 */
 
-.clipm1 {
+.climp1 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

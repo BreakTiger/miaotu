@@ -1,1 +1,133 @@
-/* pages/mine/members/members.wxss */
+.bk {
+  width: 100%;
+  height: 2740rpx;
+  background: black;
+}
+
+.content {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0rpx;
+}
+
+.content>view {
+  width: 670rpx;
+}
+
+.user-box {
+  height: 340rpx;
+  box-shadow: 0rpx 8rpx 20rpx 20rpx rgba(0, 0, 0, 0.06);
+  border-radius: 24rpx;
+  margin: 80rpx 0;
+}
+
+.header {
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  background: black;
+  margin: 40rpx 20rpx 0 40rpx;
+}
+
+.user-info {
+  width: 470rpx;
+  padding: 40rpx 0;
+}
+
+.btn_one {
+  width: 148rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border: 2rpx solid rgba(31, 175, 241, 1);
+  margin-left: 20rpx;
+}
+
+.linebottms {
+  font-size: 36rpx;
+  position: relative;
+  margin-bottom: 36rpx;
+}
+
+.linebottms::after {
+  content: '';
+  position: absolute;
+  bottom: 0rpx;
+  left: 36rpx;
+  width: 72rpx;
+  height: 8rpx;
+  background: rgba(255, 211, 4, 0.7);
+}
+
+.card-list {
+  height: 1050rpx;
+  position: relative;
+}
+
+.card-list>view {
+  width: 100%;
+  height: 450rpx;
+  position: absolute;
+}
+
+.card-list>view>image {
+  width: 100%;
+  height: 100%;
+}
+
+.card-info-line-one {
+  width: 100%;
+  position: absolute;
+  top: 30rpx;
+}
+
+.card-info-line-one>view, .card-info-line-two>view {
+  margin-left: 40rpx;
+}
+
+.card-info-line-one>text, .card-info-line-two>view {
+  margin-right: 40rpx;
+}
+
+.card-info-line-two {
+  width: 100%;
+  position: absolute;
+  bottom: 70rpx;
+}
+
+.buy {
+  width: 148rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border: 2rpx solid rgba(255, 255, 255, 1);
+}
+
+.f48 {
+  font-size: 48rpx;
+}
+
+.f36 {
+  font-size: 36rpx;
+}
+
+.introduce {
+  width: 578rpx !important;
+  margin-top: 50rpx;
+  margin-bottom: 100rpx;
+}
+
+.linesbottom {
+  font-size: 36rpx;
+  position: relative;
+  margin-bottom: 36rpx;
+}
+
+.linesbottom::after {
+  content: '';
+  position: absolute;
+  bottom: 0rpx;
+  left: 70rpx;
+  width: 72rpx;
+  height: 8rpx;
+  background: rgba(255, 211, 4, 0.7);
+}
