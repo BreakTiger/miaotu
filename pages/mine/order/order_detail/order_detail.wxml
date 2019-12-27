@@ -1,3 +1,61 @@
 <view class="container flex col fl-align">
+  <view class="type-line flex fl-align b-2E">
+    <image src="../../../../icon/dispose.png" class="type-icon"></image>
+    <text class="f28 c-ff">砍价助力时侯显示倒计时和失效还差x人等状态</text>
+  </view>
+  <!-- 订单信息 -->
+  <view class="order-content b-ff flex col fl-align">
+    <view class="title f32 c-00 f-wb">订单信息</view>
+    <view class="flex fl-align fl-jsb" style="padding: 20rpx 0;">
+      <image src="../../../../resources/2.png" class="order-img"></image>
+      <view class="order-title climp3 f28 c-00 f-wb">【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-30天往返含税机票【甩尾</view>
+    </view>
+    <view class="line flex fl-align f28 c-66">套餐类型：a.商务车环耳海存完</view>
+    <view class="line flex fl-align f28 c-66">出游人群：成人</view>
+    <view class="line flex fl-align f28 c-66">出行日期：2019-12-14</view>
+    <view class="line flex fl-align f28 c-66">产品编号：227727</view>
+    <view class="line flex fl-align f28 c-66">下单时间：2019-12-10 20:22</view>
+    <view class="line flex fl-align f28 c-66">拼单时间：2019-12-10 20:22</view>
+    <view class="line flex fl-align f28 c-66">支付方式：微信支付</view>
+  </view>
+  <!-- 拼单 -->
+  <view class="spell-line flex fl-align fl-jsb b-ff">
+    <text class="f28 c-66">拼单成功，共xx人</text>
+    <view class="flex fl-align">
+      <view class="spell-number">
+        <view class="spell-person">
+          <image src="../../../../resources/2.png"></image>
+          <text class="t-ac c-00 b_r200">拼主</text>
+        </view>
+        <image src="../../../../resources/1.png"></image>
+        <image src="../../../../resources/2.png"></image>
+      </view>
+      <image class="add-icon"></image>
+    </view>
+  </view>
+  <!-- 购买数量 -->
+  <view class="num-content b-ff flex col fl-align">
+    <view class="title f32 c-00 f-wb">购买数量</view>
+    <view class="line flex fl-align f28 c-66">成人票：1张</view>
+    <view class="line flex fl-align f28 c-66">儿童票：0张</view>
+  </view>
+  <!-- 签署人 -->
+  <view class="num-content b-ff flex col fl-align">
+    <view class="title f32 c-00 f-wb">签署人</view>
+    <view class="line flex fl-align f28 c-66">姓名：张三</view>
+    <view class="line flex fl-align f28 c-66">手机号：13923618873</view>
+    <view class="line flex fl-align f28 c-66">身份证号：452773833839392</view>
+  </view>
+  <!-- 合计 -->
+  <view class="total-line b-ff flex fl-align f32">
+    <text class="f-wb c-00">合计:</text>
+    <text class="c-38">¥2344.77</text>
+  </view>
+
+  <view class="last-line b-ff flex fl-align f24">
+    <view class="btn_one b_r200 t-ac c-F1">取消订单</view>
+    <view class="btn_two b_r200 t-ac c-ff">继续付款</view>
+  </view>
+
 
 </view>
