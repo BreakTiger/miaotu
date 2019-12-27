@@ -78,6 +78,11 @@ Page({
       url: url,
     })
   },
+  toInfo:function(){
+    wx.navigateTo({
+      url: '/pages/index/info/info',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

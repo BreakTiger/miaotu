@@ -30,7 +30,8 @@
     "pages/mine/order/order_detail/order_detail",
     "pages/mine/order/apply_detail/apply_detail",
     "pages/mine/order/comments/comments",
-    "pages/mine/attention/attention"
+    "pages/mine/attention/attention",
+    "pages/index/info/info"
   ],
   "window": {
     "backgroundTextStyle": "light",
