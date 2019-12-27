@@ -7,18 +7,18 @@
   width: 680rpx;
 }
 
-.picture-content>image {
+.picture-content>view {
   width: 206rpx;
   height: 206rpx;
   background: black;
   margin-bottom: 20rpx;
   margin-right: 20rpx;
+  position: relative;
 }
 
 .add-box {
   width: 206rpx;
   height: 206rpx;
-  border: 2rpx solid rgba(238, 235, 235, 1);
 }
 
 .add-box>image {
@@ -40,7 +40,6 @@
 .localtion>image {
   width: 24rpx;
   height: 32rpx;
-  background: black;
   margin-right: 24rpx;
 }
 

@@ -1,16 +1,12 @@
 <view class="container flex col fl-align">
   <input type="text" placeholder="请输入游记标题" class="title-line f28"></input>
   <view class="picture-content flex fl-w">
-    <image></image>
-    <image></image>
-    <image></image>
-    <view class="add-box b-F5 flex fl-align fl-jc">
-      <image></image>
-    </view>
+    <view></view>
+    <image class="add-box" src="../../../resources/addbox.png"></image>
   </view>
   <textarea placeholder="请输入正文内容" class="article"></textarea>
   <view class="localtion flex fl-align">
-    <image></image>
+    <image src="../../../icon/localtion.png"></image>
     <text class="f28 c-66">位置</text>
   </view>
   <view class="sends t-ac c-ff f32 b_r200">发表</view>
