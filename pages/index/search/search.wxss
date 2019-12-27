@@ -40,7 +40,6 @@ page {
 .delete {
   width: 32rpx;
   height: 36rpx;
-  background: black;
   margin-right: 44rpx;
 }
 

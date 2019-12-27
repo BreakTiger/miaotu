@@ -12,7 +12,7 @@
   <view class="history flex col fl-align">
     <view class="title-line flex fl-align fl-jsb">
       <text class="f28">历史搜索</text>
-      <image class="delete"></image>
+      <image class="delete" src="../../../icon/del.png"></image>
     </view>
     <view class="his-list flex fl-w">
       <view class="list-item f24 b-F5" wx:for="{{hislist}}" wx:key="index">{{item.name}}</view>
