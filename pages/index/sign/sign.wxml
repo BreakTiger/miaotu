@@ -1,16 +1,16 @@
 <view class="container flex col fl-align">
   <view class="top-line flex col fl-align">
-    <view class="top-bk"></view>
+    <!-- <view class="top-bk"></view> -->
+    <image class="top-bk" src="../../../resources/bk.png"></image>
     <text class="money c-ff f-w5">￥393.88</text>
     <view class="withdrawal flex fl-align fl-jc b_r200">
-      <text class="f24 c-ff">提现</text>
-      <image></image>
+      <text class="f24 c-ff">提现 ></text>
     </view>
   </view>
   <view class="laber-rulue flex fl-align fl-jc f24 c-38 b-04">规则</view>
   <view class="invite flex fl-align fl-jc f28 c-38 b-04 b_r12">邀请好友签到</view>
   <!-- 商品列表展示 -->
-  <view class="goods-list-content flex col fl-align b-F5">
+  <view class="goods-list-content flex col fl-align">
     <!-- 导航 -->
     <view class="list-nav flex fl-align fl-jsa c-66 f28">
       <block wx:for="{{goodsnav}}" wx:key="index">

@@ -63,8 +63,8 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/mine/order/order_detail/order_detail",
-					"pathName": "pages/mine/order/order_detail/order_detail",
+					"name": "pages/mine/track/track",
+					"pathName": "pages/mine/track/track",
 					"query": "",
 					"scene": null
 				}

@@ -51,11 +51,8 @@
     <text class="f-wb c-00">合计:</text>
     <text class="c-38">¥2344.77</text>
   </view>
-
   <view class="last-line b-ff flex fl-align f24">
     <view class="btn_one b_r200 t-ac c-F1">取消订单</view>
     <view class="btn_two b_r200 t-ac c-ff">继续付款</view>
   </view>
-
-
 </view>

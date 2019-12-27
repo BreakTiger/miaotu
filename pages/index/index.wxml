@@ -1,14 +1,18 @@
 <!-- 首页 -->
 <view class="container flex col fl-align">
   <!-- 置顶搜索栏 -->
-  <view class="search-line flex fl-align f28 b-F1">
+  <view class="search-line flex fl-align fl-jsa f28 b-F1">
     <view class="locals flex fl-align c-ff" bindtap="toPlace">
       <text>地点</text>
-      <image></image>
+      <image src="../../icon/s_down.png"></image>
     </view>
     <view class="search-box flex fl-align b-ff b_r200" bindtap="toSearch">
       <icon type="search" size="28" color="#C1C1C1" />
       <text class="c-C1">搜索</text>
+    </view>
+    <view class="infos">
+      <image src="../../icon/info.png"></image>
+      <view class="f28 c-ff t-ac">1</view>
     </view>
   </view>
   <!-- 轮播图 -->

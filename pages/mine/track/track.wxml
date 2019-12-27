@@ -5,11 +5,11 @@
       <view class="f24 c-66 climp2">【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-3</view>
       <view class="flex fl-align">
         <view class="flex fl-align" style="margin-right:20rpx;">
-          <image class="icons"></image>
+          <image class="icons" src="../../../icon/zan.png"></image>
           <text class="f20 c-66 f-w4">262</text>
         </view>
         <view class="flex fl-align">
-          <image class="icons"></image>
+          <image class="icons" src="../../../icon/discuss.png"></image>
           <text class="f20 c-66 f-w4">262</text>
         </view>
       </view>

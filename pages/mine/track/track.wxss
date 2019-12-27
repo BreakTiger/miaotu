@@ -21,6 +21,5 @@ page {
 .icons {
   width: 26rpx;
   height: 26rpx;
-  background: black;
   margin-right: 16rpx;
 }

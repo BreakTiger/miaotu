@@ -30,8 +30,6 @@ page {
 .flow-item-img {
   width: 88rpx;
   height: 88rpx;
-  background: rgba(255, 242, 183, 1);
-  border-radius: 50%;
   margin-bottom: 12rpx;
 }
 
@@ -55,9 +53,8 @@ page {
 }
 
 .top-line>image {
-  width: 16rpx;
-  height: 6rpx;
-  background: black;
+  width: 18rpx;
+  height: 8rpx;
   position: absolute;
   top: 230rpx;
 }

@@ -8,26 +8,41 @@
   z-index: 10;
 }
 
-.locals {
-  margin-left: 20rpx;
-  margin-bottom: 10rpx;
-}
-
 .locals>image {
   width: 14rpx;
   height: 6rpx;
-  background: black;
   margin-left: 8rpx;
 }
 
 .search-box {
-  width: 618rpx;
+  width: 520rpx;
   height: 60rpx;
-  margin-left: 10rpx;
 }
 
 .search-box>icon {
   margin: 0 5rpx;
+}
+
+.infos {
+  width: 54rpx;
+  height: 54rpx;
+  position: relative;
+}
+
+.infos>image {
+  width: 100%;
+  height: 100%;
+}
+
+.infos>view {
+  position: absolute;
+  top: -10rpx;
+  right: -14rpx;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  background: rgba(255, 63, 83, 1);
+  border-radius: 50%;
 }
 
 /* 轮播图 */
@@ -138,5 +153,3 @@
   margin-top: 20rpx;
   margin-left: 20rpx;
 }
-
-

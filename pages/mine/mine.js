@@ -44,7 +44,7 @@ Page({
   onLoad: function(options) {
 
   },
-  
+
   bindGetUserInfo: function(e) {
     var openid = wx.getStorageSync('openid');
     var info = e.detail.userInfo
@@ -114,6 +114,12 @@ Page({
   toAttention: function() {
     wx.navigateTo({
       url: '/pages/mine/attention/attention',
+    })
+  },
+
+  tosend: function() {
+    wx.navigateTo({
+      url: '/pages/strategy/send/send',
     })
   },
 

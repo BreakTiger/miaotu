@@ -1,3 +1,7 @@
+page {
+  background: #f5f5f5;
+}
+
 .top-line {
   width: 100%;
   height: 320rpx;
@@ -6,6 +10,8 @@
 }
 
 .top-bk {
+  position: absolute;
+  top: 0rpx;
   width: 140%;
   height: 100%;
   background: linear-gradient(180deg, rgba(255, 81, 112, 1) 0%, rgba(255, 63, 83, 1) 100%);
@@ -23,13 +29,6 @@
   border: 2rpx solid rgba(255, 255, 255, 1);
   position: absolute;
   top: 95rpx;
-}
-
-.withdrawal>image {
-  width: 6rpx;
-  height: 14rpx;
-  background: black;
-  margin-left: 6rpx;
 }
 
 .laber-rulue {
@@ -51,9 +50,6 @@
   position: absolute;
   top: 175rpx;
 }
-
-
-
 
 .list-nav {
   width: 100%;
@@ -98,4 +94,3 @@
   height: 100%;
   border-radius: 16rpx;
 }
-

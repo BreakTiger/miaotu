@@ -6,13 +6,13 @@ Page({
    */
   data: {
     liu: [{
-      img: '',
+      img: '../../../icon/tickets_one.png',
       name: '选择门票'
     }, {
-      img: '',
+        img: '../../../icon/tickets_two.png',
       name: '邀请好友助力'
     }, {
-      img: '',
+        img: '../../../icon/tickets_three.png',
       name: '人满必获得门票'
     }],
     list:[1,2,3]

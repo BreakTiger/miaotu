@@ -24,7 +24,7 @@
       <block wx:else>
         <image class="header"></image>
         <view class="username flex fl-align fl-jc">
-        <button class='f32 f-wb' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登陆/注册</button>
+          <button class='f32 f-wb' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登陆/注册</button>
         </view>
       </block>
       <!-- 获赞+粉丝+关注 -->
@@ -44,6 +44,7 @@
       </view>
     </view>
     <view class="card-content b_r12 flex fl-align fl-jsb">
+      <image src="../../resources/card.png"></image>
       <text class="level-name f28 f-w5">大众会员</text>
       <text class="up_member f20 c-66 b_r200 t-ac" bindtap="toUpmembers">升级会员 ></text>
     </view>
@@ -63,7 +64,7 @@
       <view class="travel-image">
         <image src="../../resources/2.png" wx:for="12345" wx:key="index"></image>
       </view>
-      <image></image>
+      <image src="../../icon/go.png"></image>
     </view>
   </view>
   <!-- 猜你喜欢 -->
@@ -116,7 +117,5 @@
       </view>
     </view>
   </view>
-  <view class="send-btn b_r200 flex fl-align fl-jc" bindtap="tosend">
-    <image></image>
-  </view>
+  <image class="send-btn" src="../../icon/send.png" bindtap="tosend"></image>
 </view>

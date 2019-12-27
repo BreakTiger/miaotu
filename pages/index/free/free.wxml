@@ -3,15 +3,13 @@
     <view class="top-bk"></view>
     <view class="flow flex fl-align fl-jsb">
       <view class="flow-item flex col fl-align" wx:for="{{liu}}" wx:key="index">
-        <view class="flow-item-img flex fl-align fl-jc">
-          <image></image>
-        </view>
+        <image src="{{item.img}}" class="flow-item-img"></image>
         <text class="f24 f-w4">{{item.name}}</text>
       </view>
     </view>
     <view class="lines"></view>
     <text class="f20">赶紧邀请好友吧~</text>
-    <image></image>
+    <image src="../../../icon/t_down.png"></image>
   </view>
   <view class="list-content flex fl-w">
     <view class="list-item flex col fl-align b-ff">
