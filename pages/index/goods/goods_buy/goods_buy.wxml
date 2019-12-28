@@ -21,8 +21,8 @@
     <view class="nowDates flex fl-align fl-jsb">
       <text style="margin-left: 40rpx;">{{pageData.date}}</text>
       <view class="controls flex fl-align fl-jsb">
-        <image bindtap="lastMonth"></image>
-        <image bindtap="nextMonth"></image>
+        <image bindtap="lastMonth" src="../../../../icon/r_up.png"></image>
+        <image bindtap="nextMonth" src="../../../../icon/r_down.png"></image>
       </view>
     </view>
     <!-- 星期 -->

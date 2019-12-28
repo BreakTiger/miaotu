@@ -72,9 +72,8 @@ page {
 }
 
 .controls>image {
-  width: 12rpx;
+  width: 22rpx;
   height: 12rpx;
-  background: black;
 }
 
 .weeks {
