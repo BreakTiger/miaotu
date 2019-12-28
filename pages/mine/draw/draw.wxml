@@ -1,2 +1,73 @@
-<!--pages/mine/draw/draw.wxml-->
-<text>pages/mine/draw/draw.wxml</text>
+<view class="container flex col fl-align">
+  <image src="../../../resources/title_one.png" class="title_one"></image>
+  <view class="prize btn f24 c-ff b_r200 t-ac" bindtap="toPrize">我的奖品</view>
+  <view class="rule btn f24 c-ff b_r200 t-ac" bindtap="toRules">规则</view>
+  <!-- 转盘 -->
+  <view class="rotary">
+    <image src="../../../resources/rotary.png"></image>
+    <!-- 转盘内容 -->
+    <view class="rotary-inside">
+    </view>
+  </view>
+  <view class="t-ac c-ff f28">今天还可以抽
+    <text style="color:#FFD200;">0</text> 次哦～
+  </view>
+  <view class="invite f32 c-ff t-ac b_r200">邀请2人助力，多抽1次</view>
+  <image src="../../../resources/title_two.png" class="title_two"></image>
+  <!-- 列表 -->
+  <view class="list-content flex fl-w">
+    <view class="list-item flex col fl-align b-ff b_r16">
+      <image src="../../../resources/1.png"></image>
+      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+      </view>
+      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+        <text>¥234</text>
+      </view>
+    </view>
+    <view class="list-img">
+      <image src="../../../resources/1.png" class="b_r16"></image>
+    </view>
+    <view class="list-item flex col fl-align b-ff b_r16">
+      <image src="../../../resources/1.png"></image>
+      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+      </view>
+      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+        <text>¥234</text>
+      </view>
+    </view>
+    <view class="list-item flex col fl-align b-ff b_r16">
+      <image src="../../../resources/1.png"></image>
+      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+      </view>
+      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+        <text>¥234</text>
+      </view>
+    </view>
+    <view class="list-item flex col fl-align b-ff b_r16">
+      <image src="../../../resources/1.png"></image>
+      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+      </view>
+      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+        <text>¥234</text>
+      </view>
+    </view>
+    <view class="list-item flex col fl-align b-ff b_r16">
+      <image src="../../../resources/1.png"></image>
+      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+      </view>
+      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+        <text>¥234</text>
+      </view>
+    </view>
+  </view>
+  <!-- 遮罩 -->
+  <view class="cover flex col fl-align fl-jc" wx:if="{{covers}}">
+    <!-- 弹窗 -->
+    <view class="window flex col fl-align fl-jse b-ff f32 ">
+      <text class="c-38">恭喜获得！</text>
+      <image src="../../../icon/draw_one.png"></image>
+      <text class="c-00">50减去20</text>
+      <view class="b_r200 t-ac c-ff">确定</view>
+    </view>
+  </view>
+</view>
