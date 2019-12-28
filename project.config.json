@@ -55,9 +55,16 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/mine/members/members",
-					"pathName": "pages/mine/members/members",
+					"id": 0,
+					"name": "pages/mine/sign_in/sign_in",
+					"pathName": "pages/mine/sign_in/sign_in",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "pages/index/goods/goods_buy/goods_buy",
+					"pathName": "pages/index/goods/goods_buy/goods_buy",
 					"query": "",
 					"scene": null
 				}

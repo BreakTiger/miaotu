@@ -42,7 +42,6 @@
         </view>
       </view>
     </view>
-
   </view>
   <!-- 购买数量 -->
   <view class="buyNums b-ff flex col ">

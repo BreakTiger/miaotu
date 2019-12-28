@@ -31,7 +31,11 @@
     "pages/mine/order/apply_detail/apply_detail",
     "pages/mine/order/comments/comments",
     "pages/mine/attention/attention",
-    "pages/index/info/info"
+    "pages/index/info/info",
+    "pages/mine/draw/prize/prize",
+    "pages/mine/draw/rules/rules",
+    "pages/mine/draw/integral/integral",
+    "pages/mine/sign_in/sign_in"
   ],
   "window": {
     "backgroundTextStyle": "light",

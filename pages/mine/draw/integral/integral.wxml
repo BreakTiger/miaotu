@@ -1,0 +1,10 @@
+<view class="container flex col fl-align b-ff">
+  <view class="list-item flex fl-align fl-jsb f28" wx:for="123" wx:key="index">
+    <view class="flex col">
+      <text class="c-00 f-w4">签到领积分</text>
+      <text class="f24 c-66">12-20  12:23</text>
+    </view>
+    <text class="c-38">+238</text>
+  </view>
+
+</view>

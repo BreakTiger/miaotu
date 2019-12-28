@@ -131,3 +131,21 @@
   height: 8rpx;
   background: rgba(255, 211, 4, 0.7);
 }
+
+.task {
+  width: 670rpx;
+}
+
+.task-line {
+  width: 100%;
+  height: 128rpx;
+}
+
+.btn_two {
+  width: 148rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+  margin-right: 40rpx;
+  box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(31, 175, 241, 0.1);
+}

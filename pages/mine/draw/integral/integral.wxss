@@ -1,0 +1,9 @@
+page {
+  background: #f5f5f5;
+}
+
+.list-item {
+  width: 670rpx;
+  height: 128rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}

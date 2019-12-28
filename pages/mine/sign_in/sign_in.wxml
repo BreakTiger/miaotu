@@ -1,0 +1,20 @@
+<view class="container flex col fl-align">
+  <view class="top-line flex col fl-align">
+    <image class="top-bk" src="../../../resources/bk.png"></image>
+    <view class="top-content flex col fl-align">
+      <view class="type flex fl-align">
+        <image class="ty_icon" src="../../../icon/succeed.png"></image>
+        <text class="f28 c-ff">今天已签到，获得奖励</text>
+      </view>
+      <view class="c-ff">
+        <text class="f24">我的</text>
+        <text class="f72">252</text>
+      </view>
+      <view class="sign-btn t-ac b_r200 f28">签到领积分</view>
+    </view>
+    <view class="integral b_r200 c-ff f24 t-ac">积分明细</view>
+  </view>
+  <view class="title-line flex fl-align">
+    <text class="f36 c-00 f-wb">签到日历</text>
+  </view>
+</view>

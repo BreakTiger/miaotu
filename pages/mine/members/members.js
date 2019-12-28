@@ -46,8 +46,8 @@ Page({
         state: '首单最高立减666元'
       }
     ],
-    top:160,
-    move:70
+    top: 160,
+    move: 70
   },
 
   /**
@@ -55,6 +55,18 @@ Page({
    */
   onLoad: function(options) {
 
+  },
+
+  toIntegral: function() {
+    wx.navigateTo({
+      url: '/pages/mine/sign_in/sign_in',
+    })
+  },
+
+  toDraw: function() {
+    wx.navigateTo({
+      url: '/pages/mine/draw/draw',
+    })
   },
 
   /**

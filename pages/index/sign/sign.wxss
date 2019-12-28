@@ -10,11 +10,8 @@ page {
 }
 
 .top-bk {
-  position: absolute;
-  top: 0rpx;
   width: 140%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(255, 81, 112, 1) 0%, rgba(255, 63, 83, 1) 100%);
   border-radius: 100% 100% 100% 100%/0 0 50% 50%;
 }
 
