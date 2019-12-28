@@ -4,10 +4,17 @@
   <view class="rule btn f24 c-ff b_r200 t-ac" bindtap="toRules">规则</view>
   <!-- 转盘 -->
   <view class="rotary">
-    <image src="../../../resources/rotary.png"></image>
+    <image src="../../../resources/rotary_bk.png" class="r_bk"></image>
+    <image src="../../../resources/pointer.png" class="point"></image>
     <!-- 转盘内容 -->
-    <view class="rotary-inside">
+    <view class="rotary-inside" animation="{{animation}}">
+      <image src="../../../resources/rotary.png" class=""></image>
+      <view class="rotary-item flex col fl-align" wx:for="{{turntable}}" style="transform: rotate({{item.round}}deg);">
+        <text class="f28 c-00 f-w4">{{item.name}}</text>
+        <image src="{{item.icon}}"></image>
+      </view>
     </view>
+    <image src="../../../resources/rotary_btn.png" class="r_btn" bindtap="rotate"></image>
   </view>
   <view class="t-ac c-ff f28">今天还可以抽
     <text style="color:#FFD200;">0</text> 次哦～

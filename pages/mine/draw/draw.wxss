@@ -39,17 +39,56 @@ page {
   margin-bottom: 44rpx;
 }
 
-.rotary>image {
+.r_bk {
   width: 100%;
   height: 100%;
 }
 
 .rotary-inside {
-  /* width: 610rpx;
-  height: 610rpx;
-  border: 1px solid black;
+  width: 600rpx;
+  height: 600rpx;
   position: absolute;
-  top: 0rpx; */
+  top: 30rpx;
+  left: 35rpx;
+}
+
+.rotary-inside>image {
+  width: 100%;
+  height: 100%;
+}
+
+.point {
+  width: 68rpx;
+  height: 88rpx;
+  position: absolute;
+  top: -35rpx;
+  left: calc((100% - 68rpx) /2);
+  z-index: 10;
+}
+
+.r_btn {
+  width: 140rpx;
+  height: 140rpx;
+  position: absolute;
+  top: calc((100% - 140rpx)/2);
+  left: calc((100% - 140rpx)/2);
+}
+
+.rotary-item {
+  width: 300rpx;
+  height: 300rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 148rpx;
+  transform-origin: 50% 100%;
+}
+.rotary-item>text{
+  margin-top: 30rpx;
+  margin-bottom: 30rpx
+}
+.rotary-item>image{
+  width: 76rpx;
+  height: 76rpx;
 }
 
 .invite {
