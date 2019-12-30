@@ -59,6 +59,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.getLocation({
+      success: function(res) {
+        console.log(res);
+        console.log(res.latitude)
+        console.log(res.longitude)
+      },
+    })
     this.unread()
   },
 
