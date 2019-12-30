@@ -1,15 +1,8 @@
 <view class="container flex col fl-align">
-  <view class="top-line flex fl-align b-ff">
-    <image></image>
-    <view class="scroll-content">
-      <scroll-view scroll-x="true" class="scroll-list flex">
-        <view class="scroll-list-item {{item.isopen==true?'c-00':'c-66 '}}" wx:for="{{timelist}}" wx:key="index">
-          <text class="f-w6">{{item.time}}</text>
-          <text class="f20 f-w4 linebottoms" wx:if="{{item.isopen}}">抢购中</text>
-          <text class="f20 f-w4" wx:if="{{!item.isopen}}">即将开始</text>
-        </view>
-      </scroll-view>
-    </view>
+  <view class="top-line flex fl-align fl-jsa b-ff f28 c-66">
+    <text class="choice">正在秒杀</text>
+    <text>即将开抢</text>
+    <text>抢购预告</text>
   </view>
   <view class="list-content flex col fl-align">
     <view class="list-content-item flex fl-align fl-jsb b-ff" wx:for="{{goodslist}}" wx:key="index">

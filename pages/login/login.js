@@ -32,6 +32,7 @@ Page({
     }).then(function(res) {
       if (res.statusCode == 200) {
         let openid = res.data.data.openid
+        console.log(openid)
         that.upUserinfo(info, openid)
       } else {
         modals.loaded()
@@ -44,22 +45,27 @@ Page({
   },
 
   upUserinfo: function(info, openid) {
+    console.log(info)
+    console.log(openid)
     let data = {
       nickname: info.nickName,
       sex: info.gender,
       city: info.city,
       avatar: info.avatarUrl,
-      openid: wx.getStorageSync('openid')
+      openid: openid
     }
+    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Public/user'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded()
-      console.log(res);
       if (res.statusCode == 200) {
-        console.log('登录成功')
+        wx.setStorageSync('user', info);
         wx.setStorageSync('openid', openid);
+        wx.navigateBack({
+          delta: 2
+        })
       } else {
         wx.showToast({
           title: '系统繁忙，请稍后重试',
@@ -68,6 +74,8 @@ Page({
       }
     })
   },
+
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

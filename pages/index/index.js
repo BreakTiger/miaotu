@@ -2,6 +2,7 @@ const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
 
+let openid = wx.getStorageSync('openid')
 
 Page({
 
@@ -9,7 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sw_list: [1, 2], //轮播图
+    sw_list: [], //轮播图
+    noread: null,
     na_list: [{
         icon: '../../icon/group.png',
         name: '单身拼团',
@@ -32,33 +34,91 @@ Page({
       }
     ],
     goodsnav: [{
-      id: 1,
+      id: 5,
       name: '推荐'
     }, {
-      id: 2,
+      id: 6,
       name: '最新'
     }, {
-      id: 3,
+      id: 1,
       name: '本地'
     }, {
-      id: 4,
+      id: 2,
       name: '国外'
     }, {
-      id: 5,
+      id: 3,
       name: '小众'
     }, {
-      id: 6,
+      id: 4,
       name: '猎奇'
     }],
-    choice_one: 1
+    choice_one: 5
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.unread()
+  },
+
+  // 未读消息数量
+  unread: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Message/no_read'
+    request.sendRequest(url, 'post', {}, {
+      'token': openid
+    }).then(function(res) {
+      console.log(res.data)
+      if (res.statusCode == 200) {
+        that.setData({
+          noread: res.data.data
+        })
+        that.getBanner()
+      } else {
+        wx.showToast({
+          title: '系统繁忙，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
 
   },
+
+  // 获取轮播
+  getBanner: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Home/get_slide_item'
+    request.sendRequest(url, 'post', {
+      tags: 1
+    }, {
+      'token': openid
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        that.setData({
+          sw_list: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: '系统繁忙，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  toGetKind: function(e) {
+    let id = e.currentTarget.dataset.id
+    let choice = this.data.choice_one
+    if (choice != id) {
+      this.setData({
+        choice_one: id
+      })
+    }
+  },
+
+
+
 
   toPlace: function() {
     wx.navigateTo({
@@ -78,7 +138,7 @@ Page({
       url: url,
     })
   },
-  toInfo:function(){
+  toInfo: function() {
     wx.navigateTo({
       url: '/pages/index/info/info',
     })

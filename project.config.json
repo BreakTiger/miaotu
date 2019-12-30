@@ -63,8 +63,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/login/login",
-					"pathName": "pages/login/login",
+					"name": "pages/index/info/info",
+					"pathName": "pages/index/info/info",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/seckill/seckill",
+					"pathName": "pages/index/seckill/seckill",
 					"query": "",
 					"scene": null
 				}

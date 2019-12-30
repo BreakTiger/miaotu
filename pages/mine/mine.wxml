@@ -1,55 +1,53 @@
 <view class="container flex col fl-align">
   <!-- 顶部- 用户基础信息 -->
   <view class="top-content flex col fl-align">
-    <!-- 背景图 - 定位脱离文件流 -->
-    <image src="../../resources/2.png" class="bk"></image>
-    <!-- 已经登录 -->
-    <view class="user-info flex col fl-align" wx:if="{{login}}">
+    <image src="../../resources/2.png" class="bk" wx:if="{{!person.back_image}}"></image>
+    <image src="{{person.back_image}}" class="bk" wx:if="{{person.back_image}}"></image>
+    <!-- 未登录 -->
+    <view class="user-info flex col fl-align" wx:if="{{login==0}}">
       <!-- 头像 -->
-      <!-- 已经登录 -->
-      <block wx:if='{{userInfo.nickName.length > 0}}'>
-        <image class="header" bindtap="toEdutor" src="{{userInfo.avatarUrl}}"></image>
+      <image class="header"></image>
+      <button class='f32 f-wb' style="margin-top: 20rpx;" bindtap="toLogin">登陆/注册</button>
+    </view>
+    <!-- 已经登录 -->
+    <view wx:if="{{login==1}}">
+      <view class="user-info flex col fl-align">
+        <!-- 头像 -->
+        <image class="header" bindtap="toEdutor" src="{{person.avatar}}"></image>
         <!-- 用户名+性别图标 -->
         <view class="username flex fl-align fl-jc">
-          <text class="f32 f-wb">{{userInfo.nickName}}</text>
-          <!-- 男性 -->
-          <image wx:if="{{userInfo.gender == 1}}"></image>
-          <!-- 女性 -->
-          <image wx:if="{{userInfo.gender == 2}}"></image>
-          <!-- 未知 -->
-          <image wx:if="{{userInfo.gender == 0}}"></image>
+          <text class="f32 f-wb">{{person.nickname}}</text>
+          <!-- 性别 -->
+          <image wx:if="{{person.sex==1}}" src="../../icon/male.png"></image>
+          <image wx:if="{{person.sex==2}}" src="../../icon/female.png"></image>
+          <image wx:if="{{person.sex==3}}" src="../../icon/unknown.png"></image>
         </view>
-      </block>
-      <!-- <未登录> -->
-      <block wx:else>
-        <image class="header"></image>
-        <view class="username flex fl-align fl-jc">
-          <button class='f32 f-wb' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登陆/注册</button>
-        </view>
-      </block>
-      <!-- 获赞+粉丝+关注 -->
-      <view class="three-info flex fl-align">
-        <view class="three-info-item flex col fl-align" bindtap="toAttention">
-          <text class="f28">22345</text>
-          <text class="f20">获赞</text>
-        </view>
-        <view class="three-info-item flex col fl-align" bindtap="toAttention">
-          <text class="f28">22345</text>
-          <text class="f20">粉丝</text>
-        </view>
-        <view class="three-info-item flex col fl-align" bindtap="toAttention">
-          <text class="f28">22345</text>
-          <text class="f20">关注</text>
+        <!-- 获赞+粉丝+关注 -->
+        <view class="three-info flex fl-align">
+          <view class="three-info-item flex col fl-align" bindtap="toAttention">
+            <text class="f28">{{person_like.like}}</text>
+            <text class="f20">获赞</text>
+          </view>
+          <view class="three-info-item flex col fl-align" bindtap="toAttention">
+            <text class="f28">{{person_like.fan}}</text>
+            <text class="f20">粉丝</text>
+          </view>
+          <view class="three-info-item flex col fl-align" bindtap="toAttention">
+            <text class="f28">{{person_like.attention}}</text>
+            <text class="f20">关注</text>
+          </view>
         </view>
       </view>
+      <!-- 卡片 -->
+      <view class="card-content b_r12 flex fl-align fl-jsb">
+        <image src="../../resources/card.png"></image>
+        <text class="level-name f28 f-w5">{{person.level_name}}</text>
+        <text class="up_member f20 c-66 b_r200 t-ac" bindtap="toUpmembers">升级会员 ></text>
+      </view>
     </view>
-    <view class="card-content b_r12 flex fl-align fl-jsb">
-      <image src="../../resources/card.png"></image>
-      <text class="level-name f28 f-w5">大众会员</text>
-      <text class="up_member f20 c-66 b_r200 t-ac" bindtap="toUpmembers">升级会员 ></text>
-    </view>
-    <!-- 未登录 -->
   </view>
+
+
   <!-- 导航栏 -->
   <view class="nav-content flex fl-align fl-jsa b-ff b_r12">
     <view class="nav-list flex col fl-align" wx:for="{{nav}}" wx:key="index" bindtap="toNav" data-url="{{item.path}}">

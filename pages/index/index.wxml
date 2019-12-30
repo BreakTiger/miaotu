@@ -12,14 +12,14 @@
     </view>
     <view class="infos" bindtap="toInfo">
       <image src="../../icon/info.png"></image>
-      <view class="f28 c-ff t-ac">1</view>
+      <view class="f28 c-ff t-ac" wx:if="{{noread>0}}">1</view>
     </view>
   </view>
   <!-- 轮播图 -->
   <view class="banner flex col fl-align">
     <swiper class="banner_box" indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="2000">
       <swiper-item wx:for="{{sw_list}}" wx:key="index">
-        <image src="../../resources/1.png" class="sw_img"></image>
+        <image src="{{item.image}}" class="sw_img"></image>
       </swiper-item>
     </swiper>
   </view>
@@ -53,9 +53,7 @@
   <view class="goods-list-content flex col fl-align b-F5">
     <!-- 导航 -->
     <view class="list-nav flex fl-align fl-jsa c-66 f28">
-      <block wx:for="{{goodsnav}}" wx:key="index">
-        <text class="{{choice_one==item.id?'linebottom':''}}">{{item.name}}</text>
-      </block>
+      <text class="{{choice_one==item.id?'linebottom':''}}" wx:for="{{goodsnav}}" wx:key="index" data-id="{{item.id}}" bindtap="toGetKind">{{item.name}}</text>
     </view>
     <!-- 列表 -->
     <view class="list-content flex fl-w b-F5">

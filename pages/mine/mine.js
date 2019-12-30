@@ -2,15 +2,20 @@ const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
 
+
+let openid = wx.getStorageSync('openid')
+
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: [],
-    login: true,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    login: 0,
+    person: [],
+    person_like: [],
     nav: [{
         id: 1,
         icon: '../../icon/track.png',
@@ -45,44 +50,9 @@ Page({
 
   },
 
-  bindGetUserInfo: function(e) {
-    var openid = wx.getStorageSync('openid');
-    var info = e.detail.userInfo
-    var that = this
-    that.setData({
-      userInfo: info
-    })
-    wx.setStorage({
-      key: 'avatarUrl',
-      data: info.avatarUrl
-    })
-    wx.setStorage({
-      key: 'nickName',
-      data: info.nickName
-    })
-    // 1男；2女；0保密
-    wx.setStorage({
-      key: 'gender',
-      data: info.gender
-    })
-    //更新用户数据
-    var url = app.configData.miaotu.api_url + "/portal/Public/user"
-    wx.request({
-      url: url,
-      data: {
-        nickname: info.nickName,
-        sex: info.gender,
-        city: info.city,
-        avatar: info.avatarUrl,
-        openid: openid
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json',
-      },
-      success: function(res) {
-
-      }
+  toLogin: function() {
+    wx.navigateTo({
+      url: '/pages/login/login',
     })
   },
 
@@ -134,9 +104,66 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    let openid = wx.getStorageSync('openid')
+    console.log('openid:', openid)
+    // 判断登录状态
+    if (openid) {
+      console.log('已登录')
+      this.setData({
+        login: 1
+      })
+      this.getParson()
+    } else {
+      console.log('未登陆')
+      this.setData({
+        login: 0
+      })
+    }
   },
 
+  // 获取个人资料
+  getParson: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Personal/user_info'
+    request.sendRequest(url, 'post', {}, {
+      'token': openid
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        console.log(res.data.data)
+        that.setData({
+          person: res.data.data
+        })
+        that.getLike()
+
+      } else {
+        wx.showToast({
+          title: '系统繁忙，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  // 获赞+粉丝+关注
+  getLike: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Personal/get_like'
+    request.sendRequest(url, 'post', {}, {
+      'token': openid
+    }).then(function(res) {
+      console.log(res.data.data);
+      if (res.statusCode == 200) {
+        that.setData({
+          person_like: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: '请求失败，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

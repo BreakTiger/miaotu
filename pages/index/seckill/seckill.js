@@ -5,41 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    timelist: [{
-        id: 1,
-        time: '18：00',
-        isopen: true
-      },
-      {
-        id: 2,
-        time: '20：00',
-        isopen: false
-      },
-      {
-        id: 3,
-        time: '22：00',
-        isopen: false
-      },
-      {
-        id: 4,
-        time: '24：00',
-        isopen: false
-      },
-      {
-        id: 4,
-        time: '2：00',
-        isopen: false
-      },
-      {
-        id: 4,
-        time: '4：00',
-        isopen: false
-      }, {
-        id: 4,
-        time: '6：00',
-        isopen: false
-      }
-    ],
+    
     goodslist:[1,2,3,4,1,2]
 
   },
