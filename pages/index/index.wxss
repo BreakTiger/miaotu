@@ -95,7 +95,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 200rpx;
   height: 36rpx;
   border: 2rpx solid #fb2e2e;
 }

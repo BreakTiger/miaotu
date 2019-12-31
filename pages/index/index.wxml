@@ -36,7 +36,7 @@
       <view class="seckill-left-line-one" style="position: relative;">
         <view class="seckill-box b_r200 flex fl-align f20">
           <text class="c-ff b-2E b_r200">爆款秒杀</text>
-          <text class="c-38">00:12:32</text>
+          <text class="c-38">{{countdown}}</text>
         </view>
         <view class="seckill-title climp2 f28">{{skillgoods.title}}</view>
       </view>
