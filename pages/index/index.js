@@ -2,6 +2,13 @@ const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
 
+// 地图实例化
+var QQMapWX = require('../../qqmap-wx-jssdk.js');
+
+var qqmapsdk = new QQMapWX({
+  key: 'OSCBZ-J26WX-M6M4B-T6MQM-JC6EQ-HUFDP'
+});
+
 let openid = wx.getStorageSync('openid')
 
 Page({
@@ -59,37 +66,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // this.getBanner()
+    this.orientation()
+  },
+
+  // 定位
+  orientation: function() {
+    let that = this
     wx.getLocation({
       success: function(res) {
         console.log(res);
-        console.log(res.latitude)
-        console.log(res.longitude)
+        let lat = res.latitude
+        let lon = res.longitude
+        console.log('lat:', lat)
+        console.log('lon:', lon)
+
+        // qqmapsdk.reverseGeocoder({
+        //   location: {
+        //     latitude: lat,
+        //     longitude: lon
+        //   },
+        //   success: function(res) {
+        //     console.log(res);
+        //   }
+        // })
       },
     })
-    this.unread()
-  },
-
-  // 未读消息数量
-  unread: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Message/no_read'
-    request.sendRequest(url, 'post', {}, {
-      'token': openid
-    }).then(function(res) {
-      console.log(res.data)
-      if (res.statusCode == 200) {
-        that.setData({
-          noread: res.data.data
-        })
-        that.getBanner()
-      } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
-      }
-    })
-
   },
 
   // 获取轮播
@@ -99,12 +101,14 @@ Page({
     request.sendRequest(url, 'post', {
       tags: 1
     }, {
-      'token': openid
+      'content-type': 'application/json'
     }).then(function(res) {
       if (res.statusCode == 200) {
         that.setData({
           sw_list: res.data.data
         })
+        //默认情况下：
+        that.getList(that.data.choice_one)
       } else {
         wx.showToast({
           title: '系统繁忙，请稍后重试',
@@ -114,6 +118,15 @@ Page({
     })
   },
 
+  // 推荐的秒杀爆款商品
+
+  // 获取分类列表
+  getList: function(e) {
+    console.log('默认ID：', e)
+
+  },
+
+  // 切换分类
   toGetKind: function(e) {
     let id = e.currentTarget.dataset.id
     let choice = this.data.choice_one
@@ -121,8 +134,11 @@ Page({
       this.setData({
         choice_one: id
       })
+      this.getList(this.data.choice_one);
     }
   },
+
+
 
 
 
