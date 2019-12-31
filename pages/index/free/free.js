@@ -9,13 +9,13 @@ Page({
       img: '../../../icon/tickets_one.png',
       name: '选择门票'
     }, {
-        img: '../../../icon/tickets_two.png',
+      img: '../../../icon/tickets_two.png',
       name: '邀请好友助力'
     }, {
-        img: '../../../icon/tickets_three.png',
+      img: '../../../icon/tickets_three.png',
       name: '人满必获得门票'
     }],
-    list:[1,2,3]
+    list: [1, 2, 3]
   },
 
   /**
@@ -23,6 +23,12 @@ Page({
    */
   onLoad: function(options) {
 
+  },
+
+  toGetFree: function() {
+    wx.navigateTo({
+      url: '/pages/index/free/free_detail/free_detail',
+    })
   },
 
   /**

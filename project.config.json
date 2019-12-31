@@ -53,29 +53,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/info/info",
-					"pathName": "pages/index/info/info",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/seckill/seckill",
-					"pathName": "pages/index/seckill/seckill",
-					"query": "",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

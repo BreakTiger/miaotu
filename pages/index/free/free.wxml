@@ -12,29 +12,13 @@
     <image src="../../../icon/t_down.png"></image>
   </view>
   <view class="list-content flex fl-w">
-    <view class="list-item flex col fl-align b-ff">
+    <view class="list-item flex col fl-align b-ff" wx:for="123" wx:key="index">
       <image src="../../../resources/1.png"></image>
       <view class="list-item-title climp2 f24">【阿拉蕾环省自驾游瑞典】在这里，感受现代设计和北欧田园的美妙交融</view>
       <view class="price-line f28 c-38">
         <text>￥1285.00起</text>
       </view>
-      <view class="freeget f28 c-ff t-ac">免费获得</view>
-    </view>
-    <view class="list-item flex col fl-align b-ff">
-      <image src="../../../resources/1.png"></image>
-      <view class="list-item-title climp2 f24">【阿拉蕾环省自驾游瑞典】在这里，感受现代设计和北欧田园的美妙交融</view>
-      <view class="price-line f28 c-38">
-        <text>￥1285.00起</text>
-      </view>
-      <view class="freeget f28 c-ff t-ac">免费获得</view>
-    </view>
-    <view class="list-item flex col fl-align b-ff">
-      <image src="../../../resources/1.png"></image>
-      <view class="list-item-title climp2 f24">【阿拉蕾环省自驾游瑞典】在这里，感受现代设计和北欧田园的美妙交融</view>
-      <view class="price-line f28 c-38">
-        <text>￥1285.00起</text>
-      </view>
-      <view class="freeget f28 c-ff t-ac">免费获得</view>
+      <view class="freeget f28 c-ff t-ac" bindtap="toGetFree">免费获得</view>
     </view>
   </view>
 </view>

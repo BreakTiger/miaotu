@@ -3,13 +3,12 @@ import modals from '../../methods/modal.js'
 const app = getApp()
 
 // 地图实例化
-var QQMapWX = require('../../qqmap-wx-jssdk.js');
+// var QQMapWX = require('../../qqmap-wx-jssdk.js');
 
-var qqmapsdk = new QQMapWX({
-  key: 'OSCBZ-J26WX-M6M4B-T6MQM-JC6EQ-HUFDP'
-});
+// var qqmapsdk = new QQMapWX({
+//   key: 'OSCBZ-J26WX-M6M4B-T6MQM-JC6EQ-HUFDP'
+// });
 
-let openid = wx.getStorageSync('openid')
 
 Page({
 
@@ -40,6 +39,7 @@ Page({
         path: '/pages/index/sign/sign',
       }
     ],
+    skillgoods: {},
     goodsnav: [{
       id: 5,
       name: '推荐'
@@ -59,39 +59,31 @@ Page({
       id: 4,
       name: '猎奇'
     }],
-    choice_one: 5
+    choice_one: 5,
+    page: 1,
+    goods: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // this.getBanner()
-    this.orientation()
+    this.positioning()
+
+
   },
 
-  // 定位
-  orientation: function() {
-    let that = this
+  // 获取定位
+  positioning: function() {
     wx.getLocation({
       success: function(res) {
-        console.log(res);
         let lat = res.latitude
         let lon = res.longitude
-        console.log('lat:', lat)
-        console.log('lon:', lon)
-
-        // qqmapsdk.reverseGeocoder({
-        //   location: {
-        //     latitude: lat,
-        //     longitude: lon
-        //   },
-        //   success: function(res) {
-        //     console.log(res);
-        //   }
-        // })
+        // console.log('lat:', lat)
+        // console.log('lon:', lon)
       },
     })
+    this.getBanner()
   },
 
   // 获取轮播
@@ -107,6 +99,27 @@ Page({
         that.setData({
           sw_list: res.data.data
         })
+        that.getSkill()
+      } else {
+        wx.showToast({
+          title: '系统繁忙，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  // 推荐的秒杀爆款商品
+  getSkill: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Home/get_fire_seckill'
+    request.sendRequest(url, 'post', {}, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        that.setData({
+          skillgoods: res.data.data
+        })
         //默认情况下：
         that.getList(that.data.choice_one)
       } else {
@@ -118,12 +131,31 @@ Page({
     })
   },
 
-  // 推荐的秒杀爆款商品
-
   // 获取分类列表
   getList: function(e) {
-    console.log('默认ID：', e)
-
+    let that = this
+    let data = {
+      page: that.data.page,
+      length: 10,
+      type: e
+    }
+    // console.log('参数：', data)
+    let url = app.globalData.api + '/portal/Home/get_type_details'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      // console.log(res);
+      if (res.statusCode == 200) {
+        that.setData({
+          goods: res.data.data
+        })
+      } else {
+        wx.showToast({
+          title: '系统繁忙，请稍后重试',
+          icon: 'none'
+        })
+      }
+    })
   },
 
   // 切换分类
@@ -138,29 +170,41 @@ Page({
     }
   },
 
+  // 秒杀详情
+  toSkill: function() {
+    let that = this
+    let item = that.data.skillgoods
+    console.log('秒杀ID：', item.id)
+    if (item != 0) {
+      wx.navigateTo({
+        url: '/pages/index/goods/goods?id=' + item.id,
+      })
+    }
+  },
 
-
-
-
-
+  // 选择地点
   toPlace: function() {
     wx.navigateTo({
       url: '/pages/index/place/place',
     })
   },
 
+  // 搜索
   toSearch: function() {
     wx.navigateTo({
       url: '/pages/index/search/search',
     })
   },
 
+  // 导航跳转
   toNav: function(e) {
     var url = e.currentTarget.dataset.url
     wx.navigateTo({
       url: url,
     })
   },
+
+  // 查看信息
   toInfo: function() {
     wx.navigateTo({
       url: '/pages/index/info/info',
