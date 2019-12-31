@@ -8,10 +8,11 @@
   z-index: 10;
 }
 
-.locals>image {
-  width: 14rpx;
-  height: 6rpx;
-  margin-left: 8rpx;
+.locals {
+  width: 84rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
 }
 
 .search-box {
@@ -56,7 +57,7 @@
   overflow: hidden;
 }
 
-.banner_box, .sw_img, .seckill-right image, .list-img>image {
+.banner_box, .sw_img, .seckill-right image {
   width: 100%;
   height: 100%;
 }
@@ -122,16 +123,26 @@
   height: 108rpx;
 }
 
+/* 瀑布流 */
+
 .list-content {
-  width: 100%;
-  padding-bottom: 20rpx;
+  width: 710rpx;
+  margin: auto;
+}
+
+.left-col, .right-col {
+  width: 346rpx;
+  display: inline-block;
+}
+
+.right-col {
+  float: right;
 }
 
 .list-item {
-  margin-top: 20rpx;
-  margin-left: 20rpx;
   width: 346rpx;
   height: 488rpx;
+  margin-bottom: 20rpx;
 }
 
 .list-item>image {
@@ -142,13 +153,13 @@
 
 .list-titles {
   width: 304rpx;
-  margin-top: 10rpx;
-  margin-bottom: 26rpx;
+  
 }
 
 .list-img {
   width: 346rpx;
   height: 344rpx;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
+  margin-bottom: 20rpx;
 }
+
+

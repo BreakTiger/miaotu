@@ -53,7 +53,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/index/search/search",
+					"pathName": "pages/index/search/search",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }

@@ -16,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    city: '',
     sw_list: [], //轮播图
     noread: null,
     na_list: [{
@@ -68,7 +69,8 @@ Page({
     ],
     choice_one: 5,
     page: 1,
-    goods: []
+    leftlist: [],
+    rightlist: []
   },
 
   /**
@@ -87,21 +89,20 @@ Page({
       success: function(res) {
         let lat = res.latitude
         let lon = res.longitude
-        console.log(lat, lon)
         // 使用地图API
         demo.reverseGeocoder({
           location: {
-            latitude: res.latitude,
-            longitude: res.longitude
+            latitude: lat,
+            longitude: lon
           },
           success: function(res) {
-            console.log(res);
+            // console.log(res.result);
+            that.setData({
+              city: res.result.address_component.city
+            })
           },
           fail: function(error) {
             console.log(error);
-          },
-          complete: function(res) {
-            console.log(res);
           }
         })
       },
@@ -146,7 +147,7 @@ Page({
         let end = (new Date(res.data.data.ms_endtime)).getTime()
         that.countdown(start, end)
         //默认情况下：
-        // that.getList(that.data.choice_one)
+        that.getList(that.data.choice_one)
       } else {
         wx.showToast({
           title: '系统繁忙，请稍后重试',
@@ -189,16 +190,21 @@ Page({
       length: 10,
       type: e
     }
-    // console.log('参数：', data)
     let url = app.globalData.api + '/portal/Home/get_type_details'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res);
       if (res.statusCode == 200) {
-        that.setData({
-          goods: res.data.data
-        })
+        let list = res.data.data.data
+        // console.log(list)
+        let len = res.data.data.count
+        if (len > 0) {
+          let half = (len / 2).toFixed(0);
+          that.setData({
+            leftlist: list.slice(0, half),
+            rightlist: list.slice(half, len)
+          })
+        }
       } else {
         wx.showToast({
           title: '系统繁忙，请稍后重试',
@@ -234,9 +240,9 @@ Page({
 
   // 选择地点
   toPlace: function() {
-    wx.navigateTo({
-      url: '/pages/index/place/place',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/index/place/place',
+    // })
   },
 
   // 搜索

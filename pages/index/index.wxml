@@ -2,10 +2,7 @@
 <view class="container flex col fl-align">
   <!-- 置顶搜索栏 -->
   <view class="search-line flex fl-align fl-jsa f28 b-F1">
-    <view class="locals flex fl-align c-ff" bindtap="toPlace">
-      <text>地点</text>
-      <image src="../../icon/s_down.png"></image>
-    </view>
+    <view class="locals flex fl-align c-ff" bindtap="toPlace">{{city}}</view>
     <view class="search-box flex fl-align b-ff b_r200" bindtap="toSearch">
       <icon type="search" size="28" color="#C1C1C1" />
       <text class="c-C1">搜索</text>
@@ -49,59 +46,44 @@
       <image src="{{skillgoods.banner}}" class="b_r12"></image>
     </view>
   </view>
-
   <!-- 商品列表展示 -->
-  <view class="goods-list-content flex col fl-align b-F5">
+  <view class="goods-list-content b-F5">
     <!-- 导航 -->
     <view class="list-nav flex fl-align fl-jsa c-66 f28">
       <text class="{{choice_one==item.id?'linebottom':''}}" wx:for="{{goodsnav}}" wx:key="index" data-id="{{item.id}}" bindtap="toGetKind">{{item.name}}</text>
     </view>
     <!-- 列表 -->
-    <view class="list-content flex fl-w b-F5">
-      <view class="list-item flex col fl-align b-ff b_r16">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-img">
-        <image src="../../resources/1.png" class="b_r16"></image>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
+    <view class="list-content b-F5">
+      <!-- 左边 -->
+      <view class="left-col">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index">
+          <image src="{{item.banner}}"></image>
+          <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+            <view class="list-titles climp2 f24">{{item.title}}</view>
+            <view class="flex fl-align f28 c-38" style="width: 304rpx;font-size:18rpx;">
+              <text>¥</text>
+              <text class="f28">{{item.price}}</text>
+              <text>起</text>
+            </view>
+          </view>
         </view>
       </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
+      <!-- 右边 -->
+      <view class="right-col">
+        <image src="../../resources/1.png" class="b_r16 list-img"></image>
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index">
+          <image src="{{item.banner}}"></image>
+          <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+            <view class="list-titles climp2 f24">{{item.title}}</view>
+            <view class="flex fl-align f28 c-38" style="width: 304rpx;font-size:18rpx;">
+              <text>¥</text>
+              <text class="f28">{{item.price}}</text>
+              <text>起</text>
+            </view>
+          </view>
+
         </view>
       </view>
     </view>
   </view>
-
 </view>
