@@ -98,3 +98,22 @@ page {
   background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
   border-radius: 12rpx;
 }
+
+.cover>text {
+  font-size: 60rpx;
+  font-weight: 600;
+  color: #ffea87;
+  line-height: 60px;
+  margin-top: 266rpx;
+  margin-bottom: 130rpx;
+}
+
+.card-line {
+  width: 670rpx;
+  height: 292rpx;
+}
+
+.card-line>image {
+  width: 204rpx;
+  height: 100%;
+}

@@ -9,7 +9,6 @@ var demo = new QQMapWX({
   key: 'OSCBZ-J26WX-M6M4B-T6MQM-JC6EQ-HUFDP'
 });
 
-
 Page({
 
   /**
@@ -77,6 +76,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 判断用户是否登陆
+    let openID = wx.getStorageSync('openid')
+    if (!openID) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      this.unRead(openID)
+    }
+
     this.positioning()
     this.getBanner()
   },
@@ -113,6 +122,7 @@ Page({
   getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
+    modals.loading()
     request.sendRequest(url, 'post', {
       tags: 1
     }, {
@@ -188,9 +198,9 @@ Page({
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
+      modals.loaded();
       if (res.statusCode == 200) {
         let list = res.data.data.data
-        // console.log(list)
         let len = res.data.data.count
         if (len > 0) {
           let half = (len / 2).toFixed(0);
@@ -229,11 +239,26 @@ Page({
     }
   },
 
+  // 未读消息条数
+  unRead: function(openID) {
+    let that = this
+    let url = app.globalData.api + '/portal/Message/no_read'
+    request.sendRequest(url, 'post', {}, {
+      'token': openID
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        that.setData({
+          noread: res.data.data
+        })
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none');
+      }
+    })
+  },
+
   // 选择地点
   toPlace: function() {
-    // wx.navigateTo({
-    //   url: '/pages/index/place/place',
-    // })
+   
   },
 
   // 搜索
@@ -245,9 +270,24 @@ Page({
 
   // 查看信息
   toInfo: function() {
-    wx.navigateTo({
-      url: '/pages/index/info/info',
-    })
+    let openID = wx.getStorageSync('openid')
+    if (!openID) {
+      wx.showModal({
+        title: '提示',
+        content: '您还未授权登录，请先登录',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/index/info/info',
+      })
+    }
   },
 
   // 轮播跳转
@@ -275,22 +315,12 @@ Page({
 
   // 导航跳转
   toNav: function(e) {
-    var url = e.currentTarget.dataset.url
     wx.navigateTo({
-      url: url,
+      url: e.currentTarget.dataset.url,
     })
   },
 
-
-
   toGoodsDetail: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
 
   },
 
@@ -298,21 +328,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
+    let openID = wx.getStorageSync('openid')
+    this.unRead(openID);
   },
 
   /**

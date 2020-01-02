@@ -9,7 +9,7 @@
     </view>
     <view class="infos" bindtap="toInfo">
       <image src="../../icon/info.png"></image>
-      <view class="f28 c-ff t-ac" wx:if="{{noread>0}}">1</view>
+      <view class="f28 c-ff t-ac" wx:if="{{noread>0}}">{{noread}}</view>
     </view>
   </view>
   <!-- 轮播图 -->
@@ -81,7 +81,6 @@
               <text>起</text>
             </view>
           </view>
-
         </view>
       </view>
     </view>

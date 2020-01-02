@@ -1,4 +1,7 @@
-// pages/index/free/free.js
+const request = require('../../../api/http.js')
+import modals from '../../../methods/modal.js'
+const app = getApp()
+
 Page({
 
   /**
@@ -15,19 +18,46 @@ Page({
       img: '../../../icon/tickets_three.png',
       name: '人满必获得门票'
     }],
-    list: [1, 2, 3]
+    page: 1,
+    list: [],
+    covers: false,
+    before: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getList()
+  },
+
+  getList: function() {
+    let that = this
+    let data = {
+      page: that.data.page,
+      length: 10
+    }
+    let url = app.globalData.api + '/portal/Miandan/index'
+    modals.loading()
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      modals.loaded()
+      console.log(res.data.data.data);
+      if (res.statusCode == 200) {
+        that.setData({
+          list: res.data.data.data
+        })
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
 
   },
 
   toGetFree: function() {
-    wx.navigateTo({
-      url: '/pages/index/free/free_detail/free_detail',
+    this.setData({
+      covers: true
     })
   },
 

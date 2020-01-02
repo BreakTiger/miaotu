@@ -29,7 +29,7 @@ page {
   height: 100%;
 }
 
-.list-content {
+.list-content, .last-line {
   width: 100%;
 }
 
@@ -78,10 +78,6 @@ page {
 
 .b-53 {
   background: rgba(255, 63, 83, 0.1);
-}
-
-.last-line {
-  width: 100%;
 }
 
 .c-CC {

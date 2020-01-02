@@ -1,20 +1,45 @@
-// pages/index/tickets/tickets.js
+const request = require('../../../api/http.js')
+import modals from '../../../methods/modal.js'
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    page: 1,
+    list: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    // 默认
+    this.getList()
   },
 
+  getList: function() {
+    let that = this
+    let data = {
+      page: that.data.page,
+      length: 10
+    }
+    let url = app.globalData.api + '/portal/Kanjia/index'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res);
+      if (res.statusCode == 200) {
+        that.setData({
+          list: res.data.data.data
+        })
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
   toShareDown: function() {
     wx.navigateTo({
       url: '/pages/index/tickets/tickets_detail/tickets_detail',

@@ -56,8 +56,8 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/index/info/info",
-					"pathName": "pages/index/info/info",
+					"name": "pages/index/tickets/tickets",
+					"pathName": "pages/index/tickets/tickets",
 					"query": "",
 					"scene": null
 				}

@@ -28,11 +28,13 @@ Page({
       page: that.data.page,
       length: 10
     }
-    console.log('参数:', data);
     let url = app.globalData.api + '/portal/Message/index'
+    modals.loading()
     request.sendRequest(url, 'post', data, {
       'token': openid
     }).then(function(res) {
+      modals.loaded()
+      console.log(res.data.data.data)
       if (res.statusCode == 200) {
         that.setData({
           infoList: res.data.data.data

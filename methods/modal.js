@@ -1,5 +1,4 @@
 export default class modals {
-
   constructor() {
     this.isLoading = false;
   }
@@ -22,8 +21,6 @@ export default class modals {
       })
     })
   }
-
-
 
   static showToast(tittle, ion) {
     return new Promise((resolve, reject) => {
@@ -86,8 +83,6 @@ export default class modals {
     })
   }
 
-
-
   // 数据加载中显示的内容
   static loading(title = '加载中') {
     if (modals.isLoading) {
@@ -106,9 +101,7 @@ export default class modals {
       wx.hideLoading();
     }
   }
-
 }
-
 modals.isLoading = false;
 
 function confirm(con) {

@@ -2,31 +2,25 @@
   <view class="top-box flex col fl-align">
     <view class="top-bk"></view>
     <swiper indicator-dots="true" autoplay="true" indicator-active-color="#fff">
-      <swiper-item class="b_r12">
-        <image src="../../../resources/1.png" class="sw-img"></image>
-      </swiper-item>
-      <swiper-item class="b_r12">
-        <image src="../../../resources/1.png" class="sw-img"></image>
-      </swiper-item>
-      <swiper-item class="b_r12">
-        <image src="../../../resources/1.png" class="sw-img"></image>
+      <swiper-item class="b_r12" wx:for="{{sw_list}}" wx:key="index">
+        <image src="{{item.image}}" class="sw-img"></image>
       </swiper-item>
     </swiper>
   </view>
   <view class="list-content flex col fl-align">
     <view class="list-item b-ff b_r12 flex fl-align" wx:for="{{list}}" wx:key="index">
-      <image src="../../../resources/1.png" class="b_r12"></image>
+      <image src="{{item.banner}}" class="b_r12"></image>
       <view class="list-item-info flex col fl-align">
-        <view class="title climp2 f28 f-w5">【最佳欧洲③】冰与雪之夏：霞慕尼 & 勃朗峰地区（Chamonix </view>
+        <view class="title climp2 f28 f-w5">{{item.title}}</view>
         <view class="laber-line flex f20 c-53">
           <view class="b-53 t-ac">爆款</view>
           <view class="b-53 t-ac">限时立减</view>
         </view>
         <view class="last-line flex fl-align fl-jsb f20">
-          <text class="c-38">￥1235.00</text>
-          <text class="c-CC">已拼234单</text>
+          <text class="c-38">￥{{item.pt_price}}</text>
+          <text class="c-CC">已拼{{item.people_num}}单</text>
           <view class="join flex fl-align">
-            <image src="{{item.path}}" wx:for="{{headerlist}}" wx:key="index" style="left:{{index*lefts}}rpx;" wx:if="{{index<6}}"></image>
+            <image wx:for="{{item.portraits}}" wx:key="index" style="left:{{index*lefts}}rpx;" src="{{item.img}}" wx:if="{{index<6}}"></image>
           </view>
         </view>
       </view>

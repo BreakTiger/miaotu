@@ -1,5 +1,4 @@
 <view class="container flex col fl-align b-ff">
-
   <view class="line flex fl-align fl-jsa" wx:for="{{infoList}}" wx:key="index" data-id="{{item.id}}" bindtap="toRead">
     <image class="header" src="{{item.avatar}}"></image>
     <view class="flex col fl-align fl-jse">

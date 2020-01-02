@@ -12,13 +12,21 @@
     <image src="../../../icon/t_down.png"></image>
   </view>
   <view class="list-content flex fl-w">
-    <view class="list-item flex col fl-align b-ff" wx:for="123" wx:key="index">
-      <image src="../../../resources/1.png"></image>
-      <view class="list-item-title climp2 f24">【阿拉蕾环省自驾游瑞典】在这里，感受现代设计和北欧田园的美妙交融</view>
+    <view class="list-item flex col fl-align b-ff" wx:for="{{list}}" wx:key="index">
+      <image src="{{item.banner}}"></image>
+      <view class="list-item-title climp2 f24">{{item.title}}</view>
       <view class="price-line f28 c-38">
-        <text>￥1285.00起</text>
+        <text>￥{{item.dprice}}起</text>
       </view>
       <view class="freeget f28 c-ff t-ac" bindtap="toGetFree">免费获得</view>
+    </view>
+  </view>
+  <view class="cover flex col fl-align" wx:if="{{covers}}">
+    <text>助力人数由你来定</text>
+    <view class="card-line flex fl-align fl-jsb" wx:if="{{before}}">
+      <image src="../../../resources/b_plate.png"></image>
+      <image src="../../../resources/b_plate.png"></image>
+      <image src="../../../resources/b_plate.png"></image>
     </view>
   </view>
 </view>
