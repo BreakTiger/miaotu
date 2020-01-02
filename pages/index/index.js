@@ -124,10 +124,7 @@ Page({
         })
         that.getSkill()
       } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
@@ -149,10 +146,7 @@ Page({
         //默认情况下：
         that.getList(that.data.choice_one)
       } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
@@ -206,10 +200,7 @@ Page({
           })
         }
       } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
@@ -252,6 +243,36 @@ Page({
     })
   },
 
+  // 查看信息
+  toInfo: function() {
+    wx.navigateTo({
+      url: '/pages/index/info/info',
+    })
+  },
+
+  // 轮播跳转
+  toDetaill: function(e) {
+    let list = this.data.sw_list
+    let item = list[e.currentTarget.dataset.index];
+    console.log(item)
+    if (item.type1 == 1) { //商品详情
+      console.log('商品详情')
+      wx.navigateTo({
+        url: '/pages/index/goods/goods',
+      })
+    } else if (item.type2 == 1) { //秒杀列表
+      console.log('秒杀列表')
+      wx.navigateTo({
+        url: '/pages/index/seckill/seckill',
+      })
+    } else if (item.type3 == 1) { //轮播主题列表
+      console.log('轮播主题列表')
+      wx.navigateTo({
+        url: '/pages/index/shuffling/shuffling',
+      })
+    }
+  },
+
   // 导航跳转
   toNav: function(e) {
     var url = e.currentTarget.dataset.url
@@ -260,11 +281,10 @@ Page({
     })
   },
 
-  // 查看信息
-  toInfo: function() {
-    wx.navigateTo({
-      url: '/pages/index/info/info',
-    })
+
+
+  toGoodsDetail: function() {
+
   },
 
   /**

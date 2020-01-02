@@ -1,0 +1,4 @@
+<view class="container flex col fl-align">
+  <image src="../../../resources/1.png" class="banner"></image>
+
+</view>

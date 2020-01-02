@@ -33,9 +33,18 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': openid
     }).then(function(res) {
-      console.log(res);
+      if (res.statusCode == 200) {
+        that.setData({
+          infoList: res.data.data.data
+        })
+      }
     })
   },
+
+  toRead: function(e) {
+    console.log(e.currentTarget.dataset.id)
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

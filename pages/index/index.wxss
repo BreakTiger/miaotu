@@ -106,7 +106,7 @@
 
 .seckill-title {
   height: 100%;
-  text-indent: 224rpx;
+  text-indent: 240rpx;
 }
 
 .seckill-right {

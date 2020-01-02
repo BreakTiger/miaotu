@@ -4,6 +4,7 @@
     "pages/strategy/strategy",
     "pages/mine/mine",
     "pages/login/login",
+    "pages/index/shuffling/shuffling",
     "pages/index/group/group",
     "pages/index/free/free",
     "pages/index/free/free_detail/free_detail",

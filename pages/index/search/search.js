@@ -10,19 +10,20 @@ Page({
   data: {
     word: '',
     page: 1,
-    hislist: [],
-    hotlist: [],
-    searchlist: []
+    hislist: [], //历史
+    hotlist: [], //热门
+    searchlist: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // let list = wx.getStorageSync('hlist')
-    // console.log('历史搜索', list);
+    // 判断缓存中是否存在历史记录
+    this.setData({
+      hislist: wx.getStorageSync('history') || []
+    })
     this.hotSearch()
-
   },
 
   // 热门搜索
@@ -40,12 +41,18 @@ Page({
           hotlist: res.data.data
         })
       } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
+
+  // 点击历史/热门 标签 搜索
+  laberSelect: function(e) {
+    let word = e.currentTarget.dataset.name
+    this.setData({
+      word: word
+    })
+    this.searchs()
   },
 
   // 获取输入的内容、
@@ -63,7 +70,6 @@ Page({
       page: that.data.page,
       length: 10
     }
-    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Home/do_search'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
@@ -74,35 +80,42 @@ Page({
           that.setData({
             searchlist: res.data.data
           })
-          // let arr = []
-          // let ele = {
-          //   name: that.data.word
-          // }
-          // arr.push(ele)
-          // that.setData({
-          //   hislist: arr
-          // })
-          // wx.setStorageSync('history', arr)
         } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
+          modals.showToast(res.data.msg, 'none')
         }
+        //添加到历史记录
+        that.addHistory()
       } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
+
+  // 添加到历史记录
+  addHistory: function() {
+    let list = this.data.hislist
+    console.log('历史列表：', list)
+    let ele = {
+      name: this.data.word
+    }
+    console.log('元素', ele);
+    // 判断历史列表中是否已经存在搜索内容
+    if (list.includes(ele)) {
+      console.log('true')
+    } else {
+      list.push(ele)
+      wx.setStorageSync('history', list)
+    }
   },
 
 
   // 删除历史搜索内容
   delHistory: function() {
-    console.log('删除历史搜索')
+    wx.removeStorageSync('history')
+    this.onLoad();
   },
+
+  // 点击历史搜索标签
 
   /**
    * 生命周期函数--监听页面初次渲染完成

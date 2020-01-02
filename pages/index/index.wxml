@@ -15,7 +15,7 @@
   <!-- 轮播图 -->
   <view class="banner flex col fl-align">
     <swiper class="banner_box" indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="2000">
-      <swiper-item wx:for="{{sw_list}}" wx:key="index">
+      <swiper-item wx:for="{{sw_list}}" wx:key="index" bindtap="toDetaill" data-index="{{index}}">
         <image src="{{item.image}}" class="sw_img"></image>
       </swiper-item>
     </swiper>
@@ -56,7 +56,7 @@
     <view class="list-content b-F5">
       <!-- 左边 -->
       <view class="left-col">
-        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
             <view class="list-titles climp2 f24">{{item.title}}</view>

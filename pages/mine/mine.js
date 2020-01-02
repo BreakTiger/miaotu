@@ -129,12 +129,11 @@ Page({
       'token': openid
     }).then(function(res) {
       if (res.statusCode == 200) {
-        console.log(res.data.data)
+        // console.log(res)
         that.setData({
           person: res.data.data
         })
         that.getLike()
-
       } else {
         wx.showToast({
           title: '系统繁忙，请稍后重试',
@@ -151,7 +150,7 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'token': openid
     }).then(function(res) {
-      console.log(res.data.data);
+      // console.log(res.data.data);
       if (res.statusCode == 200) {
         that.setData({
           person_like: res.data.data
