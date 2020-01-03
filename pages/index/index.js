@@ -201,7 +201,7 @@ Page({
       modals.loaded();
       if (res.statusCode == 200) {
         let list = res.data.data.data
-        let len = res.data.data.count
+        let len = list.length
         if (len > 0) {
           let half = (len / 2).toFixed(0);
           that.setData({
@@ -258,7 +258,7 @@ Page({
 
   // 选择地点
   toPlace: function() {
-   
+
   },
 
   // 搜索

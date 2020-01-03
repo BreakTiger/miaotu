@@ -1,4 +1,7 @@
-// pages/strategy/strategy.js
+const request = require('../../api/http.js')
+import modals from '../../methods/modal.js'
+const app = getApp()
+
 Page({
 
   /**
@@ -22,7 +25,7 @@ Page({
         name: '精选'
       }
     ],
-    choice_one:1
+    choice_one: 1
   },
 
   /**
@@ -32,7 +35,9 @@ Page({
 
   },
 
-  tosend:function(){
+
+  // 发布
+  tosend: function() {
     wx.navigateTo({
       url: '/pages/strategy/send/send',
     })

@@ -1,8 +1,6 @@
 <view class="container flex col fl-align">
   <view class="top-line flex fl-align fl-jsa b-ff f28 c-66">
-    <text class="choice">正在秒杀</text>
-    <text>即将开抢</text>
-    <text>抢购预告</text>
+    <text class="{{choice==item.id?'choice':''}}" wx:for="{{nav}}" wx:key="index" bindtap="selectNav" data-id="{{item.id}}">{{item.name}}</text>
   </view>
   <view class="list-content flex col fl-align">
     <view class="list-content-item flex fl-align fl-jsb b-ff" wx:for="{{goodslist}}" wx:key="index">

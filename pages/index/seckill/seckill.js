@@ -1,12 +1,30 @@
-// pages/index/seckill/seckill.js
+const request = require('../../../api/http.js')
+import modals from '../../../methods/modal.js'
+const app = getApp()
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
-    goodslist:[1,2,3,4,1,2]
+    nav: [{
+        id: 1,
+        name: '正在秒杀'
+      },
+      {
+        id: 2,
+        name: '即将开抢'
+      },
+      {
+        id: 3,
+        name: '抢购预告'
+      }
+    ],
+    choice: 1,
+    page: 1,
+    goodslist: [1, 2, 3, 4, 1, 2]
 
   },
 
@@ -14,15 +32,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let choice = this.data.choice
+    this.getlist(choice)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
 
+  getlist: function(e) {
+    let that = this
+    let data = {
+      page: that.data.page,
+      length: 10,
+      type: e
+    }
+    console.log('参数:', data);
+    modals.loading()
+    let url = app.globalData.api + '/portal/Miaosha/index'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      modals.loaded()
+      console.log(res);
+    })
   },
+
+  selectNav: function(e) {
+    let id = e.currentTarget.dataset.id
+    console.log(id);
+    let choice = this.data.choice
+    if (choice != id) {
+      this.setData({
+        choice: id
+      })
+      this.getlist(this.data.choice)
+    }
+  },
+
+
+
+
 
   /**
    * 生命周期函数--监听页面显示

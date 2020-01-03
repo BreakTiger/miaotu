@@ -9,7 +9,11 @@
     </view>
   </view>
   <view style="height:108rpx;"></view>
-  <image src="../../resources/1.png" class="banner b_r12"></image>
+  <swiper class="banner">
+    <swiper-item class="">
+      <image src="../../resources/1.png" class="sw_img b_r12"></image>
+    </swiper-item>
+  </swiper>
   <text class="f36 c-00 lines" style="margin: 36rpx 0 36rpx 24rpx;">旅行发现</text>
   <view class="list-content flex fl-w">
     <view class="list-item flex col fl-align b-ff b_r16">
