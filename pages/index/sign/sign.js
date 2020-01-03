@@ -39,6 +39,7 @@ Page({
     page: 1,
     leftlist: [],
     rightlist: [],
+    card:''
   },
 
   /**
@@ -70,8 +71,25 @@ Page({
             leftlist: list.slice(0, half),
             rightlist: list.slice(half, len)
           })
+          that.getCard()
         }
       } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  getCard:function(){
+    let that = this
+    let url = app.globalData.api + '/portal/Home/get_slide_item'
+    request.sendRequest(url, 'post', { tags: 9},{
+      'content-type': 'application/json'
+    }).then(function(res){
+      if (res.statusCode == 200){
+        that.setData({
+          card: res.data.data[0].image
+        })
+      }else{
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
