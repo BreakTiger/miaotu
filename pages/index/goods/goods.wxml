@@ -28,10 +28,6 @@
       </view>
     </view>
 
-    <!-- <view class="laber-line">
-      <text class="labers c-38 f20 t-ac">限时立减</text>
-    </view> -->
-
     <view class="hint c-38 f20">
       <text class="b_r200 t-ac">秒杀预告</text>
       <text>09-26  19:00开抢</text>

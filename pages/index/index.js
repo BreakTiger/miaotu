@@ -69,7 +69,8 @@ Page({
     choice_one: 5,
     page: 1,
     leftlist: [],
-    rightlist: []
+    rightlist: [],
+    card: ''
   },
 
   /**
@@ -150,9 +151,31 @@ Page({
         that.setData({
           skillgoods: res.data.data
         })
-        let start = (new Date(res.data.data.ms_starttime)).getTime()
-        let end = (new Date(res.data.data.ms_endtime)).getTime()
-        that.countdown(start, end)
+        let time1 = res.data.data.ms_starttime
+        // console.log('开始时间', time1)
+        time1 = time1.substring(0, 19);
+        time1 = time1.replace(/-/g, '/');
+        let start = new Date(time1).getTime();
+        // console.log('开始时间:', start)
+
+        let time2 = res.data.data.ms_endtime
+        // console.log('结束时间', time2)
+        time2 = time2.substring(0, 19);
+        time2 = time2.replace(/-/g, '/');
+        let end = new Date(time2).getTime();
+        // console.log('结束时间：', end)
+
+        let now = Date.parse(new Date())
+        // console.log('当前时间戳:', now)
+        if (now >= start || now <= end) {
+          let currentstartTimer = (end - now) / 1000
+          // console.log('活动倒计时')
+          that.setTimeShow(currentstartTimer)
+        } else {
+          this.setData({
+            countdown: '活动即将开始'
+          });
+        }
         //默认情况下：
         that.getList(that.data.choice_one)
       } else {
@@ -162,28 +185,41 @@ Page({
   },
 
   // 倒计时
-  countdown: function(start, end) {
-    let that = this
-    let now = Date.parse(new Date())
-    let ts = parseInt((end - now) / 1000)
-    // 判断活动是否开始 当前时间处在活动开始时间，活动结束时间这俩个时间区间内
-    if (now >= start || now <= end) {
-      let days = Math.floor(ts / (60 * 60 * 24));
-      let modulo = ts % (60 * 60 * 24);
-      let hours = Math.floor(modulo / (60 * 60));
-      modulo = modulo % (60 * 60);
-      let minutes = Math.floor(modulo / 60);
-      let seconds = modulo % 60;
-      let times = days + ':' + hours + ':' + minutes + ':' + seconds
-      that.setData({
-        countdown: times
-      })
-    } else if (now > end) { //当前时间超出活动时间，重新请求爆款秒杀接口，更新商品
-      that.getSkill()
-    }
-    setTimeout(function() {
-      that.countdown(start, end)
-    }, 1000)
+  setTimeShow(currentstartTimer) {
+
+    let interval = setInterval(function() {
+      // 秒数
+      var second = currentstartTimer;
+      // 天数位
+      var day = Math.floor(second / 3600 / 24);
+      var dayStr = day.toString();
+      if (dayStr.length == 1) dayStr = '0' + dayStr;
+
+      // 小时位
+      var hr = Math.floor((second - day * 3600 * 24) / 3600);
+      var hrStr = hr.toString();
+      if (hrStr.length == 1) hrStr = '0' + hrStr;
+
+      // 分钟位
+      var min = Math.floor((second - day * 3600 * 24 - hr * 3600) / 60);
+      var minStr = min.toString();
+      if (minStr.length == 1) minStr = '0' + minStr;
+
+      // 秒位
+      var sec = second - day * 3600 * 24 - hr * 3600 - min * 60;
+      var secStr = sec.toString();
+      if (secStr.length == 1) secStr = '0' + secStr;
+      this.setData({
+        countdown: dayStr + ':' + hrStr + ':' + minStr + ':' + secStr
+      });
+      currentstartTimer--;
+      if (currentstartTimer <= 0) {
+        clearInterval(interval);
+        this.setData({
+          countdown: '00' + ':' + '00' + ':' + '00' + ':' + '00'
+        });
+      }
+    }.bind(this), 1000);
   },
 
   // 获取分类列表
@@ -199,9 +235,12 @@ Page({
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded();
+      // console.log(res.data.data)
       if (res.statusCode == 200) {
         let list = res.data.data.data
+        // console.log(list)
         let len = list.length
+        // console.log('长度：', len)
         if (len > 0) {
           let half = (len / 2).toFixed(0);
           that.setData({
@@ -209,6 +248,26 @@ Page({
             rightlist: list.slice(half, len)
           })
         }
+        that.getCard()
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 小卡片
+  getCard: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Home/get_slide_item'
+    request.sendRequest(url, 'post', {
+      tags: 9
+    }, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        that.setData({
+          card: res.data.data[0].image
+        })
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
@@ -232,11 +291,11 @@ Page({
     let that = this
     let item = that.data.skillgoods
     console.log('秒杀ID：', item.id)
-    if (item != 0) {
-      wx.navigateTo({
-        url: '/pages/index/goods/goods?id=' + item.id,
-      })
-    }
+    // if (item != 0) {
+    //   wx.navigateTo({
+    //     url: '/pages/index/goods/goods?id=' + item.id,
+    //   })
+    // }
   },
 
   // 未读消息条数
@@ -322,7 +381,6 @@ Page({
 
   toGoodsDetail: function(e) {
     let id = e.currentTarget.dataset.id
-    // console.log(id)
     wx.navigateTo({
       url: '/pages/index/goods/goods?id=' + id,
     })
@@ -340,20 +398,70 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.onLoad();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    let that = this
+    let left = that.data.leftlist
+    // console.log('左边：', left)
+    let right = that.data.rightlist
+    // console.log('右边：', right)
+    let pages = that.data.page + 1
+    // console.log('页码：', page)
+    let choice = that.data.choice_one
+    // console.log('选择分类：', choice)
+    let data = {
+      page: pages,
+      length: 10,
+      type: choice
+    }
+    console.log('参数：', data)
+    let url = app.globalData.api + '/portal/Home/get_type_details'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      // console.log(res.data.data.data);
+      if (res.statusCode == 200) {
+        let list = res.data.data.data
+        // console.log(list)
+        let len = list.length
+        // console.log('长度：', len)
+        if (len > 0) {
+          let half = len / 2
+          // console.log('一半：', half)
+          let one = list.slice(0, half)
+          // console.log(one)
+          let two = list.slice(half, len)
+          // console.log(two)
+          that.setData({
+            leftlist: left.concat(one),
+            rightlist: right.concat(two),
+            page: pages
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none');
+      }
+    })
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+
 
   }
 })

@@ -60,7 +60,7 @@
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
             <view class="list-titles climp2 f24">{{item.title}}</view>
-            <view class="flex fl-align f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
               <text>¥</text>
               <text class="f28">{{item.price}}</text>
               <text>起</text>
@@ -70,12 +70,12 @@
       </view>
       <!-- 右边 -->
       <view class="right-col">
-        <image src="../../resources/1.png" class="b_r16 list-img"></image>
+        <image src="{{card}}" class="b_r16 list-img"></image>
         <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
             <view class="list-titles climp2 f24">{{item.title}}</view>
-            <view class="flex fl-align f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
               <text>¥</text>
               <text class="f28">{{item.price}}</text>
               <text>起</text>

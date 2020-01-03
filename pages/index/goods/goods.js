@@ -19,7 +19,7 @@ Page({
   onLoad: function(options) {
     let that = this
     that.goodsDeatil(options.id);
-    
+
   },
 
   // 商品详情
@@ -37,6 +37,15 @@ Page({
         that.setData({
           details: res.data.data.details
         })
+        // 产品简介
+        let introduce = res.data.data.details.introduce
+
+        // 交通信息
+        // let traffic = res.
+
+        // 景点详情
+
+        // 购买须知
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }

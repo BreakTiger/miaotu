@@ -43,19 +43,6 @@ page {
   margin-bottom: 26rpx;
 }
 
-/* .laber-line {
-  width: 670rpx;
-  margin-bottom: 34rpx;
-}
-
-.labers {
-  width: 96rpx;
-  height: 32rpx;
-  line-height: 32rpx;
-  background: rgba(255, 63, 83, 0.1);
-  border-radius: 4rpx;
-} */
-
 .hint {
   width: 670rpx;
   margin-bottom: 14rpx;
