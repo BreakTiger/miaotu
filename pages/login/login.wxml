@@ -1,8 +1,8 @@
 <view class="container flex col fl-align">
   <!-- logo -->
-  <image src="" class="logo-img b_r12"></image>
+  <image src="../../resources/logo.png" class="logo-img b_r12"></image>
   <!-- 标题 -->
-  <text class="f32 c-00">喵途小程序</text>
+  <text class="f32 c-66">喵途小程序</text>
   <!-- 按钮 -->
   <button class="login-btn b_r200 c-ff" open-type="getUserInfo" bindgetuserinfo="toGetUserInfo">小程序授权登录</button>
   <text class="f28 c-66">登录即表明您同意我们的《服务协议》</text>

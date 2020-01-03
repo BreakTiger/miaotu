@@ -1,7 +1,6 @@
 .logo-img {
 width: 170rpx;
 height: 170rpx;
-background: black;
 margin-bottom: 14rpx;
 margin-top: 286rpx;
 }

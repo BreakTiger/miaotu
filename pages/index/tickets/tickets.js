@@ -27,10 +27,12 @@ Page({
       length: 10
     }
     let url = app.globalData.api + '/portal/Kanjia/index'
+    modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res);
+      // console.log(res);
+      modals.loaded()
       if (res.statusCode == 200) {
         that.setData({
           list: res.data.data.data
@@ -40,6 +42,8 @@ Page({
       }
     })
   },
+
+  
   toShareDown: function() {
     wx.navigateTo({
       url: '/pages/index/tickets/tickets_detail/tickets_detail',

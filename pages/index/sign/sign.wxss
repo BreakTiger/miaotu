@@ -53,17 +53,26 @@ page {
   height: 108rpx;
 }
 
+/* 瀑布流 */
+
 .list-content {
-  width: 100%;
-  padding-bottom: 20rpx;
+  width: 710rpx;
+  margin: auto;
+}
+
+.left-col, .right-col {
+  width: 346rpx;
+  display: inline-block;
+}
+
+.right-col {
+  float: right;
 }
 
 .list-item {
-  margin-top: 20rpx;
-  margin-left: 20rpx;
   width: 346rpx;
   height: 488rpx;
-  border-radius: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 .list-item>image {
@@ -74,20 +83,12 @@ page {
 
 .list-titles {
   width: 304rpx;
-  height: 60rpx;
-  margin-top: 10rpx;
-  margin-bottom: 26rpx;
 }
 
 .list-img {
   width: 346rpx;
   height: 344rpx;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
+  margin-bottom: 20rpx;
 }
 
-.list-img>image {
-  width: 100%;
-  height: 100%;
-  border-radius: 16rpx;
-}
+
