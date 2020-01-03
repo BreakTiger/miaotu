@@ -58,7 +58,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -71,7 +71,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -143,7 +143,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -156,7 +156,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -220,7 +220,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -233,7 +233,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -296,7 +296,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -309,7 +309,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -372,7 +372,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -385,7 +385,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -448,7 +448,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -461,7 +461,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -524,7 +524,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -537,7 +537,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -599,7 +599,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -612,7 +612,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -675,7 +675,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -688,7 +688,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -751,7 +751,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -764,7 +764,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -827,7 +827,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -840,7 +840,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">
@@ -903,7 +903,7 @@
       </button>
     </block>
     <!--li类型-->
-    <!-- <block wx:elif="{{item.tag == 'li'}}">
+    <block wx:elif="{{item.tag == 'li'}}">
       <view class="{{item.classStr}} wxParse-li" style="{{item.styleStr}}">
         <view class="{{item.classStr}} wxParse-li-inner">
           <view class="{{item.classStr}} wxParse-li-text">
@@ -916,7 +916,7 @@
           </view>
         </view>
       </view>
-    </block> -->
+    </block>
 
     <!--video类型-->
     <block wx:elif="{{item.tag == 'video'}}">

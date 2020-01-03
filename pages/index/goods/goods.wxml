@@ -1,27 +1,37 @@
+<!-- 引入富文本解析组件 -->
+<import src="../../../wxParse/wxParse.wxml" />
+
+
 <view class="container flex col fl-align">
-  <view class="top-line flex fl-align fl-jsa b-ff">
-    <text class="c-00 f28 f-w5 linebottom">商品</text>
-    <text class="c-00 f28 f-w5">详情</text>
-    <text class="c-00 f28 f-w5">须知</text>
+  <view class="top-line flex fl-align fl-jc b-ff">
+    <view style="width: 60%;" class="flex fl-align fl-jsb">
+      <text class="c-00 f28 f-w5">商品</text>
+      <text class="c-00 f28 f-w5">详情</text>
+      <text class="c-00 f28 f-w5">须知</text>
+    </view>
   </view>
   <view class="goods_detail flex col fl-align b-ff">
     <!-- 轮播 -->
     <swiper class="good-imgs">
-      <swiper-item>
-        <image src="../../../resources/1.png" class="ims"></image>
+      <swiper-item wx:for="{{details.pic}}" wx:key="index">
+        <image src="{{item.pic_url}}" class="ims"></image>
       </swiper-item>
     </swiper>
-    <view class="good-title f28 c-45 climp2">【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-30天往返含税机票【甩尾/……</view>
+
+    <view class="good-title f28 c-45 climp2">{{details.title}}</view>
+
     <view class="goods-lines f24 flex fl-align fl-jsb">
-      <text class="c-38">￥1280.00起</text>
+      <text class="c-38">￥{{details.price}}起</text>
       <view class="c-66">
-        <text>浏览：12343</text>
-        <text>已售：12343</text>
+        <text>浏览：{{details.browse_count}}</text>
+        <text style="margin-left:10rpx;">已售：{{details.sell_count}}</text>
       </view>
     </view>
-    <view class="laber-line">
+
+    <!-- <view class="laber-line">
       <text class="labers c-38 f20 t-ac">限时立减</text>
-    </view>
+    </view> -->
+
     <view class="hint c-38 f20">
       <text class="b_r200 t-ac">秒杀预告</text>
       <text>09-26  19:00开抢</text>

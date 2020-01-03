@@ -320,8 +320,12 @@ Page({
     })
   },
 
-  toGoodsDetail: function() {
-
+  toGoodsDetail: function(e) {
+    let id = e.currentTarget.dataset.id
+    // console.log(id)
+    wx.navigateTo({
+      url: '/pages/index/goods/goods?id=' + id,
+    })
   },
 
   /**

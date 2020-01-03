@@ -56,7 +56,7 @@
     <view class="list-content b-F5">
       <!-- 左边 -->
       <view class="left-col">
-        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" bindtap="toGoodsDetail">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
             <view class="list-titles climp2 f24">{{item.title}}</view>
@@ -71,7 +71,7 @@
       <!-- 右边 -->
       <view class="right-col">
         <image src="../../resources/1.png" class="b_r16 list-img"></image>
-        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
             <view class="list-titles climp2 f24">{{item.title}}</view>

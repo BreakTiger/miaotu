@@ -1,3 +1,8 @@
+const request = require('../../../api/http.js');
+import modals from '../../../methods/modal.js'
+const WxParse = require('../../../wxParse/wxParse.js')
+const app = getApp()
+
 
 Page({
 
@@ -5,14 +10,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    details: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('参数ID：',options.id)
+    let that = this
+    that.goodsDeatil(options.id);
+    
+  },
+
+  // 商品详情
+  goodsDeatil: function(e) {
+    let that = this
+    console.log(e);
+    let url = app.globalData.api + '/portal/home/get_details_info'
+    request.sendRequest(url, 'post', {
+      id: e
+    }, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res.data.data.details);
+      if (res.statusCode == 200) {
+        that.setData({
+          details: res.data.data.details
+        })
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   toEvaluate: function() {

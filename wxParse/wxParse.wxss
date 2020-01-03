@@ -18,8 +18,7 @@
     line-height: 1.8;
 }
 view{
-    word-break:break-all; 
-    /* overflow:auto; */
+    word-break:break-all; overflow:auto;
 }
 .wxParse-inline{
     display: inline;
@@ -27,7 +26,7 @@ view{
     padding: 0;
 }
 /*//标题 */
-.wxParse-div{margin: 0;padding: 0;display: none}
+.wxParse-div{margin: 0;padding: 0;}
 .wxParse-h1{ font-size:2em; margin: .67em 0 }
 .wxParse-h2{ font-size:1.5em; margin: .75em 0 }
 .wxParse-h3{ font-size:1.17em; margin: .83em 0 }
@@ -112,10 +111,7 @@ view{
     background:#f5f5f5;
 }
 .wxParse-ul{
-    margin: 20rpx 24rpx;
-    font-size:28rpx;
-    color:#666;
-
+    margin: 20rpx 10rpx;
 }
 
 .wxParse-li,.wxParse-li-inner{

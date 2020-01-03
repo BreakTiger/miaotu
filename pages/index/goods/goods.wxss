@@ -1,3 +1,5 @@
+@import '../../../wxParse/wxParse.wxss';
+
 page {
   background: #f5f5f5;
 }
@@ -41,7 +43,7 @@ page {
   margin-bottom: 26rpx;
 }
 
-.laber-line {
+/* .laber-line {
   width: 670rpx;
   margin-bottom: 34rpx;
 }
@@ -52,7 +54,7 @@ page {
   line-height: 32rpx;
   background: rgba(255, 63, 83, 0.1);
   border-radius: 4rpx;
-}
+} */
 
 .hint {
   width: 670rpx;
@@ -124,7 +126,6 @@ page {
   margin: 0 auto;
   margin-bottom: 18rpx;
 }
-
 
 .shoop-line {
   width: 100%;
