@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "门票砍价"
+  "navigationBarTitleText": "门票砍价",
+  "enablePullDownRefresh": true
 }

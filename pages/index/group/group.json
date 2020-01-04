@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "单身拼团"
+  "navigationBarTitleText": "单身拼团",
+  "enablePullDownRefresh": true
 }

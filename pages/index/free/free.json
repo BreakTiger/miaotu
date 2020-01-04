@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "助力免单"
+  "navigationBarTitleText": "助力免单",
+  "enablePullDownRefresh": true
 }

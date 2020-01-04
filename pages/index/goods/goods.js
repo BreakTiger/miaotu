@@ -3,16 +3,12 @@ import modals from '../../../methods/modal.js'
 const WxParse = require('../../../wxParse/wxParse.js')
 const app = getApp()
 
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    gid: '',
-    scrollHeight: wx.getSystemInfoSync().windowHeight,
-    back: false,
     top: [{
         name: '商品'
       },
@@ -23,10 +19,14 @@ Page({
         name: '须知'
       }
     ],
+    id: '',
     details: {},
     startTime: '',
-    hint: '',
-    discuss: {}
+    discuss: '',
+    scrollType: false,
+    collecttype:false
+
+
   },
 
   /**
@@ -34,15 +34,10 @@ Page({
    */
   onLoad: function(options) {
     console.log('页面参数：', options)
-    let that = this
-    that.setData({
-      gid: options.id
-    })
-    that.goodsDeatil(options.id);
-
+    this.goodsDeatil(options.id);
   },
 
-  // 商品详情
+  // 获取商品详情
   goodsDeatil: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_details_info'
@@ -54,9 +49,9 @@ Page({
       if (res.statusCode == 200) {
         let result = res.data.data.details
         that.setData({
-          details: result,
-          hint: result.twice_submit
+          details: result
         })
+
         // 产品简介
         let introduce = result.introduce
         WxParse.wxParse('introduce', 'html', introduce, that, 5);
@@ -66,23 +61,23 @@ Page({
         // 购买须知
         let buy = result.buy_notice
         WxParse.wxParse('buy', 'html', buy, that, 5);
+
         that.trailer(result.article_type)
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
-  // 预告
+
+
   trailer: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_foreshow'
-    modals.loading()
     request.sendRequest(url, 'post', {
       type: e
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      modals.loaded()
       if (res.statusCode == 200) {
         that.setData({
           startTime: res.data.data
@@ -102,45 +97,62 @@ Page({
       details_id: that.data.details.id
     }
     let url = app.globalData.api + '/portal/home/comment'
-    // console.log('参数：', data)
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res.data.data.data[0]);
       if (res.statusCode == 200) {
         that.setData({
           discuss: res.data.data.data[0]
         })
+        that.collectType()
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
 
+  collectType: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Shop/collect'
+    request.sendRequest(url, 'post', {
+      id: that.data.id
+    }, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res);
+    })
   },
 
 
+
   // 监听滚动条
-  scrolling: function(e) {
-    let scrollTop = e.detail.scrollTop
-    if (scrollTop < this.data.scrollHeight / 4) {
+  onPageScroll: function(e) {
+    if (e.scrollTop == 0) {
       this.setData({
-        back: false
+        scrollType: false
       })
-    } else {
+    } else if (e.scrollTop >= 200) {
       this.setData({
-        back: true
+        scrollType: true
       })
     }
   },
 
-  // 返回顶部
-  scrollToTop() {
-    this.setData({
-      scrollTop: 0,
-      back: false
-    })
+  // 回到顶部
+  backTop: function(e) {
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
   },
 
+  // 查看全部评价
   toEvaluate: function(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
@@ -148,18 +160,19 @@ Page({
     })
   },
 
+  // 去到商铺
   toShop: function() {
     wx.navigateTo({
       url: '/pages/index/goods/shop/shop',
     })
   },
 
+  // 立即下单
   toOrder: function() {
     wx.navigateTo({
       url: '/pages/index/goods/goods_buy/goods_buy',
     })
   },
-
 
 
   /**
@@ -168,8 +181,6 @@ Page({
   onShow: function() {
 
   },
-
-
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -189,12 +200,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function(options) {
-    // if (res.from === 'button') {
-    //   console.log(111);
-    // }
-    // return{
-    //   title: this.data.details.title,
-    //   path: 'pages/index/goods/goods?id=' + this.data.gid,
-    // }
+    if (options.from === 'button') {
+      console.log(111);
+    }
+    return {
+      title: this.data.details.title,
+      path: 'pages/index/goods/goods?id=' + this.data.gid,
+    }
   }
 })

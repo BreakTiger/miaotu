@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "现金签到"
+  "navigationBarTitleText": "现金签到",
+  "enablePullDownRefresh": true
 }

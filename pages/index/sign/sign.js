@@ -39,7 +39,7 @@ Page({
     page: 1,
     leftlist: [],
     rightlist: [],
-    card:''
+    card: ''
   },
 
   /**
@@ -79,17 +79,19 @@ Page({
     })
   },
 
-  getCard:function(){
+  getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
-    request.sendRequest(url, 'post', { tags: 9},{
+    request.sendRequest(url, 'post', {
+      tags: 9
+    }, {
       'content-type': 'application/json'
-    }).then(function(res){
-      if (res.statusCode == 200){
+    }).then(function(res) {
+      if (res.statusCode == 200) {
         that.setData({
           card: res.data.data[0].image
         })
-      }else{
+      } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
@@ -181,7 +183,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
   },
 
   /**
