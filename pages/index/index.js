@@ -282,6 +282,7 @@ Page({
       this.setData({
         choice_one: id
       })
+      modals.loading()
       this.getList(this.data.choice_one);
     }
   },

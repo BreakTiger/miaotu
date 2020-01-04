@@ -24,7 +24,7 @@ Page({
     startTime: '',
     discuss: '',
     scrollType: false,
-    collecttype:false
+    collecttype: false
 
 
   },
@@ -34,6 +34,9 @@ Page({
    */
   onLoad: function(options) {
     console.log('页面参数：', options)
+    this.setData({
+      id: options.id
+    })
     this.goodsDeatil(options.id);
   },
 
@@ -104,24 +107,14 @@ Page({
         that.setData({
           discuss: res.data.data.data[0]
         })
-        that.collectType()
+
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  collectType: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Shop/collect'
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
-      'content-type': 'application/json'
-    }).then(function(res) {
-      console.log(res);
-    })
-  },
+
 
 
 
@@ -161,9 +154,9 @@ Page({
   },
 
   // 去到商铺
-  toShop: function() {
+  toShop: function(e) {
     wx.navigateTo({
-      url: '/pages/index/goods/shop/shop',
+      url: '/pages/index/goods/shop/shop?sid=' + e.currentTarget.dataset.sid,
     })
   },
 
@@ -179,7 +172,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    let that = this
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      that.collectType(openID)
+    }
+  },
 
+
+  collectType: function(e) {
+    let that = this
+    let url = app.globalData.api + '/portal/Shop/collect'
+    request.sendRequest(url, 'post', {
+      id: that.data.id
+    }, {
+      'token': e
+    }).then(function(res) {
+      console.log(res);
+      if (res.statusCode == 200) {
+        if (res.data.data == 0) {
+          that.setData({
+            collecttype: false
+          })
+        } else {
+          that.setData({
+            collecttype: true
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   /**

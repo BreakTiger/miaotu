@@ -49,7 +49,7 @@
     <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate" data-id="{{details.id}}">查看全部评价 ></view>
   </view>
 
-  <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop">
+  <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop" data-sid="{{details.shop_id}}">
     <image class="b_r12" src="{{details.shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
       <text class="f28 c-00 f-w5 climp2">{{details.shop.user_nickname}}</text>
@@ -111,11 +111,13 @@
       <image src="../../../icon/talk.png"></image>
       <text class="f20 c-66 f-w4">咨询</text>
     </view>
-    <view class="icons flex col fl-align fl-jc">
-      <image src="../../../icon/collect.png" wx:if="{{!collecttype}}"></image>
-      <text class="f20 c-66 f-w4" wx:if="{{!collecttype}}">收藏</text>
-      <image src="../../../icon/collect.png" wx:if="{{collecttype}}"></image>
-      <text class="f20 c-66 f-w4" wx:if="{{collecttype}}">已收藏</text>
+    <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}">
+      <image src="../../../icon/collect.png"></image>
+      <text class="f20 c-66 f-w4">收藏</text>
+    </view>
+    <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}">
+      <image src="../../../icon/collect.png"></image>
+      <text class="f20 c-66 f-w4">已收藏</text>
     </view>
     <view class="icons flex col fl-align fl-jc">
       <image src="../../../icon/share.png"></image>
@@ -131,6 +133,6 @@
   <!-- 分享 -->
   <button class="shares" plain="true" open-type="share"></button>
 
-  
+
 
 </view>
