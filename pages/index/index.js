@@ -429,10 +429,12 @@ Page({
     }
     console.log('参数：', data)
     let url = app.globalData.api + '/portal/Home/get_type_details'
+    modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
       // console.log(res.data.data.data);
+      modals.loaded()
       if (res.statusCode == 200) {
         let list = res.data.data.data
         // console.log(list)

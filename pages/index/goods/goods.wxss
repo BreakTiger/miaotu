@@ -107,9 +107,8 @@ page {
 .allreview {
   width: 194rpx;
   height: 52rpx;
+  border: 2rpx solid rgba(65, 216, 249, 1);
   border-radius: 8rpx;
-  border: 2rpx solid;
-  border-image: linear-gradient(270deg, rgba(65, 216, 249, 1), rgba(31, 175, 241, 1)) 2 2;
   margin: 0 auto;
   margin-bottom: 18rpx;
 }
@@ -165,7 +164,6 @@ page {
 
 .abstract>view:last-child {
   line-height: 44rpx;
-  margin-bottom: 48rpx;
 }
 
 .traffic {
@@ -239,4 +237,10 @@ page {
   height: 76rpx;
   line-height: 76rpx;
   background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+}
+
+.detail-img {
+  width: 670rpx;
+  height: 400rpx;
+  margin-bottom: 8rpx;
 }

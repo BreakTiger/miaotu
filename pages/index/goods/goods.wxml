@@ -1,17 +1,16 @@
 <!-- 引入富文本解析组件 -->
 <import src="../../../wxParse/wxParse.wxml" />
 
-
 <view class="container flex col fl-align">
+
   <view class="top-line flex fl-align fl-jc b-ff">
     <view style="width: 60%;" class="flex fl-align fl-jsb">
-      <text class="c-00 f28 f-w5">商品</text>
-      <text class="c-00 f28 f-w5">详情</text>
-      <text class="c-00 f28 f-w5">须知</text>
+      <text class="c-00 f28 f-w5" wx:for="{{top}}" wx:key="index">{{item.name}}</text>
     </view>
   </view>
+
   <view class="goods_detail flex col fl-align b-ff">
-    <!-- 轮播 -->
+
     <swiper class="good-imgs">
       <swiper-item wx:for="{{details.pic}}" wx:key="index">
         <image src="{{item.pic_url}}" class="ims"></image>
@@ -28,17 +27,19 @@
       </view>
     </view>
 
-    <view class="hint c-38 f20">
+    <view class="hint c-38 f20" wx:if="{{startTime}}">
       <text class="b_r200 t-ac">秒杀预告</text>
-      <text>09-26  19:00开抢</text>
+      <text>{{startTime}}开抢</text>
     </view>
+
   </view>
-  <view class="hint-line flex fl-align fl-jsa c-00">
+
+  <view class="hint-line flex fl-align fl-jsa c-00" wx:if="{{hint}}">
     <image></image>
     <view class="f20 f-w5">二次确认</view>
-    <view class="climp2 f24 f-w3">付款成功后，需待上架二次确认是否可以出行，请至少提前三天预订</view>
+    <view class="climp2 f24 f-w3">{{hint}}</view>
   </view>
-  <!-- 点评 -->
+
   <view class="review flex col b-ff">
     <text class="f32 c-00 f-w5">点评</text>
     <view class="discuss flex fl-jsb">
@@ -47,7 +48,7 @@
     </view>
     <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate">查看全部评价 ></view>
   </view>
-  <!-- 店铺 -->
+
   <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop">
     <image class="b_r12"></image>
     <view class="shop-info flex col fl-jse">
@@ -65,10 +66,12 @@
     </view>
     <view class="shops c-ff f24 b_r200 t-ac">店铺</view>
   </view>
+
   <!-- 简介 -->
   <view class="abstract flex col fl-align b-ff">
     <view class="f32 c-00 f-w5">产品简介</view>
-    <view class="f28 c-66 f-w4">请务必跟客服核实座位价格再付款！！ 请务必跟客服核实座位价格再付款！！ 加微信咨询：13114983600 咨询后付款 多种航空：搭乘全日空/日航/国航等航空，享受舒适的空中飞行体验 直飞航班：北京/天津直飞，一站直达，省去转机时间以及旅途劳累 行程自由：单机票产品，可根据自己的实际需求安排行程，任意搭配 开口航班：去程与回程是不同的目的地，无需走回头路，节省更多时间游玩 可少请假：出发时间包含全年假期，可少请假，适合不好请假的上班族
+    <view class="f28 c-66 f-w4">
+      <template is="wxParse" data="{{wxParseData:introduce.nodes}}" />
     </view>
   </view>
   <!-- 交通信息 -->
@@ -76,16 +79,21 @@
     <text class="f32 c-00 f-w5">交通信息</text>
     <view class="f20 c-66 f-w3">交通信息仅供参考，最终以供应商确认为准，飞行时长以实际为准</view>
     <!-- 富文本 -->
-    <view></view>
+    <view>
+      <template is="wxParse" data="{{wxParseData:traffic.nodes}}" />
+    </view>
   </view>
   <!-- 景点详情 -->
   <view class="attractions flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">景点详情</text>
-    <!-- 富文本 -->
-    <view></view>
+    <view>
+      <image class="detail-img" src="{{item.pic_url}}" wx:for="{{details.product_pic}}" wx:key="index"></image>
+    </view>
     <text class="f32 c-00 f-w5">购买需知道</text>
     <!-- 富文本 -->
-    <view></view>
+    <view style="margin-bottom:40rpx;">
+      <template is="wxParse" data="{{wxParseData:buy.nodes}}" />
+    </view>
   </view>
   <!-- 回到顶部 -->
   <view class="back flex fl-align fl-jc">

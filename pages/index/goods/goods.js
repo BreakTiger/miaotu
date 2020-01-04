@@ -10,7 +10,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    details: {}
+    top: [{
+        name: '商品'
+      },
+      {
+        name: '详情'
+      },
+      {
+        name: '须知'
+      }
+    ],
+
+    details: {},
+    startTime: '',
+    hint:'',
   },
 
   /**
@@ -19,7 +32,6 @@ Page({
   onLoad: function(options) {
     let that = this
     that.goodsDeatil(options.id);
-
   },
 
   // 商品详情
@@ -32,20 +44,44 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
+      console.log(res);
       console.log(res.data.data.details);
       if (res.statusCode == 200) {
+        let result = res.data.data.details
         that.setData({
-          details: res.data.data.details
+          details: result,
+          hint: result.twice_submit
         })
         // 产品简介
-        let introduce = res.data.data.details.introduce
-
+        let introduce = result.introduce
+        WxParse.wxParse('introduce', 'html', introduce, that, 5);
         // 交通信息
-        // let traffic = res.
-
-        // 景点详情
-
+        let traffic = result.traffic
+        WxParse.wxParse('traffic', 'html', traffic, that, 5);
         // 购买须知
+        let buy = result.buy_notice
+        WxParse.wxParse('buy', 'html', buy, that, 5);
+        that.trailer(result.article_type)
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+  // 预告
+  trailer: function(e) {
+    let that = this
+    let url = app.globalData.api + '/portal/home/get_foreshow'
+    modals.loading()
+    request.sendRequest(url, 'post', {
+      type: e
+    }, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      modals.loaded()
+      if (res.statusCode == 200) {
+        that.setData({
+          startTime: res.data.data
+        })
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
