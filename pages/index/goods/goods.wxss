@@ -97,7 +97,6 @@ page {
   width: 48rpx;
   height: 48rpx;
   border-radius: 50%;
-  background: black;
 }
 
 .discuss>view {
@@ -122,7 +121,6 @@ page {
 .shoop-line>image {
   width: 88rpx;
   height: 88rpx;
-  background: black;
 }
 
 .shop-info {
@@ -186,7 +184,6 @@ page {
 
 .attractions {
   width: 100%;
-  margin-bottom: 216rpx;
 }
 
 .attractions>text {
@@ -220,6 +217,7 @@ page {
   height: 108rpx;
   position: fixed;
   bottom: 0;
+  z-index: 10;
 }
 
 .icons {
@@ -233,7 +231,7 @@ page {
 }
 
 .get {
-  width: 408rpx;
+  width: 330rpx;
   height: 76rpx;
   line-height: 76rpx;
   background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
@@ -243,4 +241,24 @@ page {
   width: 670rpx;
   height: 400rpx;
   margin-bottom: 8rpx;
+}
+
+.consult {
+  width: 108rpx !important;
+  height: 108rpx !important;
+  border: none !important;
+  position: fixed;
+  bottom: 0;
+  left: 12rpx;
+  z-index: 50;
+}
+
+.shares {
+  width: 108rpx !important;
+  height: 108rpx !important;
+  border: none !important;
+  position: fixed;
+  bottom: 0;
+  left: 278rpx;
+  z-index: 50;
 }

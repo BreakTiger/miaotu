@@ -10,6 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    gid: '',
+    scrollHeight: wx.getSystemInfoSync().windowHeight,
+    back: false,
     top: [{
         name: '商品'
       },
@@ -20,32 +23,34 @@ Page({
         name: '须知'
       }
     ],
-
     details: {},
     startTime: '',
-    hint:'',
+    hint: '',
+    discuss: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('页面参数：', options)
     let that = this
+    that.setData({
+      gid: options.id
+    })
     that.goodsDeatil(options.id);
+
   },
 
   // 商品详情
   goodsDeatil: function(e) {
     let that = this
-    console.log(e);
     let url = app.globalData.api + '/portal/home/get_details_info'
     request.sendRequest(url, 'post', {
       id: e
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res);
-      console.log(res.data.data.details);
       if (res.statusCode == 200) {
         let result = res.data.data.details
         that.setData({
@@ -82,15 +87,64 @@ Page({
         that.setData({
           startTime: res.data.data
         })
+        that.review()
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  toEvaluate: function() {
+  review: function() {
+    let that = this
+    let data = {
+      page: 1,
+      length: 1,
+      details_id: that.data.details.id
+    }
+    let url = app.globalData.api + '/portal/home/comment'
+    // console.log('参数：', data)
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      // console.log(res.data.data.data[0]);
+      if (res.statusCode == 200) {
+        that.setData({
+          discuss: res.data.data.data[0]
+        })
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+
+  },
+
+
+  // 监听滚动条
+  scrolling: function(e) {
+    let scrollTop = e.detail.scrollTop
+    if (scrollTop < this.data.scrollHeight / 4) {
+      this.setData({
+        back: false
+      })
+    } else {
+      this.setData({
+        back: true
+      })
+    }
+  },
+
+  // 返回顶部
+  scrollToTop() {
+    this.setData({
+      scrollTop: 0,
+      back: false
+    })
+  },
+
+  toEvaluate: function(e) {
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/index/goods/evaluate/evaluate',
+      url: '/pages/index/goods/evaluate/evaluate?id=' + id,
     })
   },
 
@@ -106,12 +160,7 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
 
-  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -120,19 +169,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -151,7 +188,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(options) {
+    // if (res.from === 'button') {
+    //   console.log(111);
+    // }
+    // return{
+    //   title: this.data.details.title,
+    //   path: 'pages/index/goods/goods?id=' + this.data.gid,
+    // }
   }
 })
