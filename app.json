@@ -4,7 +4,6 @@
     "pages/strategy/strategy",
     "pages/mine/mine",
     "pages/login/login",
-    "pages/index/shuffling/shuffling",
     "pages/index/group/group",
     "pages/index/free/free",
     "pages/index/free/free_detail/free_detail",
@@ -38,7 +37,8 @@
     "pages/mine/draw/prize/prize",
     "pages/mine/draw/rules/rules",
     "pages/mine/draw/integral/integral",
-    "pages/mine/sign_in/sign_in"
+    "pages/mine/sign_in/sign_in",
+    "pages/index/group/group_detail/group_detail"
   ],
   "permission": {
     "scope.userLocation": {

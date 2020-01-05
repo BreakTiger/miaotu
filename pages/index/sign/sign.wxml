@@ -8,17 +8,15 @@
   </view>
   <view class="laber-rulue flex fl-align fl-jc f24 c-38 b-04">规则</view>
   <view class="invite flex fl-align fl-jc f28 c-38 b-04 b_r12" bindtap="toSign" wx:if="{{signType}}">立即签到</view>
-  <view class="invite flex fl-align fl-jc f28 c-38 b-04 b_r12" wx:if="{{!signType}}">邀请好友签到</view>
+  <button class="invite flex fl-align fl-jc f28 c-38 b-04 b_r12" wx:if="{{!signType}}" open-type="share">邀请好友签到</button>
   <view class="goods-list-content flex col fl-align">
     <view class="list-nav flex fl-align fl-jsa c-66 f28">
-      <block wx:for="{{goodsnav}}" wx:key="index">
-        <text class="{{choice_one==item.id?'linebottom':''}}">{{item.name}}</text>
-      </block>
+      <text class="{{choice_one==item.id?'linebottom':''}}" wx:for="{{goodsnav}}" wx:key="index" data-id="{{item.id}}" bindtap="toGetKind">{{item.name}}</text>
     </view>
     <view class="list-content b-F5">
       <!-- 左边 -->
       <view class="left-col">
-        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" bindtap="toGoodsDetail">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
             <view class="list-titles climp2 f24">{{item.title}}</view>
@@ -33,7 +31,7 @@
       <!-- 右边 -->
       <view class="right-col">
         <image src="{{card}}" class="b_r16 list-img"></image>
-        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
             <view class="list-titles climp2 f24">{{item.title}}</view>
@@ -46,6 +44,5 @@
         </view>
       </view>
     </view>
-
   </view>
 </view>

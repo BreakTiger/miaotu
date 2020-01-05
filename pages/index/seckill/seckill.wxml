@@ -4,23 +4,24 @@
   </view>
   <view class="list-content flex col fl-align">
     <view class="list-content-item flex fl-align fl-jsb b-ff" wx:for="{{goodslist}}" wx:key="index">
-      <image src="../../../resources/1.png"></image>
+      <image src="{{item.banner}}"></image>
       <view class="list-content-item-info flex col">
-        <view class="title-line climp2 c-45 f28">【最佳欧洲③】冰与雪之夏：霞慕尼 & 勃朗峰地区（Chamonix </view>
+        <view class="title-line climp2 c-45 f28">{{item.title}}</view>
         <text class="labers t-ac c-38 f20">爆款</text>
-        <text class="f28 c-38">￥125.00起</text>
+        <text class="f28 c-38">￥{{item.dprice}}起</text>
         <view class="state flex col fl-align">
-          <text class="c-66 f20">已拼234单</text>
+          <text class="c-66 f20">已拼{{item.people_count}}单</text>
           <view class="flex col fl-align fl-jse b_r12 c-ff">
             <text class="f24">去拼团</text>
             <view class="flex fl-align fl-jsa">
-              <progress percent="50" activeColor="white" backgroundColor="rgba(255,255,255,0.5)" border-radius="190"></progress>
-              <text class="f18">50%</text>
+              <progress percent="{{(item.people_count/item.ms_share)*100}}" activeColor="white" backgroundColor="rgba(255,255,255,0.5)" border-radius="190"></progress>
+              <text class="f18">{{(item.people_count/item.ms_share)*100}}%</text>
             </view>
           </view>
         </view>
       </view>
 
     </view>
+    <view class="c-ff f32" style="margin:200rpx;" wx:if="{{goodslist.length==0}}">暂无数据</view>
   </view>
 </view>

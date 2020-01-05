@@ -4,14 +4,12 @@ page {
 
 .shop-line {
   width: 100%;
-  padding-top: 20rpx;
-  padding-bottom: 100rpx;
+  padding: 20rpx 0;
 }
 
 .shop-line>image {
   width: 88rpx;
   height: 88rpx;
-  background: black;
 }
 
 .shop-info {
@@ -19,11 +17,9 @@ page {
   height: 88rpx;
 }
 
-.icons>image {
+.icon{
   width: 20rpx;
-  height: 16rpx;
-  background: black;
-  margin-right: 8rpx;
+  height: 20rpx;
 }
 
 .Focus {
@@ -50,16 +46,26 @@ page {
   background: rgba(255, 211, 4, 0.7);
 }
 
+
+/* 瀑布流 */
 .list-content {
-  width: 100%;
-  padding-bottom: 20rpx;
+  width: 710rpx;
+  margin: auto;
+}
+
+.left-col, .right-col {
+  width: 346rpx;
+  display: inline-block;
+}
+
+.right-col {
+  float: right;
 }
 
 .list-item {
-  margin-top: 20rpx;
-  margin-left: 20rpx;
   width: 346rpx;
   height: 488rpx;
+  margin-bottom: 20rpx;
 }
 
 .list-item>image {
@@ -70,19 +76,11 @@ page {
 
 .list-titles {
   width: 304rpx;
-  margin-top: 10rpx;
-  margin-bottom: 26rpx;
 }
 
 .list-img {
   width: 346rpx;
   height: 344rpx;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
-}
-
-.list-img>image {
-  width: 100%;
-  height: 100%;
+  margin-bottom: 20rpx;
 }
 

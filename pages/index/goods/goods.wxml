@@ -35,16 +35,16 @@
   </view>
 
   <view class="hint-line flex fl-align fl-jsa c-00" wx:if="{{details.twice_submit}}">
-    <image></image>
+    <image src="../../../icon/hint.png"></image>
     <view class="f20 f-w5">二次确认</view>
     <view class="climp2 f24 f-w3">{{details.twice_submit}}</view>
   </view>
 
-  <view class="review flex col b-ff">
+  <view class="review flex col b-ff" wx:if="{{discuss.length>0}}">
     <text class="f32 c-00 f-w5">点评</text>
     <view class="discuss flex fl-jsb">
-      <image src="{{discuss.avatar}}"></image>
-      <view class="f28 climp2">{{discuss.content}}</view>
+      <image src="{{discuss[0].avatar}}"></image>
+      <view class="f28 climp2">{{discuss[0].content}}</view>
     </view>
     <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate" data-id="{{details.id}}">查看全部评价 ></view>
   </view>
@@ -53,16 +53,7 @@
     <image class="b_r12" src="{{details.shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
       <text class="f28 c-00 f-w5 climp2">{{details.shop.user_nickname}}</text>
-      <view class="flex fl-align fl-jsb">
-        <view class="flex fl-align">
-          <image></image>
-          <text class="c-66 f24 f-w3">入驻商家</text>
-        </view>
-        <view class="flex fl-align">
-          <image></image>
-          <text class="c-66 f24 f-w3">认证商家</text>
-        </view>
-      </view>
+      <image src="../../../resources/logo.png" class="icon"></image>
     </view>
     <view class="shops c-ff f24 b_r200 t-ac">店铺</view>
   </view>

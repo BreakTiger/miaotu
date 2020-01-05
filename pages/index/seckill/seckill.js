@@ -24,7 +24,7 @@ Page({
     ],
     choice: 1,
     page: 1,
-    goodslist: [1, 2, 3, 4, 1, 2]
+    goodslist: []
 
   },
 
@@ -44,14 +44,25 @@ Page({
       length: 10,
       type: e
     }
-    console.log('参数:', data);
     modals.loading()
     let url = app.globalData.api + '/portal/Miaosha/index'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded()
-      console.log(res);
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            goodslist: res.data.data.data
+          })
+        } else {
+          that.setData({
+            goodslist: []
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
     })
   },
 
@@ -68,27 +79,10 @@ Page({
   },
 
 
-
-
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
 
   },
 

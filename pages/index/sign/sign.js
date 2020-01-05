@@ -49,6 +49,22 @@ Page({
     this.getList(this.data.choice_one)
   },
 
+
+
+  // 切换分类
+  toGetKind: function(e) {
+    let id = e.currentTarget.dataset.id
+    let choice = this.data.choice_one
+    if (choice != id) {
+      this.setData({
+        choice_one: id
+      })
+      // modals.loading()
+      this.getList(this.data.choice_one);
+    }
+  },
+
+  // 分类列表
   getList: function(e) {
     let that = this
     let data = {
@@ -94,6 +110,14 @@ Page({
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
+    })
+  },
+
+
+  toGoodsDetail: function(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/index/goods/goods?id=' + id,
     })
   },
 

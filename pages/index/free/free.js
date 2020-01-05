@@ -56,9 +56,9 @@ Page({
   },
 
   toGetFree: function() {
-    this.setData({
-      covers: true
-    })
+    // this.setData({
+    //   covers: true
+    // })
   },
 
   /**

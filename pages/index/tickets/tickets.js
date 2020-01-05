@@ -45,9 +45,9 @@ Page({
 
 
   toShareDown: function() {
-    wx.navigateTo({
-      url: '/pages/index/tickets/tickets_detail/tickets_detail',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/index/tickets/tickets_detail/tickets_detail',
+    // })
   },
 
   /**

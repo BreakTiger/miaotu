@@ -57,16 +57,9 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/index/goods/goods",
-					"pathName": "pages/index/goods/goods",
-					"query": "id=68",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/goods/shop/shop",
-					"pathName": "pages/index/goods/shop/shop",
-					"query": "sid=1",
+					"name": "pages/index/group/group_detail/group_detail",
+					"pathName": "pages/index/group/group_detail/group_detail",
+					"query": "id=13",
 					"scene": null
 				}
 			]

@@ -32,7 +32,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    // 判断用户是否登陆
+    let openID = wx.getStorageSync('openid')
+    if (!openID) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      // this.unRead(openID)
+    }
   },
 
 

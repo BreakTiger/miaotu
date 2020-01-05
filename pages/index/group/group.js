@@ -64,7 +64,14 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
 
+  // 拼团详情
+  toGoodsDetail: function(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/index/group/group_detail/group_detail?id=' + id,
+    })
   },
 
   /**
