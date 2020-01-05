@@ -43,11 +43,15 @@ Page({
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded()
-      console.log(res.data.data.data);
+      // console.log(res.data.data.data);
       if (res.statusCode == 200) {
-        that.setData({
-          list: res.data.data.data
-        })
+        if(res.data.status==1){
+          that.setData({
+            list: res.data.data.data
+          })
+        }else{
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }

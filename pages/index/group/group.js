@@ -18,48 +18,54 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.lunbo()
-
+    this.getBanner()
   },
 
-  lunbo: function() {
+  // 轮播图
+  getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
-    modals.loading()
     request.sendRequest(url, 'post', {
       tags: 2
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log('轮播：',res);
+      console.log(res)
       if (res.statusCode == 200) {
-        that.setData({
-          sw_list: res.data.data
-        })
-        that.getList()
+        if (res.data.status == 1) {
+          that.setData({
+            sw_list: res.data.data
+          })
+          that.getList()
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
+  // 列表
   getList: function() {
     let that = this
     let data = {
       page: that.data.page,
       length: 10
     }
-    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Pintuan/index'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      modals.loaded()
-      console.log('列表', res.data.data.data);
+      console.log(res)
       if (res.statusCode == 200) {
-        that.setData({
-          list: res.data.data.data
-        })
+        if (res.data.status == 1) {
+          that.setData({
+            list: res.data.data.data
+          })
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
@@ -74,33 +80,12 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 1000
-    })
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 1000);
+
   },
 
   /**

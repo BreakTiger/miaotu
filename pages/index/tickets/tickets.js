@@ -34,9 +34,13 @@ Page({
       // console.log(res);
       modals.loaded()
       if (res.statusCode == 200) {
-        that.setData({
-          list: res.data.data.data
-        })
+        if (res.data.status == 1) {
+          that.setData({
+            list: res.data.data.data
+          })
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
