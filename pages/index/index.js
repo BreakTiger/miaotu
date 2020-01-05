@@ -16,8 +16,8 @@ Page({
    */
   data: {
     city: '',
-    sw_list: [], //轮播图
     noread: null,
+    sw_list: [],
     na_list: [{
         icon: '../../icon/group.png',
         name: '单身拼团',
@@ -39,8 +39,8 @@ Page({
         path: '/pages/index/sign/sign',
       }
     ],
-    skillgoods: {},
     countdown: '',
+    skillgoods: {},
     goodsnav: [{
         id: 5,
         name: '推荐'
@@ -78,24 +78,21 @@ Page({
    */
   onLoad: function(options) {
     // 判断用户是否登陆
-    let openID = wx.getStorageSync('openid')
-    if (!openID) {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      this.positioning()
+    } else {
       wx.navigateTo({
         url: '/pages/login/login',
       })
-    } else {
-      this.unRead(openID)
     }
-
     this.positioning()
-    this.getBanner()
   },
 
-  // 获取定位
+  // 定位
   positioning: function() {
     let that = this
     wx.getLocation({
-      type: 'gcj02',
       success: function(res) {
         let lat = res.latitude
         let lon = res.longitude
@@ -106,10 +103,10 @@ Page({
             longitude: lon
           },
           success: function(res) {
-            // console.log(res.result);
             that.setData({
               city: res.result.address_component.city
             })
+            that.getBanner()
           },
           fail: function(error) {
             console.log(error);
@@ -119,7 +116,7 @@ Page({
     })
   },
 
-  // 获取轮播
+  // 轮播图
   getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
@@ -129,55 +126,60 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
+      modals.loaded()
       if (res.statusCode == 200) {
-        that.setData({
-          sw_list: res.data.data
-        })
-        that.getSkill()
+        if (res.data.status == 1) {
+          that.setData({
+            sw_list: res.data.data
+          })
+          that.getSkill()
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  // 推荐的秒杀爆款商品
+  // 秒杀商品
   getSkill: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_fire_seckill'
+    modals.loading()
     request.sendRequest(url, 'post', {}, {
       'content-type': 'application/json'
     }).then(function(res) {
+      // console.log(res);
+      modals.loaded()
       if (res.statusCode == 200) {
-        that.setData({
-          skillgoods: res.data.data
-        })
-        let time1 = res.data.data.ms_starttime
-        // console.log('开始时间', time1)
-        time1 = time1.substring(0, 19);
-        time1 = time1.replace(/-/g, '/');
-        let start = new Date(time1).getTime();
-        // console.log('开始时间:', start)
+        if (res.data.status == 1) {
+          that.setData({
+            skillgoods: res.data.data
+          })
+          let time1 = res.data.data.ms_starttime
+          time1 = time1.substring(0, 19);
+          time1 = time1.replace(/-/g, '/');
+          let start = new Date(time1).getTime();
 
-        let time2 = res.data.data.ms_endtime
-        // console.log('结束时间', time2)
-        time2 = time2.substring(0, 19);
-        time2 = time2.replace(/-/g, '/');
-        let end = new Date(time2).getTime();
-        // console.log('结束时间：', end)
+          let time2 = res.data.data.ms_endtime
+          time2 = time2.substring(0, 19);
+          time2 = time2.replace(/-/g, '/');
+          let end = new Date(time2).getTime();
 
-        let now = Date.parse(new Date())
-        // console.log('当前时间戳:', now)
-        if (now >= start || now <= end) {
-          let currentstartTimer = (end - now) / 1000
-          // console.log('活动倒计时')
-          that.setTimeShow(currentstartTimer)
+          let now = Date.parse(new Date())
+
+          if (now >= start || now <= end) {
+            let currentstartTimer = (end - now) / 1000
+            that.setTimeShow(currentstartTimer)
+          } else {
+            that.setData({
+              countdown: '活动即将开始'
+            });
+          }
         } else {
-          this.setData({
-            countdown: '活动即将开始'
-          });
+          modals.showToast(res.data.msg, 'none')
         }
-        //默认情况下：
-        that.getList(that.data.choice_one)
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
@@ -185,8 +187,7 @@ Page({
   },
 
   // 倒计时
-  setTimeShow(currentstartTimer) {
-
+  setTimeShow: function(currentstartTimer) {
     let interval = setInterval(function() {
       // 秒数
       var second = currentstartTimer;
@@ -194,17 +195,14 @@ Page({
       var day = Math.floor(second / 3600 / 24);
       var dayStr = day.toString();
       if (dayStr.length == 1) dayStr = '0' + dayStr;
-
       // 小时位
       var hr = Math.floor((second - day * 3600 * 24) / 3600);
       var hrStr = hr.toString();
       if (hrStr.length == 1) hrStr = '0' + hrStr;
-
       // 分钟位
       var min = Math.floor((second - day * 3600 * 24 - hr * 3600) / 60);
       var minStr = min.toString();
       if (minStr.length == 1) minStr = '0' + minStr;
-
       // 秒位
       var sec = second - day * 3600 * 24 - hr * 3600 - min * 60;
       var secStr = sec.toString();
@@ -220,9 +218,10 @@ Page({
         });
       }
     }.bind(this), 1000);
+    this.getList(this.data.choice_one)
   },
 
-  // 获取分类列表
+  // 不同分类下的列表
   getList: function(e) {
     let that = this
     let data = {
@@ -234,94 +233,88 @@ Page({
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      modals.loaded();
-      // console.log(res.data.data)
+      // console.log(res);
       if (res.statusCode == 200) {
-        let list = res.data.data.data
-        // console.log(list)
-        let len = list.length
-        // console.log('长度：', len)
-        if (len > 0) {
-          let half = (len / 2).toFixed(0);
-          that.setData({
-            leftlist: list.slice(0, half),
-            rightlist: list.slice(half, len)
-          })
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          let len = list.length
+          if (len > 0) {
+            let half = (len / 2).toFixed(0);
+            that.setData({
+              leftlist: list.slice(0, half),
+              rightlist: list.slice(half, len)
+            })
+          }
+          that.getCard()
+        } else {
+          modals.showToast(res.data.msg, 'none')
         }
-        that.getCard()
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  // 小卡片
+  // 瀑布流小卡片
   getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
+    modals.loading()
     request.sendRequest(url, 'post', {
       tags: 9
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
+      // console.log(res)
+      modals.loaded()
       if (res.statusCode == 200) {
-        that.setData({
-          card: res.data.data[0].image
-        })
+        if (res.data.status == 1) {
+          that.setData({
+            card: res.data.data[0].image
+          })
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  // 切换分类
-  toGetKind: function(e) {
-    let id = e.currentTarget.dataset.id
-    let choice = this.data.choice_one
-    if (choice != id) {
-      this.setData({
-        choice_one: id
-      })
-      modals.loading()
-      this.getList(this.data.choice_one);
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      this.unread(openID)
     }
   },
 
-  // 秒杀详情
-  toSkill: function() {
-    let that = this
-    let item = that.data.skillgoods
-    console.log('秒杀ID：', item.id)
-    // if (item != 0) {
-    //   wx.navigateTo({
-    //     url: '/pages/index/goods/goods?id=' + item.id,
-    //   })
-    // }
-  },
-
-  // 未读消息条数
-  unRead: function(openID) {
+  // 未读消息
+  unread: function(openID) {
     let that = this
     let url = app.globalData.api + '/portal/Message/no_read'
     request.sendRequest(url, 'post', {}, {
       'token': openID
     }).then(function(res) {
+      // console.log(res)
       if (res.statusCode == 200) {
-        that.setData({
-          noread: res.data.data
-        })
+        if (res.data.status == 1) {
+          that.setData({
+            noread: res.data.data
+          })
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none');
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  // 选择地点
-  toPlace: function() {
-
-  },
-
-  // 搜索
+  // 跳转去搜索
   toSearch: function() {
     wx.navigateTo({
       url: '/pages/index/search/search',
@@ -330,7 +323,7 @@ Page({
 
   // 查看信息
   toInfo: function() {
-    let openID = wx.getStorageSync('openid')
+    let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
       wx.showModal({
         title: '提示',
@@ -350,11 +343,37 @@ Page({
     }
   },
 
-  // 轮播跳转
+  // 导航模块跳转
+  toNav: function(e) {
+    wx.navigateTo({
+      url: e.currentTarget.dataset.url,
+    })
+  },
+
+  // 切换分类
+  toGetKind: function(e) {
+    let id = e.currentTarget.dataset.id
+    let choice = this.data.choice_one
+    if (choice != id) {
+      this.setData({
+        choice_one: id
+      })
+      this.getList(id);
+    }
+  },
+
+  // 跳转商品详情
+  toGoodsDetail: function(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/index/goods/goods?id=' + id,
+    })
+  },
+
+  // 轮播图详情
   toDetaill: function(e) {
     let list = this.data.sw_list
     let item = list[e.currentTarget.dataset.index];
-    console.log(item)
     if (item.type1 == 1) { //商品详情
       console.log('商品详情')
       wx.navigateTo({
@@ -373,27 +392,6 @@ Page({
     }
   },
 
-  // 导航跳转
-  toNav: function(e) {
-    wx.navigateTo({
-      url: e.currentTarget.dataset.url,
-    })
-  },
-
-  toGoodsDetail: function(e) {
-    let id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '/pages/index/goods/goods?id=' + id,
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    let openID = wx.getStorageSync('openid')
-    this.unRead(openID);
-  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -416,43 +414,36 @@ Page({
   onReachBottom: function() {
     let that = this
     let left = that.data.leftlist
-    // console.log('左边：', left)
     let right = that.data.rightlist
-    // console.log('右边：', right)
     let pages = that.data.page + 1
-    // console.log('页码：', page)
     let choice = that.data.choice_one
-    // console.log('选择分类：', choice)
     let data = {
       page: pages,
       length: 10,
       type: choice
     }
-    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Home/get_type_details'
     modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res.data.data.data);
       modals.loaded()
       if (res.statusCode == 200) {
-        let list = res.data.data.data
-        // console.log(list)
-        let len = list.length
-        // console.log('长度：', len)
-        if (len > 0) {
-          let half = len / 2
-          // console.log('一半：', half)
-          let one = list.slice(0, half)
-          // console.log(one)
-          let two = list.slice(half, len)
-          // console.log(two)
-          that.setData({
-            leftlist: left.concat(one),
-            rightlist: right.concat(two),
-            page: pages
-          })
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          let len = list.length
+          if (len > 0) {
+            let half = len / 2
+            let one = list.slice(0, half)
+            let two = list.slice(half, len)
+            that.setData({
+              leftlist: left.concat(one),
+              rightlist: right.concat(two),
+              page: pages
+            })
+          }
+        } else {
+          modals.showToast('我也是有底线的', 'none');
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none');
@@ -464,7 +455,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
 
   }
 })

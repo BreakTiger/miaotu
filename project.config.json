@@ -54,15 +54,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/index/group/group_detail/group_detail",
-					"pathName": "pages/index/group/group_detail/group_detail",
-					"query": "id=13",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

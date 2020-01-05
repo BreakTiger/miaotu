@@ -9,4 +9,5 @@
       <view class="climp1 f28 c-66">{{item.content}}</view>
     </view>
   </view>
+  <view wx:if="{{infoList.length==0}}" class="f32" style="margin:auto;">暂无数据</view>
 </view>
