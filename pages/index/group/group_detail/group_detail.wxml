@@ -53,7 +53,7 @@
   <view class="bill-line flex col fl-align b-ff">
     <view class="titles-line flex fl-align fl-jsb">
       <text class="f32 f-wb c-00">34人在拼单，可直接参与</text>
-      <text class="f24 c-00 f-w4">查看全部 ></text>
+      <text class="f24 c-00 f-w4" bindtap="allGroup">查看全部 ></text>
     </view>
     <view class="bill-content">
       <swiper vertical="true" circular="true">
@@ -159,7 +159,7 @@
   <view class="attractions flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">景点详情</text>
     <view>
-      <image class="detail-img" src="{{item.pic_url}}" wx:for="{{details.product_pic}}" wx:key="index"></image>
+      <image class="detail-img" src="{{item.pic_url}}" wx:for="{{details.pic}}" wx:key="index"></image>
     </view>
     <text class="f32 c-00 f-w5">购买需知道</text>
     <!-- 富文本 -->
@@ -181,11 +181,11 @@
       <image src="../../../../icon/talk.png"></image>
       <text class="f20 c-66 f-w4">咨询</text>
     </view>
-    <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}">
+    <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}" bindtap="toCollect">
       <image src="../../../../icon/collect.png"></image>
       <text class="f20 c-66 f-w4">收藏</text>
     </view>
-    <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}">
+    <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}" bindtap="toCanel">
       <image src="../../../../icon/collect.png"></image>
       <text class="f20 c-66 f-w4">已收藏</text>
     </view>
@@ -193,7 +193,7 @@
       <image src="../../../../icon/share.png"></image>
       <text class="f20 c-66 f-w4">分享</text>
     </view>
-    <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.price}}立即预订</view>
+    <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.pt_price}}立即预订</view>
   </view>
 
   <!-- 咨询 -->
@@ -201,5 +201,28 @@
 
   <!-- 分享 -->
   <button class="shares" plain="true" open-type="share"></button>
+
+  <view class="cover flex col fl-align fl-jc" wx:if="{{shad}}">
+    <image class="close" src="../../../../icon/close.png" bindtap="toClose"></image>
+    <view class="grorpList b-ff flex col fl-align">
+      <view class="title-lines t-ac f28 c-00 f-w4">可参加的拼单</view>
+      <scroll-view class="grorpList-content">
+        <view class="bill-item flex fl-align fl-jsb" style="margin: 0 auto;border-bottom:1rpx solid #f5f5f5;" wx:for="{{12}}" wx:key="index">
+          <view class="flex fl-align">
+            <image class="headers" src=""></image>
+            <text class="f24 c-00 f-wb">用户名称1</text>
+          </view>
+          <view class="flex fl-align">
+            <view class="flex col fl-align">
+              <text class="f24">还差<text class="c-38">2人</text> 拼成</text>
+              <text class="f20">剩余23:23:23</text>
+            </view>
+            <view class="toGroup b_r200 t-ac c-ff f24">去拼团</view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+  </view>
 
 </view>

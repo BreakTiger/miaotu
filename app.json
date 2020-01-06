@@ -38,7 +38,8 @@
     "pages/mine/draw/rules/rules",
     "pages/mine/draw/integral/integral",
     "pages/mine/sign_in/sign_in",
-    "pages/index/group/group_detail/group_detail"
+    "pages/index/group/group_detail/group_detail",
+    "pages/index/group/group_buy/group_buy"
   ],
   "permission": {
     "scope.userLocation": {

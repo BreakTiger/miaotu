@@ -85,14 +85,47 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.onLoad();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    let that = this
+    let page = that.data.page + 1
+    let old = that.data.list
+    let data = {
+      page: page,
+      length: 10
+    }
+    console.log('参数：', data)
+    let url = app.globalData.api + '/portal/Pintuan/index'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let news = res.data.data.data
+          that.setData({
+            list: old.concat(news)
+          })
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   /**

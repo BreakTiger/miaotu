@@ -3,7 +3,6 @@ import modals from '../../../../methods/modal.js'
 const WxParse = require('../../../../wxParse/wxParse.js')
 const app = getApp()
 
-
 Page({
 
   /**
@@ -23,10 +22,13 @@ Page({
     id: '',
     details: {},
     shop: {},
+    packages: [],
     startTime: '',
-    discuss:[],
-    collecttype: false
-
+    discuss: {},
+    page: 1,
+    group: [],
+    collecttype: false,
+    shad: false
   },
 
   /**
@@ -36,46 +38,57 @@ Page({
     this.setData({
       id: options.id
     })
-    this.goodsDeatil(options.id);
+    let openID = wx.getStorageSync('openid')
+    // 判断是否登录
+    if (openID) { //已经登录
+      this.getShopInfo()
+    } else { //未登录
+      this.getShopInfo()
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
 
-  goodsDeatil: function(e) {
+  // 获取商品信息
+  getShopInfo: function() {
     let that = this
     let url = app.globalData.api + '/portal/Pintuan/info'
     request.sendRequest(url, 'post', {
-      id: e
+      id: that.data.id
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res);
+      console.log(res.data.data)
       if (res.statusCode == 200) {
-        let details = res.data.data.info
-        // console.log(details)
-        let shop = res.data.data.shop
-        console.log(shop)
-        that.setData({
-          details: details,
-          shop: shop
-        })
-
-        // 产品简介
-        let introduce = details.introduce
-        WxParse.wxParse('introduce', 'html', introduce, that, 5);
-        // 交通信息
-        let traffic = details.traffic
-        WxParse.wxParse('traffic', 'html', traffic, that, 5);
-        // 购买须知
-        let buy = details.buy_notice
-        WxParse.wxParse('buy', 'html', buy, that, 5);
-
-        that.trailer(details.article_type)
+        if (res.data.status == 1) {
+          let details = res.data.data.info
+          that.setData({
+            details: details,
+            shop: res.data.data.shop,
+            packages: res.data.data.setmeal
+          })
+          // 绑定富文本:
+          // 产品简介
+          let introduce = details.introduce
+          WxParse.wxParse('introduce', 'html', introduce, that, 5);
+          // 交通信息
+          let traffic = details.traffic
+          WxParse.wxParse('traffic', 'html', traffic, that, 5);
+          // 购买须知
+          let buy = details.buy_notice
+          WxParse.wxParse('buy', 'html', buy, that, 5);
+          that.trailer(details.article_type)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  // 预告
+  // 活动开始预告
   trailer: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_foreshow'
@@ -84,91 +97,215 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res)
+      console.log(res.data)
       if (res.statusCode == 200) {
-        that.setData({
-          startTime: res.data.data
-        })
-        that.review()
+        if (res.data.status == 1) {
+          that.setData({
+            startTime: res.data.data
+          })
+          that.getReview()
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  review: function() {
+  // 获取评论
+  getReview: function() {
     let that = this
     let data = {
       page: 1,
       length: 1,
       details_id: that.data.details.id
     }
+    console.log(data);
     let url = app.globalData.api + '/portal/home/comment'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
+      console.log(res.data)
       if (res.statusCode == 200) {
-        // console.log(res.data.data.data)
-        that.setData({
-          discuss: res.data.data.data
-        })
+        if (res.data.status == 1) {
+          that.setData({
+            discuss: res.data.data.data
+          })
+        }
+        that.joinGroup()
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
+  // 拼单情况
+  joinGroup: function() {
+    let that = this
+    let data = {
+      id: that.data.id,
+      page: that.data.page,
+      length: 20
+    }
+    console.log('参数：', data);
+    let url = app.globalData.api + '/portal/Pintuan/info_desc'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.collectState()
+        } else {
+          modals.showToast(res.data.status, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
 
-  // 查看全部评价
-  toEvaluate: function (e) {
-    let id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '/pages/index/goods/evaluate/evaluate?id=' + id,
+  onShow: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      console.log('已授权')
+      this.collectState()
+    }
+  },
+
+  // 产品收藏状态
+  collectState: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Shop/collect'
+    request.sendRequest(url, 'post', {
+      id: that.data.id
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data);
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          if (res.data.data == 0) { //未收藏
+            that.setData({
+              collecttype: false
+            })
+          } else { //收藏
+            that.setData({
+              collecttype: true
+            })
+          }
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 收藏
+  toCollect: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Shop/set_collect'
+    request.sendRequest(url, 'post', {
+      id: that.data.id
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast(res.data.msg, 'none')
+          that.collectState()
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 取消收藏
+  toCanel: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Shop/out_collect'
+    request.sendRequest(url, 'post', {
+      id: that.data.id
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast(res.data.msg, 'none')
+          that.collectState()
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 查看所有拼团
+  allGroup: function() {
+    this.setData({
+      shad: true
+    })
+  },
+
+  // 关闭弹窗
+  toClose: function() {
+    this.setData({
+      shad: false
     })
   },
 
   // 去到商铺
-  toShop: function (e) {
+  toShop: function(e) {
     wx.navigateTo({
       url: '/pages/index/goods/shop/shop?sid=' + e.currentTarget.dataset.sid,
     })
   },
 
-  // 立即下单
-  toOrder: function () {
-    wx.navigateTo({
-      url: '/pages/index/goods/goods_buy/goods_buy',
-    })
-  },
-
-
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
+  // 立即预定
+  toOrder: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      let data = {
+        id: this.data.details.id,
+        tao: this.data.packages,
+        uid: '',
+        price: this.data.details.pt_price
+      }
+      console.log('参数：', data)
+      wx.navigateTo({
+        url: '/pages/index/group/group_buy/group_buy?data=' + JSON.stringify(data),
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
 
   },
+
+
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.onLoad();
   },
 
   /**
@@ -182,6 +319,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    if (options.from === 'button') {}
+    return {
+      title: this.data.details.title,
+      path: '/pages/index/group/group_detail/group_detail?id=' + this.data.id,
+    }
   }
 })

@@ -82,11 +82,11 @@ Page({
     if (openID) {
       this.positioning()
     } else {
+      this.positioning()
       wx.navigateTo({
         url: '/pages/login/login',
       })
     }
-    this.positioning()
   },
 
   // 定位
@@ -161,14 +161,11 @@ Page({
           time1 = time1.substring(0, 19);
           time1 = time1.replace(/-/g, '/');
           let start = new Date(time1).getTime();
-
           let time2 = res.data.data.ms_endtime
           time2 = time2.substring(0, 19);
           time2 = time2.replace(/-/g, '/');
           let end = new Date(time2).getTime();
-
           let now = Date.parse(new Date())
-
           if (now >= start || now <= end) {
             let currentstartTimer = (end - now) / 1000
             that.setTimeShow(currentstartTimer)

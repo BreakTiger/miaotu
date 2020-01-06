@@ -309,3 +309,30 @@ page {
   height: 24rpx !important;
   margin-left: 10rpx;
 }
+
+.grorpList {
+  width: 610rpx;
+  height: 736rpx;
+  border-radius: 12rpx;
+  z-index: 80;
+}
+
+.close {
+  width: 52rpx;
+  height: 52rpx;
+  position: relative;
+  top: 25rpx;
+  left: 302rpx;
+  z-index: 100;
+}
+
+.title-lines {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.grorpList-content {
+  width: 100%;
+  height: calc(100% - 88rpx);
+}
