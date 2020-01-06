@@ -54,12 +54,14 @@ Page({
   getShopInfo: function() {
     let that = this
     let url = app.globalData.api + '/portal/Pintuan/info'
+    modals.loading()
     request.sendRequest(url, 'post', {
       id: that.data.id
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res.data.data)
+      // console.log(res.data.data)
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let details = res.data.data.info
@@ -92,12 +94,14 @@ Page({
   trailer: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_foreshow'
+    modals.loading()
     request.sendRequest(url, 'post', {
       type: e
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res.data)
+      modals.loaded()
+      // console.log(res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -121,12 +125,14 @@ Page({
       length: 1,
       details_id: that.data.details.id
     }
-    console.log(data);
+    // console.log(data);
     let url = app.globalData.api + '/portal/home/comment'
+    modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res.data)
+      // console.log(res.data)
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -140,23 +146,25 @@ Page({
     })
   },
 
-  // 拼单情况
+  // 拼单情况 - 未登录下
   joinGroup: function() {
     let that = this
     let data = {
       id: that.data.id,
       page: that.data.page,
-      length: 20
+      length: 10
     }
-    console.log('参数：', data);
+    // console.log('参数：', data);
     let url = app.globalData.api + '/portal/Pintuan/info_desc'
+    modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
       console.log(res.data)
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          that.collectState()
+          // that.collectState()
         } else {
           modals.showToast(res.data.status, 'none')
         }
@@ -169,21 +177,28 @@ Page({
   onShow: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
-      console.log('已授权')
       this.collectState()
     }
   },
+
+
+  // 拼单情况-登陆下
+
+
+
 
   // 产品收藏状态
   collectState: function() {
     let that = this
     let url = app.globalData.api + '/portal/Shop/collect'
+    modals.loading()
     request.sendRequest(url, 'post', {
       id: that.data.id
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res.data);
+      // console.log(res.data);
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           if (res.data.data == 0) { //未收藏
@@ -206,12 +221,14 @@ Page({
   toCollect: function() {
     let that = this
     let url = app.globalData.api + '/portal/Shop/set_collect'
+    modals.loading()
     request.sendRequest(url, 'post', {
       id: that.data.id
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res)
+      // console.log(res)
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           modals.showToast(res.data.msg, 'none')
@@ -229,12 +246,14 @@ Page({
   toCanel: function() {
     let that = this
     let url = app.globalData.api + '/portal/Shop/out_collect'
+    modals.loading()
     request.sendRequest(url, 'post', {
       id: that.data.id
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res)
+      // console.log(res)
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           modals.showToast(res.data.msg, 'none')
@@ -289,6 +308,11 @@ Page({
       })
     }
 
+  },
+
+  // 禁止手动滑动
+  catchTouchMove: function(res) {
+    return false
   },
 
 

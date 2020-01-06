@@ -25,12 +25,14 @@ Page({
   getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
+    modals.loading()
     request.sendRequest(url, 'post', {
       tags: 2
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res)
+      // console.log(res)
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({

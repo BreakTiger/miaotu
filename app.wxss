@@ -211,4 +211,5 @@ page {
   left: 0rpx;
   background: rgba(0, 0, 0, 0.8);
   z-index: 50;
+  overflow: hidden;
 }
