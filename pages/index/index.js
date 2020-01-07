@@ -353,7 +353,8 @@ Page({
     let choice = this.data.choice_one
     if (choice != id) {
       this.setData({
-        choice_one: id
+        choice_one: id,
+        page: 1
       })
       this.getList(id);
     }

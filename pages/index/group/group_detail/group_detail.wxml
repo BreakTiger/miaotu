@@ -52,66 +52,26 @@
   <!-- 正在拼单 -->
   <view class="bill-line flex col fl-align b-ff">
     <view class="titles-line flex fl-align fl-jsb">
-      <text class="f32 f-wb c-00">34人在拼单，可直接参与</text>
+      <text class="f32 f-wb c-00">{{len}}人在拼单，可直接参与</text>
       <text class="f24 c-00 f-w4" bindtap="allGroup">查看全部 ></text>
     </view>
     <view class="bill-content">
-      <swiper vertical="true" circular="true" autoplay="true" interval="5000">
-        <swiper-item class="flex col fl-align" catchtouchmove='catchTouchMove'>
-          <view class="bill-item flex fl-align fl-jsb">
+      <swiper vertical="true" circular="true" autoplay="true" interval="5000" >
+        <swiper-item class="flex col fl-align" catchtouchmove='catchTouchMove' wx:for="{{one}}" wx:key="index" data-index="{{index}}">
+          <view class="bill-item flex fl-align fl-jsb" wx:for="{{item}}" wx:key="index" data-indexs="{{index}}">
             <view class="flex fl-align">
-              <image class="headers" src=""></image>
-              <text class="f24 c-00 f-wb">用户名称1</text>
+              <image class="headers" src="{{item.header}}"></image>
+              <text class="f24 c-00 f-wb">{{item.name}}</text>
             </view>
             <view class="flex fl-align">
               <view class="flex col fl-align">
-                <text class="f24">还差<text class="c-38">2人</text> 拼成</text>
+                <text class="f24">还差<text class="c-38">{{item.nums}}人</text> 拼成</text>
                 <text class="f20">剩余23:23:23</text>
               </view>
-              <view class="toGroup b_r200 t-ac c-ff f24">去拼团</view>
+              <view class="toGroup b_r200 t-ac c-ff f24" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
             </view>
           </view>
-          <view class="bill-item flex fl-align fl-jsb">
-            <view class="flex fl-align">
-              <image class="headers" src=""></image>
-              <text class="f24 c-00 f-wb">用户名称1</text>
-            </view>
-            <view class="flex fl-align">
-              <view class="flex col fl-align">
-                <text class="f24">还差<text class="c-38">2人</text> 拼成</text>
-                <text class="f20">剩余23:23:23</text>
-              </view>
-              <view class="toGroup b_r200 t-ac c-ff f24">去拼团</view>
-            </view>
-          </view>
-        </swiper-item>
-        <swiper-item class="flex col fl-align" catchtouchmove='catchTouchMove'>
-          <view class="bill-item flex fl-align fl-jsb">
-            <view class="flex fl-align">
-              <image class="headers" src=""></image>
-              <text class="f24 c-00 f-wb">用户名称1</text>
-            </view>
-            <view class="flex fl-align">
-              <view class="flex col fl-align">
-                <text class="f24">还差<text class="c-38">2人</text> 拼成</text>
-                <text class="f20">剩余23:23:23</text>
-              </view>
-              <view class="toGroup b_r200 t-ac c-ff f24">去拼团</view>
-            </view>
-          </view>
-          <view class="bill-item flex fl-align fl-jsb">
-            <view class="flex fl-align">
-              <image class="headers" src=""></image>
-              <text class="f24 c-00 f-wb">用户名称1</text>
-            </view>
-            <view class="flex fl-align">
-              <view class="flex col fl-align">
-                <text class="f24">还差<text class="c-38">2人</text> 拼成</text>
-                <text class="f20">剩余23:23:23</text>
-              </view>
-              <view class="toGroup b_r200 t-ac c-ff f24">去拼团</view>
-            </view>
-          </view>
+          
         </swiper-item>
       </swiper>
     </view>
@@ -208,12 +168,12 @@
       <view class="title-lines t-ac f28 c-00 f-w4">可参加的拼单</view>
       <view class="grorpList-content">
         <scroll-view scroll-y="true" class="flex col">
-          <view class="join-line flex fl-align fl-jsb">
+          <view class="join-line flex fl-align fl-jsb" wx:for="{{allList}}" wx:key="index">
             <view class="flex fl-align" style="margin-left:20rpx;">
-              <image class="header"></image>
-              <text class="f28 c-00 f-w4">程xxx</text>
+              <image class="header" src="{{item.img}}"></image>
+              <text class="f28 c-00 f-w4">{{item.name}}</text>
             </view>
-            <view class="toGroup c-ff f24 t-ac b_r200" style="margin-right:20rpx;">去拼团</view>
+            <view class="toGroup c-ff f24 t-ac b_r200" style="margin-right:20rpx;" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
           </view>
         </scroll-view>
       </view>

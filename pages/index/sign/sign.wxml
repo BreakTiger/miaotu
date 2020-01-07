@@ -1,7 +1,7 @@
 <view class="container flex col fl-align">
   <view class="top-line flex col fl-align">
     <image class="top-bk" src="../../../resources/bk.png"></image>
-    <text class="money c-ff f-w5">￥{{balance}}</text>
+    <text class="money c-ff f-w5">￥<text style="font-size:72rpx;">{{balance}}</text></text>
     <view class="withdrawal flex fl-align fl-jc b_r200">
       <text class="f24 c-ff">提现 ></text>
     </view>

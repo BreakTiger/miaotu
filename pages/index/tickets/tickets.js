@@ -31,7 +31,7 @@ Page({
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res);
+
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -48,10 +48,10 @@ Page({
   },
 
 
-  toShareDown: function() {
-    // wx.navigateTo({
-    //   url: '/pages/index/tickets/tickets_detail/tickets_detail',
-    // })
+  toShareDown: function(e) {
+    wx.navigateTo({
+      url: '/pages/index/tickets/tickets_detail/tickets_detail?id=' + e.currentTarget.dataset.id,
+    })
   },
 
   /**

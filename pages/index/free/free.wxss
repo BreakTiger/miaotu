@@ -99,13 +99,11 @@ page {
   border-radius: 12rpx;
 }
 
-.cover>text {
+.titles {
   font-size: 60rpx;
   font-weight: 600;
   color: #ffea87;
-  line-height: 60px;
-  margin-top: 266rpx;
-  margin-bottom: 130rpx;
+  margin-bottom: 50rpx;
 }
 
 .card-line {
@@ -114,6 +112,8 @@ page {
 }
 
 .card-line>image {
-  width: 204rpx;
   height: 100%;
+  margin: 0 auto;
 }
+
+

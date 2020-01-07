@@ -80,37 +80,41 @@ Page({
   // 下单
   toOrder: function() {
     let that = this
-    if (that.data.region != '请选择出发地址') {
-      let data = {
-        id: that.data.id,
-        set_meal_id: that.data.choice,
-        name: that.data.name,
-        mobile: that.data.phone,
-        identity: that.data.idnum,
-        starting: that.data.region,
-        uid: that.data.uid
-      }
-      console.log('参数：', data);
-      modals.loading()
-      let url = app.globalData.api + '/portal/Pintuan/do_team'
-      request.sendRequest(url, 'post', data, {
-        'token': wx.getStorageSync('openid')
-      }).then(function(res) {
-        console.log(res)
-        modals.loaded()
-        if (res.statusCode == 200) {
-          if (res.data.status == 1) {
-            that.payment(res.data.data)
-          } else {
-            modals.showToast(res.data.msg, 'none')
-          }
-        } else {
-          modals.showToast('系统繁忙，请稍后重试', 'none')
-        }
-      })
-    } else {
-      modals.showToast('请先选择出发地址', 'none');
-    }
+    let phone = that.data.phone
+    console.log(phone)
+    let idnums = that.data.idnum
+    console.log(idnums)
+    // if (that.data.region != '请选择出发地址') {
+    //   let data = {
+    //     id: that.data.id,
+    //     set_meal_id: that.data.choice,
+    //     name: that.data.name,
+    //     mobile: that.data.phone,
+    //     identity: that.data.idnum,
+    //     starting: that.data.region,
+    //     uid: that.data.uid
+    //   }
+    //   console.log('参数：', data);
+    //   modals.loading()
+    //   let url = app.globalData.api + '/portal/Pintuan/do_team'
+    //   request.sendRequest(url, 'post', data, {
+    //     'token': wx.getStorageSync('openid')
+    //   }).then(function(res) {
+    //     console.log(res)
+    //     modals.loaded()
+    //     if (res.statusCode == 200) {
+    //       if (res.data.status == 1) {
+    //         that.payment(res.data.data)
+    //       } else {
+    //         modals.showToast(res.data.msg, 'none')
+    //       }
+    //     } else {
+    //       modals.showToast('系统繁忙，请稍后重试', 'none')
+    //     }
+    //   })
+    // } else {
+    //   modals.showToast('请先选择出发地址', 'none');
+    // }
   },
 
 

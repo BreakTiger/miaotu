@@ -18,14 +18,14 @@ page {
 .money {
   font-size: 36rpx;
   position: absolute;
-  top: 20rpx;
+  top: 10rpx;
 }
 
 .withdrawal {
   width: 108rpx;
   border: 2rpx solid rgba(255, 255, 255, 1);
   position: absolute;
-  top: 95rpx;
+  top: 112rpx;
 }
 
 .laber-rulue {

@@ -1,0 +1,25 @@
+page {
+  background: #ff3f53;
+}
+
+.good-content {
+  width: 710rpx;
+  height: 566rpx;
+  margin-top: 40rpx;
+}
+
+.good-line {
+  width: 670rpx;
+  margin-top: 20rpx;
+}
+
+.goods-img {
+  width: 230rpx;
+  height: 230rpx;
+  background: black;
+}
+
+.goods-info {
+  width: 420rpx;
+  height: 230rpx;
+}

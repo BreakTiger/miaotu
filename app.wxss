@@ -106,6 +106,10 @@ page {
   color: #000;
 }
 
+.c-CC{
+  color: #CCC;
+}
+
 /* 文字粗细 */
 
 .f-w3 {

@@ -21,12 +21,15 @@
       <view class="freeget f28 c-ff t-ac" bindtap="toGetFree">免费获得</view>
     </view>
   </view>
-  <view class="cover flex col fl-align" wx:if="{{covers}}">
-    <text>助力人数由你来定</text>
-    <view class="card-line flex fl-align fl-jsb" wx:if="{{before}}">
-      <image src="../../../resources/b_plate.png"></image>
-      <image src="../../../resources/b_plate.png"></image>
-      <image src="../../../resources/b_plate.png"></image>
+  <view class="cover flex col fl-align fl-jc" wx:if="{{covers}}">
+    <view class="flex col fl-align" wx:if="{{before}}">
+      <text class="titles">助力人数由你来定</text>
+      <view class="card-line flex fl-align fl-jsb">
+        <image src="../../../resources/b_plate.png" style="width:204rpx;height:100%;"></image>
+        <image src="../../../resources/b_plate.png" style="width:204rpx;height:100%;"></image>
+        <image src="../../../resources/b_plate.png" style="width:204rpx;height:100%;"></image>
+      </view>
     </view>
+
   </view>
 </view>

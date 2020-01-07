@@ -27,8 +27,11 @@ Page({
     discuss: {},
     page: 1,
     group: [],
+    one: [],
     collecttype: false,
-    shad: false
+    shad: false,
+    allList: [],
+    len: '0'
   },
 
   /**
@@ -152,19 +155,22 @@ Page({
     let data = {
       id: that.data.id,
       page: that.data.page,
-      length: 10
+      length: 6
     }
-    // console.log('参数：', data);
     let url = app.globalData.api + '/portal/Pintuan/info_desc'
     modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res.data)
       modals.loaded()
+      console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          // that.collectState()
+          that.setData({
+            group: res.data.data.data,
+            len: res.data.data.count
+          })
+          that.reform_one(that.data.group)
         } else {
           modals.showToast(res.data.status, 'none')
         }
@@ -174,18 +180,82 @@ Page({
     })
   },
 
+  // 拼单数组重整
+  reform_one: function(list) {
+    let one = []
+    let two = []
+    for (let i = 0; i < list.length; i++) {
+      let differ = list[i].number - list[i].pt_number
+      let ele = {
+        id: list[i].id,
+        header: list[i].img,
+        name: list[i].name,
+        nums: differ,
+        times: list[i].end_time
+      }
+      one.push(ele)
+    }
+    for (let j = 0; j < one.length; j++) {
+      two.push(one.slice(j, j + 2));
+    }
+    this.setData({
+      one: two
+    })
+    this.countDown()
+  },
+
+  //列表中的倒计时
+  countDown: function() {
+    console.log('重构前：', this.data.group)
+    // let one = this.data.one
+    // console.log('重构后：', one)
+    // // 每秒循环一次重构后的数据，更新倒计时
+    // let interval = setInterval(function() {
+    //   let now = Date.parse(new Date()) / 1000
+    //   for (let i = 0; i < one.length; i++) {
+    //     let end = one[i].times
+    //     let second = end - now
+    //     if (second > 0) {
+    //       // 天
+    //       let day = Math.floor(second / 3600 / 24);
+    //       let dayStr = day.toString();
+    //       if (dayStr.length == 1) dayStr = '0' + dayStr;
+    //       // 小时
+    //       var hr = Math.floor((second - day * 3600 * 24) / 3600);
+    //       var hrStr = hr.toString();
+    //       if (hrStr.length == 1) hrStr = '0' + hrStr;
+    //       // 分钟
+    //       var min = Math.floor((second - day * 3600 * 24 - hr * 3600) / 60);
+    //       var minStr = min.toString();
+    //       if (minStr.length == 1) minStr = '0' + minStr;
+    //       // 秒
+    //       var sec = second - day * 3600 * 24 - hr * 3600 - min * 60;
+    //       var secStr = sec.toString();
+    //       if (secStr.length == 1) secStr = '0' + secStr;
+    //       let ctimes = dayStr + ':' + hrStr + ':' + minStr + ':' + secStr
+    //       console.log(ctimes);
+    //       let currtime = 'one[' + i + '].times'
+    //       this.setData({
+    //         [currtime]: ctimes
+    //       })
+
+    //     }
+
+    //     // console.log(this.data.one)
+
+    //   }
+    // }.bind(this), 1000)
+  },
+
+
+
+
   onShow: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
       this.collectState()
     }
   },
-
-
-  // 拼单情况-登陆下
-
-
-
 
   // 产品收藏状态
   collectState: function() {
@@ -269,9 +339,14 @@ Page({
 
   // 查看所有拼团
   allGroup: function() {
-    this.setData({
-      shad: true
-    })
+    let that = this
+    let data = {
+      id: that.data.id,
+      page: that.data.page,
+      length: 10
+    }
+    console.log(data);
+
   },
 
   // 关闭弹窗
@@ -307,7 +382,28 @@ Page({
         url: '/pages/login/login',
       })
     }
+  },
 
+
+  // 去拼团，下单
+  togroup: function(e) {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      let data = {
+        id: this.data.details.id,
+        tao: this.data.packages,
+        uid: e.currentTarget.dataset.id,
+        price: this.data.details.pt_price
+      }
+      console.log('参数：', data)
+      wx.navigateTo({
+        url: '/pages/index/group/group_buy/group_buy?data=' + JSON.stringify(data),
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
 
   // 禁止手动滑动
