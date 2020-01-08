@@ -7,6 +7,9 @@ page {
 .search-line {
   width: 100%;
   height: 100rpx;
+  position: fixed;
+  top: 0rpx;
+  z-index: 10;
 }
 
 .search-box {
@@ -22,6 +25,12 @@ page {
 .search-box>input {
   width: 100%;
   height: 100%;
+}
+
+/* 历史搜索+热门搜索 */
+
+.his_hot {
+  width: 100%;
 }
 
 .history, .hot {
@@ -46,6 +55,7 @@ page {
 .his-list, .hot-list {
   width: 702rpx;
   padding-bottom: 26rpx;
+  margin: 0 auto;
 }
 
 .list-item {
@@ -53,4 +63,30 @@ page {
   border-radius: 12rpx;
   margin-left: 20rpx;
   margin-top: 26rpx;
+}
+
+/* 搜索结果列表 */
+
+.search-content {
+  width: 100%;
+}
+
+.search-list-item {
+  width: 670rpx;
+  height: 270rpx;
+}
+
+.good-img {
+  width: 230rpx;
+  height: 230rpx;
+  background: black;
+}
+
+.good-info-conetnt {
+  width: 420rpx;
+  height: 230rpx;
+}
+
+.good-info-conetnt>view {
+  width: 100%;
 }

@@ -1,14 +1,14 @@
 .logo-img {
-width: 170rpx;
-height: 170rpx;
-margin-bottom: 14rpx;
-margin-top: 286rpx;
+  width: 170rpx;
+  height: 170rpx;
+  margin-bottom: 14rpx;
+  margin-top: 286rpx;
 }
 
 .login-btn {
-width: 600rpx !important;
-height: 88rpx !important;
-background: linear-gradient(270deg, rgba(65, 214, 248, 1) 0%, rgba(33, 176, 240, 1) 100%);
-margin-top: 62rpx;
-margin-bottom: 36rpx;
+  width: 600rpx !important;
+  height: 88rpx !important;
+  background: linear-gradient(270deg, rgba(65, 214, 248, 1) 0%, rgba(33, 176, 240, 1) 100%);
+  margin-top: 62rpx;
+  margin-bottom: 36rpx;
 }

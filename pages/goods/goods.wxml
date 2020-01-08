@@ -1,5 +1,5 @@
 <!-- 引入富文本解析组件 -->
-<import src="../../../wxParse/wxParse.wxml" />
+<import src="../../wxParse/wxParse.wxml" />
 
 <view class="container flex col fl-align">
 
@@ -53,7 +53,10 @@
     <image class="b_r12" src="{{details.shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
       <text class="f28 c-00 f-w5 climp2">{{details.shop.user_nickname}}</text>
-      <image src="../../../resources/logo.png" class="icon"></image>
+      <view>
+        <image src="../../resources/logo.png" class="icon"></image>
+        <text>喵途</text>
+      </view>
     </view>
     <view class="shops c-ff f24 b_r200 t-ac">店铺</view>
   </view>
@@ -99,19 +102,19 @@
   <!-- 底部栏 -->
   <view class="tabbers flex fl-align fl-jsa b-ff">
     <view class="icons flex col fl-align fl-jc">
-      <image src="../../../icon/talk.png"></image>
+      <image src="../../icon/talk.png"></image>
       <text class="f20 c-66 f-w4">咨询</text>
     </view>
     <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}">
-      <image src="../../../icon/collect.png"></image>
+      <image src="../../icon/collect.png"></image>
       <text class="f20 c-66 f-w4">收藏</text>
     </view>
     <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}">
-      <image src="../../../icon/collect.png"></image>
+      <image src="../../icon/collect.png"></image>
       <text class="f20 c-66 f-w4">已收藏</text>
     </view>
     <view class="icons flex col fl-align fl-jc">
-      <image src="../../../icon/share.png"></image>
+      <image src="../../icon/share.png"></image>
       <text class="f20 c-66 f-w4">分享</text>
     </view>
     <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.price}}立即预订</view>

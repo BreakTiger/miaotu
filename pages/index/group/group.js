@@ -4,9 +4,6 @@ const app = getApp()
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     sw_list: [],
     page: 1,
@@ -14,9 +11,6 @@ Page({
     lefts: 18
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     this.getBanner()
   },
@@ -82,10 +76,6 @@ Page({
     })
   },
 
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
     wx.showToast({
       title: '加载中',
@@ -98,9 +88,7 @@ Page({
     this.onLoad();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  
   onReachBottom: function() {
     let that = this
     let page = that.data.page + 1
@@ -129,11 +117,4 @@ Page({
       }
     })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

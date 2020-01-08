@@ -19,7 +19,7 @@ page {
   position: relative;
   color: #000;
   font-weight: bold;
-  font-size: 
+  font-size: ;
 }
 
 .choice::after {

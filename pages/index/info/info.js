@@ -32,7 +32,6 @@ Page({
       'token': openid
     }).then(function(res) {
       modals.loaded()
-      // console.log(res.data.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -60,7 +59,7 @@ Page({
       console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-
+          that.getList()
         } else {
           modals.showToast(res.data.msg, 'none')
         }
@@ -68,13 +67,7 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
-
   },
-
-
-
-
-
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -87,13 +80,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
 
   }
 })

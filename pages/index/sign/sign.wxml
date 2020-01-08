@@ -14,7 +14,6 @@
       <text class="{{choice_one==item.id?'linebottom':''}}" wx:for="{{goodsnav}}" wx:key="index" data-id="{{item.id}}" bindtap="toGetKind">{{item.name}}</text>
     </view>
     <view class="list-content b-F5">
-      <!-- 左边 -->
       <view class="left-col">
         <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
@@ -28,7 +27,6 @@
           </view>
         </view>
       </view>
-      <!-- 右边 -->
       <view class="right-col">
         <image src="{{card}}" class="b_r16 list-img"></image>
         <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">

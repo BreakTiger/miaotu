@@ -10,17 +10,17 @@ Page({
    */
   data: {
     nav: [{
-        id: 1,
-        name: '正在秒杀'
-      },
-      {
-        id: 2,
-        name: '即将开抢'
-      },
-      {
-        id: 3,
-        name: '抢购预告'
-      }
+      id: 1,
+      name: '正在秒杀'
+    },
+    {
+      id: 2,
+      name: '即将开抢'
+    },
+    {
+      id: 3,
+      name: '抢购预告'
+    }
     ],
     choice: 1,
     page: 1,
@@ -31,13 +31,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let choice = this.data.choice
     this.getlist(choice)
   },
 
 
-  getlist: function(e) {
+  getlist: function (e) {
     let that = this
     let data = {
       page: that.data.page,
@@ -48,7 +48,7 @@ Page({
     let url = app.globalData.api + '/portal/Miaosha/index'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
-    }).then(function(res) {
+    }).then(function (res) {
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -66,7 +66,7 @@ Page({
     })
   },
 
-  selectNav: function(e) {
+  selectNav: function (e) {
     let id = e.currentTarget.dataset.id
     console.log(id);
     let choice = this.data.choice
@@ -82,28 +82,23 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
+  
 })

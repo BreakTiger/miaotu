@@ -1,11 +1,9 @@
 // 此签到页，必须授权登陆
-
 const request = require('../../../api/http.js')
 import modals from '../../../methods/modal.js'
 const app = getApp()
 
 Page({
-
 
   data: {
     uid: '',
@@ -227,7 +225,8 @@ Page({
   shares: function() {
     let that = this
     let data = {
-      uopenid: that.data.uid
+      uopenid: that.data.uid,
+      type: 5
     }
     let url = app.globalData.api + '/portal/Home/set_share'
     request.sendRequest(url, 'post', data, {
@@ -237,10 +236,6 @@ Page({
     })
   },
 
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
     wx.showToast({
       title: '加载中',
@@ -253,9 +248,7 @@ Page({
     this.onShow()
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+
   onReachBottom: function() {
     let that = this
     let left = that.data.leftlist
@@ -296,16 +289,14 @@ Page({
     })
   },
 
-  /**
-   * 用户点击右上角分享
-   */
+
   onShareAppMessage: function(options) {
     if (options.from === 'button') {
       console.log(111);
     }
     return {
       title: '现金签到',
-      path: 'pages/index/sign/sign?uopenid=' + wx.getStorageSync('openid'),
+      path: 'pages/index/sign/sign?uopenid=' + wx.getStorageSync('openid') + '',
     }
   }
 })
