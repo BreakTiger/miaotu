@@ -28,7 +28,6 @@ Page({
     list_time: [],
     allList: [],
     len: '0',
-
     collecttype: false,
     shad: false,
 
@@ -416,7 +415,7 @@ Page({
       }
       console.log('参数：', data)
       wx.navigateTo({
-        url: '/pages/index/group/group_buy/group_buy?data=' + JSON.stringify(data),
+        url: '/pages/buy_typetwo/buy_typetwo?data=' + JSON.stringify(data),
       })
     } else {
       wx.navigateTo({
@@ -438,7 +437,7 @@ Page({
       }
       console.log('参数：', data)
       wx.navigateTo({
-        url: '/pages/index/group/group_buy/group_buy?data=' + JSON.stringify(data),
+        url: '/pages/buy_typetwo/buy_typetwo?data=' + JSON.stringify(data),
       })
     } else {
       wx.navigateTo({

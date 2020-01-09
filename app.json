@@ -12,7 +12,9 @@
     "pages/index/tickets/tickets",
     "pages/index/sign/sign",
     "pages/group_detail/group_detail",
-    "pages/goods_detail/goods_detail"
+    "pages/goods_detail/goods_detail",
+    "pages/buy_typeone/buy_typeone",
+    "pages/buy_typetwo/buy_typetwo"
   ],
   "permission": {
     "scope.userLocation": {

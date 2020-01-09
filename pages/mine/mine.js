@@ -11,77 +11,79 @@ Page({
     person: [],
     person_like: [],
     nav: [{
-      id: 1,
-      icon: '../../icon/track.png',
-      name: '足迹',
-      path: '/pages/mine/track/track'
-    },
-    {
-      id: 2,
-      icon: '../../icon/order.png',
-      name: '订单',
-      path: '/pages/mine/order/order'
-    },
-    {
-      id: 3,
-      icon: '../../icon/certificates.png',
-      name: '礼券',
-      path: '/pages/mine/coupon/coupon'
-    },
-    {
-      id: 4,
-      icon: '../../icon/wallet.png',
-      name: '钱包',
-      path: '/pages/mine/wallet/wallet'
-    }
-    ]
+        id: 1,
+        icon: '../../icon/track.png',
+        name: '足迹',
+        path: '/pages/mine/track/track'
+      },
+      {
+        id: 2,
+        icon: '../../icon/order.png',
+        name: '订单',
+        path: '/pages/mine/order/order'
+      },
+      {
+        id: 3,
+        icon: '../../icon/certificates.png',
+        name: '礼券',
+        path: '/pages/mine/coupon/coupon'
+      },
+      {
+        id: 4,
+        icon: '../../icon/wallet.png',
+        name: '钱包',
+        path: '/pages/mine/wallet/wallet'
+      }
+    ],
+    travelList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
-  toLogin: function () {
+  // 去登陆
+  toLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
     })
   },
 
-  toNav: function (e) {
+  toNav: function(e) {
     var url = e.currentTarget.dataset.url
     wx.navigateTo({
       url: url,
     })
   },
 
-  totravel: function () {
+  totravel: function() {
     wx.navigateTo({
       url: '/pages/mine/travel/travel',
     })
   },
 
-  toUpmembers: function () {
+  toUpmembers: function() {
     wx.navigateTo({
       url: '/pages/mine/members/members',
     })
   },
 
-  toEdutor: function () {
+  toEdutor: function() {
     wx.navigateTo({
       url: '/pages/mine/user/user',
     })
   },
 
-  toAttention: function () {
+  toAttention: function() {
     wx.navigateTo({
       url: '/pages/mine/attention/attention',
     })
   },
 
-  tosend: function () {
+  tosend: function() {
     wx.navigateTo({
       url: '/pages/strategy/send/send',
     })
@@ -90,7 +92,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let openid = wx.getStorageSync('openid')
     console.log('openid:', openid)
     // 判断登录状态
@@ -109,12 +111,12 @@ Page({
   },
 
   // 获取个人资料
-  getParson: function () {
+  getParson: function() {
     let that = this
     let url = app.globalData.api + '/portal/Personal/user_info'
     request.sendRequest(url, 'post', {}, {
       'token': openid
-    }).then(function (res) {
+    }).then(function(res) {
       if (res.statusCode == 200) {
         // console.log(res)
         that.setData({
@@ -131,12 +133,12 @@ Page({
   },
 
   // 获赞+粉丝+关注
-  getLike: function () {
+  getLike: function() {
     let that = this
     let url = app.globalData.api + '/portal/Personal/get_like'
     request.sendRequest(url, 'post', {}, {
       'token': openid
-    }).then(function (res) {
+    }).then(function(res) {
       // console.log(res.data.data);
       if (res.statusCode == 200) {
         that.setData({
@@ -152,19 +154,19 @@ Page({
   },
 
   // 我的游记
-  
-  
-  
-  onPullDownRefresh: function () {
+
+
+
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
- 
+
 })

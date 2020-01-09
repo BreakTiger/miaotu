@@ -54,7 +54,22 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/group_detail/group_detail",
+					"pathName": "pages/group_detail/group_detail",
+					"query": "id=13",
+					"scene": null
+				}
+			]
 		}
 	}
 }

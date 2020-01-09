@@ -4,9 +4,8 @@
     <image src="{{person.back_image}}" class="bk" wx:if="{{person.back_image}}"></image>
     <view class="user-info flex col fl-align" wx:if="{{login==0}}">
       <image class="header"></image>
-      <button class='f32 f-wb' style="margin-top: 20rpx;" bindtap="toLogin">登陆/注册</button>
+      <button class='f32 f-wb' style="margin-top: 20rpx;" bindtap="toLogin">授权登录</button>
     </view>
-    
     <view wx:if="{{login==1}}">
       <view class="user-info flex col fl-align">
         <image class="header" bindtap="toEdutor" src="{{person.avatar}}"></image>
@@ -16,7 +15,6 @@
           <image wx:if="{{person.sex==2}}" src="../../icon/female.png"></image>
           <image wx:if="{{person.sex==3}}" src="../../icon/unknown.png"></image>
         </view>
-       
         <view class="three-info flex fl-align">
           <view class="three-info-item flex col fl-align" bindtap="toAttention">
             <text class="f28">{{person_like.like}}</text>
@@ -39,29 +37,24 @@
       </view>
     </view>
   </view>
-
-
-  <!-- 导航栏 -->
   <view class="nav-content flex fl-align fl-jsa b-ff b_r12">
     <view class="nav-list flex col fl-align" wx:for="{{nav}}" wx:key="index" bindtap="toNav" data-url="{{item.path}}">
       <image class="icons" src="{{item.icon}}"></image>
       <text class="f20 c-66">{{item.name}}</text>
     </view>
   </view>
-  <!-- 我的游记 -->
   <view class="travel flex fl-align fl-jsb b-ff b_r12">
     <text class="f28 c-00">我的游记</text>
     <view class="flex fl-align fl-jsb" bindtap="totravel">
-      <view class="travel-image">
+      <view class="travel-image" wx:if="{{travelList.length>0}}">
         <image src="../../resources/2.png" wx:for="12345" wx:key="index"></image>
       </view>
+      <text class="f28 c-00" wx:if="{{travelList.length==0}}">您暂无游记哦^_^</text>
       <image src="../../icon/go.png"></image>
     </view>
   </view>
-  <!-- 猜你喜欢 -->
   <view class="guess">
     <text>猜你喜欢</text>
-    <!-- 列表 -->
     <view class="list-content flex fl-w b-F5">
       <view class="list-item flex col fl-align b-ff b_r16">
         <image src="../../resources/1.png"></image>

@@ -26,7 +26,7 @@
     </view>
   </view>
   <view class="hint-line flex fl-align fl-jsa c-00" wx:if="{{details.twice_submit}}">
-    <image src="../../../icon/hint.png"></image>
+    <image src="../../icon/hint.png"></image>
     <view class="f20 f-w5">二次确认</view>
     <view class="climp2 f24 f-w3">{{details.twice_submit}}</view>
   </view>
@@ -69,7 +69,7 @@
     <view class="shop-info flex col fl-jse">
       <text class="f28 c-00 f-w5 climp2">{{shop.user_nickname}}</text>
       <view class="flex fl-align">
-        <image src="../../../../resources/logo.png" class="icon"></image>
+        <image src="../../resources/logo.png" class="icon"></image>
         <text class="f20 c-00" style="margin-left:20rpx;">喵途</text>
       </view>
     </view>
@@ -81,7 +81,7 @@
       <text style="color: rgb(217, 135, 72);" wx:if="{{shop.serve>=4.5}}">高</text>
       <text style="color: rgb(217, 135, 72);" wx:else>低</text></text>
     </view>
-    <image src="../../../../icon/go.png" class="togos"></image>
+    <image src="../../icon/go.png" class="togos"></image>
   </view>
   <!-- 简介 -->
   <view class="abstract flex col fl-align b-ff">
