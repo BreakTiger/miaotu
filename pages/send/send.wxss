@@ -1,0 +1,69 @@
+.title-line {
+  width: 670rpx;
+  margin: 68rpx 0;
+}
+
+.picture-content {
+  width: 680rpx;
+}
+
+.picture-content>view {
+  width: 206rpx;
+  height: 206rpx;
+  margin-bottom: 20rpx;
+  margin-right: 30rpx;
+  position: relative;
+}
+
+.picture {
+  width: 100%;
+  height: 100%;
+}
+
+.close {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+  z-index: 10rpx;
+}
+
+.add-box {
+  width: 206rpx;
+  height: 206rpx;
+}
+
+.add-box>image {
+  width: 100rpx;
+  height: 100rpx;
+  background: black;
+}
+
+.article {
+  width: 690rpx;
+  margin-top: 40rpx;
+}
+
+.localtion {
+  width: 670rpx;
+  padding: 28rpx 0;
+}
+
+.localtion>image {
+  width: 24rpx;
+  height: 32rpx;
+  margin-right: 24rpx;
+}
+
+.sends {
+  width: 348rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+  position: fixed;
+  right: 20rpx;
+  bottom: 16rpx;
+  z-index: 10;
+}

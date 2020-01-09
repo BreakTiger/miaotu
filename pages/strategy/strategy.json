@@ -2,5 +2,6 @@
   "usingComponents": {},
   "navigationBarTitleText": "攻略",
   "navigationBarTextStyle": "white",
-  "navigationBarBackgroundColor": "#1FAFF1"
+  "navigationBarBackgroundColor": "#1FAFF1",
+  "enablePullDownRefresh": true
 }
