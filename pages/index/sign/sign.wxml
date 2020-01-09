@@ -3,7 +3,7 @@
     <image class="top-bk" src="../../../resources/bk.png"></image>
     <text class="money c-ff f-w5">￥<text style="font-size:72rpx;">{{balance}}</text></text>
     <view class="withdrawal flex fl-align fl-jc b_r200">
-      <text class="f24 c-ff">提现 ></text>
+      <text class="f24 c-ff" bindtap="toTake">提现 ></text>
     </view>
   </view>
   <view class="laber-rulue flex fl-align fl-jc f24 c-38 b-04">规则</view>

@@ -17,7 +17,9 @@
     "pages/buy_typetwo/buy_typetwo",
     "pages/seckill_detail/seckill_detail",
     "pages/send/send",
-    "pages/shop/shop"
+    "pages/shop/shop",
+    "pages/evaluate/evaluate",
+    "pages/tickets_detail/tickets_detail"
   ],
   "permission": {
     "scope.userLocation": {

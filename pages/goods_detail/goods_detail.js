@@ -95,8 +95,6 @@ Page({
             startTime: res.data.data
           })
           that.getReview()
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -121,8 +119,6 @@ Page({
           that.setData({
             discuss: res.data.data.data
           })
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -189,7 +185,6 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
-
   },
 
   // 取消收藏
@@ -218,21 +213,40 @@ Page({
 
 
   // 去到商铺
-  toShop: function (e) {
+  toShop: function(e) {
     wx.navigateTo({
       url: '/pages/shop/shop?sid=' + e.currentTarget.dataset.sid,
     })
   },
 
-
-
-
-
-  onPullDownRefresh: function() {
-
+  // 查看所有评论
+  toEvaluate: function(e) {
+    console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: '/pages/evaluate/evaluate?id=' + e.currentTarget.dataset.id,
+    })
   },
 
-  onShareAppMessage: function() {
+  onPullDownRefresh: function() {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
 
+    this.onLoad({
+      id: this.data.id
+    });
+  },
+
+  onShareAppMessage: function(options) {
+    if (options.from === 'button') {}
+    return {
+      title: this.data.details.title,
+      path: '/pages/goods_detail/goods_detail?id=' + this.data.id,
+    }
   }
 })

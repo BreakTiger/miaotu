@@ -198,7 +198,7 @@ Page({
     })
   },
 
-  
+
   onShow: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
@@ -236,7 +236,20 @@ Page({
     })
   },
 
-  
+  // 店铺
+  toshop: function(e) {
+    wx.navigateTo({
+      url: '/pages/shop/shop?sid=' + e.currentTarget.dataset.id,
+    })
+  },
+
+  // 查看所有评论
+  toEvaluate: function(e) {
+    console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: '/pages/evaluate/evaluate?id=' + e.currentTarget.dataset.id,
+    })
+  },
 
   // 产品收藏状态
   collectState: function() {
@@ -365,7 +378,6 @@ Page({
     }
   },
 
-
   // 去拼团，下单
   togroup: function(e) {
     let openID = wx.getStorageSync('openid') || ''
@@ -404,10 +416,7 @@ Page({
     this.onLoad();
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
+  onShareAppMessage: function (options) {
     if (options.from === 'button') {}
     return {
       title: this.data.details.title,

@@ -13,7 +13,7 @@ page {
 }
 
 .shop-info {
-  width: 350rpx;
+  width: 250rpx;
   height: 88rpx;
 }
 

@@ -1,24 +1,18 @@
 <!-- 引入富文本解析组件 -->
 <import src="../../wxParse/wxParse.wxml" />
-
 <view class="container flex col fl-align">
-
   <view class="top-line flex fl-align fl-jc b-ff">
     <view style="width: 60%;" class="flex fl-align fl-jsb">
       <text class="c-00 f28 f-w5" wx:for="{{top}}" wx:key="index">{{item.name}}</text>
     </view>
   </view>
-
   <view class="goods_detail flex col fl-align b-ff">
-
-    <swiper class="good-imgs">
+    <swiper class="good-imgs" autoplay="true">
       <swiper-item wx:for="{{details.pic}}" wx:key="index">
         <image src="{{item.pic_url}}" class="ims"></image>
       </swiper-item>
     </swiper>
-
     <view class="good-title f28 c-45 climp2">{{details.title}}</view>
-
     <view class="goods-lines f24 flex fl-align fl-jsb">
       <text class="c-38">￥{{details.price}}起</text>
       <view class="c-66">
@@ -26,7 +20,6 @@
         <text style="margin-left:10rpx;">已售：{{details.sell_count}}</text>
       </view>
     </view>
-
     <view class="hint c-38 f20" wx:if="{{startTime}}">
       <text class="b_r200 t-ac">秒杀预告</text>
       <text>{{startTime}}开抢</text>
@@ -52,7 +45,7 @@
   <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop" data-sid="{{details.shop_id}}">
     <image class="b_r12" src="{{details.shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
-      <text class="f28 c-00 f-w5 climp2">{{details.shop.user_nickname}}</text>
+      <text class="f28 c-00 f-w5 climp2">{{details.shop.travel_office}}</text>
       <view>
         <image src="../../resources/logo.png" class="icon"></image>
         <text class="f20 c-00">喵途</text>

@@ -1,0 +1,49 @@
+<view class="container flex col fl-align">
+
+  <view class="good-content b-ff b_r12 flex col fl-align">
+    <view class="good-line flex fl-align fl-jsb">
+      <image class="goods-img b_r12" src="{{info.banner}}"></image>
+      <view class="goods-info flex col fl-jse">
+        <view class="climp2 f28 c-66 f-w5">{{info.title}}</view>
+        <view class="count flex fl-align">
+          <view class="count-num flex fl-align">
+            <view class="nums c-ff f20 t-ac">{{day}}</view>：
+            <view class="nums c-ff f20 t-ac">{{hour}}</view>：
+            <view class="nums c-ff f20 t-ac">{{min}}</view>
+          </view>
+          <text class="f20 c-66" style="margin-left:10rpx;">砍价将失效</text>
+        </view>
+        <view class="goods-last flex fl-align fl-jsb">
+          <view>
+            <text class="c-38" style="font-size:18rpx;">￥<text style="font-size:48rpx;">0</text></text>
+            <text class="f28 c-CC" style="margin-left:10rpx;">￥{{info.price}}</text>
+          </view>
+          <text class="f20 c-38">{{info.sell_count}}人已免费领取</text>
+        </view>
+      </view>
+    </view>
+    <text class="f32 c-00 f-w4">已砍<text style="font-size:40rpx;color:#FC4224;">{{info.do_price}}元</text>,即还差{{(info.price)-(info.do_price)}}元</text>
+    <progress class="progress-line" percent="{{(info.do_price)/(info.price)*100}}" border-radius="190" activeColor="#FFD304" backgroundColor="#F5F5F5"></progress>
+    <!-- <button class="invite c-00 f32 b_r200" open-type="share">喊好友帮砍一刀</button> -->
+    <button class="invite c-00 f32 b_r200" open-type="share">帮好友砍一刀</button>
+  </view>
+
+  <text class="c-ff lines" style="font-size:36rpx;">砍价记录</text>
+
+  <view class="list-content flex col fl-align b-ff b_r12">
+    <view class="empt flex col fl-align" wx:if="{{list.length>0}}">
+      <image src="../../../../resources/invite.png" class="empt-img"></image>
+      <text class="f28 c-66">还没有好友，赶紧喊好友来帮忙吧～</text>
+      <button class="b_r200 c-ff" open-type="share">邀请好友</button>
+    </view>
+    <scroll-view scroll-y="true">
+      <view class="list-item flex fl-align fl-jsb">
+        <view class="f28 c-66 flex fl-align">
+          <image class="header"></image>
+          <text>程xxx</text>
+        </view>
+        <text class="f24 c-66">砍掉234.78元</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

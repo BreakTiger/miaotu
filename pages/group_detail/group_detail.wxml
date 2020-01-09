@@ -7,7 +7,7 @@
     </view>
   </view>
   <view class="goods_detail flex col fl-align b-ff">
-    <swiper class="good-imgs">
+    <swiper class="good-imgs" autoplay="true">
       <swiper-item wx:for="{{details.pic}}" wx:key="index">
         <image src="{{item.pic_url}}" class="ims"></image>
       </swiper-item>
@@ -64,10 +64,11 @@
       </swiper>
     </view>
   </view>
-  <view class="shop-line flex fl-align fl-jsa b-ff" bindtap="toShop">
+  <!-- 商铺 -->
+  <view class="shop-line flex fl-align fl-jsa b-ff" bindtap="toshop" data-id="{{shop.id}}">
     <image class="b_r12" src="{{shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
-      <text class="f28 c-00 f-w5 climp2">{{shop.user_nickname}}</text>
+      <text class="f28 c-00 f-w5 climp2">{{shop.travel_office}}</text>
       <view class="flex fl-align">
         <image src="../../resources/logo.png" class="icon"></image>
         <text class="f20 c-00" style="margin-left:20rpx;">喵途</text>

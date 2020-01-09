@@ -212,6 +212,25 @@ Page({
     }
   },
 
+  // 提现
+  toTake: function() {
+    let price = this.data.balance
+    console.log(price)
+    if (price > 10) {
+      wx.showModal({
+        title: '提示',
+        content: '提现功能暂未开通，敬请期待',
+        showCancel: false
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '提现金额最低为10元',
+        showCancel: false
+      })
+    }
+  },
+
 
   // 查看商品详情
   toGoodsDetail: function(e) {

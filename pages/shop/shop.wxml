@@ -2,8 +2,19 @@
   <view class="shop-line flex fl-align fl-jsa b-ff">
     <image class="b_r12" src="{{shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
-      <text>{{shop.user_nickname}}</text>
-      <image src="../../resources/logo.png" class="icon"></image>
+      <text class="f20 c-00">{{shop.travel_office}}</text>
+      <view class="flex fl-align">
+        <image src="../../resources/logo.png" class="icon"></image>
+        <text class="f20 c-00" style="margin-left:10rpx;">喵途</text>
+      </view>
+    </view>
+    <view class="flex col fl-align f24 c-66">
+      <text>描述相符 <text style="color: rgb(217, 166, 56);">{{shop.describe}}</text>
+      <text style="color: rgb(217, 135, 72);" wx:if="{{shop.describe>=4.5}}">高</text>
+      <text style="color: rgb(217, 135, 72);" wx:else>低</text></text>
+      <text>服务态度 <text style="color: rgb(217, 166, 56);">{{shop.serve}}</text>
+      <text style="color: rgb(217, 135, 72);" wx:if="{{shop.serve>=4.5}}">高</text>
+      <text style="color: rgb(217, 135, 72);" wx:else>低</text></text>
     </view>
     <view class="Focus b_r200 f24 c-ff t-ac" wx:if="{{!status}}" bindtap="enshrine">关注</view>
     <view class="Focus b_r200 f24 c-ff t-ac" wx:if="{{status}}" bindtap="enshrine">已关注</view>
