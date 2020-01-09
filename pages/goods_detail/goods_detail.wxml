@@ -35,7 +35,7 @@
   </view>
 
   <view class="hint-line flex fl-align fl-jsa c-00" wx:if="{{details.twice_submit}}">
-    <image src="../../../icon/hint.png"></image>
+    <image src="../../icon/hint.png"></image>
     <view class="f20 f-w5">二次确认</view>
     <view class="climp2 f24 f-w3">{{details.twice_submit}}</view>
   </view>
@@ -55,13 +55,20 @@
       <text class="f28 c-00 f-w5 climp2">{{details.shop.user_nickname}}</text>
       <view>
         <image src="../../resources/logo.png" class="icon"></image>
-        <text>喵途</text>
+        <text class="f20 c-00">喵途</text>
       </view>
     </view>
-    <view class="shops c-ff f24 b_r200 t-ac">店铺</view>
+    <view class="flex col fl-align f24 c-66">
+      <text>描述相符 <text style="color: rgb(217, 166, 56);">{{details.shop.describe}}</text>
+      <text style="color: rgb(217, 135, 72);" wx:if="{{details.shop.describe>=4.5}}">高</text>
+      <text style="color: rgb(217, 135, 72);" wx:else>低</text></text>
+      <text>服务态度 <text style="color: rgb(217, 166, 56);">{{details.shop.serve}}</text>
+      <text style="color: rgb(217, 135, 72);" wx:if="{{details.shop.serve>=4.5}}">高</text>
+      <text style="color: rgb(217, 135, 72);" wx:else>低</text></text>
+    </view>
+    <image src="../../icon/go.png" class="togos"></image>
   </view>
 
-  <!-- 简介 -->
   <view class="abstract flex col fl-align b-ff">
     <view class="f32 c-00 f-w5">产品简介</view>
     <view class="f28 c-66 f-w4">
@@ -69,48 +76,38 @@
     </view>
   </view>
 
-  <!-- 交通信息 -->
   <view class="traffic flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">交通信息</text>
     <view class="f20 c-66 f-w3">交通信息仅供参考，最终以供应商确认为准，飞行时长以实际为准</view>
-    <!-- 富文本 -->
     <view>
       <template is="wxParse" data="{{wxParseData:traffic.nodes}}" />
     </view>
   </view>
 
-  <!-- 景点详情 -->
   <view class="attractions flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">景点详情</text>
     <view>
       <image class="detail-img" src="{{item.pic_url}}" wx:for="{{details.product_pic}}" wx:key="index"></image>
     </view>
     <text class="f32 c-00 f-w5">购买需知道</text>
-    <!-- 富文本 -->
     <view style="margin-bottom:40rpx;">
       <template is="wxParse" data="{{wxParseData:buy.nodes}}" />
     </view>
   </view>
 
-  <!-- 回到顶部 -->
-  <!-- <view class="back flex fl-align fl-jc" wx:if="{{scrollType}}" bindtap="backTop">
-    <image src="../../../icon/top.png"></image>
-  </view> -->
-
   <view style="height:216rpx;width:750rpx;"></view>
 
-  <!-- 底部栏 -->
   <view class="tabbers flex fl-align fl-jsa b-ff">
     <view class="icons flex col fl-align fl-jc">
       <image src="../../icon/talk.png"></image>
       <text class="f20 c-66 f-w4">咨询</text>
     </view>
-    <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}">
+    <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}" bindtap="toCollect">
       <image src="../../icon/collect.png"></image>
       <text class="f20 c-66 f-w4">收藏</text>
     </view>
-    <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}">
-      <image src="../../icon/collect.png"></image>
+    <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}" bindtap="toCancel">
+      <image src="../../icon/collects.png"></image>
       <text class="f20 c-66 f-w4">已收藏</text>
     </view>
     <view class="icons flex col fl-align fl-jc">
@@ -119,8 +116,9 @@
     </view>
     <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.price}}立即预订</view>
   </view>
-  <!-- 咨询 -->
+
   <button class="consult" plain="true" open-type="contact"></button>
-  <!-- 分享 -->
+
   <button class="shares" plain="true" open-type="share"></button>
+
 </view>

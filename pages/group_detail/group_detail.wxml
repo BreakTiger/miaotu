@@ -64,7 +64,7 @@
       </swiper>
     </view>
   </view>
-  <view class="shop-line flex fl-align fl-jsa b-ff" bindtap="toShop" data-sid="{{shop.id}}">
+  <view class="shop-line flex fl-align fl-jsa b-ff" bindtap="toShop">
     <image class="b_r12" src="{{shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
       <text class="f28 c-00 f-w5 climp2">{{shop.user_nickname}}</text>
@@ -109,10 +109,6 @@
       <template is="wxParse" data="{{wxParseData:buy.nodes}}" />
     </view>
   </view>
-  <!-- 回到顶部 -->
-  <!-- <view class="back flex fl-align fl-jc" wx:if="{{scrollType}}" bindtap="backTop">
-    <image src="../../../icon/top.png"></image>
-  </view> -->
   <view style="height:216rpx;width:750rpx;"></view>
   <view class="tabbers flex fl-align fl-jsa b-ff">
     <view class="icons flex col fl-align fl-jc">

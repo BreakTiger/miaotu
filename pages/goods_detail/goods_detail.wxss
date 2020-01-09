@@ -1,4 +1,4 @@
-/* pages/goods_detail/goods_detail.wxss */@import '../../wxParse/wxParse.wxss';
+@import '../../wxParse/wxParse.wxss';
 
 page {
   background: #f5f5f5;
@@ -123,7 +123,7 @@ page {
 }
 
 .shop-info {
-  width: 420rpx;
+  width: 335rpx;
   height: 88rpx;
 }
 
@@ -134,13 +134,13 @@ page {
 .icon {
   width: 20rpx;
   height: 20rpx;
+  margin-right: 10rpx;
 }
 
-.shops {
-  width: 128rpx;
-  height: 48rpx;
-  line-height: 48rpx;
-  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+.togos {
+  width: 24rpx !important;
+  height: 24rpx !important;
+  margin-left: 10rpx;
 }
 
 .abstract {

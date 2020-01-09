@@ -16,7 +16,8 @@
     "pages/buy_typeone/buy_typeone",
     "pages/buy_typetwo/buy_typetwo",
     "pages/seckill_detail/seckill_detail",
-    "pages/send/send"
+    "pages/send/send",
+    "pages/shop/shop"
   ],
   "permission": {
     "scope.userLocation": {
