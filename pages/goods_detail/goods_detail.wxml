@@ -119,14 +119,8 @@
     </view>
     <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.price}}立即预订</view>
   </view>
-
   <!-- 咨询 -->
   <button class="consult" plain="true" open-type="contact"></button>
-
-
   <!-- 分享 -->
   <button class="shares" plain="true" open-type="share"></button>
-
-
-
 </view>

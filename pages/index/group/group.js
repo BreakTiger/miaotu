@@ -53,7 +53,7 @@ Page({
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res)
+      // console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({

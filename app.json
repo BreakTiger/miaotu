@@ -11,8 +11,8 @@
     "pages/index/free/free",
     "pages/index/tickets/tickets",
     "pages/index/sign/sign",
-    "pages/goods/goods",
-    "pages/group_detail/group_detail"
+    "pages/group_detail/group_detail",
+    "pages/goods_detail/goods_detail"
   ],
   "permission": {
     "scope.userLocation": {

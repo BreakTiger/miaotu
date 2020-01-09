@@ -1,4 +1,4 @@
-@import '../../wxParse/wxParse.wxss';
+/* pages/goods_detail/goods_detail.wxss */@import '../../wxParse/wxParse.wxss';
 
 page {
   background: #f5f5f5;
