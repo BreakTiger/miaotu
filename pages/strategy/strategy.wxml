@@ -1,84 +1,58 @@
 <view class="container flex col">
   <view class="top-line flex fl-align fl-jsb b-ff">
     <view class="flex fl-align fl-jsb f28 c-66">
-      <text wx:for="{{tlist}}" wx:key="index" class="{{choice_one==item.id?'linebottom':''}}">{{item.name}}</text>
+      <text wx:for="{{tlist}}" wx:key="index" class="{{choice_one==item.id?'linebottom':''}}" bindtap="toChoice" data-item="{{item}}">{{item.name}}</text>
     </view>
     <view class="search flex fl-align b-F5 b_r200">
       <icon type="search" size="28" color="#C1C1C1" />
-      <text class="f24 c-66">搜索</text>
+      <input type="text" placeholder="搜索"></input>
     </view>
   </view>
   <view style="height:108rpx;"></view>
   <swiper class="banner">
-    <swiper-item class="">
-      <image src="../../resources/1.png" class="sw_img b_r12"></image>
+    <swiper-item wx:for="{{sw_list}}" wx:key="index">
+      <image src="{{item.image}}" class="sw_img b_r12"></image>
     </swiper-item>
   </swiper>
   <text class="f36 c-00 lines" style="margin: 36rpx 0 36rpx 24rpx;">旅行发现</text>
-  <view class="list-content flex fl-w">
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src="../../resources/1.png"></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
-        <view class="users flex fl-align">
-          <image></image>
-          <text>用户1</text>
-        </view>
-        <view class="likes flex fl-align">
-          <image src="../../icon/like.png"></image>
-          <text>345</text>
-        </view>
-      </view>
-    </view>
-    <view class="list-img">
-      <image src="../../resources/1.png" class="b_r16"></image>
-    </view>
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src="../../resources/1.png"></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
-        <view class="users flex fl-align">
-          <image></image>
-          <text>用户1</text>
-        </view>
-        <view class="likes flex fl-align">
-          <image src="../../icon/like.png"></image>
-          <text>345</text>
+  <view class="list-content b-F5">
+    <view class="left-col">
+      <view class="list-item flex col fl-align b-ff b_r16" wx:for="{{leftlist}}" wx:key="index">
+        <image src="{{item.r_pic}}"></image>
+        <view class="list-titles climp2 f24">{{item.r_title}}</view>
+        <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
+          <view class="users flex fl-align">
+            <image src="{{item.avatar}}"></image>
+            <text>{{item.nickname}}</text>
+          </view>
+          <view class="likes flex fl-align">
+            <image src="../../icon/unzan.png" wx:if="{{item.like_staus==0}}"></image>
+            <image src="../../icon/collects.png" wx:if="{{item.like_staus==1}}"></image>
+            <text>{{item.like_sum}}</text>
+          </view>
         </view>
       </view>
     </view>
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src="../../resources/1.png"></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
-        <view class="users flex fl-align">
-          <image></image>
-          <text>用户1</text>
-        </view>
-        <view class="likes flex fl-align">
-          <image src="../../icon/like.png"></image>
-          <text>345</text>
-        </view>
-      </view>
-    </view>
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src="../../resources/1.png"></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
-        <view class="users flex fl-align">
-          <image></image>
-          <text>用户1</text>
-        </view>
-        <view class="likes flex fl-align">
-          <image src="../../icon/like.png"></image>
-          <text>345</text>
+    <view class="right-col">
+      <image src="{{card}}" class="b_r16 list-img"></image>
+      <view class="list-item flex col fl-align b-ff b_r16" wx:for="{{rightlist}}" wx:key="index">
+        <image src="{{item.r_pic}}"></image>
+        <view class="list-titles climp2 f24">{{item.r_title}}</view>
+        <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
+          <view class="users flex fl-align">
+            <image src="{{item.avatar}}"></image>
+            <text>{{item.nickname}}</text>
+          </view>
+          <view class="likes flex fl-align">
+            <image src="../../icon/unzan.png" wx:if="{{item.like_staus==0}}"></image>
+            <image src="../../icon/collects.png" wx:if="{{item.like_staus==1}}"></image>
+            <text>{{item.like_sum}}</text>
+          </view>
         </view>
       </view>
     </view>
   </view>
+
   <image class="send-btn" src="../../icon/send.png" bindtap="tosend"></image>
+
 </view>

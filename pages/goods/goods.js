@@ -5,9 +5,6 @@ const app = getApp()
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     top: [{
         name: '商品'
@@ -31,7 +28,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // console.log('页面参数：', options)
     this.setData({
       id: options.id
     })
@@ -52,17 +48,12 @@ Page({
         that.setData({
           details: result
         })
-
-        // 产品简介
         let introduce = result.introduce
         WxParse.wxParse('introduce', 'html', introduce, that, 5);
-        // 交通信息
         let traffic = result.traffic
         WxParse.wxParse('traffic', 'html', traffic, that, 5);
-        // 购买须知
         let buy = result.buy_notice
         WxParse.wxParse('buy', 'html', buy, that, 5);
-
         that.trailer(result.article_type)
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -70,7 +61,7 @@ Page({
     })
   },
 
-
+  // 预告
   trailer: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_foreshow'
@@ -102,7 +93,6 @@ Page({
       'content-type': 'application/json'
     }).then(function(res) {
       if (res.statusCode == 200) {
-        // console.log(res.data.data.data)
         that.setData({
           discuss: res.data.data.data
         })
@@ -110,33 +100,6 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
-  },
-
-  // 监听滚动条
-  onPageScroll: function(e) {
-    if (e.scrollTop == 0) {
-      this.setData({
-        scrollType: false
-      })
-    } else if (e.scrollTop >= 200) {
-      this.setData({
-        scrollType: true
-      })
-    }
-  },
-
-  // 回到顶部
-  backTop: function(e) {
-    if (wx.pageScrollTo) {
-      wx.pageScrollTo({
-        scrollTop: 0
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
-      })
-    }
   },
 
   // 查看全部评价
@@ -161,10 +124,6 @@ Page({
     })
   },
 
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function() {
     let that = this
     let openID = wx.getStorageSync('openid') || ''
@@ -173,7 +132,7 @@ Page({
     }
   },
 
-
+  // 收藏状态
   collectType: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/Shop/collect'

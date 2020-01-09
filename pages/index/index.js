@@ -19,52 +19,52 @@ Page({
     noread: null,
     sw_list: [],
     na_list: [{
-      icon: '../../icon/group.png',
-      name: '单身拼团',
-      path: '/pages/index/group/group',
-    },
-    {
-      icon: '../../icon/free.png',
-      name: '助力免单',
-      path: '/pages/index/free/free',
-    },
-    {
-      icon: '../../icon/tickets.png',
-      name: '门票砍价',
-      path: '/pages/index/tickets/tickets',
-    },
-    {
-      icon: '../../icon/sign.png',
-      name: '现金签到',
-      path: '/pages/index/sign/sign',
-    }
+        icon: '../../icon/group.png',
+        name: '单身拼团',
+        path: '/pages/index/group/group',
+      },
+      {
+        icon: '../../icon/free.png',
+        name: '助力免单',
+        path: '/pages/index/free/free',
+      },
+      {
+        icon: '../../icon/tickets.png',
+        name: '门票砍价',
+        path: '/pages/index/tickets/tickets',
+      },
+      {
+        icon: '../../icon/sign.png',
+        name: '现金签到',
+        path: '/pages/index/sign/sign',
+      }
     ],
     countdown: '',
     skillgoods: {},
     goodsnav: [{
-      id: 5,
-      name: '推荐'
-    },
-    {
-      id: 6,
-      name: '最新'
-    },
-    {
-      id: 1,
-      name: '本地'
-    },
-    {
-      id: 2,
-      name: '国外'
-    },
-    {
-      id: 3,
-      name: '小众'
-    },
-    {
-      id: 4,
-      name: '猎奇'
-    }
+        id: 5,
+        name: '推荐'
+      },
+      {
+        id: 6,
+        name: '最新'
+      },
+      {
+        id: 1,
+        name: '本地'
+      },
+      {
+        id: 2,
+        name: '国外'
+      },
+      {
+        id: 3,
+        name: '小众'
+      },
+      {
+        id: 4,
+        name: '猎奇'
+      }
     ],
     choice_one: 5,
     page: 1,
@@ -76,7 +76,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     // 判断用户是否登陆
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
@@ -90,10 +90,10 @@ Page({
   },
 
   // 定位
-  positioning: function () {
+  positioning: function() {
     let that = this
     wx.getLocation({
-      success: function (res) {
+      success: function(res) {
         let lat = res.latitude
         let lon = res.longitude
         // 使用地图API
@@ -102,13 +102,13 @@ Page({
             latitude: lat,
             longitude: lon
           },
-          success: function (res) {
+          success: function(res) {
             that.setData({
               city: res.result.address_component.city
             })
             that.getBanner()
           },
-          fail: function (error) {
+          fail: function(error) {
             console.log(error);
           }
         })
@@ -117,39 +117,39 @@ Page({
   },
 
   // 轮播图
-  getBanner: function () {
+  getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
     modals.loading()
     request.sendRequest(url, 'post', {
       tags: 1
     }, {
-        'content-type': 'application/json'
-      }).then(function (res) {
-        modals.loaded()
-        if (res.statusCode == 200) {
-          if (res.data.status == 1) {
-            that.setData({
-              sw_list: res.data.data
-            })
-            that.getSkill()
-          } else {
-            modals.showToast(res.data.msg, 'none')
-          }
+      'content-type': 'application/json'
+    }).then(function(res) {
+      modals.loaded()
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            sw_list: res.data.data
+          })
+          that.getSkill()
         } else {
-          modals.showToast('系统繁忙，请稍后重试', 'none')
+          modals.showToast(res.data.msg, 'none')
         }
-      })
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   // 秒杀商品
-  getSkill: function () {
+  getSkill: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_fire_seckill'
     modals.loading()
     request.sendRequest(url, 'post', {}, {
       'content-type': 'application/json'
-    }).then(function (res) {
+    }).then(function(res) {
       // console.log(res);
       modals.loaded()
       if (res.statusCode == 200) {
@@ -184,8 +184,8 @@ Page({
   },
 
   // 倒计时
-  setTimeShow: function (currentstartTimer) {
-    let interval = setInterval(function () {
+  setTimeShow: function(currentstartTimer) {
+    let interval = setInterval(function() {
       // 秒数
       var second = currentstartTimer;
       // 天数位
@@ -219,7 +219,7 @@ Page({
   },
 
   // 不同分类下的列表
-  getList: function (e) {
+  getList: function(e) {
     let that = this
     let data = {
       page: that.data.page,
@@ -229,7 +229,7 @@ Page({
     let url = app.globalData.api + '/portal/Home/get_type_details'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
-    }).then(function (res) {
+    }).then(function(res) {
       // console.log(res);
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -253,36 +253,36 @@ Page({
   },
 
   // 瀑布流小卡片
-  getCard: function () {
+  getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
     modals.loading()
     request.sendRequest(url, 'post', {
       tags: 9
     }, {
-        'content-type': 'application/json'
-      }).then(function (res) {
-        // console.log(res)
-        modals.loaded()
-        if (res.statusCode == 200) {
-          if (res.data.status == 1) {
-            that.setData({
-              card: res.data.data[0].image
-            })
-          } else {
-            modals.showToast(res.data.msg, 'none')
-          }
+      'content-type': 'application/json'
+    }).then(function(res) {
+      // console.log(res)
+      modals.loaded()
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            card: res.data.data[0].image
+          })
         } else {
-          modals.showToast('系统繁忙，请稍后重试', 'none')
+          modals.showToast(res.data.msg, 'none')
         }
-      })
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
       this.unread(openID)
@@ -290,12 +290,12 @@ Page({
   },
 
   // 未读消息
-  unread: function (openID) {
+  unread: function(openID) {
     let that = this
     let url = app.globalData.api + '/portal/Message/no_read'
     request.sendRequest(url, 'post', {}, {
       'token': openID
-    }).then(function (res) {
+    }).then(function(res) {
       // console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -312,14 +312,14 @@ Page({
   },
 
   // 跳转去搜索
-  toSearch: function () {
+  toSearch: function() {
     wx.navigateTo({
       url: '/pages/index/search/search',
     })
   },
 
   // 查看信息
-  toInfo: function () {
+  toInfo: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
       wx.showModal({
@@ -341,14 +341,14 @@ Page({
   },
 
   // 导航模块跳转
-  toNav: function (e) {
+  toNav: function(e) {
     wx.navigateTo({
       url: e.currentTarget.dataset.url,
     })
   },
 
   // 切换分类
-  toGetKind: function (e) {
+  toGetKind: function(e) {
     let id = e.currentTarget.dataset.id
     let choice = this.data.choice_one
     if (choice != id) {
@@ -361,7 +361,7 @@ Page({
   },
 
   // 跳转商品详情
-  toGoodsDetail: function (e) {
+  toGoodsDetail: function(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/goods/goods?id=' + id,
@@ -369,7 +369,7 @@ Page({
   },
 
   // 轮播图详情
-  toDetaill: function (e) {
+  toDetaill: function(e) {
     let list = this.data.sw_list
     let item = list[e.currentTarget.dataset.index];
     if (item.type1 == 1) { //商品详情
@@ -394,7 +394,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.showToast({
       title: '加载中',
       icon: 'loading',
@@ -409,7 +409,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this
     let left = that.data.leftlist
     let right = that.data.rightlist
@@ -424,7 +424,7 @@ Page({
     modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
-    }).then(function (res) {
+    }).then(function(res) {
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
