@@ -1,7 +1,7 @@
 <view class="container flex col">
   <view class="top-line flex fl-align fl-jsb b-ff">
     <view class="flex fl-align fl-jsb f28 c-66">
-      <text wx:for="{{tlist}}" wx:key="index" class="{{choice_one==item.id?'linebottom':''}}" bindtap="toChoice" data-item="{{item}}">{{item.name}}</text>
+      <text wx:for="{{tlist}}" wx:key="index" class="{{choice_one==item.id?'linebottom':''}}" bindtap="toChoice" data-id="{{item.id}}">{{item.name}}</text>
     </view>
     <view class="search flex fl-align b-F5 b_r200">
       <icon type="search" size="28" color="#C1C1C1" />

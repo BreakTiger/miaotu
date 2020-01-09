@@ -70,6 +70,7 @@ page {
 .list-item {
   width: 346rpx;
   height: 488rpx;
+  margin-bottom: 20rpx;
 }
 
 .list-item>image {

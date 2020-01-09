@@ -2,12 +2,8 @@ const request = require('../../../api/http.js')
 import modals from '../../../methods/modal.js'
 const app = getApp()
 
-
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     nav: [{
         id: 1,
@@ -25,18 +21,14 @@ Page({
     choice: 1,
     page: 1,
     goodslist: []
-
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     let choice = this.data.choice
     this.getlist(choice)
   },
 
-
+  // 获取列表
   getlist: function(e) {
     let that = this
     let data = {
@@ -66,9 +58,9 @@ Page({
     })
   },
 
+  // 切换分类
   selectNav: function(e) {
     let id = e.currentTarget.dataset.id
-    console.log(id);
     let choice = this.data.choice
     if (choice != id) {
       this.setData({
@@ -82,31 +74,19 @@ Page({
   toGoodsDetail: function(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/index/group/group_detail/group_detail?id=' + id,
+      url: '/pages/seckill_detail/seckill_detail?id=' + id,
     })
   },
 
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function() {
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function() {
 
-  },
-
-
+  }
 })

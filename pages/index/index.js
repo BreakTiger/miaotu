@@ -11,9 +11,6 @@ var demo = new QQMapWX({
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     city: '',
     noread: null,
@@ -73,9 +70,6 @@ Page({
     card: ''
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     // 判断用户是否登陆
     let openID = wx.getStorageSync('openid') || ''
@@ -106,7 +100,7 @@ Page({
             that.setData({
               city: res.result.address_component.city
             })
-            that.getBanner()
+            // that.getBanner()
           },
           fail: function(error) {
             console.log(error);
@@ -114,6 +108,7 @@ Page({
         })
       },
     })
+    that.getBanner()
   },
 
   // 轮播图
@@ -150,7 +145,6 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res);
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -230,7 +224,6 @@ Page({
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res);
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data.data
@@ -262,7 +255,6 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -296,7 +288,6 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'token': openID
     }).then(function(res) {
-      // console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -347,6 +338,13 @@ Page({
     })
   },
 
+  // 爆款秒杀详情
+  toSeckillDetail:function(){
+    wx.navigateTo({
+      url: '/pages/seckill_detail/seckill_detail',
+    })
+  },
+
   // 切换分类
   toGetKind: function(e) {
     let id = e.currentTarget.dataset.id
@@ -360,7 +358,7 @@ Page({
     }
   },
 
-  // 跳转商品详情
+  // 跳转商品详情-普通
   toGoodsDetail: function(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
@@ -375,7 +373,7 @@ Page({
     if (item.type1 == 1) { //商品详情
       console.log('商品详情')
       wx.navigateTo({
-        url: '/pages/index/goods/goods',
+        url: '/pages/goods_detail/goods_detail',
       })
     } else if (item.type2 == 1) { //秒杀列表
       console.log('秒杀列表')
@@ -387,10 +385,6 @@ Page({
     }
   },
 
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
     wx.showToast({
       title: '加载中',
@@ -403,9 +397,6 @@ Page({
     this.onLoad();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function() {
     let that = this
     let left = that.data.leftlist

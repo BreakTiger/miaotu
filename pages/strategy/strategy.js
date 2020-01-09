@@ -6,24 +6,24 @@ Page({
 
   data: {
     tlist: [{
-        id: 1,
-        name: '关注'
-      },
-      {
-        id: 2,
+        id: 0,
         name: '发现'
       },
       {
-        id: 3,
+        id: 1,
         name: '问答'
       },
       {
-        id: 4,
+        id: 2,
         name: '精选'
-      }
+      },
+      {
+        id: 3,
+        name: '关注'
+      },
     ],
-    choice_one: 1,
-    choice_one_name: '关注',
+    choice_one: 0,
+    word: '',
     sw_list: [],
     page: 1,
     leftlist: [],
@@ -59,25 +59,31 @@ Page({
         } else {
           modals.showToast(res.data.msg, 'none')
         }
-        that.getList(that.data.choice_one_name)
+        that.getList(that.data.choice_one)
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
+  // 获取列表内容 - 不包括关注
   getList: function(e) {
     let that = this
     let data = {
       page: that.data.page,
       length: 10,
-      name: e
+      type: e,
+      name: that.data.word,
+      status: ''
     }
+    // console.log('参数：', data)
     let url = app.globalData.api + '/portal/Strategy/index'
+    modals.loading()
     request.sendRequest(url, 'post', data, {
-      'token': wx.getStorageSync('openid')
+      'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res.data.data)
+      // console.log(res.data.data)
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data.data
@@ -99,6 +105,7 @@ Page({
     })
   },
 
+  // 获取小卡片
   getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
@@ -125,17 +132,56 @@ Page({
 
   // 选择分类
   toChoice: function(e) {
-    console.log(e);
     let choice = this.data.choice_one
-    let cid = e.currentTarget.dataset.item.id
-    let cname = e.currentTarget.dataset.item.name
+    let cid = e.currentTarget.dataset.id
     if (choice != cid) {
       this.setData({
         choice_one: cid,
-        choice_one_name: cname
+        page: 1
       })
-      this.getList(this.data.choice_one_name)
+      if (cid == 3) { //关注
+        this.getCareList()
+      } else { //除关注外的其他列表
+        this.getList(this.data.choice_one)
+      }
     }
+  },
+
+  // 获取关注列表
+  getCareList: function() {
+    let that = this
+    let data = {
+      page: that.data.page,
+      length: 10,
+      type: '',
+      name: that.data.word,
+      status: 1
+    }
+    let url = app.globalData.api + '/portal/Strategy/index'
+    modals.loading()
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      modals.loaded()
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          let len = list.length
+          if (len > 0) {
+            let half = (len / 2).toFixed(0);
+            that.setData({
+              leftlist: list.slice(0, half),
+              rightlist: list.slice(half, len)
+            })
+          }
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+
   },
 
   // 发布

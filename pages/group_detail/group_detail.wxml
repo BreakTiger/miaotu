@@ -39,7 +39,7 @@
     <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate" data-id="{{details.id}}">查看全部评价 ></view>
   </view>
   <!-- 正在拼单 -->
-  <view class="bill-line flex col fl-align b-ff">
+  <view class="bill-line flex col fl-align b-ff" wx:if="{{len>0}}">
     <view class="titles-line flex fl-align fl-jsb">
       <text class="f32 f-wb c-00">{{len}}人在拼单，可直接参与</text>
       <text class="f24 c-00 f-w4" bindtap="allGroup">查看全部 ></text>
