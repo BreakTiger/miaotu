@@ -384,9 +384,6 @@ Page({
       })
     } else if (item.type3 == 1) { //轮播主题列表
       console.log('轮播主题列表')
-      // wx.navigateTo({
-      //   url: '/pages/index/shuffling/shuffling',
-      // })
     }
   },
 

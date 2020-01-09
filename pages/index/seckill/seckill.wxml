@@ -3,7 +3,7 @@
     <text class="{{choice==item.id?'choice':''}}" wx:for="{{nav}}" wx:key="index" bindtap="selectNav" data-id="{{item.id}}">{{item.name}}</text>
   </view>
   <view class="list-content flex col fl-align">
-    <view class="list-content-item flex fl-align fl-jsb b-ff" wx:for="{{goodslist}}" wx:key="index">
+    <view class="list-content-item flex fl-align fl-jsb b-ff" wx:for="{{goodslist}}" wx:key="index" bindtap="toGoodsDetail" data-id="{{item.id}}">
       <image src="{{item.banner}}"></image>
       <view class="list-content-item-info flex col">
         <view class="title-line climp2 c-45 f28">{{item.title}}</view>

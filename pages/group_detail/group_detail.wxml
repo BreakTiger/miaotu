@@ -1,5 +1,5 @@
 <!-- 引入富文本解析组件 -->
-<import src="../../../../wxParse/wxParse.wxml" />
+<import src="../../wxParse/wxParse.wxml" />
 <view class="container flex col fl-align">
   <view class="top-line flex fl-align fl-jc b-ff">
     <view style="width: 60%;" class="flex fl-align fl-jsb">
@@ -45,7 +45,7 @@
       <text class="f24 c-00 f-w4" bindtap="allGroup">查看全部 ></text>
     </view>
     <view class="bill-content">
-      <swiper vertical="true" circular="true" autoplay="true" interval="5000" >
+      <swiper vertical="true" circular="true" autoplay="true" interval="5000">
         <swiper-item class="flex col fl-align" catchtouchmove='catchTouchMove' wx:for="{{list_pelpel}}" wx:key="index" data-index="{{index}}">
           <view class="bill-item flex fl-align fl-jsb" wx:for="{{item}}" wx:key="index" data-indexs="{{index}}">
             <view class="flex fl-align">
@@ -114,22 +114,21 @@
     <image src="../../../icon/top.png"></image>
   </view> -->
   <view style="height:216rpx;width:750rpx;"></view>
-  <!-- 底部栏 -->
   <view class="tabbers flex fl-align fl-jsa b-ff">
     <view class="icons flex col fl-align fl-jc">
-      <image src="../../../../icon/talk.png"></image>
+      <image src="../../icon/talk.png"></image>
       <text class="f20 c-66 f-w4">咨询</text>
     </view>
     <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}" bindtap="toCollect">
-      <image src="../../../../icon/collect.png"></image>
+      <image src="../../icon/collect.png"></image>
       <text class="f20 c-66 f-w4">收藏</text>
     </view>
     <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}" bindtap="toCanel">
-      <image src="../../../../icon/collect.png"></image>
+      <image src="../../icon/collects.png"></image>
       <text class="f20 c-66 f-w4">已收藏</text>
     </view>
     <view class="icons flex col fl-align fl-jc">
-      <image src="../../../../icon/share.png"></image>
+      <image src="../../icon/share.png"></image>
       <text class="f20 c-66 f-w4">分享</text>
     </view>
     <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.pt_price}}立即预订</view>
@@ -139,7 +138,7 @@
   <!-- 分享 -->
   <button class="shares" plain="true" open-type="share"></button>
   <view class="cover flex col fl-align fl-jc" wx:if="{{shad}}" catchtouchmove="ture">
-    <image class="close" src="../../../../icon/close.png" bindtap="toClose"></image>
+    <image class="close" src="../../icon/close.png" bindtap="toClose"></image>
     <view class="grorpList b-ff flex col fl-align">
       <view class="title-lines t-ac f28 c-00 f-w4">可参加的拼单</view>
       <view class="grorpList-content">

@@ -1,6 +1,6 @@
-const request = require('../../../../api/http.js')
-import modals from '../../../../methods/modal.js'
-const WxParse = require('../../../../wxParse/wxParse.js')
+const request = require('../../api/http.js')
+import modals from '../../methods/modal.js'
+const WxParse = require('../../wxParse/wxParse.js')
 const app = getApp()
 
 Page({
@@ -471,7 +471,7 @@ Page({
     if (options.from === 'button') { }
     return {
       title: this.data.details.title,
-      path: '/pages/index/group/group_detail/group_detail?id=' + this.data.id,
+      path: '/pages/group_detail/group_detail?id=' + this.data.id,
     }
   }
 })
