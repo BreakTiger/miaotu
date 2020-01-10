@@ -26,7 +26,7 @@ Page({
     group: [],
     list_pelpel: [],
     list_time: [],
-    allList: [],
+    all_list: [],
     len: '0',
     collecttype: false,
     shad: false,
@@ -339,8 +339,22 @@ Page({
       page: that.data.page,
       length: 10
     }
-    console.log(data);
-
+    let url = app.globalData.api + '/portal/Pintuan/info_desc'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data.data.data);
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            shad: true,
+            all_list: res.data.data
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   // 关闭弹窗
@@ -416,7 +430,7 @@ Page({
     this.onLoad();
   },
 
-  onShareAppMessage: function (options) {
+  onShareAppMessage: function(options) {
     if (options.from === 'button') {}
     return {
       title: this.data.details.title,

@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
 
-  
+
   data: {
     page: 1,
     list: []
@@ -13,24 +13,24 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    let id = options.id
-    this.review(id)
+  onLoad: function(options) {
+    this.setData({
+      id: options.id
+    })
+    this.review(options.id)
   },
 
-  review: function (e) {
+  review: function(e) {
     let that = this
     let data = {
       page: that.data.page,
       length: 10,
       details_id: e
     }
-    console.log(data);
     let url = app.globalData.api + '/portal/home/comment'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
-    }).then(function (res) {
-      console.log(res);
+    }).then(function(res) {
       if (res.statusCode == 200) {
         that.setData({
           list: res.data.data.data
@@ -41,27 +41,29 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+
+
+  onPullDownRefresh: function() {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.onLoad({
+      id: this.data.id
+    });
+  },
+
+
+  onReachBottom: function() {
 
   },
 
-  
 
-  
-  onPullDownRefresh: function () {
-
-  },
-
-  
-  onReachBottom: function () {
-
-  },
-
-  
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

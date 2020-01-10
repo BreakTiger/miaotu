@@ -1,5 +1,21 @@
 <view class="container flex col fl-align">
   <image src="../../../resources/banner.png" class="top-banner"></image>
+
+  <!-- 正在砍价进行中 -->
+  <text class="c-ff f-wb" wx:if="{{alist.length>0}}">正在砍价进行中</text>
+  <view class="list-content flex fl-w" wx:if="{{alist.length>0}}">
+    <view class="list-item flex col fl-align b-ff" wx:for="{{alist}}" wx:key="index">
+      <image src="{{item.img}}"></image>
+      <view class="list-item-title climp2 f24">{{item.title}}</view>
+      <view class="price-line f28 c-38">
+        <text>￥{{item.price}}起</text>
+      </view>
+      <view class="freeget f28 c-ff t-ac" bindtap="toShareDown" data-item="{{item}}">分享好友帮我砍价</view>
+    </view>
+  </view>
+
+  <!-- 所有活动列表 -->
+  <text class="c-ff f-wb">免单活动</text>
   <view class="list-content flex fl-w">
     <view class="list-item flex col fl-align b-ff" wx:for="{{list}}" wx:key="index">
       <image src="{{item.banner}}"></image>
@@ -7,7 +23,8 @@
       <view class="price-line f28 c-38">
         <text>￥{{item.dprice}}起</text>
       </view>
-      <view class="freeget f28 c-ff t-ac" bindtap="toShareDown" data-id="{{item.id}}">分享好友帮我砍价</view>
+      <view class="freeget f28 c-ff t-ac" catchtap="toFreeGet" data-id="{{item.id}}">点击免费拿</view>
     </view>
   </view>
+
 </view>

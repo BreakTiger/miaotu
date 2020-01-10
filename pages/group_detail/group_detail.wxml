@@ -55,7 +55,7 @@
             <view class="flex fl-align">
               <view class="flex col fl-align">
                 <text class="f24">还差<text class="c-38">{{item.nums}}人</text> 拼成</text>
-                <text class="f20">剩余23:23:23</text>
+                <text class="f20">截止至2020-1-15</text>
               </view>
               <view class="toGroup b_r200 t-ac c-ff f24" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
             </view>
@@ -140,11 +140,12 @@
       <view class="title-lines t-ac f28 c-00 f-w4">可参加的拼单</view>
       <view class="grorpList-content">
         <scroll-view scroll-y="true" class="flex col">
-          <view class="join-line flex fl-align fl-jsb" wx:for="{{allList}}" wx:key="index">
+          <view class="join-line flex fl-align fl-jsb" wx:for="{{all_list}}" wx:key="index">
             <view class="flex fl-align" style="margin-left:20rpx;">
               <image class="header" src="{{item.img}}"></image>
               <text class="f28 c-00 f-w4">{{item.name}}</text>
             </view>
+            <view>截止至2020-1-15</view>
             <view class="toGroup c-ff f24 t-ac b_r200" style="margin-right:20rpx;" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
           </view>
         </scroll-view>

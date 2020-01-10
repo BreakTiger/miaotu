@@ -9,7 +9,8 @@
           <view class="count-num flex fl-align">
             <view class="nums c-ff f20 t-ac">{{day}}</view>：
             <view class="nums c-ff f20 t-ac">{{hour}}</view>：
-            <view class="nums c-ff f20 t-ac">{{min}}</view>
+            <view class="nums c-ff f20 t-ac">{{min}}</view>：
+            <view class="nums c-ff f20 t-ac">{{sec}}</view>
           </view>
           <text class="f20 c-66" style="margin-left:10rpx;">砍价将失效</text>
         </view>
@@ -24,8 +25,8 @@
     </view>
     <text class="f32 c-00 f-w4">已砍<text style="font-size:40rpx;color:#FC4224;">{{info.do_price}}元</text>,即还差{{(info.price)-(info.do_price)}}元</text>
     <progress class="progress-line" percent="{{(info.do_price)/(info.price)*100}}" border-radius="190" activeColor="#FFD304" backgroundColor="#F5F5F5"></progress>
-    <!-- <button class="invite c-00 f32 b_r200" open-type="share">喊好友帮砍一刀</button> -->
-    <button class="invite c-00 f32 b_r200" open-type="share">帮好友砍一刀</button>
+    <button class="invite c-00 f32 b_r200" open-type="share">喊好友帮砍一刀</button>
+    <!-- <button class="invite c-00 f32 b_r200">帮好友砍一刀</button> -->
   </view>
 
   <text class="c-ff lines" style="font-size:36rpx;">砍价记录</text>

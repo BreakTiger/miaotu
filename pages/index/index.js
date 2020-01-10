@@ -100,7 +100,7 @@ Page({
             that.setData({
               city: res.result.address_component.city
             })
-            // that.getBanner()
+            wx.setStorageSync('city', res.result.address_component.city)
           },
           fail: function(error) {
             console.log(error);
@@ -128,8 +128,6 @@ Page({
             sw_list: res.data.data
           })
           that.getSkill()
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -168,8 +166,6 @@ Page({
               countdown: '活动即将开始'
             });
           }
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -236,8 +232,6 @@ Page({
             })
           }
           that.getCard()
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -261,8 +255,6 @@ Page({
           that.setData({
             card: res.data.data[0].image
           })
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -293,8 +285,6 @@ Page({
           that.setData({
             noread: res.data.data
           })
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -339,7 +329,7 @@ Page({
   },
 
   // 爆款秒杀详情
-  toSeckillDetail:function(){
+  toSeckillDetail: function() {
     wx.navigateTo({
       url: '/pages/seckill_detail/seckill_detail',
     })

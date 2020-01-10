@@ -19,6 +19,23 @@ Page({
     page: 1,
     list: [],
     covers: false,
+    width_one: 204,
+    width_two: 0,
+
+    cardlist: [{
+        id: 0
+      },
+      {
+        id: 1
+      },
+      {
+        id: 3
+      }
+    ],
+
+    choice_card: '',
+
+
     before: true
   },
 

@@ -25,9 +25,7 @@
     <view class="flex col fl-align" wx:if="{{before}}">
       <text class="titles">助力人数由你来定</text>
       <view class="card-line flex fl-align fl-jsb">
-        <image src="../../../resources/b_plate.png" style="width:204rpx;height:100%;"></image>
-        <image src="../../../resources/b_plate.png" style="width:204rpx;height:100%;"></image>
-        <image src="../../../resources/b_plate.png" style="width:204rpx;height:100%;"></image>
+        <image src="../../../resources/b_plate.png" style="width:{{width_one}}rpx;height:100%;" wx:for="{{cardlist}}" wx:key="index"></image>
       </view>
     </view>
   </view>
