@@ -17,13 +17,13 @@
   <text class="f36 c-00 lines" style="margin: 36rpx 0 36rpx 24rpx;">旅行发现</text>
   <view class="list-content b-F5">
     <view class="left-col">
-      <view class="list-item flex col fl-align b-ff b_r16" wx:for="{{leftlist}}" wx:key="index" bindtap="toDetails">
+      <view class="list-item flex col fl-align b-ff b_r16" wx:for="{{leftlist}}" wx:key="index" data-item="{{item}}" bindtap="toDetails">
         <image src="{{item.r_pic}}"></image>
         <view class="list-titles climp2 f24">{{item.r_title}}</view>
         <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">
           <view class="users flex fl-align">
             <image src="{{item.avatar}}"></image>
-            <text>{{item.r_author}}</text>
+            <text>{{item.nickname}}</text>
           </view>
           <view class="likes flex fl-align" catchtap="">
             <image src="../../icon/unzan.png" wx:if="{{item.like_staus==0}}"></image>
@@ -35,7 +35,7 @@
     </view>
     <view class="right-col">
       <image src="{{card}}" class="b_r16 list-img"></image>
-      <view class="list-item flex col fl-align b-ff b_r16" wx:for="{{rightlist}}" wx:key="index" bindtap="toDetails">
+      <view class="list-item flex col fl-align b-ff b_r16" wx:for="{{rightlist}}" wx:key="index" data-item="{{item}}" bindtap="toDetails">
         <image src="{{item.r_pic}}"></image>
         <view class="list-titles climp2 f24">{{item.r_title}}</view>
         <view class="flex fl-align fl-jsb f20 c-66" style="width: 304rpx;">

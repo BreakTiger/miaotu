@@ -54,7 +54,22 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/strategy/strategy",
+					"pathName": "pages/strategy/strategy",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/strategy/travel_details/travel_details",
+					"pathName": "pages/strategy/travel_details/travel_details",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }

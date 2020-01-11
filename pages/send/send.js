@@ -122,7 +122,6 @@ Page({
     } else {
       modals.loading()
       that.upVideo()
-
     }
   },
 
@@ -147,10 +146,11 @@ Page({
           that.setData({
             film: movie
           })
-          that.cycle_img(that.data.imgList)
+          
         }
       })
     }
+    that.cycle_img(that.data.imgList)
   },
 
   // 上传图片
@@ -179,9 +179,8 @@ Page({
     // 延迟俩秒执行发布接口
     setTimeout(function() {
       that.sendTravel()
-    }, 1500)
+    }, 900)
   },
-
 
 
   // 发布游记

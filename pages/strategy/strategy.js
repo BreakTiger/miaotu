@@ -207,8 +207,16 @@ Page({
         }
       })
     }
-
   },
+
+  toDetails: function(e) {
+    console.log(e.currentTarget.dataset.item);
+    wx.navigateTo({
+      url: '/pages/strategy/travel_details/travel_details',
+    })
+  },
+
+
 
   onPullDownRefresh: function() {
     wx.showToast({

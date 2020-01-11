@@ -1,0 +1,102 @@
+page {
+  background: #f5f5f5;
+}
+
+.article-item {
+  width: 100%;
+  margin-bottom: 8rpx;
+}
+
+.user-line, .line {
+  width: 670rpx;
+  height: 88rpx;
+  margin: auto;
+}
+
+.user-info>image {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: black;
+  margin-right: 20rpx;
+}
+
+.threepoint {
+  width: 40rpx;
+}
+
+.threepoint>view {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: black;
+}
+
+.picture {
+  width: 670rpx;
+  height: 670rpx;
+  margin: auto;
+  margin-bottom: 12rpx;
+  overflow: hidden;
+}
+
+.picture>swiper, .video-img, .v_img {
+  width: 100%;
+  height: 100%;
+}
+
+.play-icon {
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+  position: absolute;
+  background: black;
+  z-index: 10;
+}
+
+.title {
+  width: 670rpx;
+  margin: auto;
+}
+
+.content, .contents {
+  width: 670rpx;
+  line-height: 44rpx;
+  margin-bottom: 12rpx;
+  margin: auto;
+}
+
+.article-item>text {
+  margin: 12rpx 0 0 40rpx;
+}
+
+.location {
+  padding: 0 20rpx;
+  height: 40rpx;
+  background: rgba(31, 175, 241, 0.2);
+}
+
+.location>image {
+  width: 12rpx;
+  height: 16rpx;
+  margin-right: 10rpx;
+}
+
+.icons {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 6rpx;
+}
+
+.review {
+  width: 670rpx;
+  height: 128rpx;
+  border-radius: 4rpx;
+  margin: auto;
+  margin-bottom: 12rpx;
+}
+
+.review-line {
+  width: 630rpx;
+  margin-top: 10rpx;
+}
