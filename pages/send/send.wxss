@@ -52,7 +52,7 @@
 
 .localtion {
   width: 670rpx;
-  padding: 28rpx 0;
+  height: 108rpx;
   margin-bottom: 200rpx;
 }
 

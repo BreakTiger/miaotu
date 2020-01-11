@@ -27,11 +27,11 @@ Page({
       length: 10
     }
     let url = app.globalData.api + '/portal/Message/index'
-    modals.loading()
+    // modals.loading()
     request.sendRequest(url, 'post', data, {
       'token': openid
     }).then(function(res) {
-      modals.loaded()
+      // modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({

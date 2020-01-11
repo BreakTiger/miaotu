@@ -1,26 +1,26 @@
 <view class="container flex col fl-align">
-  <input type="text" placeholder="请输入游记标题" class="title-line f28"></input>
+  <input type="text" placeholder="请输入游记标题" class="title-line f28" bindinput="setTitle"></input>
   <view class="title-line">选择要上传的图片</view>
   <view class="picture-content flex fl-w">
     <view wx:for="{{imgList}}" wx:key="index" wx:if="{{imgList.length>0}}">
       <image class="picture" src="{{item}}"></image>
       <image class="close" src="../../icon/close.png" data-index="{{index}}" bindtap="delsPicture"></image>
     </view>
-    <image class="add-box" src="../../resources/addbox.png" bindtap="addPicture"></image>
+    <image class="add-box" src="../../resources/addbox.png" bindtap="addPicture" wx:if="{{imgList.length!=6}}"></image>
   </view>
   <view class="title-line">选择要上传的视频</view>
   <view class="viedo-content flex fl-w">
-    <view wx:for="{{videoList}}" wx:key="index" wx:if="{{videoList.length>0}}">
-      <video class="videos"></video>
-      <image class="close" src="../../icon/close.png" data-index="{{index}}" bindtap="delsVideo"></image>
+    <view wx:if="{{video}}">
+      <video class="videos" src="{{video}}"></video>
+      <image class="close" src="../../icon/close.png" bindtap="delsVideo"></image>
     </view>
-    <image class="add-box" src="../../resources/addbox.png" bindtap="addVideo"></image>
+    <image class="add-box" src="../../resources/addbox.png" bindtap="addVideo" wx:if="{{!videos}}"></image>
   </view>
 
-  <textarea placeholder="请输入正文内容" class="article"></textarea>
+  <textarea placeholder="请输入正文内容" class="article" bindinput="getArticle"></textarea>
   <view class="localtion flex fl-align" bindtap="choice_postion">
     <image src="../../icon/localtion.png"></image>
-    <text class="f28 c-66">位置</text>
+    <text class="f28 c-66">{{city}}</text>
   </view>
   <view class="sends t-ac c-ff f32 b_r200" bindtap="toSend">发表</view>
 </view>

@@ -1,0 +1,48 @@
+page {
+  background: #f5f5f5;
+}
+
+.pay_type {
+  padding: 40rpx 0;
+  margin-bottom: 36rpx;
+}
+
+icon {
+  margin-bottom: 14rpx;
+}
+
+.readOrder {
+  width: 348rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.backHome {
+  width: 348rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  border: 2rpx solid rgba(31, 175, 241, 1);
+}
+
+.title {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: 500;
+  position: relative;
+  margin-left: 24rpx;
+  margin-bottom: 36rpx;
+}
+
+.title::after {
+  content: '';
+  width: 72rpx;
+  height: 8rpx;
+  background: #ffd304;
+  position: absolute;
+  bottom: 0;
+  left: 38rpx;
+  opacity: 0.7;
+}

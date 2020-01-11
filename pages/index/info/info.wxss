@@ -2,7 +2,7 @@ page {
   background: #f5f5f5;
 }
 
-.line,.line>view>view {
+.line, .line>view>view {
   width: 100%;
 }
 
@@ -11,6 +11,20 @@ page {
   height: 92rpx;
   border-radius: 50%;
 }
+
+.point {
+  width: 20rpx !important;
+  height: 20rpx !important;
+  border-radius: 50%;
+  background: red;
+  position: absolute;
+  top: 30rpx;
+  left: 118rpx;
+}
+
+/* .header>view {
+  
+} */
 
 .line>view {
   width: 582rpx;

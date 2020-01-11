@@ -2,51 +2,35 @@ const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
 
-
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-
-  },
+  data: {},
 
   // 授权登录
   toGetUserInfo: function(e) {
     let that = this
     let info = e.detail.userInfo
     let url = app.globalData.api + '/portal/Public/getOpenid'
-    modals.loading();
+    modals.loading()
     request.sendRequest(url, 'post', {
       code: wx.getStorageSync('code')
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
       if (res.statusCode == 200) {
-        let openid = res.data.data.openid
-        // console.log(openid)
-        that.upUserinfo(info, openid)
+        if (res.data.status == 1) {
+          let openid = res.data.data.openid
+          that.upUserinfo(info, openid)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
-        modals.loaded()
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
+        modals.showToast('系统繁忙，请稍后重试', 'none');
       }
     })
   },
 
   upUserinfo: function(info, openid) {
-    // console.log(info)
-    // console.log(openid)
     let data = {
       nickname: info.nickName,
       sex: info.gender,
@@ -60,17 +44,21 @@ Page({
     }).then(function(res) {
       modals.loaded()
       if (res.statusCode == 200) {
-        wx.setStorageSync('user', info);
-        wx.setStorageSync('openid', openid);
-        wx.navigateBack({
-          delta: 2
-        })
+        if (res.data.status == 1) {
+          modals.showToast('授权成功', 'none')
+          wx.setStorageSync('user', info);
+          wx.setStorageSync('openid', openid);
+          setTimeout(function() {
+            wx.navigateBack({
+              delta: 2
+            })
+          }, 2000)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
       } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
+        modals.showToast('系统繁忙，请稍后重试', 'none');
       }
     })
-  },
+  }
 })

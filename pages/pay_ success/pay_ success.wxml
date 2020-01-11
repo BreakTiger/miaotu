@@ -1,0 +1,11 @@
+<view class="container flex col">
+  <view class="pay_type flex col fl-align b-ff">
+    <icon type="success" size="48" color="#1FF193" />
+    <text class="f28 c-00 f-wb">支付成功！</text>
+    <text class="f28 c-66">实际支付：23477.23元</text>
+    <view class="readOrder f32 c-ff t-ac b_r200">查看订单</view>
+    <view class="backHome f32 c-F1 t-ac b_r200">返回首页</view>
+  </view>
+  <text class="title">猜你喜欢</text>
+
+</view>

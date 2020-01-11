@@ -2,6 +2,7 @@ const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
 
+
 // 引入SDK核心类
 var QQMapWX = require('../../qqmap-wx-jssdk.min.js')
 // 实例化API核心类
@@ -73,14 +74,12 @@ Page({
   onLoad: function(options) {
     // 判断用户是否登陆
     let openID = wx.getStorageSync('openid') || ''
-    if (openID) {
-      this.positioning()
-    } else {
-      this.positioning()
+    if (!openID) {
       wx.navigateTo({
         url: '/pages/login/login',
       })
     }
+    this.positioning() 
   },
 
   // 定位

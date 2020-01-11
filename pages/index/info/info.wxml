@@ -1,6 +1,7 @@
 <view class="container flex col fl-align b-ff">
-  <view class="line flex fl-align fl-jsa" wx:for="{{infoList}}" wx:key="index" data-id="{{item.id}}" bindtap="toRead">
+  <view class="line flex fl-align fl-jsa" wx:for="{{infoList}}" wx:key="index" data-id="{{item.id}}" bindtap="toRead" style="position: relative;">
     <image class="header" src="{{item.avatar}}"></image>
+    <view class="point" wx:if="{{item.status==0}}"></view>
     <view class="flex col fl-align fl-jse">
       <view class="flex fl-align fl-jsb">
         <text class="f32 c-00 f-wb">{{item.travel_office}}</text>

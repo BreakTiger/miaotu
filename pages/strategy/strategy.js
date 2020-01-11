@@ -39,6 +39,9 @@ Page({
         url: '/pages/login/login',
       })
     }
+  },
+
+  onShow: function() {
     this.getBanner()
   },
 
@@ -186,9 +189,25 @@ Page({
 
   // 发布
   tosend: function() {
-    wx.navigateTo({
-      url: '/pages/send/send',
-    })
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      wx.navigateTo({
+        url: '/pages/send/send',
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '需要授权登录后，才可以进行发布哦',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
+      })
+    }
+
   },
 
   onPullDownRefresh: function() {
