@@ -38,9 +38,6 @@ Page({
     travelList: []
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
 
   },
@@ -93,7 +90,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    let openid = wx.getStorageSync('openid')
+    let openid = wx.getStorageSync('openid') || ''
     console.log('openid:', openid)
     // 判断登录状态
     if (openid) {

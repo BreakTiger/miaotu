@@ -50,7 +50,7 @@ Page({
           wx.setStorageSync('openid', openid);
           setTimeout(function() {
             wx.navigateBack({
-              delta: 2
+              delta: 1
             })
           }, 2000)
         } else {

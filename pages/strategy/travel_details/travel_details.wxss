@@ -107,3 +107,74 @@ page {
   width: 630rpx;
   margin-top: 10rpx;
 }
+
+.commont-content {
+  width: 100%;
+  height: 940rpx;
+  border-radius: 24rpx 24rpx 0rpx 0rpx;
+  position: relative;
+}
+
+.c_close {
+  width: 26rpx;
+  height: 26rpx;
+  position: absolute;
+  top: 32rpx;
+  left: 38rpx;
+}
+
+.title-line, .commont-input {
+  width: 100%;
+  height: 88rpx;
+}
+
+.scroll-conetnt {
+  width: 100%;
+  height: 764rpx;
+}
+
+.scroll-conetnt>scroll-view {
+  width: 100%;
+  height: 100%;
+}
+
+.scroll-list-item {
+  width: 670rpx;
+  margin: 5rpx auto;
+}
+
+.scroll-list-item>view {
+  width: 100%;
+}
+
+.scroll-list-item>view>view {
+  width: 582rpx;
+}
+
+.commont-input>input {
+  width: 630rpx;
+  height: 68rpx;
+  border: 2rpx solid rgba(31, 175, 241, 1);
+  text-indent: 25rpx;
+}
+
+.header {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  background: black;
+}
+
+.reply {
+  width: 582rpx;
+  border-radius: 4rpx;
+  margin-left: 88rpx;
+  padding-bottom: 18rpx;
+}
+
+.reply>view {
+  width: 542rpx;
+  margin: 0 auto;
+  margin-top: 18rpx;
+}

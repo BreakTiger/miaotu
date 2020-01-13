@@ -15,10 +15,10 @@
       <swiper>
         <swiper-item wx:if="{{item.r_video}}">
           <view class="video-img flex col fl-align fl-jc" style="position: relative;">
-            <image src="{{item.r_pic}}" class="v_img" wx:if="{{!showVideo}}"></image>
-            <image class="play-icon" src="../../../resources/play.png" wx:if="{{!showVideo}}" bindtap="toShowVideo"></image>
-            <video class="film-box" wx:if="{{showVideo}}" src="{{item.r_video}}"></video>
-            <image class="close" src="../../../icon/close.png" class="closed" wx:if="{{showVideo}}" bindtap="toShowVideo"></image>
+            <image src="{{item.r_pic}}" class="v_img" wx:if="{{!item.showVideo}}"></image>
+            <image class="play-icon" src="../../../resources/play.png" wx:if="{{!item.showVideo}}" data-index="{{index}}" bindtap="toShowVideo"></image>
+            <video class="film-box" wx:if="{{item.showVideo}}" src="{{item.r_video}}" autoplay="true"></video>
+            <image class="close" src="../../../icon/close.png" class="closed" wx:if="{{item.showVideo}}" data-index="{{index}}" bindtap="toCloseVideo"></image>
           </view>
         </swiper-item>
         <swiper-item wx:for="{{item.r_image}}" wx:key="index">
@@ -30,11 +30,11 @@
     <!-- 标题 -->
     <view class="title f28 c-00 f-wb clipm1">{{item.r_title}}</view>
     <!-- 内容简介 -->
-    <view class="content climp2 f24" wx:if="{{!show}}">{{item.r_content}}</view>
+    <view class="content climp2 f24" wx:if="{{!item.show}}">{{item.r_content}}</view>
     <!-- 全内容 -->
-    <view class="contents f24" wx:if="{{show}}">{{item.r_content}}</view>
+    <view class="contents f24" wx:if="{{item.show}}">{{item.r_content}}</view>
     <!-- 展开 -->
-    <text class="open c-00 f24 f-wb">展开</text>
+    <text class="open c-00 f24 f-wb" data-index="{{index}}" wx:if="{{!item.show}}" bindtap="toOpened">展开</text>
     <!-- 日期 -->
     <text class="f20">发表于{{item.addtime}}</text>
     <!-- 定位+评论+收藏 -->
@@ -46,13 +46,13 @@
       </view>
       <!-- 评论+收藏 -->
       <view class="right_path flex fl-align">
-        <view class="flex" bindtap="toAllComment">
+        <view class="flex" bindtap="toAllComment" data-item="{{item}}">
           <image class="icons" src="../../../icon/talk.png"></image>
           <text class="f20 c-66">{{item.comment}}</text>
         </view>
         <view class="flex" style="margin-left:30rpx;">
-          <image class="icons" src="../../../icon/collect.png" wx:if="{{item.like_staus==0}}"></image>
-          <image class="icons" src="../../../icon/collects.png" wx:if="{{item.like_staus==1}}"></image>
+          <image class="icons" src="../../../icon/collect.png" wx:if="{{item.like_staus==0}}" data-id="{{item.id}}" bindtap="toLike"></image>
+          <image class="icons" src="../../../icon/collects.png" wx:if="{{item.like_staus==1}}" data-id="{{item.id}}" bindtap="toCancel"></image>
           <text class="f20 c-66">{{item.like}}</text>
         </view>
       </view>
@@ -64,6 +64,43 @@
         <text class="c-66">{{item.content}}</text>
       </view>
       <view class="review-line f20 c-66">共{{item.comment_info.length}}条评论</view>
+    </view>
+  </view>
+  <!-- 评论窗口 -->
+  <view class="cover flex col fl-align fl-jsd" catchtouchmove="ture" wx:if="{{covers}}">
+    <view class="commont-content b-ff">
+      <image class="c_close" src="../../../icon/closes.png" bindtap="toClosed"></image>
+      <view class="title-line flex fl-align fl-jc">
+        <text class="c-00 f28 f-wb">全部评论</text>
+      </view>
+      <view class="scroll-conetnt">
+        <scroll-view scroll-y>
+          <view class="scroll-list-item flex col fl-align" wx:for="{{rlist}}" wx:key="index">
+            <view class="flex fl-align">
+              <image class="header" src="{{item.avatar}}"></image>
+              <view class="flex col">
+                <text class="f24 c-00 f-wb">{{item.name}}</text>
+                <text class="f20 c-CC">{{item.addtime}}</text>
+              </view>
+            </view>
+            <view class="flex col">
+              <view style="margin:20rpx 0;margin-left:88rpx;" class="f24 c-00 f-w4">{{item.content}}</view>
+              <!-- 回复 -->
+              <view class="reply b-F5" wx:if="{{item.uid!=0}}">
+                <view class="f24f-w4">
+                  <text class="c-00">{{item.uname}}：</text>
+                  <text class="c-66">{{item.ucontent}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="scroll-list-item t-ac" wx:if="{{rlist.length==0}}">暂无评论</view>
+        </scroll-view>
+      </view>
+      <view class="commont-input flex fl-align fl-jsa">
+        <input type="text" placeholder="添加评论" class="b_r200" placeholder-style="color:#1faff1;"></input>
+        <text>发布</text>
+      </view>
     </view>
   </view>
 </view>
