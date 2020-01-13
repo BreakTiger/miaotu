@@ -5,7 +5,7 @@
     </view>
     <view class="search flex fl-align b-F5 b_r200">
       <icon type="search" size="28" color="#C1C1C1" />
-      <input type="text" placeholder="搜索"></input>
+      <input type="text" placeholder="搜索" bindinput="toSearch"></input>
     </view>
   </view>
   <view style="height:108rpx;"></view>

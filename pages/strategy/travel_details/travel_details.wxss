@@ -17,7 +17,6 @@ page {
   width: 60rpx;
   height: 60rpx;
   border-radius: 50%;
-  background: black;
   margin-right: 20rpx;
 }
 
@@ -40,9 +39,17 @@ page {
   overflow: hidden;
 }
 
-.picture>swiper, .video-img, .v_img {
+.picture>swiper, .video-img, .v_img, .film-box {
   width: 100%;
   height: 100%;
+}
+
+.closed {
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
 }
 
 .play-icon {

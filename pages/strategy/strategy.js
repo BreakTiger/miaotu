@@ -23,13 +23,15 @@ Page({
       },
     ],
     choice_one: 0,
-    word: '',
     sw_list: [],
+    card: '',
+    word: '',
     page: 1,
     leftlist: [],
-    rightlist: [],
-    card: ''
+    rightlist: []
+
   },
+
 
   onLoad: function(options) {
     // 判断用户是否登陆
@@ -40,6 +42,7 @@ Page({
       })
     }
   },
+
 
   onShow: function() {
     this.getBanner()
@@ -62,30 +65,53 @@ Page({
         } else {
           modals.showToast(res.data.msg, 'none')
         }
-        that.getList(that.data.choice_one)
+        that.getCard()
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  // 获取列表内容 - 不包括关注
+  // 瀑布流小卡片
+  getCard: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Home/get_slide_item'
+    request.sendRequest(url, 'post', {
+      tags: 9
+    }, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            card: res.data.data[0].image
+          })
+          that.getList(that.data.choice_one)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+
+    })
+  },
+
+  // 分类列表 不包括关注
   getList: function(e) {
     let that = this
     let data = {
       page: that.data.page,
       length: 10,
       type: e,
-      name: that.data.word,
-      status: ''
+      name: that.data.word
     }
-    // console.log('参数：', data)
+    console.log('参数：', data);
     let url = app.globalData.api + '/portal/Strategy/index'
     modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res.data.data)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -99,37 +125,15 @@ Page({
             })
           }
         } else {
-          modals.showToast(res.data.msg, 'none')
-        }
-        that.getCard()
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
-
-  // 获取小卡片
-  getCard: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Home/get_slide_item'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      tags: 9
-    }, {
-      'content-type': 'application/json'
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
           that.setData({
-            card: res.data.data[0].image
+            leftlist: [],
+            rightlist: [],
           })
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
+
     })
   },
 
@@ -143,23 +147,24 @@ Page({
         page: 1
       })
       if (cid == 3) { //关注
-        this.getCareList()
+        this.getCareList(this.data.choice_one)
       } else { //除关注外的其他列表
         this.getList(this.data.choice_one)
       }
     }
   },
 
-  // 获取关注列表
-  getCareList: function() {
+
+  // 关注列表
+  getCareList: function(e) {
     let that = this
     let data = {
       page: that.data.page,
       length: 10,
-      type: '',
-      name: that.data.word,
-      status: 1
+      type: e,
+      name: that.data.word
     }
+    console.log(data)
     let url = app.globalData.api + '/portal/Strategy/index'
     modals.loading()
     request.sendRequest(url, 'post', data, {
@@ -178,13 +183,29 @@ Page({
             })
           }
         } else {
-          modals.showToast(res.data.msg, 'none')
+          that.setData({
+            leftlist: [],
+            rightlist: [],
+          })
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
 
+  // 搜索
+  toSearch: function(e) {
+    let type = this.data.choice_one
+    console.log(type)
+    this.setData({
+      word: e.detail.value
+    })
+    if (type == 3) {
+      this.getCareList(this.data.choice_one)
+    } else {
+      this.getList(this.data.choice_one)
+    }
   },
 
   // 发布
@@ -210,9 +231,15 @@ Page({
   },
 
   toDetails: function(e) {
-    console.log(e.currentTarget.dataset.item);
+    let that = this
+    let data = {
+      type: that.data.choice_one,
+      word: that.data.word || '',
+      id: e.currentTarget.dataset.item.id
+    }
+    // console.log('传输参数：', data);
     wx.navigateTo({
-      url: '/pages/strategy/travel_details/travel_details',
+      url: '/pages/strategy/travel_details/travel_details?data=' + JSON.stringify(data),
     })
   },
 
@@ -230,7 +257,9 @@ Page({
     this.onLoad();
   },
 
-
+  /**
+   * 页面上拉触底事件的处理函数
+   */
   onReachBottom: function() {
 
   }
