@@ -2,19 +2,21 @@
   <view class="line b-ff flex col fl-align">
     <view class="flex fl-align fl-jsb">
       <text class="f28 c-66">头像</text>
-      <image class="header"></image>
+      <image class="header" src="{{data.avatar}}"></image>
     </view>
   </view>
   <view class="line b-ff flex col fl-align">
     <view class="flex fl-align fl-jsb">
       <text class="f28 c-00 f-w4">用户昵称</text>
-      <text class="f24 c-66">设置</text>
+      <text class="f24 c-66">{{data.nickname}}</text>
     </view>
   </view>
   <view class="line b-ff flex col fl-align">
     <view class="flex fl-align fl-jsb">
       <text class="f28 c-00 f-w4">性别</text>
-      <text class="f24 c-66">设置</text>
+      <text class="f24 c-66" wx:if="{{data.sex==0}}">未知</text>
+      <text class="f24 c-66" wx:if="{{data.sex==1}}">男</text>
+      <text class="f24 c-66" wx:if="{{data.sex==2}}">女</text>
     </view>
   </view>
   <view class="line b-ff flex col fl-align">
@@ -22,7 +24,7 @@
       <text class="f28 c-00 f-w4">出生日期</text>
       <picker mode="date">
         <view class="flex fl-align">
-          <text class="f24 c-66">设置</text>
+          <text class="f24 c-66">{{data.birthday}}</text>
           <image class="icon" src="../../../icon/go.png"></image>
         </view>
       </picker>
@@ -33,7 +35,7 @@
       <text class="f28 c-00 f-w4">常居城市</text>
       <picker mode="region">
         <view class="flex fl-align">
-          <text class="f24 c-66">设置</text>
+          <text class="f24 c-66">{{data.city}}</text>
           <image class="icon" src="../../../icon/go.png"></image>
         </view>
       </picker>
@@ -42,8 +44,8 @@
   <view class="line b-ff flex col fl-align">
     <view class="flex col" style="height:auto;">
       <text class="f28 c-00 f-w4" style="margin-top: 40rpx">个人简介</text>
-      <textarea placeholder="设置" class="introduce f24 c-66" maxlength="255"></textarea>
+      <textarea placeholder="设置" class="introduce f24 c-66" maxlength="255" value="{{data.intro}}"></textarea>
     </view>
   </view>
-  <view class="confirm b_r200 c-ff f32 t-ac">确定</view>
+  <view class="confirm b_r200 c-ff f32 t-ac" bindtap="toSure">确定</view>
 </view>

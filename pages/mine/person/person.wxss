@@ -15,7 +15,6 @@ page {
 .header {
   width: 88rpx;
   height: 88rpx;
-  background: black;
   border-radius: 50%;
 }
 

@@ -4,15 +4,20 @@ const app = getApp()
 
 Page({
   data: {
-    nickname: '设置',
+    data: {}
   },
 
   onLoad: function(options) {
-
+    this.setData({
+      data: JSON.parse(options.data)
+    })
   },
 
-  onShow: function() {
+  // 确定
+  toSure: function() {
 
   }
+
+
 
 })
