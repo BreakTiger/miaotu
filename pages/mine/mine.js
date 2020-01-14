@@ -2,8 +2,6 @@ const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
 
-let openid = wx.getStorageSync('openid')
-
 Page({
 
   data: {
@@ -11,44 +9,188 @@ Page({
     person: [],
     person_like: [],
     nav: [{
-        id: 1,
         icon: '../../icon/track.png',
         name: '足迹',
         path: '/pages/mine/track/track'
       },
       {
-        id: 2,
         icon: '../../icon/order.png',
         name: '订单',
         path: '/pages/mine/order/order'
       },
       {
-        id: 3,
         icon: '../../icon/certificates.png',
         name: '礼券',
-        path: '/pages/mine/coupon/coupon'
+        path: '/pages/mine/certificates/certificates'
       },
       {
-        id: 4,
         icon: '../../icon/wallet.png',
         name: '钱包',
         path: '/pages/mine/wallet/wallet'
       }
     ],
-    travelList: []
+    travelList: [],
+    card: '',
+    page: 1,
+    leftlist: [],
+    rightlist: []
   },
 
   onLoad: function(options) {
-
+    let openID = wx.getStorageSync('openid') ||''
+    if (!openID){
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    this.getCard()
   },
 
-  // 去登陆
-  toLogin: function() {
-    wx.navigateTo({
-      url: '/pages/login/login',
+  // 瀑布流小卡片
+  getCard: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Home/get_slide_item'
+    request.sendRequest(url, 'post', {
+      tags: 9
+    }, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            card: res.data.data[0].image
+          })
+        }
+        that.getList()
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
     })
   },
 
+  // 猜你喜欢列表
+  getList: function() {
+    let that = this
+    let data = {
+      page: that.data.page,
+      length: 10,
+      type: 7
+    }
+    let url = app.globalData.api + '/portal/Home/get_type_details'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          let len = list.length
+          if (len > 0) {
+            let half = (len / 2).toFixed(0);
+            that.setData({
+              leftlist: list.slice(0, half),
+              rightlist: list.slice(half, len)
+            })
+          }
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 猜你喜欢列表项详情
+  toGoodsDetail: function(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/goods_detail/goods_detail?id=' + id,
+    })
+  },
+
+  onShow: function() {
+    let openid = wx.getStorageSync('openid') || ''
+    // 判断登录状态
+    if (openid) {
+      this.setData({
+        login: 1
+      })
+      this.getParson()
+    } else {
+      this.setData({
+        login: 0
+      })
+    }
+  },
+
+  // 用户信息
+  getParson: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Personal/user_info'
+    request.sendRequest(url, 'post', {}, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            person: res.data.data
+          })
+          that.getLike()
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 获取用户的获赞+粉丝+关注等数据
+  getLike: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Personal/get_like'
+    request.sendRequest(url, 'post', {}, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            person_like: res.data.data
+          })
+          that.getTravel()
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 获取我的游记
+  getTravel: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Personal/mytravels'
+    request.sendRequest(url, 'post', {
+      length: 5
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            travelList: res.data.data
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 编辑用户资料
+  toEdutor: function() {
+    let data = JSON.stringify(this.data.person)
+    wx.navigateTo({
+      url: '/pages/mine/person/person?data=' + data,
+    })
+  },
+
+  // 导航
   toNav: function(e) {
     var url = e.currentTarget.dataset.url
     wx.navigateTo({
@@ -56,114 +198,36 @@ Page({
     })
   },
 
-  totravel: function() {
-    wx.navigateTo({
-      url: '/pages/mine/travel/travel',
-    })
-  },
 
-  toUpmembers: function() {
-    wx.navigateTo({
-      url: '/pages/mine/members/members',
-    })
-  },
-
-  toEdutor: function() {
-    wx.navigateTo({
-      url: '/pages/mine/user/user',
-    })
-  },
-
-  toAttention: function() {
-    wx.navigateTo({
-      url: '/pages/mine/attention/attention',
-    })
-  },
-
+  // 发布
   tosend: function() {
-    wx.navigateTo({
-      url: '/pages/strategy/send/send',
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    let openid = wx.getStorageSync('openid') || ''
-    console.log('openid:', openid)
-    // 判断登录状态
-    if (openid) {
-      console.log('已登录')
-      this.setData({
-        login: 1
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      wx.navigateTo({
+        url: '/pages/send/send',
       })
-      this.getParson()
     } else {
-      console.log('未登陆')
-      this.setData({
-        login: 0
+      wx.showModal({
+        title: '提示',
+        content: '授权登录后，才可以进行此项操作',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
       })
     }
   },
-
-  // 获取个人资料
-  getParson: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Personal/user_info'
-    request.sendRequest(url, 'post', {}, {
-      'token': openid
-    }).then(function(res) {
-      if (res.statusCode == 200) {
-        // console.log(res)
-        that.setData({
-          person: res.data.data
-        })
-        that.getLike()
-      } else {
-        wx.showToast({
-          title: '系统繁忙，请稍后重试',
-          icon: 'none'
-        })
-      }
-    })
-  },
-
-  // 获赞+粉丝+关注
-  getLike: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Personal/get_like'
-    request.sendRequest(url, 'post', {}, {
-      'token': openid
-    }).then(function(res) {
-      // console.log(res.data.data);
-      if (res.statusCode == 200) {
-        that.setData({
-          person_like: res.data.data
-        })
-      } else {
-        wx.showToast({
-          title: '请求失败，请稍后重试',
-          icon: 'none'
-        })
-      }
-    })
-  },
-
-  // 我的游记
-
 
 
   onPullDownRefresh: function() {
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+
   onReachBottom: function() {
 
-  },
-
-
+  }
 })

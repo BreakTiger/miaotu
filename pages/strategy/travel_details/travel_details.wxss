@@ -22,6 +22,7 @@ page {
 
 .threepoint {
   width: 40rpx;
+  height: 40rpx;
 }
 
 .threepoint>view {

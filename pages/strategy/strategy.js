@@ -230,6 +230,7 @@ Page({
     }
   },
 
+  // 去到详情
   toDetails: function(e) {
     let that = this
     let data = {
@@ -237,7 +238,6 @@ Page({
       word: that.data.word || '',
       id: e.currentTarget.dataset.item.id
     }
-    // console.log('传输参数：', data);
     wx.navigateTo({
       url: '/pages/strategy/travel_details/travel_details?data=' + JSON.stringify(data),
     })
@@ -257,9 +257,7 @@ Page({
     this.onLoad();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  
   onReachBottom: function() {
 
   }

@@ -57,6 +57,13 @@
 			"list": [
 				{
 					"id": -1,
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
 					"name": "pages/strategy/strategy",
 					"pathName": "pages/strategy/strategy",
 					"query": "",
@@ -64,8 +71,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/strategy/travel_details/travel_details",
-					"pathName": "pages/strategy/travel_details/travel_details",
+					"name": "pages/mine/person/person",
+					"pathName": "pages/mine/person/person",
 					"query": "",
 					"scene": null
 				}

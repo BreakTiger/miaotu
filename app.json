@@ -23,7 +23,12 @@
     "pages/index/tickets/tickets_buy/tickets_buy",
     "pages/index/sign/sign_rule/sign_rule",
     "pages/pay_ success/pay_ success",
-    "pages/strategy/travel_details/travel_details"
+    "pages/strategy/travel_details/travel_details",
+    "pages/mine/track/track",
+    "pages/mine/order/order",
+    "pages/mine/certificates/certificates",
+    "pages/mine/wallet/wallet",
+    "pages/mine/person/person"
   ],
   "permission": {
     "scope.userLocation": {

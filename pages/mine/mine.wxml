@@ -32,7 +32,7 @@
       </view>
       <view class="card-content b_r12 flex fl-align fl-jsb">
         <image src="../../resources/card.png"></image>
-        <text class="level-name f28 f-w5">{{person.level_name}}</text>
+        <text class="level-name f28 f-w5">{{person.level_name}}会员</text>
         <text class="up_member f20 c-66 b_r200 t-ac" bindtap="toUpmembers">升级会员 ></text>
       </view>
     </view>
@@ -47,7 +47,7 @@
     <text class="f28 c-00">我的游记</text>
     <view class="flex fl-align fl-jsb" bindtap="totravel">
       <view class="travel-image" wx:if="{{travelList.length>0}}">
-        <image src="../../resources/2.png" wx:for="12345" wx:key="index"></image>
+        <image src="{{item}}" wx:for="{{travelList}}" wx:key="index"></image>
       </view>
       <text class="f28 c-00" wx:if="{{travelList.length==0}}">您暂无游记哦^_^</text>
       <image src="../../icon/go.png"></image>
@@ -55,48 +55,32 @@
   </view>
   <view class="guess">
     <text>猜你喜欢</text>
-    <view class="list-content flex fl-w b-F5">
-      <view class="list-item flex col fl-align b-ff b_r16">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-img">
-        <image src="../../resources/1.png" class="b_r16"></image>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
+    <view class="list-content b-F5">
+      <view class="left-col">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+          <image src="{{item.banner}}"></image>
+          <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+            <view class="list-titles climp2 f24">{{item.title}}</view>
+            <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+              <text>¥</text>
+              <text class="f28">{{item.price}}</text>
+              <text>起</text>
+            </view>
+          </view>
         </view>
       </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
+      <view class="right-col">
+        <image src="{{card}}" class="b_r16 list-img"></image>
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+          <image src="{{item.banner}}"></image>
+          <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+            <view class="list-titles climp2 f24">{{item.title}}</view>
+            <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+              <text>¥</text>
+              <text class="f28">{{item.price}}</text>
+              <text>起</text>
+            </view>
+          </view>
         </view>
       </view>
     </view>

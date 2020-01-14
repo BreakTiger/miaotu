@@ -1,0 +1,19 @@
+<view class="container flex col fl-align">
+  <view class="list-item b-ff flex fl-align fl-jsb" wx:for="123" wx:key="index">
+    <view class="left flex col fl-jse">
+      <text class="f28 c-00 f-wb">标题文本占位符</text>
+      <view class="f24 c-66 climp2">【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-3</view>
+      <view class="flex fl-align">
+        <view class="flex fl-align" style="margin-right:20rpx;">
+          <image class="icons" src="../../../icon/zan.png"></image>
+          <text class="f20 c-66 f-w4">262</text>
+        </view>
+        <view class="flex fl-align">
+          <image class="icons" src="../../../icon/discuss.png"></image>
+          <text class="f20 c-66 f-w4">262</text>
+        </view>
+      </view>
+    </view>
+    <image class="right b_r12" src="../../../resources/2.png"></image>
+  </view>
+</view>

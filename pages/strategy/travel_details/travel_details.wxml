@@ -6,7 +6,7 @@
         <image src="{{item.avatar}}"></image>
         <text class="f24 c-66">{{item.nickname}}</text>
       </view>
-      <view class="threepoint flex fl-align fl-jsb">
+      <view class="threepoint flex fl-align fl-jsb" bindtap="toControl" data-item="{{item}}">
         <view wx:for="123" wx:key="index"></view>
       </view>
     </view>
@@ -75,7 +75,7 @@
       </view>
       <view class="scroll-conetnt">
         <scroll-view scroll-y>
-          <view class="scroll-list-item flex col fl-align" wx:for="{{rlist}}" wx:key="index">
+          <view class="scroll-list-item flex col fl-align" wx:for="{{rlist}}" wx:key="index" data-item="{{item}}" bindtap="secondReply" bindlongtap="deltReay">
             <view class="flex fl-align">
               <image class="header" src="{{item.avatar}}"></image>
               <view class="flex col">
@@ -98,8 +98,8 @@
         </scroll-view>
       </view>
       <view class="commont-input flex fl-align fl-jsa">
-        <input type="text" placeholder="添加评论" class="b_r200" placeholder-style="color:#1faff1;"></input>
-        <text>发布</text>
+        <input type="text" placeholder="{{rhint}}" class="b_r200" placeholder-style="color:#1faff1;" bindinput="getInput" value="{{relay}}" data-id="{{item.id}}"></input>
+        <text bindtap="toSend">发布</text>
       </view>
     </view>
   </view>
