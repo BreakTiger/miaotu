@@ -28,7 +28,8 @@
     "pages/mine/order/order",
     "pages/mine/certificates/certificates",
     "pages/mine/wallet/wallet",
-    "pages/mine/person/person"
+    "pages/mine/person/person",
+    "pages/mine/travel/travel"
   ],
   "permission": {
     "scope.userLocation": {

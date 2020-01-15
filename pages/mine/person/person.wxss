@@ -24,23 +24,38 @@ page {
   margin-left: 10rpx;
 }
 
-.username {
-  width: 210rpx;
-  text-align: right;
-}
-
 .introduce {
   width: 100%;
   height: 220rpx;
   margin: 40rpx 0;
 }
 
+.picture {
+  width: 206rpx;
+  height: 206rpx;
+  margin: 20rpx 0;
+  position: relative;
+}
+
+.p_img {
+  width: 100%;
+  height: 100%;
+}
+
+.close {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: black;
+  position: absolute;
+  top: -20rpx;
+  right: -20rpx;
+}
+
 .confirm {
   width: 600rpx;
   height: 88rpx;
   line-height: 88rpx;
-  background: linear-gradient(270deg, rgba(65, 214, 248, 1) 0%, rgba(33, 176, 240, 
-
-1) 100%);
-  margin-top: 62rpx;
+  background: linear-gradient(270deg, rgba(65, 214, 248, 1) 0%, rgba(33, 176, 240, 1) 100%);
+  margin: 100rpx 0;
 }

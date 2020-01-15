@@ -1,2 +1,41 @@
-<!--pages/mine/certificates/certificates.wxml-->
-<text>pages/mine/certificates/certificates.wxml</text>
+<view class="container flex col fl-align">
+
+  <view class="coupon-item flex col" wx:for="{{list}}" wx:key="index">
+    <image src="../../../resources/coupon_one.png" wx:if="{{item.status==0}}"></image>
+    <image src="../../../resources/coupon_two.png" wx:else></image>
+    <view class="line_one flex fl-align  c-ff" wx:if="{{item.coupon_type==0}}">
+      <view>
+        <text class="f40">￥</text>
+        <text class="f72">{{item.yhq_price}}</text>
+      </view>
+      <view class="f32">优惠券满{{item.lowprice}}可用</view>
+    </view>
+    <view class="line_one flex fl-align  c-ff" wx:if="{{item.coupon_type==1}}">
+      <view>
+        <text class="f40">￥</text>
+        <text class="f72">{{item.yhq_price}}</text>
+      </view>
+      <view class="f32">可抵现金{{item.yhq_price}}</view>
+    </view>
+    <view class="line_two flex col c-66 f20">
+      <text>有效日期：截止至{{item.end_time}}有效</text>
+      <text>适用范围：{{item.yhq_rule}}</text>
+    </view>
+  </view>
+
+  <!-- <view class="coupon-item flex col">
+    <image src="../../../resources/coupon_two.png"></image>
+    <view class="line_one flex fl-align  c-ff">
+      <view>
+        <text class="f40">￥</text>
+        <text class="f72">500</text>
+      </view>
+      <view class="f32">优惠券满1200可用</view>
+    </view>
+    <view class="line_two flex col c-66 f20">
+      <text>有效日期：领取30天内有效</text>
+      <text>适用范围：仅限喵途平台使用</text>
+    </view>
+  </view> -->
+
+</view>

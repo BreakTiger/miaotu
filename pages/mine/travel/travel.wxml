@@ -1,0 +1,80 @@
+<view class="container flex col fl-align">
+  <view class="user-content b-ff">
+    <!-- banner -->
+    <image src="../../../resources/2.png" class="banner"></image>
+    <!-- header -->
+    <image class="header"></image>
+    <view class="signature f28 c-66 climp2">“这个人很懒，什么都没留下！”</view>
+    <!-- 标签栏 -->
+    <view class="laber-line flex fl-w">
+      <view class="laber-one flex fl-align fl-jc b_r200">
+        <image></image>
+        <text class="f24 c-F1">男</text>
+      </view>
+      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">25岁白羊座</view>
+      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">广州</view>
+    </view>
+    <!-- 获赞+粉丝+关注 -->
+    <view class="user-last-line flex fl-align">
+      <view>
+        <text class="f36 f-wb">230</text>
+        <text class="f20">获赞</text>
+      </view>
+      <view>
+        <text class="f36 f-wb">230</text>
+        <text class="f20">粉丝</text>
+      </view>
+      <view>
+        <text class="f36 f-wb">230</text>
+        <text class="f20">关注</text>
+      </view>
+    </view>
+  </view>
+  <!-- 列表 -->
+    <view class="list-content flex fl-w b-F5">
+      <view class="list-item flex col fl-align b-ff b_r16">
+        <image src="../../../resources/1.png"></image>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
+        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+          <text>¥234</text>
+        </view>
+      </view>
+      <view class="list-img">
+        <image src="../../../resources/1.png" class="b_r16"></image>
+      </view>
+      <view class="list-item flex col fl-align b-ff">
+        <image src="../../../resources/1.png"></image>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
+        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+          <text>¥234</text>
+        </view>
+      </view>
+      <view class="list-item flex col fl-align b-ff">
+        <image src="../../../resources/1.png"></image>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
+        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+          <text>¥234</text>
+        </view>
+      </view>
+      <view class="list-item flex col fl-align b-ff">
+        <image src="../../../resources/1.png"></image>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
+        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+          <text>¥234</text>
+        </view>
+      </view>
+      <view class="list-item flex col fl-align b-ff">
+        <image src="../../../resources/1.png"></image>
+        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
+        </view>
+        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
+          <text>¥234</text>
+        </view>
+      </view>
+    </view>
+  
+</view>

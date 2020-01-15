@@ -4,30 +4,10 @@ const app = getApp()
 
 Page({
 
- 
   data: {
-    navlist: [{
-      id: 1,
-      name: '全部',
-    }, {
-      id: 2,
-      name: '待付款',
-    }, {
-      id: 3,
-      name: '待分享',
-    }, {
-      id: 4,
-      name: '待出行',
-    }, {
-      id: 5,
-      name: '待评价',
-    }],
-    choice_one: 1
+
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
 
   },

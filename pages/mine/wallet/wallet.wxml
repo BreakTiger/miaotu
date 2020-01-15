@@ -1,2 +1,51 @@
-<!--pages/mine/wallet/wallet.wxml-->
-<text>pages/mine/wallet/wallet.wxml</text>
+<view class="container">
+  <view class="flex col fl-align b-ff">
+    <view class="wallet">
+      <image src="../../../resources/wallet.png"></image>
+      <view class="flex fl-align fl-jsb c-ff">
+        <view style="margin-left: 40rpx;">
+          <text class="f24">当前余额(元)</text>
+          <view>
+            <text class="f28">￥</text>
+            <text class="f72">{{balance}}</text>
+          </view>
+        </view>
+        <view class="extract f28 b_r200 t-ac" style=" margin-right: 40rpx;" bindtap="toMoney">提现 ></view>
+      </view>
+    </view>
+    <view class="nav-line flex fl-align fl-jsb f28 c-66">
+      <text class="{{choice_one==item.id?'linebottom':''}}" wx:for="{{nav}}" wx:key="index" bindtap="choice_nav" data-id="{{item.id}}">{{item.name}}</text>
+    </view>
+    <view class="list flex fl-align fl-jsb" wx:for="{{list}}" wx:key="index">
+      <view class="flex fl-align">
+        <view class="header f28 c-ff flex fl-align fl-jc" wx:if="{{item.type==1}}">
+          <text>拼团</text>
+        </view>
+        <view class="header f28 c-ff flex fl-align fl-jc" wx:if="{{item.type==2}}">
+          <text>砍价</text>
+        </view>
+        <view class="header f28 c-ff flex fl-align fl-jc" wx:if="{{item.type==3}}">
+          <text>秒杀</text>
+        </view>
+        <view class="header f28 c-ff flex fl-align fl-jc" wx:if="{{item.type==4}}">
+          <text>抽奖</text>
+        </view>
+        <view class="header f28 c-ff flex fl-align fl-jc" wx:if="{{item.type==5}}">
+          <text>管理员</text>
+        </view>
+        <view class="header f28 c-ff flex fl-align fl-jc" wx:if="{{item.type==6}}">
+          <text>签到</text>
+        </view>
+        <view class="header f28 c-ff flex fl-align fl-jc" wx:if="{{item.type==7}}">
+          <text>提现</text>
+        </view>
+        <view class="flex col">
+          <text class="f28 c-00">{{item.record}}</text>
+          <text class="f24 c-66">{{item.utime}}</text>
+        </view>
+      </view>
+      <text class="f28 c-38" wx:if="{{item.status==0}}">-{{item.price}}</text>
+      <text class="f28" wx:if="{{item.status==1}}">{{item.price}}</text>
+    </view>
+  </view>
+</view>

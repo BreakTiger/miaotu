@@ -37,8 +37,8 @@ Page({
   },
 
   onLoad: function(options) {
-    let openID = wx.getStorageSync('openid') ||''
-    if (!openID){
+    let openID = wx.getStorageSync('openid') || ''
+    if (!openID) {
       wx.navigateTo({
         url: '/pages/login/login',
       })
@@ -192,10 +192,47 @@ Page({
 
   // 导航
   toNav: function(e) {
-    var url = e.currentTarget.dataset.url
-    wx.navigateTo({
-      url: url,
-    })
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      let url = e.currentTarget.dataset.url
+      wx.navigateTo({
+        url: url,
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '您需要在授权登录后，才可进行此项操作',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
+      })
+    }
+  },
+
+  // 我的游记
+  totravel: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      wx.navigateTo({
+        url: '/pages/mine/travel/travel',
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '您需要授权登录后，才可进行此项操作！',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
+      })
+    }
   },
 
 
