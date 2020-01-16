@@ -5,7 +5,6 @@ const app = getApp()
 
 Page({
 
-
   data: {
     top: [{
         name: '商品'
@@ -21,18 +20,17 @@ Page({
     details: {},
     packages: [],
     startTime: '',
-    discuss: [],
+    discuss: {},
     collecttype: false
-
-
   },
 
   onLoad: function(options) {
+    console.log('商品ID：', options.id)
     this.setData({
       id: options.id
     })
-    let openID = wx.getStorageSync('openid') || ''
     // 判断是否登录
+    let openID = wx.getStorageSync('openid') || ''
     if (openID) { //已经登录
       this.getShopInfo()
     } else { //未登录
@@ -69,9 +67,10 @@ Page({
           let buy = details.buy_notice
           WxParse.wxParse('buy', 'html', buy, that, 5);
           that.trailer(details.article_type)
-        } else {
-          modals.showToast(res.data.msg, 'none')
         }
+        //  else {
+        //   modals.showToast(res.data.msg, 'none')
+        // }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
@@ -211,6 +210,13 @@ Page({
     })
   },
 
+  // 查看所有评论
+  toEvaluate: function(e) {
+    console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: '/pages/evaluate/evaluate?id=' + e.currentTarget.dataset.id,
+    })
+  },
 
   // 去到商铺
   toShop: function(e) {
@@ -219,13 +225,14 @@ Page({
     })
   },
 
-  // 查看所有评论
-  toEvaluate: function(e) {
-    console.log(e.currentTarget.dataset.id)
+  // 立即预定
+  toOrder: function() {
     wx.navigateTo({
-      url: '/pages/evaluate/evaluate?id=' + e.currentTarget.dataset.id,
+      url: '/pages/buy_typeone/buy_typeone',
     })
   },
+
+
 
   onPullDownRefresh: function() {
     wx.showToast({
@@ -236,13 +243,12 @@ Page({
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
-
     this.onLoad({
       id: this.data.id
-    });
+    })
   },
 
-  onShareAppMessage: function(options) {
+  onShareAppMessage: function() {
     if (options.from === 'button') {}
     return {
       title: this.data.details.title,

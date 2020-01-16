@@ -1,4 +1,3 @@
-<!-- 引入富文本解析组件 -->
 <import src="../../wxParse/wxParse.wxml" />
 <view class="container flex col fl-align">
   <view class="top-line flex fl-align fl-jc b-ff">

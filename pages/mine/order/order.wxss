@@ -98,20 +98,32 @@ page {
   width: 92%;
   padding: 16rpx 0;
   justify-content: flex-end;
+  position: relative;
 }
 
 .btn_one {
-  width: 148rpx;
-  height: 56rpx;
+  width: 148rpx !important;
+  height: 56rpx !important;
   line-height: 56rpx;
   border: 2rpx solid rgba(31, 175, 241, 1);
   margin-left: 20rpx;
 }
 
 .btn_two {
-  width: 148rpx;
-  height: 56rpx;
+  width: 148rpx !important;
+  height: 56rpx !important;
   line-height: 56rpx;
   background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
   margin-left: 20rpx;
+}
+
+.contact-btn {
+  width: 148rpx !important;
+  height: 56rpx !important;
+  min-height: 0rpx !important;
+  padding: 0;
+  border: none !important;
+  position: absolute;
+  right: 170rpx;
+  z-index: 10;
 }

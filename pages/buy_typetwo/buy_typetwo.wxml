@@ -1,7 +1,7 @@
 <view class="container flex col fl-align">
 
   <!-- 套餐类型 -->
-  <view class="type b-ff flex col">
+  <view class="type b-ff flex col" wx:if="{{types.length!=0}}">
     <text class="f32 c-00 f-w5">请选择套餐类型：</text>
     <view class="type-list flex fl-w">
       <text class="c-66 b_r12 {{types[index].id==choice?'type-list-item':''}}" wx:for="{{types}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>

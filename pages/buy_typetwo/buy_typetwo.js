@@ -26,7 +26,8 @@ Page({
    */
   onLoad: function(options) {
     let data = JSON.parse(options.data)
-    console.log(data.tao[0].id)
+    console.log(data)
+    // console.log(data.tao[0].id)
     this.setData({
       id: data.id,
       uid: data.uid,

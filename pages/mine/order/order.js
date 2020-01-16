@@ -55,11 +55,15 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res.data.data.data)
+      console.log(res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
             list: res.data.data.data
+          })
+        } else {
+          that.setData({
+            list: []
           })
         }
       } else {
@@ -67,7 +71,6 @@ Page({
       }
     })
   },
-
 
   // 选择分类
   toChoice: function(e) {
@@ -81,6 +84,20 @@ Page({
       this.getList(this.data.choice_one)
     }
   },
+
+  // 取消订单
+  cancelOrder: function(e) {
+    console.log('取消订单')
+  },
+
+  // 继续付款
+  continuePay: function(e) {
+    console.log('继续付款')
+  },
+
+
+
+
 
 
 
