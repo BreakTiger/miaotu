@@ -40,6 +40,7 @@ Page({
       count: 6,
       success: function(res) {
         var tempFilePaths = res.tempFilePaths
+        console.log('图片组：', tempFilePaths)
         img = list.concat(tempFilePaths)
         that.setData({
           imgList: img
@@ -69,6 +70,7 @@ Page({
       success(res) {
         let size = res.size / 1024 / 1024
         if (size <= 5) {
+          console.log('视频：', res.tempFilePath)
           that.setData({
             video: res.tempFilePath
           })
@@ -120,7 +122,6 @@ Page({
     } else if (!that.data.article) {
       modals.showToast('请输入正文内容', 'none');
     } else {
-      modals.loading()
       that.upVideo()
     }
   },
@@ -129,7 +130,6 @@ Page({
   upVideo: function() {
     let that = this
     let video = that.data.video
-    // console.log(video)
     if (video) {
       let url = app.globalData.api + '/portal/home/upload_video'
       wx.uploadFile({
@@ -140,17 +140,14 @@ Page({
           'token': wx.getStorageSync('openid')
         },
         success: function(res) {
-          console.log(res)
           let movie = JSON.parse(res.data).data
-          // console.log(movie)
           that.setData({
             film: movie
           })
-          
         }
       })
     }
-    that.cycle_img(that.data.imgList)
+    // that.cycle_img(that.data.imgList)
   },
 
   // 上传图片
@@ -168,6 +165,7 @@ Page({
           'token': wx.getStorageSync('openid')
         },
         success: function(res) {
+          console.log(res)
           let data = JSON.parse(res.data).data
           pricue.push(data)
           that.setData({
@@ -179,7 +177,7 @@ Page({
     // 延迟俩秒执行发布接口
     setTimeout(function() {
       that.sendTravel()
-    }, 900)
+    }, 1500)
   },
 
 
@@ -194,25 +192,26 @@ Page({
       r_video: that.data.film
     }
     console.log('参数：', data)
-    let url = app.globalData.api + '/portal/Strategy/add'
-    request.sendRequest(url, 'post', data, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          setTimeout(function() {
-            wx.navigateBack({
-              delta: 2
-            })
-          }, 2000)
-        } else {
-          modals.showToast(res.data.msg, 'none')
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
+
+    // let url = app.globalData.api + '/portal/Strategy/add'
+    // request.sendRequest(url, 'post', data, {
+    //   'token': wx.getStorageSync('openid')
+    // }).then(function(res) {
+    //   modals.loaded()
+    //   if (res.statusCode == 200) {
+    //     if (res.data.status == 1) {
+    //       modals.showToast(res.data.msg, 'none')
+    //       setTimeout(function() {
+    //         wx.navigateBack({
+    //           delta: 2
+    //         })
+    //       }, 2000)
+    //     } else {
+    //       modals.showToast(res.data.msg, 'none')
+    //     }
+    //   } else {
+    //     modals.showToast('系统繁忙，请稍后重试', 'none')
+    //   }
+    // })
   }
 })

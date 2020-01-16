@@ -16,7 +16,6 @@
     </view>
     <image class="add-box" src="../../resources/addbox.png" bindtap="addVideo" wx:if="{{!videos}}"></image>
   </view>
-
   <textarea placeholder="请输入正文内容" class="article" bindinput="getArticle"></textarea>
   <view class="localtion flex fl-align" bindtap="choice_postion">
     <image src="../../icon/localtion.png"></image>

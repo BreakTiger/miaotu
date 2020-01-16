@@ -54,22 +54,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/mine/track/track",
-					"pathName": "pages/mine/track/track",
-					"query": "",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }
