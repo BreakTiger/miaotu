@@ -81,7 +81,7 @@ page {
 }
 
 .calendar-content-col {
-  width: 36px;
+  width: 72rpx;
   height: 100%;
 }
 
@@ -112,7 +112,6 @@ page {
 }
 
 .number-control {
-  width: 164rpx;
   height: 48rpx;
   margin-right: 40rpx;
 }
@@ -125,8 +124,9 @@ page {
 }
 
 .number-control input {
-  width: 48rpx;
+  width: 130rpx;
   height: 100%;
+  margin: 0 10rpx;
 }
 
 /* 底部栏 */
@@ -164,4 +164,10 @@ page {
 
 .depart>text {
   margin-left: 40rpx;
+}
+
+.choice_item {
+  background: #1faff1;
+  border-radius: 50%;
+  color: #fff;
 }

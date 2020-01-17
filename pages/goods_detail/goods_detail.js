@@ -68,9 +68,6 @@ Page({
           WxParse.wxParse('buy', 'html', buy, that, 5);
           that.trailer(details.article_type)
         }
-        //  else {
-        //   modals.showToast(res.data.msg, 'none')
-        // }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
@@ -227,9 +224,28 @@ Page({
 
   // 立即预定
   toOrder: function() {
-    wx.navigateTo({
-      url: '/pages/buy_typeone/buy_typeone',
-    })
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      let data = {
+        id: this.data.details.id,
+        tao: this.data.packages
+      }
+      wx.navigateTo({
+        url: '/pages/buy_typeone/buy_typeone?data=' + JSON.stringify(data),
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '您需要授权后，才可进行此项操作',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
+      })
+    }
   },
 
 

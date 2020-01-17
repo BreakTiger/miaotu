@@ -13,7 +13,7 @@
   <view class="type b-ff flex col">
     <text class="f32 c-00 f-w5">套餐类型</text>
     <view class="type-list flex fl-w">
-      <text class="c-66 b_r12 {{item.id==choice_two?'type-list-item':''}}" wx:for="{{types}}" wx:key="index">{{item.name}}</text>
+      <text class="c-66 b_r12 {{types[index].id==choice?'type-list-item':''}}" wx:for="{{types}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
     </view>
   </view>
   <!-- 价格日历 -->
@@ -36,9 +36,9 @@
       <view class="calendar-content-row flex fl-align fl-jsb" wx:for="123456" wx:key="index" wx:for-index="row">
         <!-- 列 -->
         <view class="calendar-content-col" wx:for="1234567" wx:key="index" wx:for-index="col">
-          <view class="calendar-list-item flex col fl-align f28" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}">
+          <view class="calendar-list-item {{choice_day==(row * 7 + col)?'choice_item':''}} flex col fl-align f28" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
             <text>{{pageData.arrDays[row * 7 + col]}}</text>
-            <text class="f20">￥12</text>
+            <text style="font-size:15rpx;">￥{{priceList[row * 7 + col]}}</text>
           </view>
         </view>
       </view>
@@ -50,17 +50,17 @@
     <view class="line flex fl-align fl-jsb">
       <text class="f28 c-66">成人票</text>
       <view class="number-control flex fl-jsb t-ac">
-        <text bindlongtap="tominus_one">-</text>
-        <input type="number" class="t-ac" value="{{adult}}" maxlength="2"></input>
-        <text bindtap="toadd_one">+</text>
+        <text bindtap="toTicket_one_minu">-</text>
+        <input type="number" class="t-ac" value="{{adult}}" maxlength="3"></input>
+        <text bindtap="toTicket_one_add">+</text>
       </view>
     </view>
     <view class="line flex fl-align fl-jsb">
       <text class="f28 c-66">儿童票</text>
       <view class="number-control flex fl-jsb t-ac">
-        <text bindtap="tominus_two">-</text>
-        <input type="number" class="t-ac" value="{{child}}" maxlength="2"></input>
-        <text bindtap="toadd_two">+</text>
+        <text bindtap="toTicket_two_minu">-</text>
+        <input type="number" class="t-ac" value="{{child}}" maxlength="3"></input>
+        <text bindtap="toTicket_two_add">+</text>
       </view>
     </view>
   </view>
@@ -68,7 +68,7 @@
   <view class="bottom-line flex fl-jsb b-ff">
     <view class="flex fl-align f32">
       <text class="c-00">合计：</text>
-      <text class="c-38">￥1205</text>
+      <text class="c-38">￥{{total}}</text>
     </view>
     <view class="sure c-ff f32 b_r200 t-ac" bindtap="toOrder">确定</view>
   </view>

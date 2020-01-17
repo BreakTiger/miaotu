@@ -140,6 +140,7 @@ Page({
           'token': wx.getStorageSync('openid')
         },
         success: function(res) {
+          console.log('视频：',res)
           let movie = JSON.parse(res.data).data
           that.setData({
             film: movie
@@ -147,7 +148,7 @@ Page({
         }
       })
     }
-    // that.cycle_img(that.data.imgList)
+    that.cycle_img(that.data.imgList)
   },
 
   // 上传图片
@@ -165,7 +166,7 @@ Page({
           'token': wx.getStorageSync('openid')
         },
         success: function(res) {
-          console.log(res)
+          console.log('图片：',res)
           let data = JSON.parse(res.data).data
           pricue.push(data)
           that.setData({
@@ -192,26 +193,26 @@ Page({
       r_video: that.data.film
     }
     console.log('参数：', data)
-
-    // let url = app.globalData.api + '/portal/Strategy/add'
-    // request.sendRequest(url, 'post', data, {
-    //   'token': wx.getStorageSync('openid')
-    // }).then(function(res) {
-    //   modals.loaded()
-    //   if (res.statusCode == 200) {
-    //     if (res.data.status == 1) {
-    //       modals.showToast(res.data.msg, 'none')
-    //       setTimeout(function() {
-    //         wx.navigateBack({
-    //           delta: 2
-    //         })
-    //       }, 2000)
-    //     } else {
-    //       modals.showToast(res.data.msg, 'none')
-    //     }
-    //   } else {
-    //     modals.showToast('系统繁忙，请稍后重试', 'none')
-    //   }
-    // })
+    let url = app.globalData.api + '/portal/Strategy/add'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      modals.loaded()
+      console.log('发布：', res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast(res.data.msg, 'none')
+          setTimeout(function() {
+            wx.navigateBack({
+              delta: 2
+            })
+          }, 2000)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   }
 })

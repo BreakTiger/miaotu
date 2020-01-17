@@ -23,19 +23,6 @@
     </view>
   </view>
 
-  <!-- <view class="coupon-item flex col">
-    <image src="../../../resources/coupon_two.png"></image>
-    <view class="line_one flex fl-align  c-ff">
-      <view>
-        <text class="f40">￥</text>
-        <text class="f72">500</text>
-      </view>
-      <view class="f32">优惠券满1200可用</view>
-    </view>
-    <view class="line_two flex col c-66 f20">
-      <text>有效日期：领取30天内有效</text>
-      <text>适用范围：仅限喵途平台使用</text>
-    </view>
-  </view> -->
+  <view wx:if="{{list.length==0}}">暂无数据</view>
 
 </view>

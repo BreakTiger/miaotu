@@ -385,27 +385,36 @@ Page({
         itemList: ['删除信息'],
         itemColor: '#FF3B30',
         success(res) {
-          let id = e.currentTarget.dataset.item.id
-          console.log('攻略ID：', id)
-          let url = app.globalData.api + '/portal/Strategy/delete'
-          request.sendRequest(url, 'post', {
-            id: id
-          }, {
-            'token': wx.getStorageSync('openid')
-          }).then(function(res) {
-            if (res.statusCode == 200) {
-              if (res.data.status == 1) {
-                modals.showToast(res.data.msg, 'none');
-                that.getList_login(wx.getStorageSync('openid'))
+          let openid = e.currentTarget.dataset.item.open_id
+          if (openid == openID) {
+            let id = e.currentTarget.dataset.item.id
+            console.log('攻略ID：', id)
+            let url = app.globalData.api + '/portal/Strategy/delete'
+            request.sendRequest(url, 'post', {
+              id: id
+            }, {
+              'token': wx.getStorageSync('openid')
+            }).then(function(res) {
+              if (res.statusCode == 200) {
+                if (res.data.status == 1) {
+                  modals.showToast(res.data.msg, 'none');
+                  // this.getList_login(wx.getStorageSync('openid'))
+                } else {
+                  modals.showToast(res.data.msg, 'none');
+                }
               } else {
-                modals.showToast(res.data.msg, 'none');
+                modals.showToast('系统繁忙，请稍后重试', 'none')
               }
-            } else {
-              modals.showToast('系统繁忙，请稍后重试', 'none')
-            }
-          })
+            })
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: '你没有权限进行此项操作',
+            })
+          }
         }
       })
+
     }
   },
 

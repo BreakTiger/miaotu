@@ -16,4 +16,5 @@
     </view>
     <image class="right b_r12" src="{{item.r_pic}}"></image>
   </view>
+  <view wx:if="{{list.length==0}}">暂无数据</view>
 </view>
