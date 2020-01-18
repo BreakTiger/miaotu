@@ -1,5 +1,4 @@
 <view class="container flex col fl-align">
-
   <!-- 出发地 -->
   <view class="depart b-ff flex fl-align fl-jsb">
     <text class="f32 c-00 f-w5">出发地</text>
@@ -7,13 +6,11 @@
       <view class="picker f32 c-66">{{region}}</view>
     </picker>
   </view>
-
-
   <!-- 套餐类型 -->
   <view class="type b-ff flex col">
     <text class="f32 c-00 f-w5">套餐类型</text>
     <view class="type-list flex fl-w">
-      <text class="c-66 b_r12 {{types[index].id==choice?'type-list-item':''}}" wx:for="{{types}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
+      <text class="c-66 b_r12 {{types[index].id==choiceTao?'type-list-item':''}}" wx:for="{{types}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
     </view>
   </view>
   <!-- 价格日历 -->
@@ -36,7 +33,7 @@
       <view class="calendar-content-row flex fl-align fl-jsb" wx:for="123456" wx:key="index" wx:for-index="row">
         <!-- 列 -->
         <view class="calendar-content-col" wx:for="1234567" wx:key="index" wx:for-index="col">
-          <view class="calendar-list-item {{choice_day==(row * 7 + col)?'choice_item':''}} flex col fl-align f28" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
+          <view class="calendar-list-item {{choice_day_index==(row * 7 + col)?'choice_item':''}} flex col fl-align f28" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
             <text>{{pageData.arrDays[row * 7 + col]}}</text>
             <text style="font-size:15rpx;">￥{{priceList[row * 7 + col]}}</text>
           </view>
@@ -64,12 +61,42 @@
       </view>
     </view>
   </view>
+  <!-- 平台优惠 -->
+  <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:278rpx;" bindtap="toShowCoupons">
+    <text class="f28 c-66">平台优惠</text>
+    <view class="flex fl-align" style="margin-right:40rpx;">
+      <text>{{choice_coupon}}</text>
+      <image class="icon" src="../../icon/go.png"></image>
+    </view>
+  </view>
   <!-- 底部栏 -->
   <view class="bottom-line flex fl-jsb b-ff">
     <view class="flex fl-align f32">
       <text class="c-00">合计：</text>
-      <text class="c-38">￥{{total}}</text>
+      <text class="c-38">￥{{total_fina}}</text>
     </view>
     <view class="sure c-ff f32 b_r200 t-ac" bindtap="toOrder">确定</view>
+  </view>
+  <!-- 选择优惠券 -->
+  <view class="cover flex col fl-align fl-jsd" wx:if="{{covers}}">
+    <view class="coupons b-ff flex col fl-align">
+      <image src="../../icon/closes.png" class="close" bindtap="toClose"></image>
+      <view class="title-line f28 t-ac f-wb">平台优惠</view>
+      <view class="coupons-content">
+        <scroll-view scroll-y>
+          <view class="coupons-list-item flex fl-align fl-jsb" wx:for="{{list}}" wx:key="index" data-index="{{index}}" bindtap="toChoiceCoupons">
+            <text class="c-38 f20" style="width:160rpx;">￥<text class="f32">{{item.fullprice}}</text></text>
+            <view class="flex col fl-jse f20">
+              <text>{{item.yhq_rule}}</text>
+              <text>有效期{{item.yhq_starttime}}~{{item.yhq_endtime}}</text>
+              <text class="c-38">{{item.yhq_name}}</text>
+            </view>
+            <icon type="circle" size="20" wx:if="{{choice_coupon_index!=item.id}}"></icon>
+            <icon type="success" color="#1faff1" size="20" wx:if="{{choice_coupon_index==item.id}}"></icon>
+          </view>
+          <view class="t-ac" wx:if="{{list.length==0}}">无可用的优惠券</view>
+        </scroll-view>
+      </view>
+    </view>
   </view>
 </view>

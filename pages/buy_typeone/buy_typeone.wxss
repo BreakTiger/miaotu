@@ -94,7 +94,7 @@ page {
 
 .buyNums {
   width: 100%;
-  margin-bottom: 278rpx;
+  margin-bottom: 8rpx;
 }
 
 .buyNums>text {
@@ -170,4 +170,53 @@ page {
   background: #1faff1;
   border-radius: 50%;
   color: #fff;
+}
+
+.icon {
+  width: 15rpx;
+  height: 25rpx;
+  margin-left: 10rpx;
+}
+
+.coupons {
+  width: 100%;
+  height: 880rpx;
+  position: relative;
+}
+
+.close {
+  width: 26rpx;
+  height: 26rpx;
+  position: absolute;
+  top: 35rpx;
+  right: 35rpx;
+  z-index: 100;
+}
+
+.title-line {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.coupons-content {
+  width: 100%;
+  height: calc(880rpx - 88rpx);
+}
+
+.coupons-content>scroll-view {
+  width: 100%;
+  height: 100%;
+}
+
+.coupons-list-item {
+  width: 94%;
+  height: 108rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+  margin: 30rpx auto;
+}
+
+.coupons-list-item>view {
+  width: 450rpx;
+  height: 100%;
 }

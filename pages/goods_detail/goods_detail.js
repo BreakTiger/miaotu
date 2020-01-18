@@ -25,7 +25,6 @@ Page({
   },
 
   onLoad: function(options) {
-    console.log('商品ID：', options.id)
     this.setData({
       id: options.id
     })
@@ -139,7 +138,7 @@ Page({
     }, {
       'token': openID
     }).then(function(res) {
-      console.log(res.data)
+      // console.log(res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           if (res.data.data == 0) {
