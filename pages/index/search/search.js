@@ -4,7 +4,6 @@ const app = getApp()
 
 Page({
 
-
   data: {
     word: '',
     history: [],
@@ -13,14 +12,12 @@ Page({
     searchList: []
   },
 
-
   onLoad: function(options) {
     // 判断缓存中是否存在历史记录
     this.setData({
       history: wx.getStorageSync('history') || []
     })
     this.getHotList()
-
   },
 
   // 获取热门搜索
@@ -71,8 +68,6 @@ Page({
         console.log(res.data.data);
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
-            console.log(111)
-            console.log(res.data.data.data)
             that.setData({
               searchList: res.data.data.data
             })
@@ -143,13 +138,6 @@ Page({
     console.log(e.currentTarget.dataset.id)
   },
 
-
-
-
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function() {
 
   },
@@ -159,7 +147,5 @@ Page({
    */
   onReachBottom: function() {
 
-  },
-
-
+  }
 })

@@ -150,10 +150,11 @@ Page({
             signType: res.data.data.signType,
             paySign: res.data.data.paySign,
             success: function(res) {
+              console.log(res)
               modals.showToast('支付成功', 'success')
               setTimeout(function() {
-                wx.navigateBack({
-                  delta: 2
+                wx.navigateTo({
+                  url: '/pages/pay_ success/pay_ success?total' + that.data.total_fina,
                 })
               }, 2000)
             },

@@ -61,6 +61,21 @@
       </view>
     </view>
   </view>
+  <!-- 购买人姓名 -->
+  <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:8rpx;">
+    <text class="f28 c-66">姓名</text>
+    <input placeholder="请输入购买人姓名" class="input-box" bindinput="toGetName"></input>
+  </view>
+  <!-- 购买人手机 -->
+  <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:8rpx;">
+    <text class="f28 c-66">手机号码</text>
+    <input placeholder="请输入购买人手机号" class="input-box" bindinput="toGetPhone"></input>
+  </view>
+  <!-- 购买人身份证 -->
+  <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:8rpx;">
+    <text class="f28 c-66">身份证号码</text>
+    <input placeholder="请输入购买人身份证" class="input-box" bindinput="toGetIdentity"></input>
+  </view>
   <!-- 平台优惠 -->
   <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:278rpx;" bindtap="toShowCoupons">
     <text class="f28 c-66">平台优惠</text>

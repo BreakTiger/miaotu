@@ -133,7 +133,6 @@ page {
 
 .guess>text {
   margin-left: 24rpx;
-  margin-bottom: 36rpx;
   position: relative;
 }
 
@@ -152,6 +151,7 @@ page {
 .list-content {
   width: 710rpx;
   margin: auto;
+  margin-top: 20rpx;
 }
 
 .left-col, .right-col {

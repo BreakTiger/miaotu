@@ -37,7 +37,7 @@ var pageData = {
 
 //刷新全部数据
 var refreshPageData = function(year, month, day, week) {
-  pageData.date = year + '年' + (month + 1) + '月' + day + '日'
+  pageData.date = year + '-' + (month + 1) + '-' + day
   pageData.time = year + '-' + (month + 1)
   var offset = new Date(year, month, 1).getDay();
   for (var i = 0; i < 42; ++i) {
@@ -73,12 +73,17 @@ Page({
     choice_coupon_index: null,
 
     child_price: '', //儿童票价格百分比
-    total_one: '',
+    down: 0, //优惠券减少金额
     total_fina: '0.00', //合计总价
     covers: false,
 
-    down: '', //优惠券减少金额
+    name: '',
+    mobile: '',
+    identity: '',
 
+    //出发地
+    startPlace: [],
+    region: '请选择出发地址',
 
   },
 
@@ -119,7 +124,6 @@ Page({
             priceList: news,
             child_price: res.data.data.details.child_price
           })
-
           that.getToday()
         }
       } else {
@@ -130,15 +134,31 @@ Page({
 
   // 获取今日，以及价格
   getToday: function() {
-    let daylist = this.data.pageData.arrDays
-    let price = this.data.priceList
-    for (let i = 0; i < daylist.length; i++) {
-      if (daylist[i] == curDay) {
-        this.setData({
-          choice_day_index: i,
-          choice_day_price: price[i]
-        })
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDate()
+    let now = year + '-' + (month + 1) + '-' + day
+    console.log('时间一：', now)
+    let time = this.data.pageData.date
+    console.log('时间二：', time)
+    // 判断
+    if (now == time) {
+      let daylist = this.data.pageData.arrDays
+      let price = this.data.priceList
+      for (let i = 0; i < daylist.length; i++) {
+        if (daylist[i] == curDay) {
+          this.setData({
+            choice_day_index: i,
+            choice_day_price: price[i]
+          })
+        }
       }
+    } else {
+      this.setData({
+        choice_day_index: '',
+        choice_day_price: ''
+      })
     }
     this.getDiscount()
   },
@@ -169,28 +189,29 @@ Page({
       choiceTao: item.id,
       taoPrice: item.setmeal_price
     })
-    if (this.data.down) {
-      this.calculate_three()
-    } else {
-      this.calculate_one()
-    }
+    this.calculate_one()
   },
 
   // 选择日期
   selectDay: function(e) {
     let index = e.currentTarget.dataset.dayIndex
+    let price = this.data.priceList[index]
+    console.log('对应日期的价位：', price)
+    let time = this.data.pageData.time
+    console.log('年月：', time)
+    let day = this.data.pageData.arrDays[index]
+    console.log('日：', day)
     let choice = this.data.choice_day
+    let times = time + '-' + day
+    console.log('年月日:', times)
     if (choice != index) {
       this.setData({
         choice_day_index: index,
+        'pageData.date': times,
         choice_day_price: this.data.priceList[index]
       })
     }
-    if (this.data.down) {
-      this.calculate_three()
-    } else {
-      this.calculate_one()
-    }
+    this.calculate_one()
   },
 
   // 成人票：
@@ -202,11 +223,7 @@ Page({
     this.setData({
       adult: this.data.adult
     });
-    if (this.data.down) {
-      this.calculate_three()
-    } else {
-      this.calculate_one()
-    }
+    this.calculate_one()
   },
 
   toTicket_one_add: function() {
@@ -217,11 +234,7 @@ Page({
     this.setData({
       adult: this.data.adult
     });
-    if (this.data.down) {
-      this.calculate_three()
-    } else {
-      this.calculate_one()
-    }
+    this.calculate_one()
   },
 
   // 儿童票
@@ -233,11 +246,7 @@ Page({
     this.setData({
       child: this.data.child
     });
-    if (this.data.down) {
-      this.calculate_three()
-    } else {
-      this.calculate_one()
-    }
+    this.calculate_one()
   },
 
   toTicket_two_add: function() {
@@ -248,11 +257,7 @@ Page({
     this.setData({
       child: this.data.child
     });
-    if (this.data.down) {
-      this.calculate_three()
-    } else {
-      this.calculate_one()
-    }
+    this.calculate_one()
   },
 
   // 计算一
@@ -261,36 +266,26 @@ Page({
     // 票数
     let t_one = that.data.adult
     let t_two = that.data.child
-    console.log('成人票数：', t_one)
-    console.log('儿童票数：', t_two)
     // 票价
     let tp = that.data.choice_day_price
-    console.log('今日票价：', tp)
     // 折扣
-    let zhe = that.data.discount
-    console.log('折扣：', zhe)
-    // 儿童
-    let c_zhe = that.data.child_price
-    console.log('儿童票价百分比：', c_zhe)
+    let zhe = that.data.discount / 100
+    //优惠券
+    let quan = that.data.down
     // 成人票总价
     let adTotal = t_one * tp
-    console.log('成人票总价:', adTotal)
     // 单张儿童票价
+    let c_zhe = that.data.child_price
     let chalone = tp * (c_zhe / 100)
-    console.log('单张儿童票价:', chalone)
     // 儿童总票价
     let chTotal = chalone * t_two
-    console.log('儿童总票价：', chTotal)
+    //单份套餐价格
     let tao = that.data.taoPrice
-    console.log('套餐价格:', tao)
     // 套餐总价
-    let taoToatl = (t_two + t_one) * tao
-    console.log('套餐总价:', taoToatl)
-    let fina = (adTotal + chTotal) * (zhe / 100) + taoToatl
-    console.log('合计一（无优惠券）:', fina)
+    let taoTotal = t_one * tao + t_two * tao
+    let a = (((adTotal + chTotal - quan) * zhe) + taoTotal).toFixed(2)
     that.setData({
-      total_one: (adTotal + chTotal) * (zhe / 100),
-      total_fina: fina
+      total_fina: a
     })
   },
 
@@ -342,78 +337,191 @@ Page({
     console.log(list)
     let item = list[index]
     console.log(item)
-    let tprice = that.data.total_one
-    console.log('合计(不含套餐价，不含优惠券优惠)：', tprice)
+    let tprice = that.data.total_fina
     let down = item.fullprice
     let choice = item.id
     if (item.coupon_type == 0) {
       if (tprice >= item.lowprice) {
-        console.log('满减')
         that.setData({
           down: down,
           choice_coupon_index: choice,
-          covers: false
+          covers: false,
+          choice_coupon: -down
         })
-        that.calculate_two()
+        that.calculate_one()
       } else {
         modals.showToast('不符合试用条件', 'none')
       }
     } else {
-      console.log('现金')
       that.setData({
         down: down,
         choice_coupon_index: choice,
-        covers: false
+        covers: false,
+        choice_coupon: -down
       })
-      that.calculate_two()
+      that.calculate_one()
     }
   },
 
-  // 计算二
-  calculate_two: function() {
-    let that = this
-    let down = that.data.down
-    console.log('优惠券减少数额:', down)
-    let one = that.data.total_fina
-    console.log('合计(不含优惠券优惠)：', one)
-    let a = one - down
-    console.log('合计二（包含套餐，包含优惠券）:', a);
-    that.setData({
-      total_fina: a
+  // 上一个月
+  lastMonth: function() {
+    if (0 == curMonth) {
+      curMonth = 11;
+      --curYear
+    } else {
+      --curMonth;
+    }
+    refreshPageData(curYear, curMonth, 1, 0);
+    this.setData({
+      pageData: pageData
+    })
+    this.getMonthPrice()
+  },
+
+  // 下一个月
+  nextMonth: function() {
+    if (11 == curMonth) {
+      curMonth = 0;
+      ++curYear
+    } else {
+      ++curMonth;
+    }
+    refreshPageData(curYear, curMonth, 1, 0);
+    this.setData({
+      pageData: pageData
+    })
+    this.getMonthPrice()
+  },
+
+  // 获取姓名
+  toGetName: function(e) {
+    this.setData({
+      name: e.detail.value
     })
   },
 
-  // 计算三
-  calculate_three: function() {
-    let that = this
-    let tao = that.data.taoPrice
-    console.log('套餐价格:', tao)
-    let tp = that.data.choice_day_price
-    console.log('今日票价：', tp)
-    let t_one = that.data.adult
-    console.log('成人票数：', t_one)
-    let t_two = that.data.child
-    console.log('儿童票数：', t_two)
-    let c_zhe = that.data.child_price
-    console.log('儿童票价百分比：', c_zhe)
-    let chalone = tp * (c_zhe / 100)
-    console.log('单张儿童票价:', chalone)
-    let adTotal = t_one * tp
-    console.log('成人票总价:', adTotal)
-    let chTotal = t_two * chalone
-    console.log('儿童票总价:', chTotal)
-    let taoTotal = (t_one + t_two) * tao
-    console.log('套餐总价：', taoTotal)
-    let down = that.data.down
-    console.log('优惠券折扣减少：', down)
-    let zhe = that.data.discount
-    console.log('折扣：', zhe)
-    let a = ((adTotal + chTotal) * (zhe / 100)) + taoTotal - down
-    console.log('最终价格：', a)
-    that.setData({
-      total_fina: a
+  // 获取手机号
+  toGetPhone: function(e) {
+    this.setData({
+      mobile: e.detail.value
     })
   },
+
+  // 获取身份证
+  toGetIdentity: function(e) {
+    this.setData({
+      identity: e.detail.value
+    })
+  },
+
+  // 选择出发地
+  bindRegionChange: function(e) {
+    let address = e.detail.value
+    this.setData({
+      region: address[0] + '-' + address[1] + '-' + address[2]
+    })
+  },
+
+  // 确定下单
+  toOrder: function() {
+    let that = this
+    let t_one = that.data.adult
+    let t_two = that.data.child
+    let address = that.data.region
+    let name = that.data.name
+    let phone = that.data.mobile
+    let identity = that.data.identity
+    let total = that.data.total_fina
+    if (address == "请选择出发地址") {
+      modals.showToast('请选择您的出发地', 'none')
+    } else if (t_one == 0 && t_two == 0) {
+      modals.showToast('请添加你购买的票数', 'none')
+    } else if (!name) {
+      modals.showToast('请输入您的姓名', 'none')
+    } else if (!phone) {
+      modals.showToast('请输入您的手机号码', 'none')
+    } else if (!(/^1[34578]\d{9}$/.test(phone))) {
+      modals.showToast('手机号码有误，请重新输入', 'none')
+    } else if (!identity) {
+      modals.showToast('请输入身份证号码', 'none')
+    } else if (!identity || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(identity)) {
+      modals.showToast('身份证号码有误，请重新输入', 'none')
+    } else {
+      let data = {
+        details_id: that.data.id,
+        set_meal_id: that.data.choiceTao,
+        name: name,
+        mobile: phone,
+        identity: identity,
+        starting: address,
+        day: that.data.pageData.date,
+        adult_num: t_one,
+        child_num: t_two,
+        coupon_id: that.data.choice_coupon_index,
+        total: parseFloat(total)
+      }
+      console.log('参数：', data)
+      let url = app.globalData.api + '/portal/Order/do_order'
+      request.sendRequest(url, 'post', data, {
+        'token': wx.getStorageSync('openid')
+      }).then(function(res) {
+        if (res.statusCode == 200) {
+          if (res.data.status == 1) {
+            let oid = res.data.data
+            that.pay_memont(oid)
+          } else {
+            modals.showToast(res.data.msg, 'none');
+          }
+        } else {
+          modals.showToast('系统繁忙，请稍后重试', 'none')
+        }
+      })
+    }
+  },
+
+  // 支付
+  pay_memont: function(e) {
+    let that = this
+    let url = app.globalData.api + '/portal/Pay/do_pay'
+    request.sendRequest(url, 'post', {
+      order_id: e
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let result = res.data.data
+          console.log(result)
+          wx.requestPayment({
+            timeStamp: result.timeStamp,
+            nonceStr: result.nonceStr,
+            package: result.package,
+            signType: result.signType,
+            paySign: result.paySign,
+            success: function(res) {
+              modals.showToast('支付成功', 'success')
+              setTimeout(function() {
+                wx.navigateTo({
+                  url: '/pages/pay_ success/pay_ success?total' + that.data.total_fina,
+                })
+              }, 2000)
+            },
+            fail: function(res) {
+              modals.showToast('支付失败', 'loading')
+              setTimeout(function() {
+                wx.redirectTo({
+                  url: '/pages/mine/order/order',
+                })
+              }, 2000)
+            }
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  }
+
 
 
 })

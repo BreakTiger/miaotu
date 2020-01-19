@@ -61,6 +61,12 @@
 					"pathName": "pages/goods_detail/goods_detail",
 					"query": "id=68",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/pay_ success/pay_ success",
+					"pathName": "pages/pay_ success/pay_ success",
+					"scene": null
 				}
 			]
 		}
