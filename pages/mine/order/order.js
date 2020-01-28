@@ -35,10 +35,6 @@ Page({
     list: []
   },
 
-  onLoad: function(options) {
-
-  },
-
   onShow: function() {
     this.getList(this.data.choice_one)
   },
@@ -55,7 +51,6 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -85,24 +80,75 @@ Page({
     }
   },
 
-  // 取消订单
+  // 取消订单 + 删除订单
   cancelOrder: function(e) {
-    console.log('取消订单')
+    let that = this
+    let oid = e.currentTarget.dataset.item.id
+    let url = app.globalData.api + '/portal/order/delete'
+    request.sendRequest(url, 'post', {
+      id: oid
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast('取消成功', 'loading')
+          setTimeout(function() {
+            that.getList(that.data.choice_one)
+          }, 1000)
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   // 继续付款
   continuePay: function(e) {
-    console.log('继续付款')
+    let that = this
+    let oid = e.currentTarget.dataset.item.id
+    let url = app.globalData.api + '/portal/Pay/do_pay'
+    request.sendRequest(url, 'post', {
+      order_id: e
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let result = res.data.data
+          wx.requestPayment({
+            timeStamp: result.timeStamp,
+            nonceStr: result.nonceStr,
+            package: result.package,
+            signType: result.signType,
+            paySign: result.paySign,
+            success: function(res) {
+              modals.showToast('支付成功', 'loading')
+              setTimeout(function() {
+                that.getList(that.data.choice_one)
+              }, 1000)
+            },
+            fail: function(res) {
+              modals.showToast('支付失败，请稍后重试', 'none')
+            }
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
-
-
-
-
-
-
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.getList(this.data.choice_one)
   },
 
   onReachBottom: function() {
