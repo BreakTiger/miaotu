@@ -89,6 +89,7 @@ Page({
 
   onLoad: function(options) {
     let data = JSON.parse(options.data)
+    console.log(data)
     this.setData({
       id: data.id,
       types: data.tao

@@ -2,10 +2,7 @@ const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
 
-
-// 引入SDK核心类
 var QQMapWX = require('../../qqmap-wx-jssdk.min.js')
-// 实例化API核心类
 var demo = new QQMapWX({
   key: 'OSCBZ-J26WX-M6M4B-T6MQM-JC6EQ-HUFDP'
 });
@@ -72,7 +69,6 @@ Page({
   },
 
   onLoad: function(options) {
-    // 判断用户是否登陆
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
       wx.navigateTo({
@@ -82,14 +78,12 @@ Page({
     this.positioning() 
   },
 
-  // 定位
   positioning: function() {
     let that = this
     wx.getLocation({
       success: function(res) {
         let lat = res.latitude
         let lon = res.longitude
-        // 使用地图API
         demo.reverseGeocoder({
           location: {
             latitude: lat,
@@ -110,7 +104,6 @@ Page({
     that.getBanner()
   },
 
-  // 轮播图
   getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
@@ -134,7 +127,6 @@ Page({
     })
   },
 
-  // 秒杀商品
   getSkill: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_fire_seckill'
@@ -142,6 +134,7 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'content-type': 'application/json'
     }).then(function(res) {
+      console.log('秒杀：',res.data.data)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -172,24 +165,18 @@ Page({
     })
   },
 
-  // 倒计时
   setTimeShow: function(currentstartTimer) {
     let interval = setInterval(function() {
-      // 秒数
       var second = currentstartTimer;
-      // 天数位
       var day = Math.floor(second / 3600 / 24);
       var dayStr = day.toString();
       if (dayStr.length == 1) dayStr = '0' + dayStr;
-      // 小时位
       var hr = Math.floor((second - day * 3600 * 24) / 3600);
       var hrStr = hr.toString();
       if (hrStr.length == 1) hrStr = '0' + hrStr;
-      // 分钟位
       var min = Math.floor((second - day * 3600 * 24 - hr * 3600) / 60);
       var minStr = min.toString();
       if (minStr.length == 1) minStr = '0' + minStr;
-      // 秒位
       var sec = second - day * 3600 * 24 - hr * 3600 - min * 60;
       var secStr = sec.toString();
       if (secStr.length == 1) secStr = '0' + secStr;
@@ -207,7 +194,6 @@ Page({
     this.getList(this.data.choice_one)
   },
 
-  // 不同分类下的列表
   getList: function(e) {
     let that = this
     let data = {
@@ -238,7 +224,6 @@ Page({
     })
   },
 
-  // 瀑布流小卡片
   getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
@@ -261,10 +246,6 @@ Page({
     })
   },
 
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
@@ -272,7 +253,6 @@ Page({
     }
   },
 
-  // 未读消息
   unread: function(openID) {
     let that = this
     let url = app.globalData.api + '/portal/Message/no_read'
@@ -291,14 +271,12 @@ Page({
     })
   },
 
-  // 跳转去搜索
   toSearch: function() {
     wx.navigateTo({
       url: '/pages/index/search/search',
     })
   },
 
-  // 查看信息
   toInfo: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
@@ -320,21 +298,18 @@ Page({
     }
   },
 
-  // 导航模块跳转
   toNav: function(e) {
     wx.navigateTo({
       url: e.currentTarget.dataset.url,
     })
   },
 
-  // 爆款秒杀详情
   toSeckillDetail: function() {
     wx.navigateTo({
       url: '/pages/seckill_detail/seckill_detail',
     })
   },
 
-  // 切换分类
   toGetKind: function(e) {
     let id = e.currentTarget.dataset.id
     let choice = this.data.choice_one
@@ -347,7 +322,6 @@ Page({
     }
   },
 
-  // 跳转商品详情-普通
   toGoodsDetail: function(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
@@ -355,7 +329,6 @@ Page({
     })
   },
 
-  // 轮播图详情
   toDetaill: function(e) {
     let list = this.data.sw_list
     let item = list[e.currentTarget.dataset.index];

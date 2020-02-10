@@ -32,7 +32,6 @@ Page({
     }
   },
 
-  // 获取列表 - 登录
   getList_login: function(openID) {
     let that = this
     let data = {
@@ -63,7 +62,6 @@ Page({
     })
   },
 
-  // 获取列表 - 未登录
   getList_unlogin: function() {
     let that = this
     let data = {
@@ -94,7 +92,6 @@ Page({
     })
   },
 
-  // 轮播图的视频显示
   toShowVideo: function(e) {
     let that = this
     let index = e.currentTarget.dataset.index
@@ -104,7 +101,6 @@ Page({
     })
   },
 
-  // 关闭视频播放
   toCloseVideo: function(e) {
     let that = this
     let index = e.currentTarget.dataset.index
@@ -114,7 +110,6 @@ Page({
     })
   },
 
-  // 展开
   toOpened: function(e) {
     let that = this
     let index = e.currentTarget.dataset.index
@@ -125,7 +120,6 @@ Page({
     })
   },
 
-  // 关注
   toLike: function(e) {
     let that = this
     let openID = wx.getStorageSync('openid') || ''
@@ -145,13 +139,11 @@ Page({
     } else {
       let url = app.globalData.api + '/portal/Strategy/do_like'
       let id = e.currentTarget.dataset.id
-      console.log(id)
       request.sendRequest(url, 'post', {
         id: id
       }, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
-        console.log(res)
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             modals.showToast(res.data.msg, 'none')
@@ -164,7 +156,6 @@ Page({
     }
   },
 
-  // 取消关注
   toCancel: function(e) {
     let that = this
     let openID = wx.getStorageSync('openid') || ''
@@ -184,7 +175,6 @@ Page({
     } else {
       let url = app.globalData.api + '/portal/Strategy/out_like'
       let id = e.currentTarget.dataset.id
-      console.log(id)
       request.sendRequest(url, 'post', {
         id: id
       }, {
@@ -202,11 +192,9 @@ Page({
     }
   },
 
-  // 查看所有评论
   toAllComment: function(e) {
     let that = this
     let item = e.currentTarget.dataset.item
-    console.log(item)
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
       wx.showModal({
@@ -232,14 +220,12 @@ Page({
   },
 
   allComment: function(e) {
-    // console.log('攻略ID：', e)
     let that = this
     let data = {
       page: that.data.rpage,
       length: 10,
       id: e
     }
-    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Strategy/get_comment'
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
@@ -260,7 +246,6 @@ Page({
     })
   },
 
-  // 关闭评论弹窗
   toClosed: function() {
     this.setData({
       covers: false,
@@ -271,19 +256,15 @@ Page({
     this.onShow()
   },
 
-  // 获取输入的评论内容
   getInput: function(e) {
     this.setData({
       relay: e.detail.value
     })
   },
 
-  // 选择回复的评论
   secondReply: function(e) {
     let item = e.currentTarget.dataset.item
-    console.log(item)
     let id = item.id
-    console.log('回复评论的ID：', id)
     this.setData({
       uid: id,
       rhint: '回复' + item.name
@@ -306,16 +287,13 @@ Page({
         content: relay,
         uid: that.data.uid
       }
-      console.log('参数：', data);
       let url = app.globalData.api + '/portal/Strategy/do_comment'
       request.sendRequest(url, 'post', data, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
-        console.log(res);
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             modals.showToast(res.data.msg, 'none')
-            console.log('攻略ID：', that.data.rid)
             that.setData({
               relay: '',
               uid: 0,
@@ -330,13 +308,10 @@ Page({
     }
   },
 
-  // 长按删除
   deltReay: function(e) {
     let that = this
     let id = e.currentTarget.dataset.item.id
-    console.log('评论ID:', id)
     let openID = e.currentTarget.dataset.item.open_id
-    console.log('openID:', openID)
     if (openID == wx.getStorageSync('openid')) {
       wx.showModal({
         title: '提示',
@@ -388,7 +363,6 @@ Page({
           let openid = e.currentTarget.dataset.item.open_id
           if (openid == openID) {
             let id = e.currentTarget.dataset.item.id
-            console.log('攻略ID：', id)
             let url = app.globalData.api + '/portal/Strategy/delete'
             request.sendRequest(url, 'post', {
               id: id
@@ -398,7 +372,6 @@ Page({
               if (res.statusCode == 200) {
                 if (res.data.status == 1) {
                   modals.showToast(res.data.msg, 'none');
-                  // this.getList_login(wx.getStorageSync('openid'))
                 } else {
                   modals.showToast(res.data.msg, 'none');
                 }
@@ -414,14 +387,48 @@ Page({
           }
         }
       })
-
     }
   },
 
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      this.getList_login(openID)
+    } else {
+      this.getList_unlogin()
+    }
   },
-  onReachBottom: function() {
 
-  }
+  onReachBottom: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      this.getBottom_login()
+    } else {
+      this.getBottom_unlogin()
+    }
+  },
+
+  getBottom_unlogin:function(){
+    console.log(111)
+    let that = this
+    let list = that.data.list
+    console.log(list)
+  },
+
+  getBottom_login:function(){
+    console.log(222)
+    let that = this
+    let list = that.data.list
+    console.log(list)
+  },
+
+
 })

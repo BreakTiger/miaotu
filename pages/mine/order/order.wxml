@@ -34,7 +34,7 @@
         <text class="c-38">￥{{item.pay_price}}</text>
       </view>
       <view class="btn-line flex fl-align f24">
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==1}}" bindtap="cancelOrder" data-item="{{item}}">取消订单</view>
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==1}}" bindtap="delOrder" data-item="{{item}}">取消订单</view>
         <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==1}}" bindtap="continuePay" data-item="{{item}}">继续付款</view>
         <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==2}}">申请退款</view>
         <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==3||item.new_status==4}}" bindtap="delOrder">删除订单</view>

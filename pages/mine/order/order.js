@@ -81,7 +81,7 @@ Page({
   },
 
   // 取消订单 + 删除订单
-  cancelOrder: function(e) {
+  delOrder: function(e) {
     let that = this
     let oid = e.currentTarget.dataset.item.id
     let url = app.globalData.api + '/portal/order/delete'
@@ -107,6 +107,7 @@ Page({
   continuePay: function(e) {
     let that = this
     let oid = e.currentTarget.dataset.item.id
+    console.log('订单ID：',oid)
     let url = app.globalData.api + '/portal/Pay/do_pay'
     request.sendRequest(url, 'post', {
       order_id: e

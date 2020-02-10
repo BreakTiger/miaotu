@@ -46,3 +46,42 @@ icon {
   left: 38rpx;
   opacity: 0.7;
 }
+
+/* 瀑布流 */
+
+.list-content {
+  width: 710rpx;
+  margin: auto;
+  margin-top: 20rpx;
+}
+
+.left-col, .right-col {
+  width: 346rpx;
+  display: inline-block;
+}
+
+.right-col {
+  float: right;
+}
+
+.list-item {
+  width: 346rpx;
+  height: 488rpx;
+  margin-bottom: 20rpx;
+}
+
+.list-item>image {
+  width: 346rpx;
+  height: 344rpx;
+  border-radius: 16rpx 16rpx 0rpx 0rpx;
+}
+
+.list-titles {
+  width: 304rpx;
+}
+
+.list-img {
+  width: 346rpx;
+  height: 344rpx;
+  margin-bottom: 20rpx;
+}

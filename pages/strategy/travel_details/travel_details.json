@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "攻略详情"
+  "navigationBarTitleText": "攻略详情",
+  "enablePullDownRefresh": true
 }

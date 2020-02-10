@@ -23,15 +23,12 @@
       <text class="b_r200 t-ac">秒杀预告</text>
       <text>{{startTime}}开抢</text>
     </view>
-
   </view>
-
   <view class="hint-line flex fl-align fl-jsa c-00" wx:if="{{details.twice_submit}}">
     <image src="../../icon/hint.png"></image>
     <view class="f20 f-w5">二次确认</view>
     <view class="climp2 f24 f-w3">{{details.twice_submit}}</view>
   </view>
-
   <view class="review flex col b-ff" wx:if="{{discuss.length>0}}">
     <text class="f32 c-00 f-w5">点评</text>
     <view class="discuss flex fl-jsb">
@@ -40,7 +37,6 @@
     </view>
     <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate" data-id="{{details.id}}">查看全部评价 ></view>
   </view>
-
   <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop" data-sid="{{details.shop_id}}">
     <image class="b_r12" src="{{details.shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
@@ -60,14 +56,12 @@
     </view>
     <image src="../../icon/go.png" class="togos"></image>
   </view>
-
   <view class="abstract flex col fl-align b-ff">
     <view class="f32 c-00 f-w5">产品简介</view>
     <view class="f28 c-66 f-w4">
       <template is="wxParse" data="{{wxParseData:introduce.nodes}}" />
     </view>
   </view>
-
   <view class="traffic flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">交通信息</text>
     <view class="f20 c-66 f-w3">交通信息仅供参考，最终以供应商确认为准，飞行时长以实际为准</view>
@@ -75,7 +69,6 @@
       <template is="wxParse" data="{{wxParseData:traffic.nodes}}" />
     </view>
   </view>
-
   <view class="attractions flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">景点详情</text>
     <view>
@@ -86,9 +79,7 @@
       <template is="wxParse" data="{{wxParseData:buy.nodes}}" />
     </view>
   </view>
-
   <view style="height:216rpx;width:750rpx;"></view>
-
   <view class="tabbers flex fl-align fl-jsa b-ff">
     <view class="icons flex col fl-align fl-jc">
       <image src="../../icon/talk.png"></image>
@@ -108,9 +99,6 @@
     </view>
     <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.price}}立即预订</view>
   </view>
-
   <button class="consult" plain="true" open-type="contact"></button>
-
   <button class="shares" plain="true" open-type="share"></button>
-
 </view>

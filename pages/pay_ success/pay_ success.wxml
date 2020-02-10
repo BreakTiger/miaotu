@@ -3,9 +3,39 @@
     <icon type="success" size="48" color="#1FF193" />
     <text class="f28 c-00 f-wb">支付成功！</text>
     <text class="f28 c-66">实际支付：23477.23元</text>
-    <view class="readOrder f32 c-ff t-ac b_r200">查看订单</view>
-    <view class="backHome f32 c-F1 t-ac b_r200">返回首页</view>
+    <view class="readOrder f32 c-ff t-ac b_r200" bindtap="toOrderDetail">查看订单</view>
+    <view class="backHome f32 c-F1 t-ac b_r200" bindtap="toBackHome">返回首页</view>
   </view>
   <text class="title">猜你喜欢</text>
+  <view class="list-content b-F5">
+      <view class="left-col">
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+          <image src="{{item.banner}}"></image>
+          <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+            <view class="list-titles climp2 f24">{{item.title}}</view>
+            <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+              <text>¥</text>
+              <text class="f28">{{item.price}}</text>
+              <text>起</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="right-col">
+        <image src="{{card}}" class="b_r16 list-img"></image>
+        <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+          <image src="{{item.banner}}"></image>
+          <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+            <view class="list-titles climp2 f24">{{item.title}}</view>
+            <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+              <text>¥</text>
+              <text class="f28">{{item.price}}</text>
+              <text>起</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
 
 </view>

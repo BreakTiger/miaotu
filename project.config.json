@@ -59,6 +59,21 @@
 					"id": -1,
 					"name": "pages/mine/order/order",
 					"pathName": "pages/mine/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/pay_ success/pay_ success",
+					"pathName": "pages/pay_ success/pay_ success",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/strategy/strategy",
+					"pathName": "pages/strategy/strategy",
+					"query": "",
 					"scene": null
 				}
 			]

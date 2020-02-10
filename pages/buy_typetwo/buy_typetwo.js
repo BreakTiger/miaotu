@@ -154,7 +154,7 @@ Page({
               modals.showToast('支付成功', 'success')
               setTimeout(function() {
                 wx.navigateTo({
-                  url: '/pages/pay_ success/pay_ success?total' + that.data.total_fina,
+                  url: '/pages/pay_ success/pay_ success?total=' + that.data.total_fina,
                 })
               }, 2000)
             },

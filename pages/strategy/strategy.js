@@ -25,16 +25,13 @@ Page({
     choice_one: 0,
     sw_list: [],
     card: '',
-    word: '',
     page: 1,
+    word: '',
     leftlist: [],
     rightlist: []
-
   },
 
-
   onLoad: function(options) {
-    // 判断用户是否登陆
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
       wx.navigateTo({
@@ -43,13 +40,7 @@ Page({
     }
   },
 
-
   onShow: function() {
-    this.getBanner()
-  },
-
-  // 轮播图
-  getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
     request.sendRequest(url, 'post', {
@@ -72,7 +63,6 @@ Page({
     })
   },
 
-  // 瀑布流小卡片
   getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
@@ -93,11 +83,9 @@ Page({
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
-
     })
   },
 
-  // 分类列表 不包括关注
   getList: function(e) {
     let that = this
     let data = {
@@ -133,11 +121,9 @@ Page({
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
-
     })
   },
 
-  // 选择分类
   toChoice: function(e) {
     let choice = this.data.choice_one
     let cid = e.currentTarget.dataset.id
@@ -146,69 +132,18 @@ Page({
         choice_one: cid,
         page: 1
       })
-      if (cid == 3) { //关注
-        this.getCareList(this.data.choice_one)
-      } else { //除关注外的其他列表
-        this.getList(this.data.choice_one)
-      }
-    }
-  },
-
-
-  // 关注列表
-  getCareList: function(e) {
-    let that = this
-    let data = {
-      page: that.data.page,
-      length: 10,
-      type: e,
-      name: that.data.word
-    }
-    console.log(data)
-    let url = app.globalData.api + '/portal/Strategy/index'
-    modals.loading()
-    request.sendRequest(url, 'post', data, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          let list = res.data.data.data
-          let len = list.length
-          if (len > 0) {
-            let half = (len / 2).toFixed(0);
-            that.setData({
-              leftlist: list.slice(0, half),
-              rightlist: list.slice(half, len)
-            })
-          }
-        } else {
-          that.setData({
-            leftlist: [],
-            rightlist: [],
-          })
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
-
-  // 搜索
-  toSearch: function(e) {
-    let type = this.data.choice_one
-    console.log(type)
-    this.setData({
-      word: e.detail.value
-    })
-    if (type == 3) {
-      this.getCareList(this.data.choice_one)
-    } else {
       this.getList(this.data.choice_one)
     }
   },
 
-  // 发布
+  toSearch: function(e) {
+    let type = this.data.choice_one
+    this.setData({
+      word: e.detail.value
+    })
+    this.getList(this.data.choice_one)
+  },
+
   tosend: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
@@ -230,7 +165,6 @@ Page({
     }
   },
 
-  // 去到详情
   toDetails: function(e) {
     let that = this
     let data = {
@@ -242,8 +176,6 @@ Page({
       url: '/pages/strategy/travel_details/travel_details?data=' + JSON.stringify(data),
     })
   },
-
-
 
   onPullDownRefresh: function() {
     wx.showToast({
@@ -257,8 +189,44 @@ Page({
     this.onLoad();
   },
 
-  
   onReachBottom: function() {
+    let that = this
+    let left = that.data.leftlist
+    let right = that.data.rightlist
+    let pages = that.data.page+1
+    let type = that.data.choice_one
+    let name = that.data.word
+    let data = {
+      page: pages,
+      length:10,
+      type: type,
+      name: name
+    }
+    console.log('参数：',data)
+    let url = app.globalData.api + '/portal/Strategy/index'
+    request.sendRequest(url,'post',data,{
+      'content-type': 'application/json'
+    }).then(function(res){
+      if (res.statusCode==200){
+        if(res.data.status==1){
+          let list = res.data.data.data
+          let len = list.length
+          if (len > 0){
+            let half = len / 2
+            let one = list.slice(0, half)
+            let two = list.slice(half, len)
+            that.setData({
+              leftlist: left.concat(one),
+              rightlist: right.concat(two),
+              page: pages
+            })
+          }
+        }else{
+          modals.showToast('我也是有底线的', 'none');
+        }
+      }
+    })
+
 
   }
 })
