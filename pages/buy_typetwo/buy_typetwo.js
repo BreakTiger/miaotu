@@ -150,11 +150,16 @@ Page({
             signType: res.data.data.signType,
             paySign: res.data.data.paySign,
             success: function(res) {
-              console.log(res)
               modals.showToast('支付成功', 'success')
-              setTimeout(function() {
+              console.log('订单ID：', e)
+              console.log('总价：', total_fina)
+              let param = {
+                oid: e,
+                tprice: total_fina
+              }
+              setTimeout(function () {
                 wx.navigateTo({
-                  url: '/pages/pay_ success/pay_ success?total=' + that.data.total_fina,
+                  url: '/pages/pay_ success/pay_ success?param=' + JSON.stringify(param),
                 })
               }, 2000)
             },

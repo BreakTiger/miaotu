@@ -75,7 +75,7 @@ Page({
         url: '/pages/login/login',
       })
     }
-    this.positioning() 
+    this.positioning()
   },
 
   positioning: function() {
@@ -134,7 +134,7 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log('秒杀：',res.data.data)
+      console.log('秒杀：', res.data.data)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -304,9 +304,11 @@ Page({
     })
   },
 
-  toSeckillDetail: function() {
+  toSeckillDetail: function(e) {
+    let oid = e.currentTarget.dataset.item.id
+    console.log(oid)
     wx.navigateTo({
-      url: '/pages/seckill_detail/seckill_detail',
+      url: '/pages/seckill_detail/seckill_detail?oid=' + oid,
     })
   },
 

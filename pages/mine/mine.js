@@ -108,7 +108,6 @@ Page({
 
   onShow: function() {
     let openid = wx.getStorageSync('openid') || ''
-    // 判断登录状态
     if (openid) {
       this.setData({
         login: 1
@@ -235,7 +234,6 @@ Page({
     }
   },
 
-
   // 发布
   tosend: function() {
     let openID = wx.getStorageSync('openid') || ''
@@ -258,13 +256,24 @@ Page({
     }
   },
 
-
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.onLoad();
   },
 
 
   onReachBottom: function() {
-
+    let that = this
+    let left = that.data.left
+    console.log(left)
+    let right = that.data.right
+    console.log(right)
   }
 })

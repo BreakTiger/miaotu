@@ -38,15 +38,12 @@ Page({
       id: options.id
     })
     let openID = wx.getStorageSync('openid') || ''
-    // 判断是否登录
-    if (openID) { //已经登录
-      this.getShopInfo()
-    } else { //未登录
-      this.getShopInfo()
+    if (!openID){
       wx.navigateTo({
-        url: '/pages/login/login',
+        url: '/pages/login/login'
       })
     }
+    this.getShopInfo()
   },
 
   // 获取商品信息

@@ -25,7 +25,6 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -53,7 +52,6 @@ Page({
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -88,7 +86,6 @@ Page({
     this.onLoad();
   },
 
-  
   onReachBottom: function() {
     let that = this
     let page = that.data.page + 1
@@ -116,5 +113,5 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
-  },
+  }
 })

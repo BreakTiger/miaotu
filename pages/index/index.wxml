@@ -24,7 +24,7 @@
       <text>{{item.name}}</text>
     </view>
   </view>
-  <view class="seckill-line flex fl-align" bindtap="toSkill" wx:if="{{skillgoods.length!=0}}" bindtap="toSeckillDetail">
+  <view class="seckill-line flex fl-align" bindtap="toSkill" wx:if="{{skillgoods.length!=0}}" bindtap="toSeckillDetail" data-item="{{skillgoods}}">
     <view class="seckill-left flex col fl-align">
       <view class="seckill-left-line-one" style="position: relative;">
         <view class="seckill-box b_r200 flex fl-align f20">

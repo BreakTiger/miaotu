@@ -14,7 +14,12 @@ Page({
   },
 
   onLoad: function(options) {
-    // console.log(options)
+    let that = this
+    let data = JSON.parse(options)
+    that.setData({
+      id: data.oid,
+      price: data.tprice
+    })
     this.getCard()
   },
 
@@ -84,23 +89,51 @@ Page({
     })
   },
 
-
-
-
-  onPullDownRefresh: function() {
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 1000
+  toGoodsDetail: function(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/goods_detail/goods_detail?id=' + id,
     })
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 1000);
-    this.onLoad();
   },
 
-
   onReachBottom: function() {
-
+    let that = this
+    let left = that.data.leftlist
+    let right = that.data.rightlist
+    let pages = that.data.page + 1
+    let url = app.globalData.api + '/portal/Home/get_type_details'
+    let data = {
+      page: pages,
+      length: 10,
+      type: 7
+    }
+    console.log('参数：', data)
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          console.log(list)
+          let len = list.length
+          console.log(len)
+          if (len > 0) {
+            let half = len / 2
+            let one = list.slice(0, half)
+            let two = list.slice(half, len)
+            that.setData({
+              leftlist: left.concat(one),
+              rightlist: right.concat(two),
+              page: pages
+            })
+          }
+        } else {
+          modals.showToast('我也是有底线的', 'none');
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none');
+      }
+    })
   }
 })

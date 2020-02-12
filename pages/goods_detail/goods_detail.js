@@ -28,14 +28,11 @@ Page({
     this.setData({
       id: options.id
     })
-    // 判断是否登录
+    this.getShopInfo()
     let openID = wx.getStorageSync('openid') || ''
-    if (openID) { //已经登录
-      this.getShopInfo()
-    } else { //未登录
-      this.getShopInfo()
+    if (!openID){
       wx.navigateTo({
-        url: '/pages/login/login',
+        url: '/pages/login/login'
       })
     }
   },

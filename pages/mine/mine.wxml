@@ -43,9 +43,9 @@
       <text class="f20 c-66">{{item.name}}</text>
     </view>
   </view>
-  <view class="travel flex fl-align fl-jsb b-ff b_r12">
+  <view class="travel flex fl-align fl-jsb b-ff b_r12" bindtap="totravel">
     <text class="f28 c-00">我的游记</text>
-    <view class="flex fl-align fl-jsb" bindtap="totravel">
+    <view class="flex fl-align fl-jsb">
       <view class="travel-image" wx:if="{{travelList.length>0}}">
         <image src="{{item}}" wx:for="{{travelList}}" wx:key="index"></image>
       </view>

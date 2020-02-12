@@ -25,8 +25,11 @@
     <view class="flex col fl-align" wx:if="{{before}}">
       <text class="titles">助力人数由你来定</text>
       <view class="card-line flex fl-align fl-jsb">
-        <image src="../../../resources/b_plate.png" style="width:{{width_one}}rpx;height:100%;" wx:for="{{cardlist}}" wx:key="index"></image>
+        <image src="../../../resources/b_plate.png" style="width:{{width_one}}rpx;height:100%;" wx:for="{{cardlist}}" wx:key="index" bindtap="choose_card"></image>
       </view>
+    </view>
+    <view class="flex col fl-align" wx:else>
+      <text class="titles">恭喜！门票仅需xx人助力即可免费拿</text>
     </view>
   </view>
 </view>
