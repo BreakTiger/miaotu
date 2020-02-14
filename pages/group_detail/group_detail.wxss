@@ -274,7 +274,6 @@ page {
 .bill-content {
   height: 180rpx;
   width: 100%;
-  /* background: black; */
 }
 
 .bill-content>swiper {
@@ -291,7 +290,6 @@ page {
   width: 48rpx;
   height: 48rpx;
   border-radius: 50%;
-  background: black;
   margin-right: 20rpx;
 }
 
@@ -352,5 +350,4 @@ page {
   height: 68rpx;
   border-radius: 50%;
   margin-right: 20rpx;
-  background: black;
 }

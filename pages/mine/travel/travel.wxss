@@ -47,7 +47,6 @@ page {
 .laber-one>image {
   width: 16rpx;
   height: 16rpx;
-  background: black;
   margin-right: 8rpx;
 }
 
@@ -73,37 +72,52 @@ page {
 }
 
 .list-content {
-  width: 100%;
-  padding-bottom: 20rpx;
+  width: 710rpx;
+  margin: auto;
+  margin-top: 20rpx;
+}
+
+.left-col, .right-col {
+  width: 346rpx;
+  display: inline-block;
+}
+
+.right-col {
+  float: right;
 }
 
 .list-item {
-  margin-top: 20rpx;
-  margin-left: 20rpx;
   width: 346rpx;
   height: 488rpx;
+  margin-bottom: 20rpx;
 }
 
 .list-item>image {
   width: 346rpx;
   height: 344rpx;
   border-radius: 16rpx 16rpx 0rpx 0rpx;
+  background: black;
 }
 
-.list-titles {
+.list-line {
   width: 304rpx;
-  margin-top: 10rpx;
-  margin-bottom: 26rpx;
 }
 
 .list-img {
   width: 346rpx;
   height: 344rpx;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
+  margin-bottom: 20rpx;
 }
 
-.list-img>image {
-  width: 100%;
-  height: 100%;
+.list-header{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.zan-icon{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 10rpx;
 }

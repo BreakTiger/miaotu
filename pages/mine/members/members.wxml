@@ -1,0 +1,60 @@
+<view class="container flex col fl-align" style="position: relative;">
+  <image class="bk"></image>
+  <view class="content flex col fl-align">
+    <!-- 用户 -->
+    <view class="user-box b-ff flex">
+      <image class="header"></image>
+      <view class="user-info flex col fl-jse">
+        <text class="f36 c-00 f-wb">菜菜子Joe</text>
+        <text>大众会员</text>
+        <progress percent="50" border-radius="190" backgroundColor="#f5f5f5" activeColor="#1FAFF1"></progress>
+        <text class="f24 c-66">成长值：1289/5000</text>
+        <view class="flex fl-align fl-jsd f24 c-F1">
+          <view class="btn_one t-ac b_r200" bindtap="toIntegral">积分签到</view>
+          <view class="btn_one t-ac b_r200" bindtap="toDraw">积分抽奖</view>
+        </view>
+      </view>
+    </view>
+    <view class="linebottms c-ff">会员介绍</view>
+    <!-- 会员卡 -->
+    <view class="card-list flex col fl-align">
+      <view class="card-list-item" wx:for="{{cardlist}}" wx:key="index" style="top:{{index*top}}rpx;">
+        <image src="{{item.img}}"></image>
+        <view class="card-info-line-one flex fl-align fl-jsb c-ff f48">
+          <view>
+            <text class="f28">￥</text>
+            <text>{{item.money}}</text>
+          </view>
+          <text>{{item.card}}</text>
+        </view>
+        <view class="card-info-line-two flex fl-jsb c-ff f24">
+          <view class="flex col">
+            <text class="f36">{{item.cardType}}</text>
+            <text>{{item.state}}</text>
+          </view>
+          <view class="buy t-ac b_r200">立即购买</view>
+        </view>
+      </view>
+    </view>
+    <!-- 卡片介绍 -->
+    <view class="introduce c-ff f24">会员特权：有效期内，在平台下单每单可享8.5折，每卡每日限购4单，累计限购99单。 会员卡首单最高立减666元 有效期12个月</view>
+    <text class="linesbottom c-ff">做任务升等级</text>
+    <!-- 任务栏 -->
+    <view class="task flex col fl-align b_r12 b-ff">
+      <view class="task-line flex fl-align fl-jsb">
+        <view class="flex col" style="margin-left:40rpx;">
+          <text class="f32 c-00 f-wb">积分签到</text>
+          <text class="f20 c-66">连续签到可获得+23积分</text>
+        </view>
+        <view class="btn_two f24 c-ff b_r200 t-ac">去完成</view>
+      </view>
+      <view class="task-line flex fl-align fl-jsb">
+        <view class="flex col" style="margin-left:40rpx;">
+          <text class="f32 c-00 f-wb">积分抽奖</text>
+          <text class="f20 c-66">有机会获得立减666元机会</text>
+        </view>
+        <view class="btn_two f24 c-ff b_r200 t-ac">去完成</view>
+      </view>
+    </view>
+  </view>
+</view>

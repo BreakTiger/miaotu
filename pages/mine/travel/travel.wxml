@@ -1,80 +1,78 @@
 <view class="container flex col fl-align">
   <view class="user-content b-ff">
-    <!-- banner -->
-    <image src="../../../resources/2.png" class="banner"></image>
-    <!-- header -->
-    <image class="header"></image>
-    <view class="signature f28 c-66 climp2">“这个人很懒，什么都没留下！”</view>
-    <!-- 标签栏 -->
+    <image src="{{person.back_image}}" class="banner"></image>
+    <image class="header" src="{{person.avatar}}"></image>
+    <view class="signature f28 c-66 climp2">“{{person.intro}}”</view>
     <view class="laber-line flex fl-w">
-      <view class="laber-one flex fl-align fl-jc b_r200">
-        <image></image>
+      <view class="laber-one flex fl-align fl-jc b_r200" wx:if="{{person.sex==1}}">
+        <image src="../../../icon/male.png"></image>
         <text class="f24 c-F1">男</text>
       </view>
-      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">25岁白羊座</view>
-      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">广州</view>
+      <view class="laber-one flex fl-align fl-jc b_r200" wx:if="{{person.sex==2}}">
+        <image src="../../../icon/female.png"></image>
+        <text class="f24 c-F1">女</text>
+      </view>
+      <view class="laber-one flex fl-align fl-jc b_r200" wx:if="{{person.sex==3}}">
+        <image src="../../../icon/unknown.png"></image>
+        <text class="f24 c-F1">未知</text>
+      </view>
+      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">{{person.birthday}}</view>
+      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">{{person.city}}</view>
     </view>
-    <!-- 获赞+粉丝+关注 -->
     <view class="user-last-line flex fl-align">
       <view>
-        <text class="f36 f-wb">230</text>
+        <text class="f36 f-wb">{{person_like.like}}</text>
         <text class="f20">获赞</text>
       </view>
       <view>
-        <text class="f36 f-wb">230</text>
+        <text class="f36 f-wb">{{person_like.fan}}</text>
         <text class="f20">粉丝</text>
       </view>
       <view>
-        <text class="f36 f-wb">230</text>
+        <text class="f36 f-wb">{{person_like.attention}}</text>
         <text class="f20">关注</text>
       </view>
     </view>
   </view>
-  <!-- 列表 -->
-    <view class="list-content flex fl-w b-F5">
-      <view class="list-item flex col fl-align b-ff b_r16">
-        <image src="../../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-img">
-        <image src="../../../resources/1.png" class="b_r16"></image>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
-        </view>
-      </view>
-      <view class="list-item flex col fl-align b-ff">
-        <image src="../../../resources/1.png"></image>
-        <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-        </view>
-        <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-          <text>¥234</text>
+  <view class="list-content b-F5">
+    <view class="left-col">
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.r_pic}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-line climp2 f24">{{item.r_title}}</view>
+          <view class="list-line flex fl-align fl-jsb">
+            <view class="flex fl-align">
+              <image class="list-header" src="{{person.avatar}}"></image>
+              <text class="f20 c-66">{{person.nickname}}</text>
+            </view>
+            <view class="flex fl-align">
+              <image src="../../../icon/unzan.png" class="zan-icon"></image>
+              <text class="f20 c-66">{{count_like}}</text>
+              <text class="f20 c-66" wx:if="{{!count_like}}">0</text>
+            </view>
+          </view>
         </view>
       </view>
     </view>
-  
+    <view class="right-col">
+      <image src="{{card}}" class="b_r16 list-img"></image>
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.r_pic}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-line climp2 f24">{{item.r_title}}</view>
+          <view class="list-line flex fl-align fl-jsb">
+            <view class="flex fl-align">
+              <image class="list-header" src="{{person.avatar}}"></image>
+              <text class="f20 c-66">{{person.nickname}}</text>
+            </view>
+            <view class="flex fl-align">
+              <image src="../../../icon/unzan.png" class="zan-icon"></image>
+              <text class="f20 c-66">{{count_like}}</text>
+              <text class="f20 c-66" wx:if="{{!count_like}}">0</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

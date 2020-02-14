@@ -111,7 +111,6 @@ Page({
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data.data
@@ -123,8 +122,8 @@ Page({
             let one = list.slice(0, half)
             let two = list.slice(half, len)
             that.setData({
-              leftlist: left.concat(one),
-              rightlist: right.concat(two),
+              leftlist: left.concat(two),
+              rightlist: right.concat(one),
               page: pages
             })
           }

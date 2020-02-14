@@ -120,6 +120,18 @@ Page({
     }
   },
 
+  toLogin:function(){
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
+  },
+
+  toMembers:function(){
+    wx.navigateTo({
+      url: '/pages/mine/members/members',
+    })
+  },
+
   // 用户信息
   getParson: function() {
     let that = this
@@ -216,8 +228,13 @@ Page({
   totravel: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
+      let data = {
+        person: this.data.person,
+        person_like: this.data.person_like
+      }
+      console.log(data)
       wx.navigateTo({
-        url: '/pages/mine/travel/travel',
+        url: '/pages/mine/travel/travel?data='+JSON.stringify(data),
       })
     } else {
       wx.showModal({
@@ -268,12 +285,41 @@ Page({
     this.onLoad();
   },
 
-
   onReachBottom: function() {
     let that = this
-    let left = that.data.left
-    console.log(left)
-    let right = that.data.right
-    console.log(right)
+    let left = that.data.leftlist
+    let right = that.data.rightlist
+    let pages = that.data.page + 1
+    let data = {
+      page: pages,
+      length: 10,
+      type: 7
+    }
+    console.log('参数：', data)
+    let url = app.globalData.api + '/portal/Home/get_type_details'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          let len = list.length
+          if (len > 0) {
+            let half = len / 2
+            let one = list.slice(0, half)
+            let two = list.slice(half, len)
+            that.setData({
+              leftlist: left.concat(two),
+              rightlist: right.concat(one),
+              page: pages
+            })
+          }
+        } else {
+          modals.showToast('我也是有底线的', 'none');
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none');
+      }
+    })
   }
 })

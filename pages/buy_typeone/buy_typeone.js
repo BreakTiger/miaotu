@@ -150,7 +150,7 @@ Page({
       for (let i = 0; i < daylist.length; i++) {
         if (daylist[i] == curDay) {
           this.setData({
-            choice_day_index: i,
+            choice_day_index: i+1,
             choice_day_price: price[i]
           })
         }

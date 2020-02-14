@@ -29,7 +29,9 @@
     "pages/mine/certificates/certificates",
     "pages/mine/wallet/wallet",
     "pages/mine/person/person",
-    "pages/mine/travel/travel"
+    "pages/mine/travel/travel",
+    "pages/mine/order/order_details/toOrderDetails",
+    "pages/mine/members/members"
   ],
   "permission": {
     "scope.userLocation": {

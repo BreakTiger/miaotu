@@ -72,9 +72,9 @@ Page({
 
   // 拼团详情
   toGoodsDetail: function(e) {
-    let id = e.currentTarget.dataset.id
+    let oid = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/seckill_detail/seckill_detail?id=' + id,
+      url: '/pages/seckill_detail/seckill_detail?oid=' + oid,
     })
   },
 

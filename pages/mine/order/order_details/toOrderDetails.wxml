@@ -1,0 +1,92 @@
+<view class="container flex col fl-align">
+  <view class="type-line flex fl-align b-2E">
+    <image src="../../../../icon/dispose.png" class="type-icon"></image>
+    <text class="f28 c-ff">砍价助力时侯显示倒计时和失效还差x人等状态</text>
+    <!-- <text class="f28 c-ff">显示退款成功，失败，处理中共三种状态！</text> -->
+  </view>
+  <!-- 订单信息 -->
+  <view class="order-content b-ff flex col fl-align">
+
+    <view class="title f32 c-00 f-wb">订单信息</view>
+
+    <view class="flex fl-align fl-jsb" style="padding: 20rpx 0;">
+      <image src="{{details.banner}}" class="order-img"></image>
+      <view class="order-title climp3 f28 c-00 f-wb">{{details.title}}</view>
+    </view>
+
+    <view class="line flex fl-align f28 c-66">套餐类型：{{order.set_meal}}</view>
+
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.crowd==0}}">出游人群：成人</view>
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.crowd==1}}">出游人群：儿童</view>
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.crowd==2}}">出游人群：成人与儿童</view>
+
+    <view class="line flex fl-align f28 c-66">出行日期：{{order.starttime}}</view>
+    <view class="line flex fl-align f28 c-66">产品编号：{{order.order_no}}</view>
+    <view class="line flex fl-align f28 c-66">下单时间：{{order.pay_time}}</view>
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.type==1}}">拼单时间：{{order.pay_time}}</view>
+    <view class="line flex fl-align f28 c-66">支付方式：微信支付</view>
+
+  </view>
+
+  <!-- 拼单 -->
+  <view class="spell-line flex fl-align fl-jsb b-ff">
+    <text class="f28 c-66">拼单成功，共xx人</text>
+    <view class="flex fl-align">
+      <view class="spell-number">
+        <view class="spell-person">
+          <image src="../../../../resources/2.png"></image>
+          <text class="t-ac c-00 b_r200">拼主</text>
+        </view>
+        <image src="../../../../resources/1.png"></image>
+        <image src="../../../../resources/2.png"></image>
+      </view>
+      <image class="add-icon"></image>
+    </view>
+  </view>
+
+
+  <!-- 购买数量 -->
+  <view class="num-content b-ff flex col fl-align">
+    <view class="title f32 c-00 f-wb">购买数量</view>
+    <view class="line flex fl-align f28 c-66">成人票：{{order.adult_num}}张</view>
+    <view class="line flex fl-align f28 c-66">儿童票：{{order.child_num}}张</view>
+  </view>
+
+  <!-- 签署人 -->
+  <view class="num-content b-ff flex col fl-align">
+    <view class="title f32 c-00 f-wb">签署人</view>
+    <view class="line flex fl-align f28 c-66">姓名：{{order.name}}</view>
+    <view class="line flex fl-align f28 c-66">手机号：{{order.mobile}}</view>
+    <view class="line flex fl-align f28 c-66">身份证号：{{order.identity}}</view>
+  </view>
+
+  <!-- 合计 -->
+  <view class="total-line b-ff flex fl-align f32">
+    <text class="f-wb c-00">合计:</text>
+    <text class="c-38">¥{{order.pay_price}}</text>
+  </view>
+
+  <view class="last-line b-ff flex fl-align f24">
+
+    <!-- 待支付 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==1}}">取消订单</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==1}}">继续付款</view>
+
+    <!-- 待分享 -->
+
+    <!-- 待出行 -->
+
+    <!-- 待评价 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==3}}">删除订单</view>
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==3}}">申请售后</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==3}}">立即评价</view>
+
+    <!-- 已完成 -->
+
+    
+
+
+  </view>
+
+
+</view>

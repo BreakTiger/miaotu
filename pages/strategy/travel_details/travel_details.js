@@ -25,24 +25,24 @@ Page({
 
   onShow: function() {
     let openID = wx.getStorageSync('openid') || ''
+    let data = {
+      page: this.data.page,
+      length: 10,
+      type: this.data.data.type,
+      name: this.data.data.word,
+      sid: this.data.data.id
+    }
     if (openID) {
-      this.getList_login(openID)
+      this.getList_login(openID, data)
     } else {
-      this.getList_unlogin()
+      this.getList_unlogin(data)
     }
   },
 
-  getList_login: function(openID) {
+  getList_login: function(openID, param) {
     let that = this
-    let data = {
-      page: that.data.page,
-      length: 10,
-      type: that.data.data.type,
-      name: that.data.data.word,
-      sid: that.data.data.id
-    }
     let url = app.globalData.api + '/portal/Strategy/lists'
-    request.sendRequest(url, 'post', data, {
+    request.sendRequest(url, 'post', param, {
       'token': openID
     }).then(function(res) {
       if (res.statusCode == 200) {
@@ -62,17 +62,11 @@ Page({
     })
   },
 
-  getList_unlogin: function() {
+  getList_unlogin: function(param) {
     let that = this
-    let data = {
-      page: that.data.page,
-      length: 10,
-      type: that.data.data.type,
-      name: that.data.data.word,
-      sid: that.data.data.id
-    }
     let url = app.globalData.api + '/portal/Strategy/lists'
-    request.sendRequest(url, 'post', data, {
+    console.log(param)
+    request.sendRequest(url, 'post', param, {
       'content-type': 'application/json'
     }).then(function(res) {
       if (res.statusCode == 200) {
@@ -114,7 +108,6 @@ Page({
     let that = this
     let index = e.currentTarget.dataset.index
     let change = "list[" + index + "].show";
-    console.log(change);
     that.setData({
       [change]: true
     })
@@ -408,27 +401,67 @@ Page({
   },
 
   onReachBottom: function() {
+    let that = this
+    let list = that.data.list
+    let data = {
+      page: that.data.page + 1,
+      length: 10,
+      type: that.data.data.type,
+      name: that.data.data.word,
+      sid: that.data.data.id
+    }
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
-      this.getBottom_login()
+      this.getBottom_login(openID, data, list)
     } else {
-      this.getBottom_unlogin()
+      this.getBottom_unlogin(data, list)
     }
   },
 
-  getBottom_unlogin:function(){
-    console.log(111)
+  getBottom_unlogin: function(param, list) {
     let that = this
-    let list = that.data.list
-    console.log(list)
+    let url = app.globalData.api + '/portal/Strategy/lists'
+    request.sendRequest(url, 'post', param, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let one = res.data.data.data
+          console.log(one)
+          that.setData({
+            list: list.concat(one),
+            page: param.page
+          })
+        } else {
+          modals.showToast('我也是有底线的', 'none');
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none');
+      }
+    })
   },
 
-  getBottom_login:function(){
-    console.log(222)
+  getBottom_login: function(openID, param, list) {
     let that = this
-    let list = that.data.list
-    console.log(list)
-  },
-
-
+    let url = app.globalData.api + '/portal/Strategy/lists'
+    request.sendRequest(url, 'post', param, {
+      'token': openID
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let one = res.data.data.data
+          console.log(one)
+          that.setData({
+            list: list.concat(one),
+            page: param.page
+          })
+        } else {
+          modals.showToast('我也是有底线的', 'none');
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none');
+      }
+    })
+  }
 })

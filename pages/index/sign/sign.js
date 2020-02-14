@@ -294,8 +294,8 @@ Page({
             let one = list.slice(0, half)
             let two = list.slice(half, len)
             that.setData({
-              leftlist: left.concat(one),
-              rightlist: right.concat(two),
+              leftlist: left.concat(two),
+              rightlist: right.concat(one),
               page: pages
             })
           }

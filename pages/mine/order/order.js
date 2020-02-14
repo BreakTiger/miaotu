@@ -107,16 +107,17 @@ Page({
   continuePay: function(e) {
     let that = this
     let oid = e.currentTarget.dataset.item.id
-    console.log('订单ID：',oid)
+    console.log('订单ID：', oid)
     let url = app.globalData.api + '/portal/Pay/do_pay'
     request.sendRequest(url, 'post', {
-      order_id: e
+      order_id: oid
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let result = res.data.data
+          console.log(result)
           wx.requestPayment({
             timeStamp: result.timeStamp,
             nonceStr: result.nonceStr,
@@ -133,10 +134,21 @@ Page({
               modals.showToast('支付失败，请稍后重试', 'none')
             }
           })
+
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
+    })
+  },
+
+
+  // 跳转订单详情
+  toOrderDetails: function(e) {
+    let oid = e.currentTarget.dataset.id
+    console.log(oid)
+    wx.navigateTo({
+      url: '/pages/mine/order/order_details/toOrderDetails?oid='+oid,
     })
   },
 
