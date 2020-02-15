@@ -501,8 +501,8 @@ Page({
             paySign: result.paySign,
             success: function(res) {
               modals.showToast('支付成功', 'success')
-              console.log('订单ID：', e)
-              console.log('总价：', total_fina)
+              // console.log('订单ID：', e)
+              // console.log('总价：', total_fina)
               let param = {
                 oid: e,
                 tprice: total_fina

@@ -1,6 +1,6 @@
 <view class="container flex col fl-align">
   <view class="top-content flex col fl-align">
-    <image src="../../resources/2.png" class="bk" wx:if="{{!person.back_image}}"></image>
+    <image src="" class="bk" wx:if="{{!person.back_image}}"></image>
     <image src="{{person.back_image}}" class="bk" wx:if="{{person.back_image}}"></image>
     <view class="user-info flex col fl-align" wx:if="{{login==0}}">
       <image class="header"></image>

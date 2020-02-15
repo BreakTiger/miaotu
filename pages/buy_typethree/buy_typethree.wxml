@@ -1,10 +1,10 @@
 <view class="container flex col fl-align">
 
   <!-- 套餐类型 -->
-  <view class="type b-ff flex col" wx:if="{{types.length!=0}}">
+  <view class="type b-ff flex col" wx:if="{{tao.length!=0}}">
     <text class="f32 c-00 f-w5">请选择套餐类型：</text>
     <view class="type-list flex fl-w">
-      <text class="c-66 b_r12 {{types[index].id==choice?'type-list-item':''}}" wx:for="{{types}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
+      <text class="c-66 b_r12 {{tao[index].id==choice?'type-list-item':''}}" wx:for="{{tao}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
     </view>
   </view>
 
@@ -16,22 +16,31 @@
     </picker>
   </view>
 
+  <!-- 购买数量 -->
+  <view class="buyNums b-ff flex col ">
+    <text class="f32 c-00 f-w5">购买数量</text>
+    <view class=" flex fl-align fl-jsb">
+      <text class="f28 c-66">成人票</text>
+      <text>1</text>
+    </view>
+  </view>
+
   <!-- 购买人 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">姓名</text>
-    <input type="text" bindinput="usernames" placeholder="请输入购买人姓名"></input>
+    <input type="text" bindinput="toGetName" placeholder="请输入购买人姓名"></input>
   </view>
 
   <!-- 手机号 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">手机号</text>
-    <input type="number" bindinput="phones" placeholder="请输入购买人电话"></input>
+    <input type="number" bindinput="toGetPhone" placeholder="请输入购买人电话"></input>
   </view>
 
   <!-- 身份证 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">身份证</text>
-    <input type="idcard" bindinput="identity" placeholder="请输入购买人身份证"></input>
+    <input type="idcard" bindinput="toGetIdentity" placeholder="请输入购买人身份证"></input>
   </view>
 
   <!-- 底部栏 -->
@@ -42,5 +51,5 @@
     </view>
     <view class="sure c-ff f32 b_r200 t-ac" bindtap="toOrder">确定</view>
   </view>
-  
+
 </view>

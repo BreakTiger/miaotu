@@ -68,34 +68,6 @@
 					"pathName": "pages/mine/order/order",
 					"query": "",
 					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/mine/order/order_details/toOrderDetails",
-					"pathName": "pages/mine/order/order_details/toOrderDetails",
-					"query": "oid=121",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/tickets/tickets_buy/tickets_buy",
-					"pathName": "pages/index/tickets/tickets_buy/tickets_buy",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/mine/mine",
-					"pathName": "pages/mine/mine",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/shop/shop",
-					"pathName": "pages/shop/shop",
-					"query": "sid=1",
-					"scene": null
 				}
 			]
 		}

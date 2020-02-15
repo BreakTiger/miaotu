@@ -19,6 +19,7 @@ Page({
     id: '',
     details: {},
     shop: {},
+    tao: [],
     startTime: '',
     discuss: {},
     collecttype: false,
@@ -42,6 +43,7 @@ Page({
   getShopInfo: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/Miaosha/info'
+    modals.loading()
     request.sendRequest(url, 'post', {
       id: e
     }, {
@@ -49,18 +51,21 @@ Page({
     }).then(function(res) {
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          let details = res.data.data.info
+          let result = res.data.data
+          console.log(result)
           that.setData({
-            details: details,
-            shop: res.data.data.shop
+            details: result.info,
+            shop: result.shop,
+            tao: result.setmeal
           })
-          let introduce = details.introduce
+
+          let introduce = result.info.introduce
           WxParse.wxParse('introduce', 'html', introduce, that, 5);
-          let traffic = details.traffic
+          let traffic = result.info.traffic
           WxParse.wxParse('traffic', 'html', traffic, that, 5);
-          let buy = details.buy_notice
+          let buy = result.info.buy_notice
           WxParse.wxParse('buy', 'html', buy, that, 5);
-          that.trailer(details.article_type)
+          that.trailer(result.info.article_type)
         }
       }
     })
@@ -156,6 +161,7 @@ Page({
         countdown: '活动即将开始'
       });
     }
+    modals.loaded()
   },
 
   toShop: function(e) {
@@ -246,6 +252,51 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
+
+  toOrder: function() {
+    let that = this
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      console.log('秒杀活动ID：', that.data.id)
+      let url = app.globalData.api + '/portal/Miaosha/do_miaoshao'
+      modals.loading()
+      request.sendRequest(url, 'post', {
+        id: that.data.id
+      }, {
+        'token': openID
+      }).then(function(res) {
+        modals.loaded()
+        if (res.statusCode == 200) {
+          if (res.data.status == 1) {
+            let data = {
+              id:that.data.details.id,
+              tao: that.data.tao,
+              price: that.data.details.ms_price
+            }
+            wx.navigateTo({
+              url: '/pages/buy_typethree/buy_typethree?data='+JSON.stringify(data),
+            })
+          } else {
+            modals.showToast('您还未有抢购该商品的资格', 'none')
+          }
+        } else {
+          modals.showToast('系统繁忙，请稍后重试', 'none')
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '您需要授权后，才可进行此项操作',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
+      })
+    }
   },
 
   onShareAppMessage: function(options) {

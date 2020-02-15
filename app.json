@@ -31,7 +31,10 @@
     "pages/mine/person/person",
     "pages/mine/travel/travel",
     "pages/mine/order/order_details/toOrderDetails",
-    "pages/mine/members/members"
+    "pages/mine/members/members",
+    "pages/buy_typethree/buy_typethree",
+    "pages/mine/order/apply/apply",
+    "pages/mine/order/comments/comments"
   ],
   "permission": {
     "scope.userLocation": {

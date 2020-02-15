@@ -1,0 +1,50 @@
+page {
+  background: #f5f5f5;
+}
+
+.goods-line {
+  width: 670rpx;
+  padding: 20rpx 0;
+}
+
+.goods-img {
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.goods-name {
+  width: 492rpx;
+}
+
+.picture-content {
+  width: 670rpx;
+  padding-bottom: 15rpx;
+}
+
+.picture-box {
+  width: 206rpx;
+  height: 206rpx;
+  background: black;
+  position: relative;
+  margin-right: 15rpx;
+  margin-bottom: 15rpx;
+}
+
+.add {
+  width: 206rpx;
+  height: 206rpx;
+}
+
+.comments{
+  width: 670rpx;
+  height: 400rpx;
+  margin-bottom: 20rpx;
+}
+
+.send {
+  width: 600rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(270deg, rgba(65, 214, 248, 1) 0%, rgba(33, 176, 240, 1) 100%);
+  margin-top: 40rpx;
+}

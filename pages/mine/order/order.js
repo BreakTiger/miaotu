@@ -107,7 +107,6 @@ Page({
   continuePay: function(e) {
     let that = this
     let oid = e.currentTarget.dataset.item.id
-    console.log('订单ID：', oid)
     let url = app.globalData.api + '/portal/Pay/do_pay'
     request.sendRequest(url, 'post', {
       order_id: oid
@@ -117,7 +116,6 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let result = res.data.data
-          console.log(result)
           wx.requestPayment({
             timeStamp: result.timeStamp,
             nonceStr: result.nonceStr,
@@ -131,10 +129,9 @@ Page({
               }, 1000)
             },
             fail: function(res) {
-              modals.showToast('支付失败，请稍后重试', 'none')
+              modals.showToast('支付失败', 'none')
             }
           })
-
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -145,10 +142,13 @@ Page({
 
   // 跳转订单详情
   toOrderDetails: function(e) {
-    let oid = e.currentTarget.dataset.id
-    console.log(oid)
+    let item = e.currentTarget.dataset.item
+    let data = {
+      oid: item.id,
+      newtype: item.new_status
+    }
     wx.navigateTo({
-      url: '/pages/mine/order/order_details/toOrderDetails?oid='+oid,
+      url: '/pages/mine/order/order_details/toOrderDetails?data=' + JSON.stringify(data),
     })
   },
 
@@ -165,6 +165,31 @@ Page({
   },
 
   onReachBottom: function() {
+    let that = this
+    let old = that.data.list
+    let pages = that.data.page + 1
+    let data = {
+      page: pages,
+      length: 10,
+      type: that.data.choice_one
+    }
+    console.log('参数:', data)
+    let url = app.globalData.api + '/portal/Personal/my_order'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res)
+      if(res.statusCode==200){
+        if(res.data.status==1){
+
+        }else{
+          modals.showToast('我也是有底线的', 'none')
+        }
+      }else{
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+
 
   }
 })

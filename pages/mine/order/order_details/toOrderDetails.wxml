@@ -1,8 +1,14 @@
 <view class="container flex col fl-align">
   <view class="type-line flex fl-align b-2E">
     <image src="../../../../icon/dispose.png" class="type-icon"></image>
-    <text class="f28 c-ff">砍价助力时侯显示倒计时和失效还差x人等状态</text>
-    <!-- <text class="f28 c-ff">显示退款成功，失败，处理中共三种状态！</text> -->
+    <text class="f28 c-ff" wx:if="{{otype==1}}">待付款</text>
+    <text class="f28 c-ff" wx:if="{{otype==2}}">待出行</text>
+    <text class="f28 c-ff" wx:if="{{otype==3}}">待评价</text>
+    <text class="f28 c-ff" wx:if="{{otype==4}}">已完成</text>
+    <text class="f28 c-ff" wx:if="{{otype==5}}">待分享</text>
+    <text class="f28 c-ff" wx:if="{{otype==6}}">商家处理中...</text>
+    <text class="f28 c-ff" wx:if="{{otype==7}}">申请失败</text>
+    <text class="f28 c-ff" wx:if="{{otype==8}}">申请成功</text>
   </view>
   <!-- 订单信息 -->
   <view class="order-content b-ff flex col fl-align">
@@ -44,7 +50,6 @@
     </view>
   </view>
 
-
   <!-- 购买数量 -->
   <view class="num-content b-ff flex col fl-align">
     <view class="title f32 c-00 f-wb">购买数量</view>
@@ -68,23 +73,34 @@
 
   <view class="last-line b-ff flex fl-align f24">
 
-    <!-- 待支付 -->
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==1}}">取消订单</view>
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==1}}">继续付款</view>
+    <!-- 待支付  order_type：1-->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==1}}" bindtap="delOrder">取消订单</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==1}}" bindtap="continuePay">继续付款</view>
 
-    <!-- 待分享 -->
+    <!-- 待出行 order_type：2-->
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==2}}">申请退款</view>
 
-    <!-- 待出行 -->
-
-    <!-- 待评价 -->
+    <!-- 待评价 order_type：3-->
     <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==3}}">删除订单</view>
     <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==3}}">申请售后</view>
     <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==3}}">立即评价</view>
 
-    <!-- 已完成 -->
+    <!-- 已完成 order_type：4-->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==4}}">删除订单</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==4}}">再次购买</view>
 
-    
+    <!-- 待分享 order_type：5-->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==5}}">取消订单</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==5}}">立即分享</view>
 
+    <!-- 商家处理中 order_type：6-->
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==6}}">取消申请</view>
+
+    <!-- 申请成功 order_type：7-->
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==7}}">取消订单</view>
+
+    <!-- 申请失败 order_type：8-->
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==8}}">取消订单</view>
 
   </view>
 
