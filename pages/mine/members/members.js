@@ -5,31 +5,57 @@ const app = getApp()
 Page({
 
   data: {
-
+    person: [],
+    cardlist: [],
   },
 
- 
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    let person = JSON.parse(options.data)
+    this.setData({
+      person: person
+    })
+    this.getAllCard()
   },
 
- 
-  onShow: function () {
-
+  getAllCard: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Level/index'
+    request.sendRequest(url, 'post', {}, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data
+          for (let i = 0; i < list.length; i++) {
+            let move = i * 160
+            list[i].top = move
+          }
+          that.setData({
+            cardlist: list
+          })
+        }
+      }
+    })
   },
 
-  
-  onPullDownRefresh: function () {
+  // onReady: function() {
+  //   this.animation = wx.createAnimation()
+  // },
 
+  // choiceCard: function(e) {
+  //   let that = this
+  //   let index = e.currentTarget.dataset.index
+  //   let len = that.data.cardlist.length - 1
+  //   if (index != len) {
+  //     console.log('移动距离：',index * 50)
+  //     that.animation.translateY(index*50).step()
+  //     that.setData({
+  //       animation: that.animation.export()
+  //     })
+  //   }
+  // },
+
+  toBuy: function() {
+    console.log(222)
   },
-
-  
-  onReachBottom: function () {
-
-  },
-
-  
-  onShareAppMessage: function () {
-
-  }
 })

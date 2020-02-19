@@ -68,6 +68,33 @@
 					"pathName": "pages/mine/order/order",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/members/members",
+					"pathName": "pages/mine/members/members",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/members/members",
+					"pathName": "pages/mine/members/members",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/free/free",
+					"pathName": "pages/index/free/free",
+					"scene": null
 				}
 			]
 		}

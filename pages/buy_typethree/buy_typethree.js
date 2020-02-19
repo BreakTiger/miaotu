@@ -22,6 +22,7 @@ Page({
 
   onLoad: function(options) {
     let data = JSON.parse(options.data)
+    console.log(data)
     this.setData({
       id: data.id,
       tao: data.tao,
@@ -76,11 +77,6 @@ Page({
     let name = that.data.name
     let phone = that.data.mobile
     let identity = that.data.identity
-    let time = new Date();
-    let Y = time.getFullYear(); //获取当前年份
-    let M = time.getMonth() + 1; //获取当前月份(0-11,0代表1月)
-    let D = time.getDate(); //获取当前日(1-31)
-    let now = Y + '-' + M + '-' + D
     // 验证
     if (place == "请选择出发地址") {
       modals.showToast('请选择您的出发地', 'none')
@@ -96,24 +92,19 @@ Page({
       modals.showToast('身份证号码有误，请重新输入', 'none')
     } else {
       let data = {
-        details_id: that.data.id,
-        set_meal_id: that.data.choice,
+        id: that.data.id,
         name: name,
         mobile: phone,
         identity: identity,
-        starting: place,
-        day: now,
-        adult_num: 1,
-        child_num: 0,
-        coupon_id: '',
-        total: that.data.total
+        set_meal_id: that.data.choice,
+        starting: place
       }
       console.log('参数：', data)
-      let url = app.globalData.api + '/portal/Order/do_order'
+      let url = app.globalData.api + '/portal/Miaosha/do_order'
       request.sendRequest(url, 'post', data, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
-        console.log(res.data.data)
+        console.log(res.data)
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             let oid = res.data.data
@@ -125,7 +116,6 @@ Page({
           modals.showToast('系统繁忙，请稍后重试', 'none')
         }
       })
-
     }
   },
 
@@ -150,17 +140,18 @@ Page({
             paySign: result.paySign,
             success: function(res) {
               modals.showToast('支付成功', 'success')
-              // console.log('订单ID：', e)
-              // console.log('总价：', total_fina)
-              // let param = {
-              //   oid: e,
-              //   tprice: total_fina
-              // }
-              // setTimeout(function() {
-              //   wx.navigateTo({
-              //     url: '/pages/pay_ success/pay_ success?param=' + JSON.stringify(param),
-              //   })
-              // }, 2000)
+              console.log('订单ID：', e)
+              console.log('订单总价：', total)
+              let param = {
+                oid: e,
+                tprice: total_fina
+              }
+              console.log('参数：',param)
+              setTimeout(function() {
+                wx.navigateTo({
+                  url: '/pages/pay_ success/pay_ success?param=' + JSON.stringify(param),
+                })
+              }, 2000)
             },
             fail: function(res) {
               modals.showToast('支付失败', 'loading')

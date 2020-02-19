@@ -21,13 +21,10 @@ Page({
     covers: false,
     width_one: 204,
     width_two: 0,
-
     cardlist: 3,
-
     choice_card: '',
-
-
-    before: true
+    before: true,
+    members: ''
   },
 
 
@@ -63,10 +60,48 @@ Page({
 
   },
 
-  toGetFree: function() {
-    this.setData({
-      covers: true
-    })
+  toGetFree: function(e) {
+    let that = this
+    let openID = wx.getStorageSync('openid') || ''
+    if (!openID) {
+      wx.showModal({
+        title: '提示',
+        content: '您需授权才可以进行此项操作哦',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
+      })
+    } else {
+      let url = app.globalData.api + '/portal/Miandan/do_miandan'
+      modals.loading()
+      request.sendRequest(url, 'post', {
+        id: e.currentTarget.dataset.id
+      }, {
+        'token': openID
+      }).then(function(res) {
+        modals.loaded()
+        console.log(res)
+        if (res.statusCode == 200) {
+          if (res.data.status == 1) {
+            console.log(res.data.data)
+            that.setData({
+              covers: true,
+              members: res.data.data
+            })
+          }
+        } else {
+          modals.showToast('系统繁忙，请稍后重试', 'none')
+        }
+      })
+    }
+  },
+
+  onReady: function() {
+    this.animation = wx.createAnimation()
   },
 
   choose_card: function() {
@@ -74,7 +109,24 @@ Page({
     that.setData({
       cardlist: 1
     })
+    this.animation.rotateY(180).step()
+    this.setData({
+      animation: this.animation.export()
+    })
+    setTimeout(function() {
+      that.setData({
+        before: false
+      })
+    }, 500)
   },
+
+
+  toReceive:function(){
+    let that = this
+    console.log(1111)
+  },
+
+
 
   onPullDownRefresh: function() {
     wx.showToast({

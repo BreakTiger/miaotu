@@ -100,7 +100,6 @@ page {
 }
 
 .titles {
-  font-size: 60rpx;
   font-weight: 600;
   color: #ffea87;
   margin-bottom: 50rpx;
@@ -114,4 +113,20 @@ page {
 .card-line>image {
   height: 100%;
   margin: 0 auto;
+}
+
+.receives {
+  width: 480rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(270deg, rgba(65, 214, 248, 1) 0%, rgba(33, 176, 240, 1) 100%);
+  box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(31, 175, 241, 1);
+  margin-top: 20rpx;
+}
+
+.members {
+  width: 100rpx;
+  position: absolute;
+  left: calc((670rpx - 100rpx)/2);
+  top: 120rpx;
 }

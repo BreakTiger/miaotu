@@ -18,18 +18,23 @@
       <view class="price-line f28 c-38">
         <text>￥{{item.dprice}}起</text>
       </view>
-      <view class="freeget f28 c-ff t-ac" bindtap="toGetFree">免费获得</view>
+      <view class="freeget f28 c-ff t-ac" bindtap="toGetFree" data-id="{{item.id}}">免费获得</view>
     </view>
   </view>
   <view class="cover flex col fl-align fl-jc" wx:if="{{covers}}">
     <view class="flex col fl-align" wx:if="{{before}}">
-      <text class="titles">助力人数由你来定</text>
+      <text class="titles f60">助力人数由你来定</text>
       <view class="card-line flex fl-align fl-jsb">
-        <image src="../../../resources/b_plate.png" style="width:{{width_one}}rpx;height:100%;" wx:for="{{cardlist}}" wx:key="index" bindtap="choose_card"></image>
+        <image src="../../../resources/b_plate.png" style="width:{{width_one}}rpx;height:100%;" wx:for="{{cardlist}}" wx:key="index" bindtap="choose_card" animation="{{animation}}"></image>
       </view>
     </view>
     <view class="flex col fl-align" wx:else>
-      <text class="titles">恭喜！门票仅需xx人助力即可免费拿</text>
+      <text class="titles f40">恭喜！门票仅需{{members}}人助力即可免费拿</text>
+      <view class="card-line flex fl-align" style="position: relative;">
+        <image src="../../../resources/plate.png" style="width:{{width_one}}rpx;height:100%;"></image>
+        <view class="members c-ff f40 t-ac">{{members}}人</view>
+      </view>
+      <view class="receives b_r200 c-ff f32 t-ac" bindtap="toReceive">立即领取</view>
     </view>
   </view>
 </view>

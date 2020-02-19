@@ -80,6 +80,10 @@ page {
   font-size: 40rpx;
 }
 
+.f60{
+  font-size: 60rpx;
+}
+
 /* 文字颜色 */
 
 .c-F1 {

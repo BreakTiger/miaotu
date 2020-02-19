@@ -120,15 +120,16 @@ Page({
     }
   },
 
-  toLogin:function(){
+  toLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
     })
   },
 
-  toMembers:function(){
+  toMembers: function() {
+    let data = JSON.stringify(this.data.person)
     wx.navigateTo({
-      url: '/pages/mine/members/members',
+      url: '/pages/mine/members/members?data='+data,
     })
   },
 
@@ -234,7 +235,7 @@ Page({
       }
       console.log(data)
       wx.navigateTo({
-        url: '/pages/mine/travel/travel?data='+JSON.stringify(data),
+        url: '/pages/mine/travel/travel?data=' + JSON.stringify(data),
       })
     } else {
       wx.showModal({

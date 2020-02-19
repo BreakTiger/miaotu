@@ -19,7 +19,6 @@
     "pages/send/send",
     "pages/shop/shop",
     "pages/evaluate/evaluate",
-    "pages/tickets_detail/tickets_detail",
     "pages/index/tickets/tickets_buy/tickets_buy",
     "pages/index/sign/sign_rule/sign_rule",
     "pages/pay_ success/pay_ success",

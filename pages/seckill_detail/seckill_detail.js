@@ -270,7 +270,7 @@ Page({
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             let data = {
-              id:that.data.details.id,
+              id: that.data.id,
               tao: that.data.tao,
               price: that.data.details.ms_price
             }
