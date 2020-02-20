@@ -1,0 +1,46 @@
+page {
+  background: #f5f5f5;
+}
+
+/* 出发地 + 套餐类型 */
+
+.depart, .imports {
+  width: 100%;
+  padding: 20rpx 0;
+  margin-bottom: 8rpx;
+}
+
+.depart>text,  .imports>text {
+  margin-left: 40rpx;
+}
+
+
+/* 底部栏 */
+
+.bottom-line {
+  width: 100%;
+  padding: 16rpx 0;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+}
+
+.bottom-line>view:first-child {
+  margin-left: 40rpx;
+}
+
+.bottom-line>view:last-child {
+  margin-right: 40rpx;
+}
+
+.sure {
+  width: 300rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+}
+
+.imports>input {
+  text-align: right;
+  margin-right: 40rpx;
+}

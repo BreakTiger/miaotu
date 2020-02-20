@@ -33,7 +33,8 @@
     "pages/mine/members/members",
     "pages/buy_typethree/buy_typethree",
     "pages/mine/order/apply/apply",
-    "pages/mine/order/comments/comments"
+    "pages/mine/order/comments/comments",
+    "pages/buy_typefour/buy_typefour"
   ],
   "permission": {
     "scope.userLocation": {

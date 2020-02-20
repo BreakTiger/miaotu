@@ -24,7 +24,8 @@ Page({
     cardlist: 3,
     choice_card: '',
     before: true,
-    members: ''
+    members: '',
+    id: '',
   },
 
 
@@ -44,7 +45,6 @@ Page({
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded()
-      // console.log(res.data.data.data);
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -77,9 +77,10 @@ Page({
       })
     } else {
       let url = app.globalData.api + '/portal/Miandan/do_miandan'
+      let id = e.currentTarget.dataset.id
       modals.loading()
       request.sendRequest(url, 'post', {
-        id: e.currentTarget.dataset.id
+        id: id
       }, {
         'token': openID
       }).then(function(res) {
@@ -90,7 +91,8 @@ Page({
             console.log(res.data.data)
             that.setData({
               covers: true,
-              members: res.data.data
+              members: res.data.data,
+              id: id
             })
           }
         } else {
@@ -120,10 +122,12 @@ Page({
     }, 500)
   },
 
-
-  toReceive:function(){
-    let that = this
-    console.log(1111)
+  // 跳转去资料输入页面
+  toReceive: function() {
+    console.log('ID:', this.data.id)
+    wx.navigateTo({
+      url: '/pages/buy_typefour/buy_typefour?id=' + this.data.id,
+    })
   },
 
 
