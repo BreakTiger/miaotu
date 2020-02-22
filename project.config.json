@@ -54,7 +54,22 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/buy_typefour/buy_typefour",
+					"pathName": "pages/buy_typefour/buy_typefour",
+					"query": "id=8",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tickets_detail/tickets_detail",
+					"pathName": "pages/tickets_detail/tickets_detail",
+					"query": "id=7",
+					"scene": null
+				}
+			]
 		}
 	}
 }

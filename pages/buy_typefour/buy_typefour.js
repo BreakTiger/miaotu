@@ -1,3 +1,5 @@
+// 门票下单
+
 const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
@@ -82,11 +84,20 @@ Page({
         starting: place
       }
       console.log('参数：', data)
-      let url = app.globalData.api + '/portal/Miandan/do_order'
+      let url = app.globalData.api + '/portal/Kanjia/get_kanjia'
       request.sendRequest(url, 'post', data, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
         console.log(res)
+        if (res.statusCode == 200) {
+          if (res.data.status == 1) {
+            let oid = res.data.data
+            console.log(oid)
+            
+          }
+        } else {
+          modals.showToast('系统繁忙，请稍后重试', 'none')
+        }
       })
     }
   },

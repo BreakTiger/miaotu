@@ -1,0 +1,100 @@
+page {
+  background: #ff3f53;
+}
+
+.good-content {
+  width: 710rpx;
+  height: 566rpx;
+  margin-top: 40rpx;
+  margin-bottom: 80rpx;
+}
+
+.good-line {
+  width: 670rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.goods-img {
+  width: 230rpx;
+  height: 230rpx;
+}
+
+.goods-info {
+  width: 420rpx;
+  height: 230rpx;
+}
+
+.nums {
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  background: linear-gradient(180deg, rgba(255, 115, 140, 1) 0%, rgba(255, 63, 83, 1) 100%);
+  border-radius: 4rpx;
+}
+
+.progress-line {
+  width: 520rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.invite {
+  width: 600rpx !important;
+  background: rgba(255, 211, 4, 1);
+}
+
+.lines {
+  position: relative;
+  margin-bottom: 42rpx;
+}
+
+.lines::after {
+  content: '';
+  position: absolute;
+  bottom: 0rpx;
+  left: 36rpx;
+  width: 72rpx;
+  height: 8rpx;
+  background: rgba(255, 211, 4, 0.7);
+}
+
+.list-content {
+  height: 864rpx;
+  width: 710rpx;
+  margin-bottom: 40rpx;
+}
+
+.list-content>scroll-view {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.empt {
+  margin: auto;
+}
+
+.empt>image {
+  width: 322rpx;
+  height: 272rpx;
+}
+
+.empt>button {
+  width: 348rpx !important;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+  margin-top: 40rpx;
+}
+
+.list-item {
+  width: 630rpx;
+  height: 108rpx;
+  margin: 0 auto;
+}
+
+.header {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}

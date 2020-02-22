@@ -12,7 +12,7 @@
         <view class="state flex col fl-align">
           <text class="c-66 f20">已拼{{item.people_count}}单</text>
           <view class="flex col fl-align fl-jse b_r12 c-ff">
-            <text class="f24">去拼团</text>
+            <text class="f24">去秒杀</text>
             <view class="flex fl-align fl-jsa">
               <progress percent="{{(item.people_count/item.ms_share)*100}}" activeColor="white" backgroundColor="rgba(255,255,255,0.5)" border-radius="190"></progress>
               <text class="f18">{{(item.people_count/item.ms_share)*100}}%</text>

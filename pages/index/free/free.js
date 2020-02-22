@@ -16,6 +16,7 @@ Page({
       img: '../../../icon/tickets_three.png',
       name: '人满必获得门票'
     }],
+    mlist: [],
     page: 1,
     list: [],
     covers: false,
@@ -50,6 +51,7 @@ Page({
           that.setData({
             list: res.data.data.data
           })
+          that.getMyList()
         } else {
           modals.showToast(res.data.msg, 'none')
         }
@@ -58,6 +60,29 @@ Page({
       }
     })
 
+  },
+
+  getMyList: function() {
+    let that = this
+    let data = {
+      page: 1,
+      length: 20
+    }
+    let url = app.globalData.api + '/portal/Miandan/my_index'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data.data.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            mlist: res.data.data.data
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   toGetFree: function(e) {
@@ -102,6 +127,13 @@ Page({
     }
   },
 
+  toshares: function(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/free_detail/free_detail?id=' + id,
+    })
+  },
+
   onReady: function() {
     this.animation = wx.createAnimation()
   },
@@ -126,7 +158,7 @@ Page({
   toReceive: function() {
     console.log('ID:', this.data.id)
     wx.navigateTo({
-      url: '/pages/buy_typefour/buy_typefour?id=' + this.data.id,
+      url: '/pages/free_detail/free_detail?id=' + this.data.id,
     })
   },
 

@@ -11,7 +11,6 @@ Page({
     alist: []
   },
 
-
   onLoad: function(options) {
     this.getList()
   },
@@ -43,17 +42,16 @@ Page({
     })
   },
 
-
-
   // 点击免费拿
   toFreeGet: function(e) {
     let id = e.currentTarget.dataset.id
+    console.log(id)
     // 判断是否登录
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
       console.log('立即下单')
       wx.navigateTo({
-        url: '/pages/index/tickets/tickets_buy/tickets_buy',
+        url: '/pages/buy_typefour/buy_typefour?id=' + id,
       })
     } else {
       wx.showModal({
@@ -69,30 +67,6 @@ Page({
       })
     }
   },
-
-  getFree: function(id) {
-    console.log(id);
-    let that = this
-    let url = app.globalData.api + '/portal/Kanjia/get_kanjia'
-    request.sendRequest(url, 'post', {
-      id: id
-    }, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      console.log(res.data)
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          // that.getMyList(wx.getStorageSync('openid'))
-        } else {
-          modals.showToast(res.data.msg, 'none')
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
-
 
   // 分享好友
   toShareDown: function(e) {
@@ -121,7 +95,7 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': openID
     }).then(function(res) {
-      console.log(res.data.data)
+      // console.log(res.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({

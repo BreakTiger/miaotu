@@ -19,7 +19,6 @@
     "pages/send/send",
     "pages/shop/shop",
     "pages/evaluate/evaluate",
-    "pages/index/tickets/tickets_buy/tickets_buy",
     "pages/index/sign/sign_rule/sign_rule",
     "pages/pay_ success/pay_ success",
     "pages/strategy/travel_details/travel_details",
@@ -34,7 +33,9 @@
     "pages/buy_typethree/buy_typethree",
     "pages/mine/order/apply/apply",
     "pages/mine/order/comments/comments",
-    "pages/buy_typefour/buy_typefour"
+    "pages/buy_typefour/buy_typefour",
+    "pages/free_detail/free_detail",
+    "pages/tickets_detail/tickets_detail"
   ],
   "permission": {
     "scope.userLocation": {

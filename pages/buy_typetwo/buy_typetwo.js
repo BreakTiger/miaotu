@@ -1,3 +1,5 @@
+// 拼团下单
+
 const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
@@ -18,7 +20,7 @@ Page({
     phone: '',
     idnum: '',
     price: '',
-    total: 0
+    total: '0.00'
   },
 
   /**
@@ -116,11 +118,13 @@ Page({
       request.sendRequest(url, 'post', data, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
-        console.log(res)
         modals.loaded()
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
-            that.payment(res.data.data)
+            let oid = res.data.data
+            console.log('订单ID：', oid)
+            console.log('总价：', that.data.total)
+            that.payment(oid)
           } else {
             modals.showToast(res.data.msg, 'none')
           }
@@ -152,10 +156,10 @@ Page({
             success: function(res) {
               modals.showToast('支付成功', 'success')
               console.log('订单ID：', e)
-              console.log('总价：', total_fina)
+              console.log('总价：', that.data.total)
               let param = {
                 oid: e,
-                tprice: total_fina
+                tprice: that.data.total
               }
               setTimeout(function () {
                 wx.navigateTo({

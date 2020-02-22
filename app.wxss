@@ -76,6 +76,10 @@ page {
   font-size: 32rpx;
 }
 
+.f36{
+  font-size: 36rpx;
+}
+
 .f40 {
   font-size: 40rpx;
 }
@@ -114,6 +118,9 @@ page {
   color: #CCC;
 }
 
+.c-33{
+  color: #333;
+}
 /* 文字粗细 */
 
 .f-w3 {

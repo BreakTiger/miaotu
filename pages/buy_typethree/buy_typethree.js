@@ -1,3 +1,5 @@
+// 秒杀下单
+
 const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
@@ -108,6 +110,8 @@ Page({
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             let oid = res.data.data
+            console.log('订单ID：', oid)
+            console.log('总价：', that.data.total)
             that.pay_memont(oid)
           } else {
             modals.showToast(res.data.msg, 'none');
@@ -141,12 +145,12 @@ Page({
             success: function(res) {
               modals.showToast('支付成功', 'success')
               console.log('订单ID：', e)
-              console.log('订单总价：', total)
+              console.log('订单总价：', that.data.total)
               let param = {
                 oid: e,
-                tprice: total_fina
+                tprice: that.data.total
               }
-              console.log('参数：',param)
+              console.log('参数：', param)
               setTimeout(function() {
                 wx.navigateTo({
                   url: '/pages/pay_ success/pay_ success?param=' + JSON.stringify(param),

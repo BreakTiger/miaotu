@@ -1,0 +1,101 @@
+.container>view {
+  width: 100%;
+}
+
+.goods-info {
+  height: 594rpx;
+  background: rgba(202, 238, 255, 1);
+  margin-bottom: 36rpx;
+}
+
+.goods-box {
+  width: 710rpx;
+  height: 270rpx;
+  background: rgba(255, 255, 255, 1);
+  margin: 40rpx 0;
+}
+
+.share {
+  margin-top: 20rpx;
+  width: 600rpx !important;
+  height: 88rpx !important;
+  background: rgba(255, 63, 83, 1);
+}
+
+.goods-img {
+  width: 230rpx;
+  height: 230rpx;
+  margin: 0 20rpx;
+}
+
+.info-box {
+  width: 420rpx;
+  height: 230rpx;
+  margin-right: 20rpx;
+}
+
+.info-box>view {
+  width: 100%;
+}
+
+.nums {
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  background: linear-gradient(180deg, rgba(255, 115, 140, 1) 0%, rgba(255, 63, 83, 1) 100%);
+  border-radius: 4rpx;
+}
+
+.linebottoms {
+  position: relative;
+  margin-left: 20rpx;
+}
+
+.linebottoms::after {
+  content: '';
+  width: 72rpx;
+  height: 8rpx;
+  background: #ffd304;
+  position: absolute;
+  bottom: 0;
+  left: calc((100% - 72rpx)/2);
+  opacity: 0.7;
+}
+
+.list-content {
+  width: 710rpx !important;
+  margin: auto;
+  margin-top: 20rpx;
+}
+
+.left-col, .right-col {
+  width: 346rpx;
+  display: inline-block;
+}
+
+.right-col {
+  float: right;
+}
+
+.list-item {
+  width: 346rpx;
+  height: 488rpx;
+  margin-bottom: 20rpx;
+}
+
+.list-item>image {
+  width: 346rpx;
+  height: 344rpx;
+  border-radius: 16rpx 16rpx 0rpx 0rpx;
+}
+
+.list-titles {
+  width: 304rpx;
+}
+
+.list-img {
+  width: 346rpx;
+  height: 344rpx;
+  margin-bottom: 20rpx;
+}
+

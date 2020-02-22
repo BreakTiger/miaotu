@@ -1,0 +1,63 @@
+<view class="container flex col fl-align">
+  <view class="goods-info flex col fl-align">
+    <view class="goods-box b_r12 flex fl-align fl-jsb">
+      <image src="{{info.banner}}" class="goods-img b_r12"></image>
+      <view class="info-box flex col fl-align fl-jse">
+        <view class="climp2 f28 c-66 f-w5">{{info.title}}</view>
+        <view class="counts flex fl-align">
+          <view class="count-lines flex fl-align">
+            <view class="nums c-ff f20 t-ac">{{day}}</view>:
+            <view class="nums c-ff f20 t-ac">{{hour}}</view>:
+            <view class="nums c-ff f20 t-ac">{{min}}</view>:
+            <view class="nums c-ff f20 t-ac">{{sec}}</view>
+          </view>
+          <text class="f20 c-66" style="margin-left:10rpx;" wx:if="{{info.status==0}}">活动正在进行</text>
+          <text class="f20 c-66" style="margin-left:10rpx;" wx:if="{{info.status==1}}">活动已完成</text>
+          <text class="f20 c-66" style="margin-left:10rpx;" wx:if="{{info.status==2}}">活动已过期</text>
+        </view>
+        <view class="price-lines flex fl-align fl-jsb">
+          <view>
+            <text class="c-38 f18">￥<text style="font-size:48rpx;">0</text></text>
+            <text class="c-CC f28">￥{{info.dprice}}</text>
+          </view>
+          <text class="c-38 f20">{{info.sell_count}}人已免费领取</text>
+        </view>
+      </view>
+    </view>
+    <text class="f32 c-00">差<text class="f40 c-38">3人</text>即可成功</text>
+    <button class="share b_r200 c-ff" open-type="share">喊好友帮忙</button>
+    <!-- <button class="share b_r200 c-ff" bindtap="toFinash">立即领取</button> -->
+  </view>
+  <view>
+    <text class="linebottoms c-33 f-w5">猜你喜欢</text>
+  </view>
+  <view class="list-content b-F5">
+    <view class="left-col">
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.banner}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-titles climp2 f24">{{item.title}}</view>
+          <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <text>¥</text>
+            <text class="f28">{{item.price}}</text>
+            <text>起</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="right-col">
+      <image src="{{card}}" class="b_r16 list-img"></image>
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.banner}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-titles climp2 f24">{{item.title}}</view>
+          <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <text>¥</text>
+            <text class="f28">{{item.price}}</text>
+            <text>起</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
