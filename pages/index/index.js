@@ -157,6 +157,10 @@ Page({
               countdown: '活动即将开始'
             });
           }
+        }else{
+          that.setData({
+            skillgoods: res.data.data
+          })
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')

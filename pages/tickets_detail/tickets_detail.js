@@ -13,15 +13,24 @@ Page({
     hour: '0',
     min: '0',
     sec: '0',
-    logList:[]
+    logList: [],
+    judge: ''
   },
 
   onLoad: function(options) {
-    console.log(options.id)
     this.setData({
       id: options.id
     })
-    this.getGoods(options.id)
+  },
+
+  onShow: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (!openID) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+    this.getGoods(this.data.id)
   },
 
   // 商品详情
@@ -33,13 +42,25 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res.data.data.info);
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
             info: res.data.data.info,
             percent: parseFloat(res.data.data.info.do_price) / parseFloat(res.data.data.info.price) * 100
           })
+          let opneID = wx.getStorageSync('openid')
+          console.log('当前登录的opneid：', opneID)
+          let tokens = res.data.data.info.openid
+          console.log('活动发起人的opneid：', tokens)
+          if (opneID == tokens) {
+            that.setData({
+              judge: true
+            })
+          } else {
+            that.setData({
+              judge: false
+            })
+          }
           that.setTimeShow(res.data.data.info.end_time)
         }
       } else {
@@ -48,6 +69,7 @@ Page({
     })
   },
 
+  // 倒计时
   setTimeShow: function(e) {
     let now = Date.parse(new Date()) / 1000
     if (e > now) {
@@ -84,13 +106,13 @@ Page({
         }
       }.bind(this), 1000);
     }
-    this.getLog()
+    // this.getLog()
   },
 
+  // 砍价记录
   getLog: function() {
     let that = this
     let id = that.data.id
-    console.log('订单ID：', id)
     let url = app.globalData.api + '/portal/Kanjia/kanjia_info'
     request.sendRequest(url, 'post', {
       id: id
@@ -98,29 +120,56 @@ Page({
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
       console.log(res.data.data)
-      if(res.statusCode==200){
-        if(res.data.status==1){
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
           that.setData({
             logList: res.data.data
           })
         }
-      }else{
+      } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
-
   },
 
-  onShow: function() {
-    let openID = wx.getStorageSync('openid') || ''
-    if (!openID) {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
+  // 完成砍价，领取
+  toFinsh: function() {
+    let id = this.data.id
+    console.log('活动ID：', id)
+    wx.navigateTo({
+      url: '/pages/buy_typefour/buy_typefour?id=' + id,
+    })
+  },
+
+  // 好友砍一刀
+  cutOne: function() {
+    let that = this
+    let data = {
+      uopenid: that.data.info.openid,
+      type: 2,
+      order_id: that.data.info.id
     }
+    console.log('参数：', data)
+    let url = app.globalData.api + '/portal/Home/set_share'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast(res.data.msg, 'none')
+          that.getGoods(that.data.id)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
-  onShareAppMessage: function (options) {
+  //分享给好友
+  onShareAppMessage: function(options) {
     let that = this
     if (options.from === 'button') {
       console.log('参数：', that.data.id)
@@ -130,6 +179,5 @@ Page({
       title: that.data.info.title,
       path: 'pages/tickets_detail/tickets_detail?id=' + that.data.id,
     }
-
   }
 })

@@ -15,18 +15,29 @@ Page({
     card: '',
     page: 1,
     leftlist: [],
-    rightlist: []
+    rightlist: [],
+    judge: ''
   },
 
 
   onLoad: function(options) {
-    console.log(options.id)
+    // console.log(options.id)
     this.setData({
       id: options.id
     })
+  },
+
+  onShow: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (!openID) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
     this.getGoodsInfo()
   },
 
+  // 免单详情
   getGoodsInfo: function() {
     let that = this
     let url = app.globalData.api + '/portal/Miandan/info'
@@ -35,22 +46,34 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      console.log(res.data.data.info)
+      // console.log(res.data.data.info)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
             info: res.data.data.info
           })
+          let opneID = wx.getStorageSync('openid')
+          // console.log('当前登录的openid', opneID)
+          let tokens = res.data.data.info.openid
+          // console.log('发起人的openids', tokens)
+          if (opneID == tokens) {
+            that.setData({
+              judge: true
+            })
+          } else {
+            that.setData({
+              judge: false
+            })
+          }
           that.setTimeShow(res.data.data.info.end_time)
         }
       }
     })
   },
 
+  // 倒计时
   setTimeShow: function(e) {
-    console.log('活动截止时间戳：', e)
     let now = Date.parse(new Date()) / 1000
-    console.log('当前日期时间戳：', now)
     if (e > now) {
       let currentstartTimer = e - now
       let interval = setInterval(function() {
@@ -88,6 +111,7 @@ Page({
     this.getCard()
   },
 
+  // 瀑布流小卡片
   getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
@@ -109,6 +133,7 @@ Page({
     })
   },
 
+  // 瀑布流列表
   getList: function() {
     let that = this
     let data = {
@@ -138,15 +163,45 @@ Page({
     })
   },
 
-  onShow: function() {
-    let openID = wx.getStorageSync('openid') || ''
-    console.log(openID)
-    if (!openID) {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
-    }
+  // 立即领取
+  toFinash: function() {
+    let that = this
+    let id = that.data.id
+    console.log(id)
+    wx.navigateTo({
+      url: '/pages/buy_typefive/buy_typefive?id=' + id,
+    })
   },
+
+
+  // 好友参与
+  toJoin: function() {
+    let that = this
+    let data = {
+      uopenid: that.data.info.openid,
+      type: 4,
+      order_id: that.data.id
+    }
+    console.log(data)
+    let url = app.globalData.api + '/portal/Home/set_share'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast(res.data.msg, 'none')
+          that.getGoodsInfo()
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+
+  },
+
 
   onReachBottom: function() {
     let that = this
@@ -158,7 +213,6 @@ Page({
       length: 10,
       type: 7
     }
-    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Home/get_type_details'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
@@ -186,7 +240,6 @@ Page({
       }
     })
   },
-
 
   onShareAppMessage: function(options) {
     let that = this

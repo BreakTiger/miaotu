@@ -126,8 +126,8 @@ page {
 }
 
 .members {
-  width: 100rpx;
+  width: 170rpx;
   position: absolute;
-  left: calc((670rpx - 100rpx)/2);
+  left: calc((670rpx - 170rpx)/2);
   top: 120rpx;
 }

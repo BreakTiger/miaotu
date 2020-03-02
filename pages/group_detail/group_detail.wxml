@@ -55,7 +55,7 @@
             <view class="flex fl-align">
               <view class="flex col fl-align">
                 <text class="f24">还差<text class="c-38">{{item.nums}}人</text> 拼成</text>
-                <text class="f20">截止至2020-1-15</text>
+                <text class="f20">截止至{{item.date}}</text>
               </view>
               <view class="toGroup b_r200 t-ac c-ff f24" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
             </view>
@@ -111,6 +111,9 @@
     </view>
   </view>
   <view style="height:216rpx;width:750rpx;"></view>
+
+  <image src="/icon/back.png" class="backTop b_rh" wx:if="{{floorstatus}}" bindtap="goTop"></image>
+
   <view class="tabbers flex fl-align fl-jsa b-ff">
     <view class="icons flex col fl-align fl-jc">
       <image src="../../icon/talk.png"></image>
@@ -145,7 +148,7 @@
               <image class="header" src="{{item.img}}"></image>
               <text class="f28 c-00 f-w4">{{item.name}}</text>
             </view>
-            <view>截止至2020-1-15</view>
+            <view class="f28 c-00 f-w4">截止至2020-1-15</view>
             <view class="toGroup c-ff f24 t-ac b_r200" style="margin-right:20rpx;" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
           </view>
         </scroll-view>

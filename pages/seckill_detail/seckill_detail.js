@@ -23,7 +23,8 @@ Page({
     startTime: '',
     discuss: {},
     collecttype: false,
-    countdown: ''
+    countdown: '',
+    floorstatus: false
   },
 
   onLoad: function(options) {
@@ -275,7 +276,7 @@ Page({
               price: that.data.details.ms_price
             }
             wx.navigateTo({
-              url: '/pages/buy_typethree/buy_typethree?data='+JSON.stringify(data),
+              url: '/pages/buy_typethree/buy_typethree?data=' + JSON.stringify(data),
             })
           } else {
             modals.showToast('您还未有抢购该商品的资格', 'none')
@@ -295,6 +296,33 @@ Page({
             })
           }
         }
+      })
+    }
+  },
+
+  // 监听滚动
+  onPageScroll: function(e) {
+    if (e.scrollTop > 100) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
+
+  //回到顶部
+  goTop: function() {
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
   },

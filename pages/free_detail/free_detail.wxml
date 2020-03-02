@@ -25,8 +25,11 @@
       </view>
     </view>
     <text class="f32 c-00">差<text class="f40 c-38">3人</text>即可成功</text>
-    <button class="share b_r200 c-ff" open-type="share">喊好友帮忙</button>
-    <!-- <button class="share b_r200 c-ff" bindtap="toFinash">立即领取</button> -->
+    <!-- 发起人 -->
+    <button class="share b_r200 c-ff" open-type="share" wx:if="{{judge}}">喊好友帮忙</button>
+    <button class="share b_r200 c-ff" bindtap="toFinash" wx:if="{{judge&&info.md_number==info.number}}">立即领取</button>
+    <!-- 分享人 -->
+    <button class="share b_r200 c-ff" bindtap="toJoin" wx:if="{{!judge}}">参与免单</button>
   </view>
   <view>
     <text class="linebottoms c-33 f-w5">猜你喜欢</text>

@@ -68,9 +68,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getintegral()
+    console.log('日历：', this.data.pageData)
+    // this.getintegral()
   },
 
+  // 获取签到情况
   getintegral: function() {
     let that = this
     let url = app.globalData.api + '/portal/Sign/info'

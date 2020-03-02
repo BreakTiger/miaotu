@@ -5,6 +5,7 @@ const app = getApp()
 
 Page({
 
+
   data: {
     top: [{
         name: '商品'
@@ -23,27 +24,37 @@ Page({
     startTime: '',
     discuss: {},
     page: 1,
+    len: '0',
     group: [],
     list_pelpel: [],
-    list_time: [],
-    all_list: [],
-    len: '0',
     collecttype: false,
     shad: false,
-
+    all_list: [],
+    floorstatus: false,
+    topNum: 0
   },
+
 
   onLoad: function(options) {
     this.setData({
       id: options.id
     })
     let openID = wx.getStorageSync('openid') || ''
-    if (!openID){
+    if (!openID) {
       wx.navigateTo({
         url: '/pages/login/login'
       })
     }
     this.getShopInfo()
+  },
+
+  onShow: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (!openID) {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+    }
   },
 
   // 获取商品信息
@@ -56,7 +67,6 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res.data.data)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -97,7 +107,6 @@ Page({
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded()
-      // console.log(res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -113,7 +122,7 @@ Page({
     })
   },
 
-  // 获取评论
+  // 获取评论 
   getReview: function() {
     let that = this
     let data = {
@@ -121,13 +130,11 @@ Page({
       length: 1,
       details_id: that.data.details.id
     }
-    // console.log(data);
     let url = app.globalData.api + '/portal/home/comment'
     modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res.data)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -135,7 +142,14 @@ Page({
             discuss: res.data.data.data
           })
         }
-        that.joinGroup()
+        // 判断是否处在登录下
+        let tokens = wx.getStorageSync('openid')
+        if (tokens) {
+          that.joinGroup_login()
+          that.collectState()
+        } else {
+          that.joinGroup_unlogin()
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
@@ -143,7 +157,7 @@ Page({
   },
 
   // 拼单情况 - 未登录下
-  joinGroup: function() {
+  joinGroup_unlogin: function() {
     let that = this
     let data = {
       id: that.data.id,
@@ -156,14 +170,13 @@ Page({
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded()
-      // console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
+            len: res.data.data.count,
             group: res.data.data.data,
-            len: res.data.data.count
           })
-          that.reform_one(that.data.group)
+          that.reform(res.data.data.data)
         } else {
           modals.showToast(res.data.status, 'none')
         }
@@ -173,38 +186,8 @@ Page({
     })
   },
 
-  // 拼单数组重整 ,将数据分为俩组，一组，放置拼团人信息，另一组放置倒计时
-  reform_one: function(list) {
-    let one = []
-    let two = []
-    for (let i = 0; i < list.length; i++) {
-      let differ = list[i].number - list[i].pt_number
-      let ele = {
-        id: list[i].id,
-        header: list[i].img,
-        name: list[i].name,
-        nums: differ,
-      }
-      one.push(ele)
-    }
-    for (let j = 0; j < one.length; j++) {
-      two.push(one.slice(j, j + 2));
-    }
-    this.setData({
-      list_pelpel: two
-    })
-  },
-
-
-  onShow: function() {
-    let openID = wx.getStorageSync('openid') || ''
-    if (openID) {
-      this.joinGroup_one()
-      this.collectState()
-    }
-  },
-
-  joinGroup_one: function() {
+  // 拼单情况 - 登录下
+  joinGroup_login: function() {
     let that = this
     let data = {
       id: that.data.id,
@@ -220,12 +203,70 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
+            len: res.data.data.count,
             group: res.data.data.data,
-            len: res.data.data.count
           })
-          that.reform_one(that.data.group)
+          that.reform(res.data.data.data)
         } else {
           modals.showToast(res.data.status, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 拼团信息整理
+  reform: function(list) {
+    let one = []
+    let two = []
+    for (let i = 0; i < list.length; i++) {
+      let differ = list[i].number - list[i].pt_number
+      let time = list[i].end_time * 1000
+      let date = new Date(time);
+      let Y = date.getFullYear() + '-';
+      let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+      let D = date.getDate() + ' ';
+      let dates = Y + M + D
+      let ele = {
+        id: list[i].id,
+        header: list[i].img,
+        name: list[i].name,
+        nums: differ,
+        date: dates
+      }
+      one.push(ele)
+    }
+    for (let j = 0; j < one.length; j++) {
+      two.push(one.slice(j, j + 2));
+    }
+    this.setData({
+      list_pelpel: two
+    })
+  },
+
+  // 活动收藏状态
+  collectState: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Shop/collect'
+    modals.loading()
+    request.sendRequest(url, 'post', {
+      id: that.data.id
+    }, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      modals.loaded()
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          if (res.data.data == 0) { //未收藏
+            that.setData({
+              collecttype: false
+            })
+          } else { //收藏
+            that.setData({
+              collecttype: true
+            })
+          }
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -248,33 +289,36 @@ Page({
     })
   },
 
-  // 产品收藏状态
-  collectState: function() {
+  // 查看所有拼团
+  allGroup: function() {
     let that = this
-    let url = app.globalData.api + '/portal/Shop/collect'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
+    let data = {
+      id: that.data.id,
+      page: that.data.page,
+      length: 10
+    }
+    let url = app.globalData.api + '/portal/Pintuan/info_desc'
+    request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      // console.log(res.data);
-      modals.loaded()
+      console.log(res.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          if (res.data.data == 0) { //未收藏
-            that.setData({
-              collecttype: false
-            })
-          } else { //收藏
-            that.setData({
-              collecttype: true
-            })
-          }
+          that.setData({
+            shad: true,
+            all_list: res.data.data.data
+          })
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
+    })
+  },
+
+  // 关闭弹窗
+  toClose: function() {
+    this.setData({
+      shad: false
     })
   },
 
@@ -288,7 +332,6 @@ Page({
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      // console.log(res)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -313,7 +356,6 @@ Page({
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      // console.log(res)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -325,46 +367,6 @@ Page({
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
-    })
-  },
-
-  // 查看所有拼团
-  allGroup: function() {
-    let that = this
-    let data = {
-      id: that.data.id,
-      page: that.data.page,
-      length: 10
-    }
-    let url = app.globalData.api + '/portal/Pintuan/info_desc'
-    request.sendRequest(url, 'post', data, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      console.log(res.data.data.data);
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          that.setData({
-            shad: true,
-            all_list: res.data.data
-          })
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
-
-  // 关闭弹窗
-  toClose: function() {
-    this.setData({
-      shad: false
-    })
-  },
-
-  // 去到商铺
-  toShop: function(e) {
-    wx.navigateTo({
-      url: '/pages/index/goods/shop/shop?sid=' + e.currentTarget.dataset.sid,
     })
   },
 
@@ -413,6 +415,33 @@ Page({
   // 禁止手动滑动
   catchTouchMove: function(res) {
     return false
+  },
+
+  // 监听滚动
+  onPageScroll: function(e) {
+    if (e.scrollTop > 100) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
+
+  //回到顶部
+  goTop: function() {
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
   },
 
   onPullDownRefresh: function() {

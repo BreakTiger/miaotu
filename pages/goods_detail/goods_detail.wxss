@@ -259,3 +259,12 @@ page {
   left: 278rpx;
   z-index: 50;
 }
+
+.backTop {
+  width: 132rpx;
+  height: 132rpx;
+  position: fixed;
+  bottom: 170rpx;
+  right: 20rpx;
+  z-index: 10;
+}

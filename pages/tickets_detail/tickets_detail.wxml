@@ -24,9 +24,12 @@
       </view>
     </view>
     <text class="f32 c-00 f-w4">已砍<text style="font-size:40rpx;color:#FC4224;">{{info.do_price}}元</text>,即还差{{(info.price)-(info.do_price)}}元</text>
-    <progress class="progress-line" percent="{{(info.do_price)/(info.price)*100}}" border-radius="190" activeColor="#FFD304" backgroundColor="#F5F5F5"></progress>
-    <button class="invite c-00 f32 b_r200" open-type="share">帮好友砍一刀</button>
-    <!-- <button class="invite c-00 f32 b_r200">领取门票</button> -->
+    <progress class="progress-line" percent="{{percent}}" border-radius="190" activeColor="#FFD304" backgroundColor="#F5F5F5"></progress>
+    <!-- 发起人 -->
+    <button class="invite c-00 f32 b_r200" open-type="share" wx:if="{{judge}}">喊好友砍一刀</button>
+    <button class="invite c-00 f32 b_r200" wx:if="{{judge&&percent==100}}" bindtap="toFinsh">领取门票</button>
+    <!-- 分享对象 -->
+    <button class="invite c-00 f32 b_r200" wx:if="{{!judge}}" bindtap="cutOne">帮好友砍一刀</button>
   </view>
 
   <text class="c-ff lines" style="font-size:36rpx;">砍价记录</text>

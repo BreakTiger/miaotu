@@ -11,6 +11,7 @@
         <text class="f72">{{integral}}</text>
       </view>
       <view class="sign-btn t-ac b_r200 f28" bindtap="toSign">签到领积分</view>
+      <!-- <view class="sign-btn t-ac b_r200 f28">已领取积分</view> -->
     </view>
     <view class="integral b_r200 c-ff f24 t-ac" bindtap="toIntegral">积分明细</view>
   </view>

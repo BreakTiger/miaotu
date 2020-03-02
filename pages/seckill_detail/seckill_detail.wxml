@@ -110,6 +110,7 @@
     </view>
   </view>
   <view style="height:216rpx;width:750rpx;"></view>
+  <image src="/icon/back.png" class="backTop b_rh" wx:if="{{floorstatus}}" bindtap="goTop"></image>
   <view class="tabbers flex fl-align fl-jsa b-ff">
     <view class="icons flex col fl-align fl-jc">
       <image src="../../icon/talk.png"></image>

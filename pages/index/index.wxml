@@ -47,7 +47,7 @@
       <text class="{{choice_one==item.id?'linebottom':''}}" wx:for="{{goodsnav}}" wx:key="index" data-id="{{item.id}}" bindtap="toGetKind">{{item.name}}</text>
     </view>
     <view class="list-content b-F5">
-      <view class="left-col">
+      <view class="left-col" wx:if="{{leftlist.length!=0}}">
         <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
           <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
@@ -60,7 +60,7 @@
           </view>
         </view>
       </view>
-      <view class="right-col">
+      <view class="right-col" wx:if="{{rightlist.length!=0}}">
         <image src="{{card}}" class="b_r16 list-img"></image>
         <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
           <image src="{{item.banner}}"></image>
@@ -75,5 +75,6 @@
         </view>
       </view>
     </view>
+    <view class="f-wb c-00 t-ac" wx:if="leftlist.length==0||rightlist.length==0">暂无数据</view>
   </view>
 </view>

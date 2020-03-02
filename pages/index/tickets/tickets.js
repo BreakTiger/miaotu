@@ -11,8 +11,35 @@ Page({
     alist: []
   },
 
-  onLoad: function(options) {
-    this.getList()
+  onShow: function() {
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      this.getMyList(openID)
+    }
+  },
+
+  // 获取我的活动列表
+  getMyList: function(openID) {
+    let that = this
+    let data = {
+      page: that.data.pages,
+      length: 15
+    }
+    let url = app.globalData.api + '/portal/Kanjia/my_index'
+    request.sendRequest(url, 'post', data, {
+      'token': openID
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            alist: res.data.data.data
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+      that.getList()
+    })
   },
 
   // 默认列表
@@ -77,37 +104,6 @@ Page({
     })
   },
 
-  onShow: function() {
-    let openID = wx.getStorageSync('openid') || ''
-    if (openID) {
-      this.getMyList(openID)
-    }
-  },
-
-  // 获取我的活动列表
-  getMyList: function(openID) {
-    let that = this
-    let data = {
-      page: that.data.pages,
-      length: 10
-    }
-    let url = app.globalData.api + '/portal/Kanjia/my_index'
-    request.sendRequest(url, 'post', data, {
-      'token': openID
-    }).then(function(res) {
-      // console.log(res.data.data)
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          that.setData({
-            alist: res.data.data.data
-          })
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
-
   onPullDownRefresh: function() {
     wx.showToast({
       title: '加载中',
@@ -117,5 +113,37 @@ Page({
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
+    this.onLoad()
+  },
+
+  onReachBottom: function() {
+    let that = this
+    let old = that.data.list
+    let pages = that.data.page + 1
+    let data = {
+      page: pages,
+      length: 10
+    }
+    let url = app.globalData.api + '/portal/Kanjia/index'
+    request.sendRequest(url, 'post', data, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      console.log(res)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let lists = res.data.data.data
+          if (lists.length > 0) {
+            that.setData({
+              list: old.concat(lists),
+              page: pages
+            })
+          }
+        } else {
+          modals.showToast('我也是有底线的', 'none');
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none');
+      }
+    })
   }
 })

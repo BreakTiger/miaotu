@@ -76,7 +76,7 @@ page {
   font-size: 32rpx;
 }
 
-.f36{
+.f36 {
   font-size: 36rpx;
 }
 
@@ -84,7 +84,7 @@ page {
   font-size: 40rpx;
 }
 
-.f60{
+.f60 {
   font-size: 60rpx;
 }
 
@@ -114,13 +114,14 @@ page {
   color: #000;
 }
 
-.c-CC{
-  color: #CCC;
+.c-CC {
+  color: #ccc;
 }
 
-.c-33{
+.c-33 {
   color: #333;
 }
+
 /* 文字粗细 */
 
 .f-w3 {
@@ -169,6 +170,10 @@ page {
 
 .b_r16 {
   border-radius: 16rpx;
+}
+
+.b_rh {
+  border-radius: 50%;
 }
 
 /* 超出省略 */

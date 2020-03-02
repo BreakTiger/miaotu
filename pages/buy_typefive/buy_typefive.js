@@ -1,5 +1,4 @@
-// 门票下单
-
+// 助力免单
 const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
 const app = getApp()
@@ -17,6 +16,7 @@ Page({
     identity: '',
     total: '0.00'
   },
+
 
   onLoad: function(options) {
     this.setData({
@@ -53,7 +53,6 @@ Page({
     })
   },
 
-  // 下单
   toOrder: function() {
     let that = this
     let place = that.data.region
@@ -81,7 +80,7 @@ Page({
         identity: identity,
         starting: place
       }
-      let url = app.globalData.api + '/portal/Kanjia/get_kanjia'
+      let url = app.globalData.api + '/portal/Miandan/do_order'
       request.sendRequest(url, 'post', data, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
@@ -90,7 +89,7 @@ Page({
             modals.showToast('下单完成', 'loading')
             setTimeout(function() {
               wx.redirectTo({
-                url: '/pages/index/tickets/tickets',
+                url: '/pages/index/free/free',
               })
             }, 500)
           }

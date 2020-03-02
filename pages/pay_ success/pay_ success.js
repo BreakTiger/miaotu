@@ -15,7 +15,7 @@ Page({
 
   onLoad: function(options) {
     let that = this
-    let data = JSON.parse(options)
+    let data = JSON.parse(options.param)
     that.setData({
       id: data.oid,
       price: data.tprice
