@@ -139,17 +139,34 @@ Page({
     })
   },
 
+  // 申请售后
+  aftersales: function(e) {
+    let that = this
+    let id = e.currentTarget.dataset.item.id
+    wx.navigateTo({
+      url: '/pages/mine/order/apply/apply?id=' + id,
+    })
+  },
+
+  // 立即分享
+  nowShare: function(e) {
+    let that = this
+    let item = e.currentTarget.dataset.item
+    console.log(item)
+  },
+
 
   // 跳转订单详情
   toOrderDetails: function(e) {
     let item = e.currentTarget.dataset.item
-    let data = {
-      oid: item.id,
-      newtype: item.new_status
+    console.log(item)
+    if (item.type != 5) {
+      let oid = item.id
+      console.log(oid)
+      wx.navigateTo({
+        url: '/pages/mine/order/order_details/toOrderDetails?oid=' + oid,
+      })
     }
-    wx.navigateTo({
-      url: '/pages/mine/order/order_details/toOrderDetails?data=' + JSON.stringify(data),
-    })
   },
 
   onPullDownRefresh: function() {
@@ -179,13 +196,13 @@ Page({
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
       console.log(res)
-      if(res.statusCode==200){
-        if(res.data.status==1){
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
 
-        }else{
+        } else {
           modals.showToast('我也是有底线的', 'none')
         }
-      }else{
+      } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })

@@ -6,7 +6,7 @@
       <text class="f24 c-ff" bindtap="toTake">提现 ></text>
     </view>
   </view>
-  <view class="laber-rulue flex fl-align fl-jc f24 c-38 b-04">规则</view>
+  <view class="laber-rulue flex fl-align fl-jc f24 c-38 b-04" bindtap="toRulue">规则</view>
   <view class="invite flex fl-align fl-jc f28 c-38 b-04 b_r12" bindtap="toSign" wx:if="{{signType}}">立即签到</view>
   <button class="invite flex fl-align fl-jc f28 c-38 b-04 b_r12" wx:if="{{!signType}}" open-type="share">邀请好友签到</button>
   <view class="goods-list-content flex col fl-align">

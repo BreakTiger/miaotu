@@ -1,4 +1,3 @@
-// 此签到页，必须授权登陆
 const request = require('../../../api/http.js')
 import modals from '../../../methods/modal.js'
 const app = getApp()
@@ -6,7 +5,7 @@ const app = getApp()
 Page({
 
   data: {
-    uid: '',
+
     goodsnav: [{
         id: 5,
         name: '推荐'
@@ -38,51 +37,38 @@ Page({
     page: 1,
     leftlist: [],
     rightlist: [],
-    card: ''
+    card: '',
+    uopenid: '',
   },
+
 
   onLoad: function(options) {
-    console.log(options)
-    this.setData({
-      uid: options.uopenid || ''
-    })
-  },
-
-  onShow: function() {
-    // 判断是否授权
-    let openID = wx.getStorageSync('openid') || '';
-    if (openID) {
-      if (this.data.uid) {
-        this.shares();
-      }
-      this.signning(openID)
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '授权登录后才可以签到哦',
-        success: function(res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '/pages/login/login',
-            })
-          } else if (res.cancel) {
-            wx.navigateBack({
-              delta: 2
-            })
-          }
-        }
+    let uopenid = options.uopenid
+    if (uopenid) {
+      this.setData({
+        uopenid: uopenid
       })
     }
   },
 
+  onShow: function() {
+    let openID = wx.getStorageSync('openid') || '';
+    if (!openID) {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    } else {
+      this.signning(openID)
+    }
+  },
 
   // 签到基本信息
-  signning: function(openID) {
+  signning: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/Sign/info'
     modals.loading()
     request.sendRequest(url, 'post', {}, {
-      'token': openID
+      'token': e
     }).then(function(res) {
       console.log(res.data.data);
       modals.loaded()
@@ -92,7 +78,8 @@ Page({
             balance: res.data.data.user.balance
           })
           let data = new Date()
-          let time = data.getFullYear() + '-' + '0' + (data.getMonth() + 1) + '-' + '0' + data.getDate()
+          let time = data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate()
+          console.log(time)
           // 未签到：当前日期不等于上次签到日期
           if (res.data.data.user.end_time == '0000-00-00') {
             that.setData({
@@ -177,28 +164,6 @@ Page({
     })
   },
 
-  // 立即签到
-  toSign: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Sign/do_sign'
-    modals.loading()
-    request.sendRequest(url, 'post', {}, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          that.signning(wx.getStorageSync('openid'))
-        } else {
-          modals.showToast(res.data.msg, 'none');
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
-
   // 选择导航分类
   toGetKind: function(e) {
     let id = e.currentTarget.dataset.id
@@ -231,7 +196,6 @@ Page({
     }
   },
 
-
   // 查看商品详情
   toGoodsDetail: function(e) {
     let id = e.currentTarget.dataset.id
@@ -240,33 +204,66 @@ Page({
     })
   },
 
-  // 邀请好友签到
-  shares: function() {
+  // 签到
+  toSign: function() {
     let that = this
-    let data = {
-      uopenid: that.data.uid,
-      type: 5
+    let uid = that.data.uopenid
+    if (uid) {
+      console.log('先好友回调')
+      that.share(uid)
+    } else {
+      console.log('直接签到')
+      that.sgin()
     }
+  },
+
+  share: function(e) {
+    let that = this
     let url = app.globalData.api + '/portal/Home/set_share'
+    let data = {
+      uopenid: e,
+      type: 5,
+      order_id: ''
+    }
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log('1111:', res);
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.sgin()
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
     })
   },
 
-  onPullDownRefresh: function() {
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 1000
+  sgin: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Sign/do_sign'
+    modals.loading()
+    request.sendRequest(url, 'post', {}, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      modals.loaded()
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast(res.data.msg, 'none')
+          that.signning(wx.getStorageSync('openid'))
+        } else {
+          modals.showToast(res.data.msg, 'none');
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
     })
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 1000);
-    this.onShow()
   },
 
+  toRulue: function() {
+    wx.navigateTo({
+      url: '/pages/index/sign/sign_rule/sign_rule',
+    })
+  },
 
   onReachBottom: function() {
     let that = this
@@ -310,13 +307,12 @@ Page({
 
 
   onShareAppMessage: function(options) {
-    console.log(options)
     if (options.from === 'button') {
-      console.log(111);
+      console.log('分享参数：', wx.getStorageSync('openid'))
     }
     return {
       title: '现金签到',
-      path: 'pages/index/sign/sign?uopenid=' + wx.getStorageSync('openid') + '',
+      path: 'pages/index/sign/sign?uopenid=' + wx.getStorageSync('openid'),
     }
   }
 })

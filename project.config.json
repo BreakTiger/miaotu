@@ -54,7 +54,22 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/mine/order/order",
+					"pathName": "pages/mine/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/sign/sign_rule/sign_rule",
+					"pathName": "pages/index/sign/sign_rule/sign_rule",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }

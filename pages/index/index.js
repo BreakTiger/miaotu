@@ -78,6 +78,7 @@ Page({
     this.positioning()
   },
 
+  // 定位
   positioning: function() {
     let that = this
     wx.getLocation({
@@ -104,6 +105,7 @@ Page({
     that.getBanner()
   },
 
+  // 轮播图
   getBanner: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'
@@ -127,6 +129,7 @@ Page({
     })
   },
 
+  // 秒杀
   getSkill: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_fire_seckill'
@@ -157,7 +160,7 @@ Page({
               countdown: '活动即将开始'
             });
           }
-        }else{
+        } else {
           that.setData({
             skillgoods: res.data.data
           })
@@ -168,6 +171,7 @@ Page({
     })
   },
 
+  // 倒计时
   setTimeShow: function(currentstartTimer) {
     let interval = setInterval(function() {
       var second = currentstartTimer;
@@ -197,6 +201,7 @@ Page({
     this.getList(this.data.choice_one)
   },
 
+  // 分类列表
   getList: function(e) {
     let that = this
     let data = {
@@ -227,6 +232,7 @@ Page({
     })
   },
 
+  // 小卡片
   getCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Home/get_slide_item'

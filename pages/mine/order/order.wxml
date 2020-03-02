@@ -41,34 +41,31 @@
         <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==1}}" catchtap="continuePay" data-item="{{item}}">继续付款</view>
 
         <!-- 待出行 -->
-        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==2}}">申请退款</view>
+        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==2}}" data-item="{{item}}">申请退款</view>
 
         <!-- 待评价 -->
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==3}}" catchtap="delOrder">删除订单</view>
-        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==3}}" catchtap="toReview">立即评价</view>
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==3}}" catchtap="delOrder" data-item="{{item}}">删除订单</view>
+        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==3}}" catchtap="toReview" data-item="{{item}}">立即评价</view>
 
         <!-- 已完成 -->
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==4}}" catchtap="delOrder">删除订单</view>
-        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==4}}" catchtap="toReview">立即评价</view>
-        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.order_type==4}}" catchtap="buyAgain">再次购买</view>
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==4}}" catchtap="delOrder" data-item="{{item}}">删除订单</view>
+        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==4}}" catchtap="toReview" data-item="{{item}}">立即评价</view>
+        <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.order_type==4}}" catchtap="buyAgain" data-item="{{item}}">再次购买</view>
 
 
         <!-- 待分享 -->
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==5}}" catchtap="delOrder" data-item="{{item}}">取消订单</view>
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==5}}" catchtap="delOrder" data-item="{{item}}">申请售后</view>
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==5}}" catchtap="delOrder" data-item="{{item}}">删除订单</view>
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==5}}" catchtap="aftersales" data-item="{{item}}">申请售后</view>
         <view class="btn_two b_r200 t-ac c-ff" wx:if="{{item.new_status==5}}" catchtap="continuePay" data-item="{{item}}">立即分享</view>
 
         <!-- 商家处理中... -->
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==6}}"  data-item="{{item}}">取消订单</view>
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==6}}" data-item="{{item}}">取消订单</view>
 
         <!-- 申请失败 -->
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==7}}" catchtap="delOrder">取消申请</view>
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==7}}" data-item="{{item}}" catchtap="delOrder">取消申请</view>
 
         <!-- 申请成功 -->
-        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==8}}" catchtap="delOrder">删除订单</view>
-
-        
-
+        <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==8}}" data-item="{{item}}" catchtap="delOrder">删除订单</view>
 
       </view>
     </view>

@@ -77,9 +77,9 @@ Page({
 
   // 查看订单
   toOrderDetail: function() {
-    // let oid = this.data.id
-    wx.redirectTo({
-      url: '/pages/mine/order/order',
+    let oid = this.data.id
+    wx.navigateTo({
+      url: '/pages/mine/order/order_details/toOrderDetails?oid=' + oid,
     })
   },
 
