@@ -1,3 +1,5 @@
+@import '../../../wxParse/wxParse.wxss';
+
 .container {
   background: linear-gradient(360deg, rgba(65, 216, 249, 1) 0%, rgba(55, 193, 255, 1) 100%);
 }
@@ -49,20 +51,18 @@
 }
 
 .card-list {
-  height: 1870rpx;
   margin: 35rpx 0;
 }
 
 .card-list-item {
   width: 100%;
-  height: 450rpx;
   position: relative;
   margin-bottom: 25rpx;
 }
 
 .card-list-item>image {
   width: 100%;
-  height: 100%;
+  height: 450rpx;
   border-radius: 24rpx;
 }
 
@@ -83,7 +83,7 @@
 .card-info-line-two {
   width: 100%;
   position: absolute;
-  bottom: 50rpx;
+  bottom: 95rpx;
 }
 
 .buy {

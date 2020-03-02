@@ -33,7 +33,7 @@ Page({
     request.sendRequest(url, 'post', {
       id: that.data.id
     }, {
-      'token': wx.getStorageSync('openid')
+      'content-type': 'application/json'
     }).then(function(res) {
       console.log(res.data.data.info)
       if (res.statusCode == 200) {

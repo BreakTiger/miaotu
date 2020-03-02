@@ -4,7 +4,6 @@ const app = getApp()
 
 Page({
 
-
   data: {
     liu: [{
       img: '../../../icon/tickets_one.png',
@@ -22,13 +21,13 @@ Page({
     covers: false,
     width_one: 204,
     width_two: 0,
-    cardlist: 3,
+    card: 3,
+    cardlist: '',
     choice_card: '',
     before: true,
     members: '',
     id: '',
   },
-
 
   onLoad: function(options) {
     this.getList()
@@ -72,11 +71,11 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res.data.data.data)
+      console.log(res.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
-            mlist: res.data.data.data
+            mlist: res.data.data
           })
         }
       } else {
@@ -101,30 +100,47 @@ Page({
         }
       })
     } else {
-      let url = app.globalData.api + '/portal/Miandan/do_miandan'
-      let id = e.currentTarget.dataset.id
-      modals.loading()
-      request.sendRequest(url, 'post', {
-        id: id
-      }, {
-        'token': openID
-      }).then(function(res) {
-        modals.loaded()
-        console.log(res)
-        if (res.statusCode == 200) {
-          if (res.data.status == 1) {
-            console.log(res.data.data)
-            that.setData({
-              covers: true,
-              members: res.data.data,
-              id: id
-            })
-          }
-        } else {
-          modals.showToast('系统繁忙，请稍后重试', 'none')
-        }
+      let cardlist = e.currentTarget.dataset.item.invite_num
+      console.log(cardlist)
+      var list = []
+      for (let i in cardlist) {
+        list.push(cardlist[i]);
+      }
+      console.log(list);
+      that.setData({
+        cardlist: list,
+        covers: true
       })
     }
+  },
+
+  onReady: function() {
+    this.animation = wx.createAnimation()
+  },
+
+  choose_card: function(e) {
+    let that = this
+    let index = e.currentTarget.dataset.index
+    console.log('下标：', index)
+    let list = that.data.cardlist
+    console.log('列表：', list)
+    let item = list[index]
+    console.log('人数：',item)
+
+    // that.setData({
+    //   cardlist: 1
+    // })
+    // 
+
+    // this.animation.rotateY(180).step()
+    // this.setData({
+    //   animation: this.animation.export()
+    // })
+    // setTimeout(function() {
+    //   that.setData({
+    //     before: false
+    //   })
+    // }, 500)
   },
 
   toshares: function(e) {
@@ -132,26 +148,6 @@ Page({
     wx.navigateTo({
       url: '/pages/free_detail/free_detail?id=' + id,
     })
-  },
-
-  onReady: function() {
-    this.animation = wx.createAnimation()
-  },
-
-  choose_card: function() {
-    let that = this
-    that.setData({
-      cardlist: 1
-    })
-    this.animation.rotateY(180).step()
-    this.setData({
-      animation: this.animation.export()
-    })
-    setTimeout(function() {
-      that.setData({
-        before: false
-      })
-    }, 500)
   },
 
   // 跳转去资料输入页面

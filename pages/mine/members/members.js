@@ -1,6 +1,7 @@
 const request = require('../../../api/http.js')
 import modals from '../../../methods/modal.js'
 const app = getApp()
+const WxParse = require('../../../wxParse/wxParse.js')
 
 Page({
 
@@ -26,13 +27,21 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data
-          for (let i = 0; i < list.length; i++) {
-            let move = i * 160
-            list[i].top = move
-          }
           that.setData({
             cardlist: list
           })
+          for (let i = 0; i < list.length; i++) {
+            let introduce = list[i].member_introduce
+            console.log(introduce)
+            WxParse.wxParse('introduce', 'html', introduce, that, 5);
+          }
+          // for (let i = 0; i < list.length; i++) {
+          //   let move = i * 160
+          //   list[i].top = move
+          // }
+          // that.setData({
+          //   cardlist: list
+          // })
         }
       }
     })
@@ -99,5 +108,19 @@ Page({
       }
     })
   },
+
+  toIntegral: function() {
+    wx.navigateTo({
+      url: '/pages/mine/sign_in/sign_in',
+    })
+  },
+
+  toDraw: function() {
+    wx.navigateTo({
+      url: '/pages/mine/draw/draw',
+    })
+  },
+
+
 
 })

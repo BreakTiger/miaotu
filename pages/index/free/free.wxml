@@ -12,8 +12,8 @@
     <image src="../../../icon/t_down.png"></image>
   </view>
   <!-- 所有活动 -->
-  <view class="f-wb c-00" style="margin-top:20rpx;">我参与的活动</view>
-  <view class="list-content flex fl-w">
+  <view class="f-wb c-00" style="margin-top:20rpx;" wx:if="{{mlist.length!=0}}">我参与的活动</view>
+  <view class="list-content flex fl-w" wx:if="{{mlist.length!=0}}">
     <view class="list-item flex col fl-align b-ff" wx:for="{{mlist}}" wx:key="index">
       <image src="{{item.banner}}"></image>
       <view class="list-item-title climp2 f24">{{item.title}}</view>
@@ -31,14 +31,14 @@
       <view class="price-line f28 c-38">
         <text>￥{{item.dprice}}起</text>
       </view>
-      <view class="freeget f28 c-ff t-ac" bindtap="toGetFree" data-id="{{item.id}}">免费获得</view>
+      <view class="freeget f28 c-ff t-ac" bindtap="toGetFree" data-item="{{item}}">免费获得</view>
     </view>
   </view>
   <view class="cover flex col fl-align fl-jc" wx:if="{{covers}}">
     <view class="flex col fl-align" wx:if="{{before}}">
       <text class="titles f60">助力人数由你来定</text>
       <view class="card-line flex fl-align fl-jsb">
-        <image src="../../../resources/b_plate.png" style="width:{{width_one}}rpx;height:100%;" wx:for="{{cardlist}}" wx:key="index" bindtap="choose_card" animation="{{animation}}"></image>
+        <image src="../../../resources/b_plate.png" style="width:{{width_one}}rpx;height:100%;" wx:for="{{card}}" wx:key="index" data-index="{{index}}" bindtap="choose_card" animation="{{animation}}"></image>
       </view>
     </view>
     <view class="flex col fl-align" wx:else>

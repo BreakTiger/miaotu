@@ -91,9 +91,11 @@ Page({
         console.log(res)
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
-            let oid = res.data.data
-            console.log(oid)
-            
+            let id = res.data.data
+            console.log(id)
+            wx.navigateTo({
+              url: '/pages/tickets_detail/tickets_detail?id=' + id,
+            })
           }
         } else {
           modals.showToast('系统繁忙，请稍后重试', 'none')

@@ -35,7 +35,9 @@
     "pages/mine/order/comments/comments",
     "pages/buy_typefour/buy_typefour",
     "pages/free_detail/free_detail",
-    "pages/tickets_detail/tickets_detail"
+    "pages/tickets_detail/tickets_detail",
+    "pages/mine/sign_in/sign_in",
+    "pages/mine/draw/draw"
   ],
   "permission": {
     "scope.userLocation": {

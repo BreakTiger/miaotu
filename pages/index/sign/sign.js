@@ -310,6 +310,7 @@ Page({
 
 
   onShareAppMessage: function(options) {
+    console.log(options)
     if (options.from === 'button') {
       console.log(111);
     }
