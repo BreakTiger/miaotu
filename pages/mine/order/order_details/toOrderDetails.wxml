@@ -1,15 +1,17 @@
 <view class="container flex col fl-align">
+  <!-- 订单状态 -->
   <view class="type-line flex fl-align b-2E">
     <image src="../../../../icon/dispose.png" class="type-icon"></image>
-    <text class="f28 c-ff" wx:if="{{otype==1}}">待付款</text>
-    <text class="f28 c-ff" wx:if="{{otype==2}}">待出行</text>
-    <text class="f28 c-ff" wx:if="{{otype==3}}">待评价</text>
-    <text class="f28 c-ff" wx:if="{{otype==4}}">已完成</text>
-    <text class="f28 c-ff" wx:if="{{otype==5}}">待分享</text>
-    <text class="f28 c-ff" wx:if="{{otype==6}}">商家处理中...</text>
-    <text class="f28 c-ff" wx:if="{{otype==7}}">申请失败</text>
-    <text class="f28 c-ff" wx:if="{{otype==8}}">申请成功</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==1}}">待付款</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==2}}">待出行</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==3}}">待评价</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==4}}">已完成</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==5}}">待分享</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==6}}">商家处理中...</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==7}}">申请失败</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==8}}">申请成功</text>
   </view>
+
   <!-- 订单信息 -->
   <view class="order-content b-ff flex col fl-align">
 
@@ -28,25 +30,27 @@
 
     <view class="line flex fl-align f28 c-66">出行日期：{{order.starttime}}</view>
     <view class="line flex fl-align f28 c-66">产品编号：{{order.order_no}}</view>
-    <view class="line flex fl-align f28 c-66">下单时间：{{order.pay_time}}</view>
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.new_status!=1}}">下单时间：{{order.pay_time}}</view>
     <view class="line flex fl-align f28 c-66" wx:if="{{order.type==1}}">拼单时间：{{order.pay_time}}</view>
-    <view class="line flex fl-align f28 c-66">支付方式：微信支付</view>
-
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.new_status==8}}">支付方式：微信支付</view>
+    <block wx:for="{{order.redund_data}}" wx:key="index">
+      <view class="line flex fl-align f28 c-66" wx:if="{{order.new_status==8&&item.type==1}}">退款原因：{{item.describe}}</view>
+      <view class="line flex fl-align f28 c-66" wx:if="{{order.new_status==8&&item.type==1}}">申请时间：{{item.ctime}}</view>
+    </block>
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.new_status==8}}">退款时间：{{order.refund_time}}</view>
   </view>
 
   <!-- 拼单 -->
-  <view class="spell-line flex fl-align fl-jsb b-ff">
-    <text class="f28 c-66">拼单成功，共xx人</text>
+  <view class="spell-line flex fl-align fl-jsb b-ff" wx:if="{{pintuan.length!=0}}">
+    <text class="f28 c-66">拼单成功，共{{pintuan.length}}人</text>
     <view class="flex fl-align">
-      <view class="spell-number">
-        <view class="spell-person">
-          <image src="../../../../resources/2.png"></image>
-          <text class="t-ac c-00 b_r200">拼主</text>
+      <view class="spell-number flex fl-align fl-jsb">
+        <view class="spell-item" wx:for="{{pintuan}}" wx:key="index" wx:if="{{index<2}}">
+          <image src="{{item.img}}"></image>
+          <view class="f18 c-00 b_r200 t-ac" wx:if="{{item.uid==0}}">拼主</view>
         </view>
-        <image src="../../../../resources/1.png"></image>
-        <image src="../../../../resources/2.png"></image>
       </view>
-      <image class="add-icon"></image>
+      <image src="/icon/spell.png" class="add-icon"></image>
     </view>
   </view>
 
@@ -67,42 +71,44 @@
 
   <!-- 合计 -->
   <view class="total-line b-ff flex fl-align f32">
-    <text class="f-wb c-00">合计:</text>
+    <text class="f-wb c-00">合计：</text>
     <text class="c-38">¥{{order.pay_price}}</text>
   </view>
 
   <view class="last-line b-ff flex fl-align f24">
 
-    <!-- 待支付  order_type：1-->
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==1}}" bindtap="delOrder">取消订单</view>
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==1}}" bindtap="continuePay">继续付款</view>
+    <!-- 待支付 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==1}}" bindtap="delOrder">取消订单</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==1}}" bindtap="continuePay">继续付款</view>
 
-    <!-- 待出行 order_type：2-->
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==2}}">申请退款</view>
+    <!-- 待出行 -->
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==2}}" bindtap="aftersales">申请售后</view>
 
-    <!-- 待评价 order_type：3-->
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==3}}">删除订单</view>
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==3}}">申请售后</view>
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==3}}">立即评价</view>
+    <!-- 待评价 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==3}}" bindtap="delOrder">删除订单</view>
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==3}}" bindtap="aftersales">申请售后</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==3}}" bindtap="toReview">立即评价</view>
 
-    <!-- 已完成 order_type：4-->
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==4}}">删除订单</view>
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==4}}">再次购买</view>
+    <!-- 已完成 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==4}}" bindtap="delOrder">删除订单</view>
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==4}}" bindtap="toReview">立即评价</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==4}}" bindtap="buyAgain">再次购买</view>
 
-    <!-- 待分享 order_type：5-->
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.order_type==5}}">取消订单</view>
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==5}}">立即分享</view>
+    <!-- 待分享 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==5}}" bindtap="delOrder">删除订单</view>
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==5}}" bindtap="aftersales">申请售后</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==5}}" bindtap="nowShare">立即分享</view>
 
-    <!-- 商家处理中 order_type：6-->
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==6}}">取消申请</view>
+    <!-- 商家处理中 -->
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==6}}" bindtap="cancelApply">取消申请</view>
 
-    <!-- 申请成功 order_type：7-->
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==7}}">取消订单</view>
+    <!-- 申请失败 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==7}}" bindtap="delOrder">取消订单</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==7}}" bindtap="buyAgain">再次购买</view>
 
-    <!-- 申请失败 order_type：8-->
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.order_type==8}}">取消订单</view>
+    <!-- 申请成功 -->
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==8}}" bindtap="delOrder">取消订单</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==8}}" bindtap="buyAgain">再次购买</view>
 
   </view>
-
-
 </view>

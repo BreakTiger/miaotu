@@ -70,18 +70,18 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'token': e
     }).then(function(res) {
-      console.log(res.data.data);
+      console.log(res);
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          that.setData({
-            balance: res.data.data.user.balance
-          })
+          // that.setData({
+          //   balance: res.data.data.user.balance
+          // })
           let data = new Date()
           let time = data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate()
           console.log(time)
           // 未签到：当前日期不等于上次签到日期
-          if (res.data.data.user.end_time == '0000-00-00') {
+          if (res.data.data.user.end_time == '0-0-0') {
             that.setData({
               signType: true
             })

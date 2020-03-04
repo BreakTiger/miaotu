@@ -61,13 +61,6 @@
 					"pathName": "pages/mine/order/order",
 					"query": "",
 					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/sign/sign_rule/sign_rule",
-					"pathName": "pages/index/sign/sign_rule/sign_rule",
-					"query": "",
-					"scene": null
 				}
 			]
 		}

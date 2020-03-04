@@ -262,6 +262,7 @@ Page({
     }
   },
 
+  // 未读消息
   unread: function(openID) {
     let that = this
     let url = app.globalData.api + '/portal/Message/no_read'
@@ -280,12 +281,14 @@ Page({
     })
   },
 
+  // 搜索
   toSearch: function() {
     wx.navigateTo({
       url: '/pages/index/search/search',
     })
   },
 
+  // 消息
   toInfo: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
@@ -307,12 +310,14 @@ Page({
     }
   },
 
+  // 导航
   toNav: function(e) {
     wx.navigateTo({
       url: e.currentTarget.dataset.url,
     })
   },
 
+  // 进入秒杀
   toSeckillDetail: function(e) {
     let oid = e.currentTarget.dataset.item.id
     console.log(oid)
@@ -321,6 +326,7 @@ Page({
     })
   },
 
+  // 获取分类
   toGetKind: function(e) {
     let id = e.currentTarget.dataset.id
     let choice = this.data.choice_one
@@ -333,6 +339,7 @@ Page({
     }
   },
 
+  // 普通商品
   toGoodsDetail: function(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
@@ -340,6 +347,7 @@ Page({
     })
   },
 
+  // 轮播图详情
   toDetaill: function(e) {
     let list = this.data.sw_list
     let item = list[e.currentTarget.dataset.index];

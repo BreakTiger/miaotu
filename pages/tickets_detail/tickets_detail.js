@@ -106,7 +106,7 @@ Page({
         }
       }.bind(this), 1000);
     }
-    // this.getLog()
+    this.getLog()
   },
 
   // 砍价记录
@@ -154,7 +154,7 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res.data)
+      console.log('好友分享回调:',res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           modals.showToast(res.data.msg, 'none')

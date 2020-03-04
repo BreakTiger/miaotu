@@ -36,8 +36,6 @@ App({
     })
   },
   globalData: {
-    api: 'https://mt.dt5555.cn',
-    addText: '玩命加载中...',
-    endText: '————— 我也是有底线的 —————'
+    api: 'https://mt.dt5555.cn'
   }
 })

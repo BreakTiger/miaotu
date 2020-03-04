@@ -286,7 +286,7 @@ Page({
     })
   },
 
-  onShareAppMessage: function() {
+  onShareAppMessage: function (options) {
     if (options.from === 'button') {}
     return {
       title: this.data.details.title,

@@ -187,7 +187,7 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res)
+      console.log('好友分享回调:',res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           modals.showToast(res.data.msg, 'none')

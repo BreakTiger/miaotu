@@ -3,21 +3,25 @@
     <!-- 退款 -->
     <view class="flex fl-align f28" style="height: 88rpx;border-bottom: 2rpx solid #f5f5f5;">
       <text class="c-66">退款金额： </text>
-      <text class="c-38">￥{{data.pay_price}}</text>
+      <text class="c-38">￥{{order.pay_price}}</text>
     </view>
     <!-- 原因 -->
     <view class="flex fl-align fl-jsb f28 c-66" style="height: 88rpx;">
       <text>退款原因</text>
-      <picker>
+      <picker bindchange="bindPickerChange" range="{{reason}}">
         <view>
-          <text>请选择原因</text>
+          <text>{{choice_reason}}</text>
           <image src="../../../../icon/go.png" class="icon"></image>
         </view>
       </picker>
     </view>
     <!-- 上传图片 -->
-    <view class="upImg">
-      <image src="../../../../resources/addbox.png" class="add"></image>
+    <view class="upImg flex fl-w">
+      <image src="../../../../resources/addbox.png" class="add" bindtap="toAddImg" wx:if="{{imgList.length<4}}"></image>
+      <view class="add" wx:for="{{imgList}}" wx:key="index">
+        <image src="{{item}}" style="width:100%;height:100%;"></image>
+        <image src="/icon/close.png" class="close-icon" bindtap="toDelImg" data-index="{{index}}"></image>
+      </view>
     </view>
   </view>
   <!-- 订单信息 -->
@@ -26,22 +30,22 @@
     <view class="title f32 c-00 f-wb">订单信息</view>
     <!-- 订单商品 -->
     <view class="order-goods flex fl-align fl-jsb">
-      <image src="{{data.banner}}" class="order-img"></image>
-      <view class="f28 c-00 climp3 f-wb">{{data.title}}</view>
+      <image src="{{details.banner}}" class="order-img"></image>
+      <view class="f28 c-00 climp3 f-wb">{{details.title}}</view>
     </view>
-    <view class="line flex fl-align f28 c-66">套餐类型：a.商务车环耳海存完</view>
-    <view class="line flex fl-align f28 c-66">成人票：{{data.adult_num}}张</view>
-    <view class="line flex fl-align f28 c-66">儿童票：{{data.child_num}}张</view>
-    <view class="line flex fl-align f28 c-66">出行日期：{{data.starttime}}</view>
-    <view class="line flex fl-align f28 c-66">下单时间：{{data.pay_time}}</view>
-    <view class="line flex fl-align f28 c-66">合计：¥2344.77</view>
+    <view class="line flex fl-align f28 c-66">套餐类型：{{order.set_meal}}</view>
+    <view class="line flex fl-align f28 c-66">成人票：{{order.adult_num}}张</view>
+    <view class="line flex fl-align f28 c-66">儿童票：{{order.child_num}}张</view>
+    <view class="line flex fl-align f28 c-66">出行日期：{{order.starttime}}</view>
+    <view class="line flex fl-align f28 c-66">下单时间：{{order.pay_time}}</view>
+    <view class="line flex fl-align f28 c-66">合计：¥{{order.pay_price}}</view>
     <view class="line flex fl-align f28 c-66">支付方式：微信支付</view>
     <!-- 标题 -->
     <view class="title f32 c-00 f-wb">签署人</view>
-    <view class="line flex fl-align f28 c-66">姓名：张三</view>
-    <view class="line flex fl-align f28 c-66">手机号：13923618873</view>
-    <view class="line flex fl-align f28 c-66">身份证号：452773833839392</view>
+    <view class="line flex fl-align f28 c-66">姓名：{{order.name}}</view>
+    <view class="line flex fl-align f28 c-66">手机号：{{order.mobile}}</view>
+    <view class="line flex fl-align f28 c-66">身份证号：{{order.identity}}</view>
   </view>
   <!-- 提交 -->
-  <view class="btn f32 c-ff b_r200 t-ac">提交</view>
+  <view class="btn f32 c-ff b_r200 t-ac" bindtap="submits">提交</view>
 </view>

@@ -34,7 +34,8 @@ Page({
       id: data.id,
       uid: data.uid,
       types: data.tao,
-      price: data.price
+      price: data.price,
+      total: data.price
     })
   },
 
@@ -83,6 +84,8 @@ Page({
   // 下单
   toOrder: function() {
     let that = this
+    let sid = that.data.choice
+    console.log('套餐ID:', sid)
     let name = that.data.name
     console.log('姓名：', name)
     let phone = that.data.phone
@@ -90,7 +93,11 @@ Page({
     let code = that.data.idnum
     console.log('身份证：', code)
     // 验证
-    if (that.data.region == '请选择出发地址') {
+    // if (!sid) {
+    //   modals.showToast('请选择套餐', 'none')
+    // } else
+    
+     if (that.data.region == '请选择出发地址') {
       modals.showToast('请选择出发地址', 'none')
     } else if (!name) {
       modals.showToast('请输入姓名！', 'none')
@@ -105,7 +112,7 @@ Page({
     } else {
       let data = {
         id: that.data.id,
-        set_meal_id: that.data.choice,
+        set_meal_id: sid,
         name: that.data.name,
         mobile: that.data.phone,
         identity: that.data.idnum,
@@ -113,6 +120,7 @@ Page({
         uid: that.data.uid
       }
       console.log('参数：', data);
+
       modals.loading()
       let url = app.globalData.api + '/portal/Pintuan/do_team'
       request.sendRequest(url, 'post', data, {
@@ -161,7 +169,7 @@ Page({
                 oid: e,
                 tprice: that.data.total
               }
-              setTimeout(function () {
+              setTimeout(function() {
                 wx.navigateTo({
                   url: '/pages/pay_ success/pay_ success?param=' + JSON.stringify(param),
                 })

@@ -1,7 +1,7 @@
 const request = require('../../../api/http.js')
 import modals from '../../../methods/modal.js'
 const app = getApp()
-let openid = wx.getStorageSync('openid')
+
 
 Page({
 
@@ -20,6 +20,7 @@ Page({
     this.getList()
   },
 
+  // 消息列表
   getList: function() {
     let that = this
     let data = {
@@ -27,11 +28,11 @@ Page({
       length: 10
     }
     let url = app.globalData.api + '/portal/Message/index'
-    // modals.loading()
+    modals.loading()
     request.sendRequest(url, 'post', data, {
-      'token': openid
+      'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      // modals.loaded()
+      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -54,7 +55,7 @@ Page({
     request.sendRequest(url, 'post', {
       id: e.currentTarget.dataset.id
     }, {
-      'token': openid
+      'token': wx.getStorageSync('openid')
     }).then(function(res) {
       console.log(res)
       if (res.statusCode == 200) {
@@ -69,16 +70,12 @@ Page({
     })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+
   onPullDownRefresh: function() {
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+
   onReachBottom: function() {
 
   }

@@ -1,21 +1,20 @@
 <view class="container flex col fl-align">
-  <view class="b-ff flex col fl-align" style="width:100%;">
+  <view class="b-ff flex col fl-align" style="width:100%;padding-bottom: 20rpx;">
     <view class="goods-line flex fl-align fl-jsb">
-      <image class="goods-img" src="../../../../resources/2.png"></image>
-      <view class="goods-name climp3 f28 c-66">【枫叶季/元旦/春节】北京直飞东京/大阪/名古屋/冲绳/札幌/福冈/仙台2-30天往返含税机票【甩尾/</view>
+      <image class="goods-img" src="{{detail.banner}}"></image>
+      <view class="goods-name climp3 f28 c-66">{{detail.title}}</view>
     </view>
     <!-- 上传图片 -->
     <view class="picture-content flex fl-w">
-      <!-- <view class="picture-box"></view> -->
-      <!-- <view class="picture-box"></view> -->
-      <!-- <view class="picture-box"></view> -->
-      <image src="../../../../resources/addbox.png" class="add"></image>
+      <image src="../../../../resources/addbox.png" class="add" bindtap="toAddImg" wx:if="{{imgList.length<6}}"></image>
+      <view class="add" wx:for="{{imgList}}" wx:key="index">
+        <image src="{{item}}" style="width:100%;height:100%;"></image>
+        <image src="/icon/close.png" class="close-icon" bindtap="toDelImg" data-index="{{index}}"></image>
+      </view>
     </view>
     <!-- 评论 -->
-    <textarea placeholder="请输入评论内容" class="comments" maxlength="255"></textarea>
+    <textarea placeholder="请输入评论内容" class="comments" maxlength="{{maxword}}" bindinput="count"></textarea>
+    <view class="f28 c-00">{{word}}</view>
   </view>
-
-
-  <view class="send b_r200 f32 c-ff t-ac">发布</view>
-
+  <view class="send b_r200 f32 c-ff t-ac" bindtap="toSend">发布</view>
 </view>

@@ -8,7 +8,7 @@ page {
 }
 
 .top-content>view {
-  width: 670rpx;
+  width: 700rpx;
 }
 
 .icon {
@@ -24,6 +24,9 @@ page {
 .add {
   width: 206rpx;
   height: 206rpx;
+  margin-right: 25rpx;
+  margin-top: 25rpx;
+  position: relative;
 }
 
 .order-content {
@@ -64,4 +67,14 @@ page {
   background: linear-gradient(270deg, rgba(65, 214, 248, 1) 0%, rgba(33, 176, 240, 1) 100%);
   position: fixed;
   bottom: 40rpx;
+}
+
+.close-icon {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: -10rpx;
+  right: -20rpx;
+  z-index: 10;
+  border-radius: 50%;
 }

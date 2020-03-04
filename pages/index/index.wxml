@@ -75,6 +75,6 @@
         </view>
       </view>
     </view>
-    <view class="f-wb c-00 t-ac" wx:if="leftlist.length==0||rightlist.length==0">暂无数据</view>
+    <view class="f-wb c-00 t-ac" wx:if="{{leftlist.length==0||rightlist.length==0}}">暂无数据</view>
   </view>
 </view>

@@ -96,6 +96,8 @@ Page({
           setTimeout(function() {
             that.getList(that.data.choice_one)
           }, 1000)
+        } else {
+          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -142,17 +144,31 @@ Page({
   // 申请售后
   aftersales: function(e) {
     let that = this
+    console.log(e.currentTarget.dataset.item)
     let id = e.currentTarget.dataset.item.id
+    console.log('订单ID:', id)
     wx.navigateTo({
       url: '/pages/mine/order/apply/apply?id=' + id,
     })
   },
 
-  // 立即分享
-  nowShare: function(e) {
+  // 再次购买
+  buyAgain: function(e) {
+    let that = this
+    let id = e.currentTarget.dataset.item.detailsId
+    console.log('ID：', id)
+    wx.navigateTo({
+      url: '/pages/goods_detail/goods_detail?id=' + id,
+    })
+  },
+
+  // 立即评价
+  toReview: function(e) {
     let that = this
     let item = e.currentTarget.dataset.item
-    console.log(item)
+    wx.navigateTo({
+      url: '/pages/mine/order/comments/comments?item=' + JSON.stringify(item),
+    })
   },
 
 
@@ -167,6 +183,35 @@ Page({
         url: '/pages/mine/order/order_details/toOrderDetails?oid=' + oid,
       })
     }
+  },
+
+  // 取消申请
+  cancelApply: function(e) {
+    let that = this
+    let data = {
+      id: e.currentTarget.dataset.item.id
+    }
+    let url = app.globalData.api + '/portal/order/delete'
+    modals.loading()
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data)
+      modals.loaded()
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          modals.showToast('取消成功', 'none')
+          setTimeout(function() {
+            that.getList(that.data.choice_one)
+          }, 500)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+
   },
 
   onPullDownRefresh: function() {
@@ -206,7 +251,16 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
 
-
+  // 立即分享
+  onShareAppMessage: function(options) {
+    if (options.from === 'button') {
+      console.log(options.target.dataset.item)
+    }
+    return {
+      title: options.target.dataset.item.title,
+      path: '/pages/goods_detail/goods_detail?id=' + options.target.dataset.item.detailsId,
+    }
   }
 })
