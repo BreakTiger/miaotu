@@ -54,15 +54,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/mine/order/order",
-					"pathName": "pages/mine/order/order",
-					"query": "",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

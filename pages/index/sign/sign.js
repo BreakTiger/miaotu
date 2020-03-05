@@ -74,9 +74,9 @@ Page({
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          // that.setData({
-          //   balance: res.data.data.user.balance
-          // })
+          that.setData({
+            balance: res.data.data.user.balance
+          })
           let data = new Date()
           let time = data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate()
           console.log(time)

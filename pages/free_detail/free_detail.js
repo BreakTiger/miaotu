@@ -167,31 +167,29 @@ Page({
   toFinash: function() {
     let that = this
     let id = that.data.id
-    console.log(id)
     wx.navigateTo({
       url: '/pages/buy_typefive/buy_typefive?id=' + id,
     })
   },
 
-
-  // 好友参与
+  //帮助好友助力
   toJoin: function() {
     let that = this
     let data = {
-      uopenid: that.data.info.openid,
-      type: 4,
-      order_id: that.data.id
+      id: that.data.id
     }
-    console.log(data)
-    let url = app.globalData.api + '/portal/Home/set_share'
+    let url = app.globalData.api + '/portal/Miandan/help'
+    console.log('参数：', data)
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log('好友分享回调:',res)
+      console.log('好友助力', res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          that.getGoodsInfo()
+          modals.showToast(res.data.msg, 'loading')
+          setTimeout(function() {
+            that.getGoodsInfo()
+          }, 500)
         } else {
           modals.showToast(res.data.msg, 'none')
         }
@@ -199,9 +197,7 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
-
   },
-
 
   onReachBottom: function() {
     let that = this

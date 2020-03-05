@@ -18,7 +18,7 @@
         </view>
         <view class="last-line flex fl-align fl-jsb f20">
           <text class="c-38">￥{{item.pt_price}}</text>
-          <text class="c-CC">已拼{{item.people_num}}单</text>
+          <text class="c-CC">已拼{{item.finish}}单</text>
           <view class="join flex fl-align">
             <image wx:for="{{item.portraits}}" wx:key="index" style="left:{{index*lefts}}rpx;" src="{{item.img}}" wx:if="{{index<6}}"></image>
           </view>

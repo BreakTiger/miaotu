@@ -132,37 +132,27 @@ Page({
     })
   },
 
-  // 完成砍价，领取
-  toFinsh: function() {
-    let id = this.data.id
-    console.log('活动ID：', id)
-    wx.navigateTo({
-      url: '/pages/buy_typefour/buy_typefour?id=' + id,
-    })
-  },
 
   // 好友砍一刀
   cutOne: function() {
     let that = this
     let data = {
-      uopenid: that.data.info.openid,
-      type: 2,
-      order_id: that.data.info.id
+      id: that.data.info.id
     }
     console.log('参数：', data)
-    let url = app.globalData.api + '/portal/Home/set_share'
+    let url = app.globalData.api + '/portal/Kanjia/do_kanjia'
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log('好友分享回调:',res.data)
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
+      console.log('好友分享回调:', res.data)
+      if(res.statusCode==200){
+        if(res.data.status==1){
           modals.showToast(res.data.msg, 'none')
           that.getGoods(that.data.id)
-        } else {
+        }else{
           modals.showToast(res.data.msg, 'none')
         }
-      } else {
+      }else{
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })

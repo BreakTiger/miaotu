@@ -85,12 +85,13 @@ Page({
       request.sendRequest(url, 'post', data, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
+        console.log(res.data)
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             modals.showToast('下单完成', 'loading')
             setTimeout(function() {
               wx.redirectTo({
-                url: '/pages/index/tickets/tickets',
+                url: '/pages/tickets_detail/tickets_detail?id=' + res.data.data,
               })
             }, 500)
           }

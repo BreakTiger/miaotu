@@ -140,7 +140,13 @@ Page({
   },
 
   // 立即分享
-  nowShare: function() {
-
+  onShareAppMessage: function (options) {
+    if (options.from === 'button') {
+      console.log(this.data.order.detailsId)
+    }
+    return {
+      title: this.data.details.title,
+      path: '/pages/goods_detail/goods_detail?id=' + this.data.order.detailsId,
+    }
   }
 })

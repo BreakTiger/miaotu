@@ -80,7 +80,9 @@ Page({
     let phone = that.data.mobile
     let identity = that.data.identity
     // 验证
-    if (place == "请选择出发地址") {
+    if (!choice) {
+      modals.showToast('请选择套餐', 'none')
+    } else if (place == "请选择出发地址") {
       modals.showToast('请选择您的出发地', 'none')
     } else if (!name) {
       modals.showToast('请输入您的姓名', 'none')

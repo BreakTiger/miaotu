@@ -42,15 +42,23 @@ Page({
   // 选择套餐
   toChoices: function(e) {
     let item = e.currentTarget.dataset.item
-    this.setData({
-      choice: item.id,
-      total: parseFloat(item.setmeal_price) + parseFloat(this.data.price)
-    })
+    let cid = this.data.choice
+    let id = item.id
+    if (cid == id) {
+      this.setData({
+        choice: null,
+        total: parseFloat(this.data.price)
+      })
+    } else {
+      this.setData({
+        choice: id,
+        total: parseFloat(item.setmeal_price) + parseFloat(this.data.price)
+      })
+    }
   },
 
   // 选择出发地
   bindRegionChange: function(e) {
-    console.log(e.detail.value)
     let address = e.detail.value
     this.setData({
       region: address[0] + '-' + address[1] + '-' + address[2]
@@ -92,12 +100,7 @@ Page({
     console.log('电话：', phone)
     let code = that.data.idnum
     console.log('身份证：', code)
-    // 验证
-    // if (!sid) {
-    //   modals.showToast('请选择套餐', 'none')
-    // } else
-    
-     if (that.data.region == '请选择出发地址') {
+    if (that.data.region == '请选择出发地址') {
       modals.showToast('请选择出发地址', 'none')
     } else if (!name) {
       modals.showToast('请输入姓名！', 'none')
@@ -120,7 +123,6 @@ Page({
         uid: that.data.uid
       }
       console.log('参数：', data);
-
       modals.loading()
       let url = app.globalData.api + '/portal/Pintuan/do_team'
       request.sendRequest(url, 'post', data, {

@@ -48,14 +48,28 @@ Page({
   },
 
   onLoad: function(options) {
-
+    this.getDraw()
   },
 
+  // 获取积分抽奖信息
+  getDraw: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Lottery/index'
+    request.sendRequest(url, 'post', {}, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res)
+    })
+  },
+
+  // 我的奖品
   toPrize: function() {
     wx.navigateTo({
       url: '/pages/mine/draw/prize/prize',
     })
   },
+
+  // 规则
   toRules: function() {
     wx.navigateTo({
       url: '/pages/mine/draw/rules/rules',
@@ -64,16 +78,16 @@ Page({
 
 
   onReady: function() {
-    // 创建动画
     this.animation = wx.createAnimation()
   },
 
+  // 开始抽奖
   // 选择
   rotate: function() {
-    this.animation.rotate(Math.random() * 720 - 360).step()
-    this.setData({
-      animation: this.animation.export()
-    })
+    // this.animation.rotate(Math.random() * 720 - 360).step()
+    // this.setData({
+    //   animation: this.animation.export()
+    // })
   },
 
 

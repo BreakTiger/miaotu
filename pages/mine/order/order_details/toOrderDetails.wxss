@@ -144,3 +144,14 @@ page {
   margin-left: 20rpx;
   margin-right: 40rpx;
 }
+
+.share-btn {
+  width: 148rpx !important;
+  min-height: 56rpx !important;
+  font-size: 24rpx !important;
+  margin: 0rpx !important;
+  padding: 0rpx !important;
+  background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
+  line-height: 56rpx;
+  margin-left: 20rpx !important;
+}

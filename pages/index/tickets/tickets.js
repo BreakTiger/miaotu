@@ -76,7 +76,6 @@ Page({
     // 判断是否登录
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
-      console.log('立即下单')
       wx.navigateTo({
         url: '/pages/buy_typefour/buy_typefour?id=' + id,
       })

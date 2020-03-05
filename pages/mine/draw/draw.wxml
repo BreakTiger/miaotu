@@ -9,7 +9,7 @@
     <!-- 转盘内容 -->
     <view class="rotary-inside" animation="{{animation}}">
       <image src="../../../resources/rotary.png" class=""></image>
-      <view class="rotary-item flex col fl-align" wx:for="{{turntable}}" style="transform: rotate({{item.round}}deg);">
+      <view class="rotary-item flex col fl-align" wx:for="{{turntable}}" wx:key="index" style="transform: rotate({{item.round}}deg);">
         <text class="f28 c-00 f-w4">{{item.name}}</text>
         <image src="{{item.icon}}"></image>
       </view>

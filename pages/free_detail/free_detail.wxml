@@ -29,7 +29,7 @@
     <button class="share b_r200 c-ff" open-type="share" wx:if="{{judge}}">喊好友帮忙</button>
     <button class="share b_r200 c-ff" bindtap="toFinash" wx:if="{{judge&&info.md_number==info.number}}">立即领取</button>
     <!-- 分享人 -->
-    <button class="share b_r200 c-ff" bindtap="toJoin" wx:if="{{!judge}}">参与免单</button>
+    <button class="share b_r200 c-ff" bindtap="toJoin" wx:if="{{!judge}}">帮助好友助力</button>
   </view>
   <view>
     <text class="linebottoms c-33 f-w5">猜你喜欢</text>

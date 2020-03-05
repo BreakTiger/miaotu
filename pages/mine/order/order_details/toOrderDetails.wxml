@@ -97,7 +97,7 @@
     <!-- 待分享 -->
     <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==5}}" bindtap="delOrder">删除订单</view>
     <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==5}}" bindtap="aftersales">申请售后</view>
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==5}}" bindtap="nowShare">立即分享</view>
+    <button class="share-btn t-ac c-ff b_r200" open-type="share">立即分享</button>
 
     <!-- 商家处理中 -->
     <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==6}}" bindtap="cancelApply">取消申请</view>
