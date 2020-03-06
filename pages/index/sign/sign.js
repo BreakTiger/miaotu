@@ -238,6 +238,7 @@ Page({
     })
   },
 
+  // 签到
   sgin: function() {
     let that = this
     let url = app.globalData.api + '/portal/Sign/do_sign'

@@ -46,7 +46,7 @@ Page({
     }, {
       'content-type': 'application/json'
     }).then(function(res) {
-      // console.log(res.data.data.info)
+      console.log(res.data.data.info)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({

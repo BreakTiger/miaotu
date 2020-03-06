@@ -17,9 +17,9 @@
     <image src="../../../resources/rotary_btn.png" class="r_btn" bindtap="rotate"></image>
   </view>
   <view class="t-ac c-ff f28">今天还可以抽
-    <text style="color:#FFD200;">0</text> 次哦～
+    <text style="color:#FFD200;">{{role.num}}</text> 次哦～
   </view>
-  <view class="invite f32 c-ff t-ac b_r200">邀请2人助力，多抽1次</view>
+  <view class="invite f32 c-ff t-ac b_r200">邀请{{role.people_num}}人助力，多抽1次</view>
   <image src="../../../resources/title_two.png" class="title_two"></image>
   <!-- 列表 -->
   <view class="list-content flex fl-w">

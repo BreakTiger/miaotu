@@ -10,8 +10,8 @@
         <text class="f24">我的</text>
         <text class="f72">{{integral}}</text>
       </view>
-      <view class="sign-btn t-ac b_r200 f28" bindtap="toSign">签到领积分</view>
-      <!-- <view class="sign-btn t-ac b_r200 f28">已领取积分</view> -->
+      <view class="sign-btn t-ac b_r200 f28" bindtap="toSign" wx:if="{{signType}}">签到领积分</view>
+      <view class="sign-btn t-ac b_r200 f28" wx:if="{{!signType}}">已签到</view>
     </view>
     <view class="integral b_r200 c-ff f24 t-ac" bindtap="toIntegral">积分明细</view>
   </view>
@@ -36,16 +36,44 @@
       <view class="calendar-content-row flex fl-align fl-jsb" wx:for="123456" wx:key="index" wx:for-index="row">
         <!-- 列 -->
         <view class="calendar-content-col" wx:for="1234567" wx:key="index" wx:for-index="col">
-          <view class="calendar-list-item flex col fl-align fl-jc f28" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}">
+          <view class="calendar-list-item flex col fl-align fl-jc f28 {{showList[row * 7 + col]?'calendar-after':''}}" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}">
             <text>{{pageData.arrDays[row * 7 + col]}}</text>
+            <image src="/icon/Check.png" class="check-icon" wx:if="{{showList[row * 7 + col]}}"></image>
           </view>
         </view>
       </view>
     </view>
   </view>
   <view class="title-line flex fl-align">
-    <text class="f36 c-00 f-wb">积分商城</text>
+    <text class="f36 c-00 f-wb">热门商品</text>
   </view>
-
-
+  <view class="list-content b-F5">
+    <view class="left-col">
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.banner}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-titles climp2 f24">{{item.title}}</view>
+          <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <text>¥</text>
+            <text class="f28">{{item.price}}</text>
+            <text>起</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="right-col">
+      <image src="{{card}}" class="b_r16 list-img"></image>
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.banner}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-titles climp2 f24">{{item.title}}</view>
+          <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <text>¥</text>
+            <text class="f28">{{item.price}}</text>
+            <text>起</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

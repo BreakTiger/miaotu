@@ -1,0 +1,8 @@
+page{
+  background: #F5F5F5;
+}
+.container>view {
+  width: 670rpx;
+  height: 128rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}

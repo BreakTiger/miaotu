@@ -70,13 +70,37 @@ Page({
     })
   },
 
-
-  onPullDownRefresh: function() {
-
-  },
-
-
   onReachBottom: function() {
+    let that = this
+    let old = that.data.infoList
+    let page = that.data.page + 1
+    let data = {
+      page: page,
+      length: 10
+    }
+    // console.log('参数：', data)
+    let url = app.globalData.api + '/portal/Message/index'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          console.log(list)
+          if (list.length > 0) {
+            that.setData({
+              page: page,
+              infoList: old.concat(list)
+            })
+          }
 
+        } else {
+          modals.showToast('我也是有底线的', 'none');
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   }
 })

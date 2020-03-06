@@ -8,11 +8,12 @@
 
   <!-- 列表 -->
   <view class="list-content flex col fl-align">
-    <view class="list-item b-ff flex col fl-align" wx:for="{{list}}" wx:key="index" >
+    <view class="list-item b-ff flex col fl-align" wx:for="{{list}}" wx:key="index">
       <view class="line_one flex fl-align fl-jsb" data-item="{{item}}" catchtap="toOrderDetails">
         <view class="flex fl-align">
           <image src="../../../icon/shop.png" class="shop"></image>
-          <text class="f28 c-00">{{item.travel_office}}</text>
+          <text class="f28 c-00" wx:if="{{item.type!=5}}">{{item.travel_office}}</text>
+          <text class="f28 c-00" wx:else>喵途官方</text>
           <image src="../../../icon/go.png" class="go"></image>
         </view>
         <text class="f24 c-38" wx:if="{{item.new_status==1}}">待付款</text>
@@ -25,7 +26,8 @@
         <text class="f24 c-38" wx:if="{{item.new_status==8}}">申请成功</text>
       </view>
       <view class="goods flex fl-align" data-item="{{item}}" catchtap="toOrderDetails">
-        <image src="{{item.banner}}" class="goods-img"></image>
+        <image src="{{item.banner}}" class="goods-img" wx:if="{{item.type!=5}}"></image>
+        <image src="/icon/vipcard.png" class="goods-img" wx:else></image>
         <view class="goods-info flex col fl-align fl-jse">
           <view class="climp2 f24 c-00 f-w4">{{item.title}}</view>
           <view class="flex fl-align fl-jsb f20 c-66">

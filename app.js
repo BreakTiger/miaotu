@@ -35,20 +35,20 @@ App({
       }
     })
   },
-  onShow: function(options) {
-    if (options.scene == 1007) {
-      console.log('通过单人聊天会话分享进入')
-      // 通过单人聊天会话分享进入
-    }
-    if (options.scene == 1008) {
-      console.log('通过群聊会话分享进入')
-      // 通过群聊会话分享进入
-    }
-    if (options.scene == 1001) {
-      console.log('通过发现栏小程序进入')
-      // 通过发现栏小程序进入
-    }
-  },
+  // onShow: function(options) {
+  //   if (options.scene == 1007) {
+  //     console.log('通过单人聊天会话分享进入')
+  //     // 通过单人聊天会话分享进入
+  //   }
+  //   if (options.scene == 1008) {
+  //     console.log('通过群聊会话分享进入')
+  //     // 通过群聊会话分享进入
+  //   }
+  //   if (options.scene == 1001) {
+  //     console.log('通过发现栏小程序进入')
+  //     // 通过发现栏小程序进入
+  //   }
+  // },
   globalData: {
     api: 'https://mt.dt5555.cn'
   }

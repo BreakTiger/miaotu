@@ -8,6 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    award: [],
+    role: {},
+    user: {},
     turntable: [{
         id: 1,
         name: '¥100',
@@ -43,7 +46,7 @@ Page({
         round: -30
       }
     ],
-    covers: false,
+    covers: false
 
   },
 
@@ -58,36 +61,61 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res)
+      console.log(res.data.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            award: res.data.data.award,
+            role: res.data.data.role,
+            user: res.data.data.user,
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
     })
   },
 
   // 我的奖品
   toPrize: function() {
-    wx.navigateTo({
-      url: '/pages/mine/draw/prize/prize',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/mine/draw/prize/prize',
+    // })
   },
 
   // 规则
   toRules: function() {
-    wx.navigateTo({
-      url: '/pages/mine/draw/rules/rules',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/mine/draw/rules/rules',
+    // })
   },
 
 
   onReady: function() {
-    this.animation = wx.createAnimation()
+    this.animation = wx.createAnimation({
+      duration: 4000,
+      timingFunction: 'ease'
+    })
   },
 
   // 开始抽奖
   // 选择
   rotate: function() {
-    // this.animation.rotate(Math.random() * 720 - 360).step()
-    // this.setData({
-    //   animation: this.animation.export()
-    // })
+    let awardIndex = 2; //中奖index
+    // 设置选择周数
+    let runNum = 8; //旋转8周
+    // 小方块角度
+    let sangle_one = 360 / 6
+    console.log(sangle_one)
+    let sangle_two = sangle_one * awardIndex
+    console.log(sangle_two)
+    // 计算角度
+    let angle = runNum * 360 - sangle_two - (sangle_one / 2)
+    console.log('选择角度：', angle)
+    this.animation.rotate(angle).step()
+    this.setData({
+      animation: this.animation.export()
+    })
   },
 
 

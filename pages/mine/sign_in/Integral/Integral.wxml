@@ -1,0 +1,9 @@
+<view class="container flex col fl-align b-ff">
+  <view class="log-line flex fl-align fl-jsb" wx:for="{{list}}" wx:key="index" wx:if="{{item.integral_balance!=0}}">
+    <view class="left flex col">
+      <text class="f28 c-00">{{item.record}}</text>
+      <text class="f28 c-66">{{item.utime}}</text>
+    </view>
+    <text class="f28 c-38">+{{item.integral_balance}}</text>
+  </view>
+</view>

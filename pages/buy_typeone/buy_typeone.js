@@ -113,7 +113,9 @@ Page({
       if (res.statusCode) {
         if (res.data.status == 1) {
           let list = res.data.data.calendar
+          console.log(res.data.data)
           let ishowList = that.data.pageData.arrIsShow
+          console.log(ishowList)
           let news = []
           for (let i = 0; i < ishowList.length; i++) {
             if (ishowList[i] == true) {
@@ -123,6 +125,7 @@ Page({
               news.push("");
             }
           }
+          console.log(news)
           that.setData({
             priceList: news,
             child_price: res.data.data.details.child_price
@@ -152,7 +155,7 @@ Page({
       for (let i = 0; i < daylist.length; i++) {
         if (daylist[i] == curDay) {
           this.setData({
-            choice_day_index: i+1,
+            choice_day_index: i + 1,
             choice_day_price: price[i]
           })
         }
@@ -471,7 +474,7 @@ Page({
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             let oid = res.data.data
-            console.log('订单ID：',oid)
+            console.log('订单ID：', oid)
             console.log('订单总价：', total)
             that.pay_memont(oid)
           } else {
