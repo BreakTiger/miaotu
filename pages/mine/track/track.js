@@ -51,6 +51,33 @@ Page({
   },
 
   onReachBottom: function() {
+    let that = this
+    let page = that.data.page + 1
+    let old = that.data.list
+    let data = {
+      page: page,
+      length: 10
+    }
+    let url = app.globalData.api + '/portal/Strategy/my_strategy'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          if (list.length > 0) {
+            that.setData({
+              list: old.concat(list),
+              page: page
+            })
+          }
+        } else {
+          modals.showToast('我也是有底线的', 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
 
   }
 })

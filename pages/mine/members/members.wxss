@@ -83,7 +83,7 @@
 .card-info-line-two {
   width: 100%;
   position: absolute;
-  bottom: 95rpx;
+  bottom: 82rpx;
 }
 
 .buy {

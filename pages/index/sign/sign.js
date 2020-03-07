@@ -5,7 +5,7 @@ const app = getApp()
 Page({
 
   data: {
-
+    info: {},
     goodsnav: [{
         id: 5,
         name: '推荐'
@@ -75,6 +75,7 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
+            info: res.data.data,
             balance: res.data.data.user.balance
           })
           let data = new Date()
@@ -261,8 +262,10 @@ Page({
   },
 
   toRulue: function() {
+    let rules = this.data.info.rule
+    console.log(rules)
     wx.navigateTo({
-      url: '/pages/index/sign/sign_rule/sign_rule',
+      url: '/pages/rules/rules?rules=' + JSON.stringify(rules),
     })
   },
 

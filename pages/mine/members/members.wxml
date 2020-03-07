@@ -34,8 +34,8 @@
         </view>
         <view class="buy t-ac b_r200" catchtap="toBuy" data-level="{{item.level}}">立即购买</view>
       </view>
-      <view class="f24 c-ff">
-        <template is="wxParse" data="{{wxParseData:introduce.nodes}}" />
+      <view class="f24 c-ff" data-index="{{index}}">
+        <template is="wxParse" data="{{wxParseData:introduce.nodes}}"/>
       </view>
     </view>
   </view>

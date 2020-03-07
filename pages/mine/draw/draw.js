@@ -163,8 +163,9 @@ Page({
 
   // 抽奖规则
   toRules: function() {
+    let rules = this.data.role.rule
     wx.navigateTo({
-      url: '/pages/rules/rules',
+      url: '/pages/rules/rules?rules=' + JSON.stringify(rules),
     })
   },
 
@@ -280,5 +281,15 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none');
       }
     })
+  },
+
+  onShareAppMessage(options){
+    if (options.from === 'menu') {
+      console.log(111)
+    }
+    // return {
+    //   title: this.data.details.title,
+    //   path: '/pages/goods_detail/goods_detail?id=' + this.data.id,
+    // }
   }
 })

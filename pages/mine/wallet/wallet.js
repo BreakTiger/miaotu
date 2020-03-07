@@ -99,14 +99,48 @@ Page({
     })
   },
 
-
-
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.onLoad();
   },
 
 
   onReachBottom: function() {
-
+    let that = this
+    let page = that.data.page + 1
+    let type = that.data.choice_one
+    let old = that.data.list
+    let data = {
+      page: page,
+      length: 10,
+      type: type
+    }
+    let url = app.globalData.api + '/portal/Personal/wallet_info'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let list = res.data.data.data
+          if (list.length > 0) {
+            that.setData({
+              page: page,
+              list: old.concat(list)
+            })
+          }
+        } else {
+          modals.showToast('我也是有底线的', 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   }
 })

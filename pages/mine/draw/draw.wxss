@@ -88,14 +88,22 @@ page {
 }
 
 .invite {
-  width: 600rpx;
-  height: 88rpx;
+  margin: 0rpx;
+  padding: 0rpx;
+  width: 600rpx !important;
+  height: 88rpx !important;
+  font-size: 32rpx !important;
   line-height: 88rpx;
   background: linear-gradient(180deg, rgba(175, 31, 241, 1) 0%, rgba(31, 56, 241, 1) 100%);
   box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(31, 175, 241, 1);
   margin-top: 14rpx;
   margin-bottom: 54rpx;
 }
+
+/* .invite {
+  
+  
+} */
 
 .title_two {
   width: 350rpx;

@@ -18,6 +18,7 @@ Page({
     this.getAllCard()
   },
 
+  // 所有会员卡
   getAllCard: function() {
     let that = this
     let url = app.globalData.api + '/portal/Level/index'
@@ -27,26 +28,29 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data
+          console.log(list)
+          // // let arr = []
+          // // for (let i = 0; i < list.length; i++) {
+          // //   arr.push(list[i].member_introduce)
+          // // }
+          // // console.log(arr)
+
+          // for (let i = 0; i < list.length; i++) {
+          //   WxParse.wxParse('reply' + i, 'html', list[i]['member_introduce'], that);
+          //   if (i === list.length - 1) {
+          //     WxParse.wxParseTemArray("replyTemArray", 'reply', list.length, that)
+          //   }
+          // }
+
           that.setData({
             cardlist: list
           })
-          for (let i = 0; i < list.length; i++) {
-            let introduce = list[i].member_introduce
-            console.log(introduce)
-            WxParse.wxParse('introduce', 'html', introduce, that, 5);
-          }
-          // for (let i = 0; i < list.length; i++) {
-          //   let move = i * 160
-          //   list[i].top = move
-          // }
-          // that.setData({
-          //   cardlist: list
-          // })
         }
       }
     })
   },
 
+  // 会员卡购买,续费
   toBuy: function(e) {
     let that = this
     let level = e.currentTarget.dataset.level
@@ -76,6 +80,7 @@ Page({
     }
   },
 
+  // 支付
   pay_memont: function(e) {
     console.log('订单ID：', e)
     let that = this
@@ -109,18 +114,18 @@ Page({
     })
   },
 
+  // 积分签到
   toIntegral: function() {
     wx.navigateTo({
       url: '/pages/mine/sign_in/sign_in',
     })
   },
 
+  // 积分抽奖
   toDraw: function() {
     wx.navigateTo({
       url: '/pages/mine/draw/draw',
     })
-  },
-
-
+  }
 
 })

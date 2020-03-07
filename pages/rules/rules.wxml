@@ -1,2 +1,13 @@
-<!--pages/rules/rules.wxml-->
-<text>pages/rules/rules.wxml</text>
+<import src="../../wxParse/wxParse.wxml" />
+
+<view class="container flex col fl-align" style="position: relative;">
+  <image src="/resources/rule.png" class="bk"></image>
+  <view class="rules-content b_r12 b-ff flex col fl-align">
+    <image class="rule-top" src="/resources/rule-top.png"></image>
+    <text class="f36 c-00 f-w4" style="margin:8rpx 0;">活动规则</text>
+    <text class="f40 c-F1 f-w4" style="margin-bottom:20rpx;">Activity rules</text>
+    <view class="rules">
+      <template is="wxParse" data="{{wxParseData:rules.nodes}}" />
+    </view>
+  </view>
+</view>

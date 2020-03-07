@@ -1,6 +1,5 @@
 <view class="container flex col fl-align">
   <image src="../../../resources/title_one.png" class="title_one"></image>
-  <!-- <view class="prize btn f24 c-ff b_r200 t-ac" bindtap="toPrize">我的奖品</view> -->
   <view class="rule btn f24 c-ff b_r200 t-ac" bindtap="toRules">规则</view>
   <!-- 转盘 -->
   <view class="rotary">
@@ -19,7 +18,7 @@
   <view class="t-ac c-ff f28">今天还可以抽
     <text style="color:#FFD200;">{{role.num}}</text> 次哦～
   </view>
-  <view class="invite f32 c-ff t-ac b_r200">邀请{{role.people_num}}人助力，多抽1次</view>
+  <button class="invite c-ff t-ac b_r200" open-type="share">邀请{{role.people_num}}人助力，多抽1次</button>
   <image src="../../../resources/title_two.png" class="title_two"></image>
   <!-- 列表 -->
   <view class="list-content">

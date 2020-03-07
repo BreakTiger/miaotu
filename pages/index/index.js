@@ -69,12 +69,22 @@ Page({
   },
 
   onLoad: function(options) {
+    let type = options.type
+    console.log('邀请参数：', type)
+    if (type) {
+      console.log('存在')
+      wx.setStorageSync('share', type)
+    } else {
+      console.log('不存在')
+    }
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
       wx.navigateTo({
         url: '/pages/login/login',
       })
     }
+
+
     this.positioning()
   },
 
