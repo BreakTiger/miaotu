@@ -39,7 +39,8 @@
     "pages/tickets_detail/tickets_detail",
     "pages/mine/sign_in/sign_in",
     "pages/mine/draw/draw",
-    "pages/mine/sign_in/Integral/Integral"
+    "pages/mine/sign_in/Integral/Integral",
+    "pages/rules/rules"
   ],
   "permission": {
     "scope.userLocation": {

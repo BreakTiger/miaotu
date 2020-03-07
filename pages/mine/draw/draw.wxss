@@ -20,15 +20,9 @@ page {
   background: rgba(0, 0, 0, 0.2);
 }
 
-.prize {
-  position: absolute;
-  top: 44rpx;
-  right: 20rpx;
-}
-
 .rule {
   position: absolute;
-  top: 116rpx;
+  top: 44rpx;
   right: 20rpx;
 }
 
@@ -82,11 +76,13 @@ page {
   left: 148rpx;
   transform-origin: 50% 100%;
 }
-.rotary-item>text{
+
+.rotary-item>text {
   margin-top: 30rpx;
-  margin-bottom: 30rpx
+  margin-bottom: 30rpx;
 }
-.rotary-item>image{
+
+.rotary-item>image {
   width: 76rpx;
   height: 76rpx;
 }
@@ -107,16 +103,27 @@ page {
   margin-bottom: 48rpx;
 }
 
+/* 瀑布流 */
+
 .list-content {
-  width: 100%;
-  padding-bottom: 20rpx;
+  width: 710rpx;
+  margin: auto;
+  margin-top: 20rpx;
+}
+
+.left-col, .right-col {
+  width: 346rpx;
+  display: inline-block;
+}
+
+.right-col {
+  float: right;
 }
 
 .list-item {
-  margin-top: 20rpx;
-  margin-left: 20rpx;
   width: 346rpx;
   height: 488rpx;
+  margin-bottom: 20rpx;
 }
 
 .list-item>image {
@@ -127,20 +134,12 @@ page {
 
 .list-titles {
   width: 304rpx;
-  margin-top: 10rpx;
-  margin-bottom: 26rpx;
 }
 
 .list-img {
   width: 346rpx;
   height: 344rpx;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
-}
-
-.list-img>image {
-  width: 100%;
-  height: 100%;
+  margin-bottom: 20rpx;
 }
 
 .window {

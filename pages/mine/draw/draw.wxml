@@ -1,6 +1,6 @@
 <view class="container flex col fl-align">
   <image src="../../../resources/title_one.png" class="title_one"></image>
-  <view class="prize btn f24 c-ff b_r200 t-ac" bindtap="toPrize">我的奖品</view>
+  <!-- <view class="prize btn f24 c-ff b_r200 t-ac" bindtap="toPrize">我的奖品</view> -->
   <view class="rule btn f24 c-ff b_r200 t-ac" bindtap="toRules">规则</view>
   <!-- 转盘 -->
   <view class="rotary">
@@ -9,8 +9,8 @@
     <!-- 转盘内容 -->
     <view class="rotary-inside" animation="{{animation}}">
       <image src="../../../resources/rotary.png" class=""></image>
-      <view class="rotary-item flex col fl-align" wx:for="{{turntable}}" wx:key="index" style="transform: rotate({{item.round}}deg);">
-        <text class="f28 c-00 f-w4">{{item.name}}</text>
+      <view class="rotary-item flex col fl-align" wx:for="{{turntable}}" wx:key="index" data-index="{{index}}" style="transform: rotate({{round[index]}}deg);">
+        <text class="f28 c-00 f-w4">{{item.award_name}}</text>
         <image src="{{item.icon}}"></image>
       </view>
     </view>
@@ -22,48 +22,32 @@
   <view class="invite f32 c-ff t-ac b_r200">邀请{{role.people_num}}人助力，多抽1次</view>
   <image src="../../../resources/title_two.png" class="title_two"></image>
   <!-- 列表 -->
-  <view class="list-content flex fl-w">
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src=""></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
-      </view>
-    </view>
-    <view class="list-img">
-      <image src="" class="b_r16"></image>
-    </view>
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src=""></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
+  <view class="list-content">
+    <view class="left-col">
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.banner}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-titles climp2 f24">{{item.title}}</view>
+          <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <text>¥</text>
+            <text class="f28">{{item.price}}</text>
+            <text>起</text>
+          </view>
+        </view>
       </view>
     </view>
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src=""></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
-      </view>
-    </view>
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src=""></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
-      </view>
-    </view>
-    <view class="list-item flex col fl-align b-ff b_r16">
-      <image src=""></image>
-      <view class="list-titles climp2 f24">【已完结】意大利——请以你的名字呼唤我 【干货攻略】纯公共交通16天罗马|波西塔诺|西西里|威尼斯|米兰|多洛米蒂山脉）
-      </view>
-      <view class="flex fl-align f28 c-38" style="width: 304rpx;">
-        <text>¥234</text>
+    <view class="right-col">
+      <image src="{{card}}" class="b_r16 list-img"></image>
+      <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{rightlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
+        <image src="{{item.banner}}"></image>
+        <view class="flex col fl-align fl-jse" style="height: calc(100% - 344rpx);width:100%;">
+          <view class="list-titles climp2 f24">{{item.title}}</view>
+          <view class="f28 c-38" style="width: 304rpx;font-size:18rpx;">
+            <text>¥</text>
+            <text class="f28">{{item.price}}</text>
+            <text>起</text>
+          </view>
+        </view>
       </view>
     </view>
   </view>
@@ -72,9 +56,9 @@
     <!-- 弹窗 -->
     <view class="window flex col fl-align fl-jse b-ff f32 ">
       <text class="c-38">恭喜获得！</text>
-      <image src="../../../icon/draw_one.png"></image>
-      <text class="c-00">50减去20</text>
-      <view class="b_r200 t-ac c-ff">确定</view>
+      <image src="{{prize.icon}}"></image>
+      <text class="c-00">{{prize.award_name}}</text>
+      <view class="b_r200 t-ac c-ff" bindtap="toSure">确定</view>
     </view>
   </view>
 </view>
