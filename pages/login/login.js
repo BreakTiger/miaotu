@@ -10,11 +10,10 @@ Page({
 
   onLoad: function(options) {
     let type = wx.getStorageSync('share') || ''
-    if (type) {
-      this.setData({
-        type: type
-      })
-    }
+    console.log('type:', type)
+    this.setData({
+      type: type
+    })
   },
 
   // 授权登录 -1
@@ -44,6 +43,7 @@ Page({
 
   // 授权登录 -2
   upUserinfo: function(info, openid) {
+    let that = this
     let data = {
       nickname: info.nickName,
       sex: info.gender,
@@ -61,9 +61,9 @@ Page({
           modals.showToast('授权成功', 'none')
           wx.setStorageSync('user', info);
           wx.setStorageSync('openid', openid);
-          if (this.data.type) {
+          if (that.data.type) {
             console.log('存在')
-            this.invitat(this.data.type, openid)
+            that.invitat(that.data.type, openid)
           } else {
             console.log('不存在')
             setTimeout(function() {
@@ -72,7 +72,6 @@ Page({
               })
             }, 2000)
           }
-
         } else {
           modals.showToast(res.data.msg, 'none')
         }

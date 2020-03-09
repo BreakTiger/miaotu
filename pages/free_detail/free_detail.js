@@ -199,6 +199,20 @@ Page({
     })
   },
 
+  onPullDownRefresh: function () {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.getGoodsInfo()
+  },
+
+
+
   onReachBottom: function() {
     let that = this
     let left = that.data.leftlist

@@ -145,17 +145,29 @@ Page({
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
       console.log('好友分享回调:', res.data)
-      if(res.statusCode==200){
-        if(res.data.status==1){
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
           modals.showToast(res.data.msg, 'none')
           that.getGoods(that.data.id)
-        }else{
+        } else {
           modals.showToast(res.data.msg, 'none')
         }
-      }else{
+      } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
+
+  onPullDownRefresh: function() {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.getGoods(this.data.id)
   },
 
   //分享给好友
