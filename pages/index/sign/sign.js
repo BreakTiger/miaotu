@@ -313,10 +313,11 @@ Page({
   onShareAppMessage: function(options) {
     if (options.from === 'button') {
       console.log('分享参数：', wx.getStorageSync('openid'))
+      return {
+        title: '现金签到',
+        path: 'pages/index/sign/sign?uopenid=' + wx.getStorageSync('openid'),
+      }
     }
-    return {
-      title: '现金签到',
-      path: 'pages/index/sign/sign?uopenid=' + wx.getStorageSync('openid'),
-    }
+
   }
 })

@@ -23,3 +23,14 @@ page {
   height: 26rpx;
   margin-right: 16rpx;
 }
+
+.empt {
+  width: 100%;
+}
+
+.empt>image {
+  width: 322rpx;
+  height: 272rpx;
+  margin-top: 170rpx;
+  margin-bottom: 28rpx;
+}

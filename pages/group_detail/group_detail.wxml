@@ -57,7 +57,7 @@
                 <text class="f24">还差<text class="c-38">{{item.nums}}人</text> 拼成</text>
                 <text class="f20">截止至{{item.date}}</text>
               </view>
-              <view class="toGroup b_r200 t-ac c-ff f24" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
+              <view class="toGroup b_r200 t-ac c-ff f24" bindtap="togroup" data-item="{{item}}">去拼团</view>
             </view>
           </view>
         </swiper-item>
@@ -138,21 +138,39 @@
   <!-- 分享 -->
   <button class="shares" plain="true" open-type="share"></button>
   <view class="cover flex col fl-align fl-jc" wx:if="{{shad}}" catchtouchmove="ture">
-    <image class="close" src="../../icon/close.png" bindtap="toClose"></image>
-    <view class="grorpList b-ff flex col fl-align">
-      <view class="title-lines t-ac f28 c-00 f-w4">可参加的拼单</view>
-      <view class="grorpList-content">
-        <scroll-view scroll-y="true" class="flex col">
-          <view class="join-line flex fl-align fl-jsb" wx:for="{{all_list}}" wx:key="index">
-            <view class="flex fl-align" style="margin-left:20rpx;">
-              <image class="header" src="{{item.img}}"></image>
-              <text class="f28 c-00 f-w4">{{item.name}}</text>
-            </view>
-            <view class="f28 c-00 f-w4">截止至2020-1-15</view>
-            <view class="toGroup c-ff f24 t-ac b_r200" style="margin-right:20rpx;" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
-          </view>
-        </scroll-view>
+    <!-- 单个拼单 -->
+    <block wx:if="{{cover_one}}">
+      <image class="close" style="top: 20rpx;left: 300rpx;" src="../../icon/close.png" bindtap="toClose_one"></image>
+      <view class="joined b-ff b_r12 flex col fl-align fl-jse">
+        <text class="f28 c-00">参与{{person.name}}的拼单</text>
+        <text class="f18 c-66">仅剩{{person.nums}}个名额，活动于{{person.date}}结束</text>
+        <view class="flex fl-align fl-jsb" style="width:200rpx;">
+          <image src="{{person.header}}" class="joined-header b_rh"></image>
+          <image src="/icon/mark.png" class="joined-header b_rh"></image>
+        </view>
+        <view class="joined-btn t-ac f28 c-ff" bindtap="toJoined">参与拼单</view>
       </view>
-    </view>
+    </block>
+    <!-- 所有拼单列表 -->
+    <block wx:if="{{cover_two}}">
+      <image class="close" style="top: 25rpx;left: 302rpx;" src="../../icon/close.png" bindtap="toClose_two"></image>
+      <view class="grorpList b-ff flex col fl-align">
+        <view class="title-lines t-ac f28 c-00 f-w4">可参加的拼单</view>
+        <view class="grorpList-content">
+          <scroll-view scroll-y="true" class="flex col">
+            <view class="join-line flex fl-align fl-jsb" wx:for="{{all_list}}" wx:key="index">
+              <view class="flex fl-align" style="margin-left:20rpx;">
+                <image class="header" src="{{item.img}}"></image>
+                <text class="f28 c-00 f-w4">{{item.name}}</text>
+              </view>
+              <view class="f28 c-00 f-w4">截止至2020-1-15</view>
+              <view class="toGroup c-ff f24 t-ac b_r200" style="margin-right:20rpx;" bindtap="togroup" data-id="{{item.id}}">去拼团</view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </block>
+
+
   </view>
 </view>

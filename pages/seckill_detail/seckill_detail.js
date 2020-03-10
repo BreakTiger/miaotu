@@ -328,7 +328,6 @@ Page({
   },
 
   onShareAppMessage: function(options) {
-    if (options.from === 'button') {}
     return {
       title: this.data.details.title,
       path: '/pages/seckill_detail/seckill_detail?id=' + this.data.id,

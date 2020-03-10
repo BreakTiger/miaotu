@@ -8,7 +8,8 @@ Page({
     oid: '',
     details: [],
     order: [],
-    pintuan: []
+    pintuan: [],
+    aid: ''
   },
 
   onLoad: function(options) {
@@ -140,13 +141,64 @@ Page({
   },
 
   // 立即分享
-  onShareAppMessage: function (options) {
+  onShareAppMessage: function(options) {
     if (options.from === 'button') {
-      console.log(this.data.order.detailsId)
+      console.log(this.data.order)
+      console.log(this.data.details)
+      let order_type = this.data.order.type
+      if (order_type == 0) {
+        return {
+          title: this.data.details.title,
+          path: '/pages/goods_detail/goods_detail?id=' + this.data.order.detailsId,
+        }
+      } else if (order_type == 1) {
+        this.getPingID(this.data.order)
+        return {
+          title: this.data.details.title,
+          path: '/pages/group_detail/group_detail?id=' + this.data.aid,
+        }
+      } else if (order_type == 2) {
+        return {
+          title: '门票砍价',
+          path: '/pages/index/tickets/tickets',
+        }
+      } else if (order_type == 3) {
+        let skill = wx.getStorageSync('skill')
+        return {
+          title: skill.title,
+          path: '/pages/seckill_detail/seckill_detail?oid=' + skill.id,
+        }
+      } else if (order_type == 4) {
+        return {
+          title: '助力免单',
+          path: '//pages/index/free/free',
+        }
+      }
     }
-    return {
-      title: this.data.details.title,
-      path: '/pages/goods_detail/goods_detail?id=' + this.data.order.detailsId,
+  },
+
+  // 获取拼团活动ID
+  getPingID: function(e) {
+    let that = this
+    let data = {
+      order_id: e.id,
+      type: 1
     }
+    console.log(data)
+    let url = app.globalData.api + '/portal/Order/get_pintuan'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            aid: res.data.data.p_id
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   }
 })

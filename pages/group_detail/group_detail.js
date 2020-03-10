@@ -31,9 +31,11 @@ Page({
     shad: false,
     all_list: [],
     floorstatus: false,
-    topNum: 0
+    topNum: 0,
+    cover_one: false,
+    cover_two: false,
+    person: {}
   },
-
 
   onLoad: function(options) {
     this.setData({
@@ -46,15 +48,6 @@ Page({
       })
     }
     this.getShopInfo()
-  },
-
-  onShow: function() {
-    let openID = wx.getStorageSync('openid') || ''
-    if (!openID) {
-      wx.navigateTo({
-        url: '/pages/login/login'
-      })
-    }
   },
 
   // 获取商品信息
@@ -245,6 +238,21 @@ Page({
     })
   },
 
+  // 提示界面
+  hint: function() {
+    wx.showModal({
+      title: '提示',
+      content: '请先授权登陆',
+      success: function(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+        }
+      }
+    })
+  },
+
   // 活动收藏状态
   collectState: function() {
     let that = this
@@ -292,58 +300,71 @@ Page({
   // 查看所有拼团
   allGroup: function() {
     let that = this
-    let data = {
-      id: that.data.id,
-      page: that.data.page,
-      length: 10
-    }
-    let url = app.globalData.api + '/portal/Pintuan/info_desc'
-    request.sendRequest(url, 'post', data, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      console.log(res.data.data)
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          that.setData({
-            shad: true,
-            all_list: res.data.data.data
-          })
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
+    let openID = wx.getStorageSync('openid')
+    if (!openID) {
+      that.hint()
+    } else {
+      let data = {
+        id: that.data.id,
+        page: that.data.page,
+        length: 10
       }
-    })
+      let url = app.globalData.api + '/portal/Pintuan/info_desc'
+      request.sendRequest(url, 'post', data, {
+        'token': wx.getStorageSync('openid')
+      }).then(function(res) {
+        console.log(res.data.data)
+        if (res.statusCode == 200) {
+          if (res.data.status == 1) {
+            that.setData({
+              shad: true,
+              cover_two: true,
+              all_list: res.data.data.data
+            })
+          }
+        } else {
+          modals.showToast('系统繁忙，请稍后重试', 'none')
+        }
+      })
+    }
   },
 
   // 关闭弹窗
-  toClose: function() {
+  toClose_two: function() {
     this.setData({
-      shad: false
+      shad: false,
+      cover_two: false
     })
   },
 
   // 收藏
   toCollect: function() {
     let that = this
-    let url = app.globalData.api + '/portal/Shop/set_collect'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          that.collectState()
+    let openID = wx.getStorageSync('openid')
+    if (!openID) {
+      that.hint()
+    } else {
+      let url = app.globalData.api + '/portal/Shop/set_collect'
+      modals.loading()
+      request.sendRequest(url, 'post', {
+        id: that.data.id
+      }, {
+        'token': wx.getStorageSync('openid')
+      }).then(function(res) {
+        modals.loaded()
+        if (res.statusCode == 200) {
+          if (res.data.status == 1) {
+            modals.showToast(res.data.msg, 'none')
+            that.collectState()
+          } else {
+            modals.showToast(res.data.msg, 'none')
+          }
         } else {
-          modals.showToast(res.data.msg, 'none')
+          modals.showToast('系统繁忙，请稍后重试', 'none')
         }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
+      })
+    }
+
   },
 
   // 取消收藏
@@ -380,36 +401,50 @@ Page({
         uid: '',
         price: this.data.details.pt_price
       }
-      console.log('参数：', data)
       wx.navigateTo({
         url: '/pages/buy_typetwo/buy_typetwo?data=' + JSON.stringify(data),
       })
     } else {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
+      this.hint()
     }
   },
 
   // 去拼团，下单
   togroup: function(e) {
+    console.log(e.currentTarget.dataset.item)
+    let item = e.currentTarget.dataset.item
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
-      let data = {
-        id: this.data.details.id,
-        tao: this.data.packages,
-        uid: e.currentTarget.dataset.id,
-        price: this.data.details.pt_price
-      }
-      console.log('参数：', data)
-      wx.navigateTo({
-        url: '/pages/buy_typetwo/buy_typetwo?data=' + JSON.stringify(data),
+      this.setData({
+        person: item,
+        shad: true,
+        cover_one: true
       })
     } else {
-      wx.navigateTo({
-        url: '/pages/login/login',
-      })
+      this.hint()
     }
+  },
+
+  toClose_one: function() {
+    this.setData({
+      shad: false,
+      cover_one: false
+    })
+  },
+
+  //参与拼单
+  toJoined: function() {
+    let item = this.data.person
+    let data = {
+      id: this.data.details.id,
+      tao: this.data.packages,
+      uid: item.id,
+      price: this.data.details.pt_price
+    }
+    console.log('参数：', data)
+    wx.navigateTo({
+      url: '/pages/buy_typetwo/buy_typetwo?data=' + JSON.stringify(data),
+    })
   },
 
   // 禁止手动滑动
@@ -457,7 +492,6 @@ Page({
   },
 
   onShareAppMessage: function(options) {
-    if (options.from === 'button') {}
     return {
       title: this.data.details.title,
       path: '/pages/group_detail/group_detail?id=' + this.data.id,

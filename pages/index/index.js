@@ -81,8 +81,6 @@ Page({
         url: '/pages/login/login',
       })
     }
-
-
     this.positioning()
   },
 
@@ -151,6 +149,7 @@ Page({
           that.setData({
             skillgoods: res.data.data
           })
+          wx.setStorageSync('skill', res.data.data)
           let time1 = res.data.data.ms_starttime
           time1 = time1.substring(0, 19);
           time1 = time1.replace(/-/g, '/');
@@ -166,12 +165,13 @@ Page({
           } else {
             that.setData({
               countdown: '活动即将开始'
-            });
+            })
           }
         } else {
           that.setData({
             skillgoods: res.data.data
           })
+          wx.setStorageSync('skill', res.data.data)
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')

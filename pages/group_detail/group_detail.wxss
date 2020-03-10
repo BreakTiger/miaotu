@@ -318,8 +318,6 @@ page {
   width: 52rpx;
   height: 52rpx;
   position: relative;
-  top: 25rpx;
-  left: 302rpx;
   z-index: 100;
 }
 
@@ -359,4 +357,21 @@ page {
   bottom: 170rpx;
   right: 20rpx;
   z-index: 10;
+}
+
+.joined {
+  width: 600rpx;
+  height: 400rpx;
+}
+
+.joined-btn {
+  width: 500rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: rgba(206, 64, 50, 1);
+}
+
+.joined-header {
+  width: 80rpx;
+  height: 80rpx;
 }

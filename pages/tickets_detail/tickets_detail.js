@@ -173,10 +173,8 @@ Page({
   //分享给好友
   onShareAppMessage: function(options) {
     let that = this
-    if (options.from === 'button') {
-      console.log('参数：', that.data.id)
-      console.log(that.data.info.title)
-    }
+    console.log('参数：', that.data.id)
+    console.log(that.data.info.title)
     return {
       title: that.data.info.title,
       path: 'pages/tickets_detail/tickets_detail?id=' + that.data.id,

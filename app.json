@@ -39,7 +39,8 @@
     "pages/mine/sign_in/sign_in",
     "pages/mine/draw/draw",
     "pages/mine/sign_in/Integral/Integral",
-    "pages/rules/rules"
+    "pages/rules/rules",
+    "pages/mine/draw/myPrize/myPrize"
   ],
   "permission": {
     "scope.userLocation": {

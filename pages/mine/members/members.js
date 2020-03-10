@@ -28,20 +28,23 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data
-          console.log(list)
-          // // let arr = []
-          // // for (let i = 0; i < list.length; i++) {
-          // //   arr.push(list[i].member_introduce)
-          // // }
-          // // console.log(arr)
-
-          // for (let i = 0; i < list.length; i++) {
-          //   WxParse.wxParse('reply' + i, 'html', list[i]['member_introduce'], that);
-          //   if (i === list.length - 1) {
-          //     WxParse.wxParseTemArray("replyTemArray", 'reply', list.length, that)
-          //   }
-          // }
-
+          // console.log(list)
+          // 循环解析富文本
+          let arr = []
+          for (let i = 0; i < list.length; i++) {
+            WxParse.wxParse('member_introduce' + i, 'html', list[i].member_introduce, that);
+            if (i === list.length - 1) {
+              WxParse.wxParseTemArray("WxParseListArr", 'member_introduce', list.length, that);
+            }
+          }
+          // console.log(list);
+          // console.log(that.data.WxParseListArr);
+          let listArr = that.data.WxParseListArr;
+          listArr.forEach((item, index) => {
+            list[index].contentCopy = item;
+            arr.push(list[index])
+          })
+          // console.log('list', list)
           that.setData({
             cardlist: list
           })
@@ -70,6 +73,8 @@ Page({
           if (res.data.status == 1) {
             let oid = res.data.data
             that.pay_memont(oid)
+          } else {
+            modals.showToast(res.data.msg, 'none')
           }
         } else {
           modals.showToast('系统繁忙，请稍后重试', 'none')

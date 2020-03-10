@@ -61,7 +61,7 @@
         <!-- 待分享 -->
         <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==5}}" catchtap="delOrder" data-item="{{item}}">删除订单</view>
         <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==5}}" catchtap="aftersales" data-item="{{item}}">申请售后</view>
-        <button open-type="share" class="share-btn c-ff b_r200 t-ac" wx:if="{{item.new_status==5}}" data-item="{{item}}">立即分享</button>
+        <button open-type="share" class="share-btn c-ff b_r200 t-ac" wx:if="{{item.new_status==5&&item.type!=5}}"  data-item="{{item}}">立即分享</button>
 
         <!-- 商家处理中... -->
         <view class="btn_one b_r200 t-ac c-F1" wx:if="{{item.new_status==6}}" catchtap="cancelApply" data-item="{{item}}">取消申请</view>

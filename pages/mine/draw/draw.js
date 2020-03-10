@@ -4,9 +4,6 @@ const app = getApp()
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     role: {},
     user: {},
@@ -169,6 +166,13 @@ Page({
     })
   },
 
+  // 我的奖品
+  toPrize: function() {
+    wx.navigateTo({
+      url: '/pages/mine/draw/myPrize/myPrize',
+    })
+  },
+
   onShow: function() {
     this.getCard()
   },
@@ -283,13 +287,13 @@ Page({
     })
   },
 
-  onShareAppMessage(options){
-    if (options.from === 'menu') {
-      console.log(111)
+  onShareAppMessage(options) {
+    if (options.from === 'button') {
+      let type = 6
+      return {
+        title: '喵途',
+        path: '/pages/index/index?type=' + type,
+      }
     }
-    // return {
-    //   title: this.data.details.title,
-    //   path: '/pages/goods_detail/goods_detail?id=' + this.data.id,
-    // }
   }
 })

@@ -287,11 +287,9 @@ Page({
   },
 
   onShareAppMessage: function(options) {
-    let type = 6
-    if (options.from === 'button') {}
     return {
-      title: '喵图',
-      path: '/pages/index/index?type=' + type,
+      title: this.data.details.title,
+      path: '/pages/goods_detail/goods_detail?id=' + this.data.id,
     }
   }
 })

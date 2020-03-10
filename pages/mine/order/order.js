@@ -32,7 +32,8 @@ Page({
     ],
     choice_one: 0,
     page: 1,
-    list: []
+    list: [],
+    aid:''
   },
 
   onShow: function() {
@@ -243,7 +244,12 @@ Page({
       console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-
+          let list = res.data.data.data
+          if (list.length > 0) {
+            that.setData({
+              list: old.concat(list)
+            })
+          }
         } else {
           modals.showToast('我也是有底线的', 'none')
         }
@@ -255,12 +261,62 @@ Page({
 
   // 立即分享
   onShareAppMessage: function(options) {
+    console.log(options.target.dataset.item)
+    let order_type = options.target.dataset.item.type
     if (options.from === 'button') {
-      console.log(options.target.dataset.item)
+      if (order_type == 0) {
+        return {
+          title: options.target.dataset.item.title,
+          path: '/pages/goods_detail/goods_detail?id=' + options.target.dataset.item.detailsId,
+        }
+      } else if (order_type == 1) {
+        this.getPingID(options.target.dataset.item)
+        return {
+          title: options.target.dataset.item.title,
+          path: '/pages/group_detail/group_detail?id=' + this.data.aid,
+        }
+      } else if (order_type == 2) {
+        return {
+          title: '门票砍价',
+          path: '/pages/index/tickets/tickets',
+        }
+      } else if (order_type == 3) {
+        let skill = wx.getStorageSync('skill')
+        return {
+          title: skill.title,
+          path: '/pages/seckill_detail/seckill_detail?oid=' + skill.id,
+        }
+      } else if (order_type == 4) {
+        return {
+          title: '助力免单',
+          path: '//pages/index/free/free',
+        }
+      }
     }
-    return {
-      title: options.target.dataset.item.title,
-      path: '/pages/goods_detail/goods_detail?id=' + options.target.dataset.item.detailsId,
+  },
+
+  // 获取平团活动ID
+  getPingID: function(e) {
+    let that = this
+    let data = {
+      order_id: e.id,
+      type: 1
     }
+    console.log(data)
+    let url = app.globalData.api + '/portal/Order/get_pintuan'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            aid: res.data.data.p_id
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   }
 })

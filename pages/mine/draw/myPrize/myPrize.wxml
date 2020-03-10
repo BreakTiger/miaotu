@@ -1,0 +1,38 @@
+<view class="container flex col fl-align">
+
+  <block wx:for="{{list}}" wx:key="index" wx:if="{{list.length!=0}}">
+    <view class="list-item" wx:if="{{item.couponId!=0}}">
+      <image src="/resources/coupon_one.png" class="coupon"></image>
+      <view class="line_one flex fl-align c-ff" wx:if="{{item.coupon_type==0}}">
+        <view>
+          <text class="f40">￥</text>
+          <text class="f72">{{item.fullprice}}</text>
+        </view>
+        <view class="f32">优惠券满{{item.lowprice}}可用</view>
+      </view>
+      <view class="line_one flex fl-align  c-ff" wx:if="{{item.coupon_type==1}}">
+        <view>
+          <text class="f40">￥</text>
+          <text class="f72">{{item.fullprice}}</text>
+        </view>
+        <view class="f32">可抵现金{{item.fullprice}}</view>
+      </view>
+      <view class="line_two flex col c-66 f20">
+        <text>有效时间剩余：{{item.yhq_validtime}}</text>
+        <text>适用范围:{{item.yhq_rule}}</text>
+      </view>
+    </view>
+    <view class="list-item-one b-ff flex fl-align b_r12" wx:if="{{item.couponId==0}}">
+      <image class="b_rh" src="/icon/draw_three.png"></image>
+      <text class="f40 c-00">获得积分:<text class="c-38">{{item.integral}}</text></text>
+    </view>
+  </block>
+
+  <view class="empt flex col fl-align" wx:if="{{list.length==0}}">
+    <image src="/resources/invite.png"></image>
+    <text>您还没有抽中任何奖品哦^_^</text>
+  </view>
+
+  <view style="width:100%;height:40rpx;"></view>
+
+</view>
