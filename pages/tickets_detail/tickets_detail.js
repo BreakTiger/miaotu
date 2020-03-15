@@ -14,7 +14,8 @@ Page({
     min: '0',
     sec: '0',
     logList: [],
-    judge: ''
+    judge: '',
+    cha:'0.00'
   },
 
   onLoad: function(options) {
@@ -44,9 +45,15 @@ Page({
     }).then(function(res) {
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
+          let info = res.data.data.info
           that.setData({
-            info: res.data.data.info,
+            info: info,
             percent: parseFloat(res.data.data.info.do_price) / parseFloat(res.data.data.info.price) * 100
+          })
+          let cha = ((info.price) - (info.do_price)).toFixed(2)
+          console.log('还差：',cha)
+          that.setData({
+            cha: cha
           })
           let opneID = wx.getStorageSync('openid')
           console.log('当前登录的opneid：', opneID)

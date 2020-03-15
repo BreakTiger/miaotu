@@ -193,25 +193,25 @@ Page({
     let that = this
     let left = that.data.leftlist
     let right = that.data.rightlist
-    let pages = that.data.page+1
+    let pages = that.data.page + 1
     let type = that.data.choice_one
     let name = that.data.word
     let data = {
       page: pages,
-      length:10,
+      length: 10,
       type: type,
       name: name
     }
-    console.log('参数：',data)
+    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Strategy/index'
-    request.sendRequest(url,'post',data,{
+    request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
-    }).then(function(res){
-      if (res.statusCode==200){
-        if(res.data.status==1){
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
           let list = res.data.data.data
           let len = list.length
-          if (len > 0){
+          if (len > 0) {
             let half = len / 2
             let one = list.slice(0, half)
             let two = list.slice(half, len)
@@ -221,12 +221,20 @@ Page({
               page: pages
             })
           }
-        }else{
+        } else {
           modals.showToast('我也是有底线的', 'none');
         }
       }
     })
 
 
+  },
+
+  onShareAppMessage: function(options) {
+    console.log(options)
+    return {
+      title: '喵途-攻略',
+      path: '/pages/strategy/strategy',
+    }
   }
 })

@@ -424,5 +424,13 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none');
       }
     })
+  },
+
+  onShareAppMessage: function(options) {
+    console.log(options)
+    return {
+      title: '喵途-首页',
+      path: '/pages/index/index?type=' + '',
+    }
   }
 })

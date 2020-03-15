@@ -41,6 +41,7 @@ Page({
     }
   },
 
+  // 商品详情
   getShopInfo: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/Miaosha/info'
@@ -72,6 +73,7 @@ Page({
     })
   },
 
+  // 二次确认
   trailer: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_foreshow';
@@ -119,6 +121,7 @@ Page({
     })
   },
 
+  // 倒计时
   setTimeShow: function() {
     let that = this
     let time1 = that.data.details.ms_starttime
@@ -165,6 +168,7 @@ Page({
     modals.loaded()
   },
 
+  // 店铺
   toShop: function(e) {
     wx.navigateTo({
       url: '/pages/shop/shop?sid=' + e.currentTarget.dataset.sid,
@@ -255,6 +259,7 @@ Page({
     })
   },
 
+  //  下单
   toOrder: function() {
     let that = this
     let openID = wx.getStorageSync('openid') || ''
@@ -279,7 +284,7 @@ Page({
               url: '/pages/buy_typethree/buy_typethree?data=' + JSON.stringify(data),
             })
           } else {
-            modals.showToast('您还未有抢购该商品的资格', 'none')
+            modals.showToast(res.data.msg, 'none')
           }
         } else {
           modals.showToast('系统繁忙，请稍后重试', 'none')

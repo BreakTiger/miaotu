@@ -129,7 +129,7 @@ Page({
   toMembers: function() {
     let data = JSON.stringify(this.data.person)
     wx.navigateTo({
-      url: '/pages/mine/members/members?data='+data,
+      url: '/pages/mine/members/members?data=' + data,
     })
   },
 
@@ -252,6 +252,18 @@ Page({
     }
   },
 
+  //审核
+  toScan: function() {
+    wx.scanCode({
+      success(res) {
+        console.log(res)
+      },
+      fail(res) {
+        console.log(res)
+      }
+    })
+  },
+
   // 发布
   tosend: function() {
     let openID = wx.getStorageSync('openid') || ''
@@ -322,5 +334,13 @@ Page({
         modals.showToast('系统繁忙，请稍后重试', 'none');
       }
     })
+  },
+
+  onShareAppMessage: function(options) {
+    console.log(options)
+    return {
+      title: '喵途-我的',
+      path: '/pages/mine/mine',
+    }
   }
 })

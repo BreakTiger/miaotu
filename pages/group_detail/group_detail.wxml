@@ -7,7 +7,7 @@
     </view>
   </view>
   <view class="goods_detail flex col fl-align b-ff">
-    <swiper class="good-imgs" autoplay="true">
+    <swiper class="good-imgs" autoplay="true" interval="3000">
       <swiper-item wx:for="{{details.pic}}" wx:key="index">
         <image src="{{item.pic_url}}" class="ims"></image>
       </swiper-item>

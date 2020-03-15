@@ -18,6 +18,7 @@ Page({
     name: '',
     mobile: '',
     identity: '',
+    price:'',
     total: '0.00'
   },
 
@@ -28,6 +29,7 @@ Page({
     this.setData({
       id: data.id,
       tao: data.tao,
+      price: parseFloat(data.price),
       total: parseFloat(data.price)
     })
   },
@@ -35,11 +37,19 @@ Page({
   // 选择套餐
   toChoices: function(e) {
     let item = e.currentTarget.dataset.item
-    console.log(item)
-    this.setData({
-      choice: item.id,
-      total: parseFloat(item.setmeal_price) + parseFloat(this.data.total) * 1
-    })
+    let cid = this.data.choice
+    let id = item.id
+    if (cid == id) {
+      this.setData({
+        choice: null,
+        total: parseFloat(this.data.price)
+      })
+    } else {
+      this.setData({
+        choice: id,
+        total: parseFloat(item.setmeal_price) + parseFloat(this.data.price)
+      })
+    }
   },
 
 
@@ -80,9 +90,7 @@ Page({
     let phone = that.data.mobile
     let identity = that.data.identity
     // 验证
-    if (!choice) {
-      modals.showToast('请选择套餐', 'none')
-    } else if (place == "请选择出发地址") {
+    if (place == "请选择出发地址") {
       modals.showToast('请选择您的出发地', 'none')
     } else if (!name) {
       modals.showToast('请输入您的姓名', 'none')

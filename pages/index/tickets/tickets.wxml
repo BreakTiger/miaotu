@@ -13,7 +13,7 @@
     </view>
   </view>
   <!-- 所有活动列表 -->
-  <text class="c-ff f-wb" wx:if="{{list.length!=0}}">所有免单活动</text>
+  <text class="c-ff f-wb" wx:if="{{list.length!=0}}">所有活动</text>
   <view class="list-content flex fl-w" wx:if="{{list.length!=0}}">
     <view class="list-item flex col fl-align b-ff" wx:for="{{list}}" wx:key="index">
       <image src="{{item.banner}}"></image>

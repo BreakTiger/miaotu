@@ -54,7 +54,22 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/mine/order/order_details/toOrderDetails",
+					"pathName": "pages/mine/order/order_details/toOrderDetails",
+					"query": "oid=193",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/seckill_detail/seckill_detail",
+					"pathName": "pages/seckill_detail/seckill_detail",
+					"query": "oid=10",
+					"scene": null
+				}
+			]
 		}
 	}
 }

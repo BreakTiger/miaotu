@@ -53,6 +53,12 @@
       <image src="../../icon/go.png"></image>
     </view>
   </view>
+
+  <view class="scan-line flex fl-align fl-jsb b-ff b_r12" wx:if="{{person.check==1}}" bindtap="toScan">
+    <text class="f28 c-00">我的核审</text>
+    <image src="../../icon/go.png"></image>
+  </view>
+
   <view class="guess">
     <text>猜你喜欢</text>
     <view class="list-content b-F5">

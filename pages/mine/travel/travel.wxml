@@ -2,7 +2,7 @@
   <view class="user-content b-ff">
     <image src="{{person.back_image}}" class="banner"></image>
     <image class="header" src="{{person.avatar}}"></image>
-    <view class="signature f28 c-66 climp2">“{{person.intro}}”</view>
+    <view class="signature f28 c-66 climp2" wx:if="{{person.intro}}">“{{person.intro}}”</view>
     <view class="laber-line flex fl-w">
       <view class="laber-one flex fl-align fl-jc b_r200" wx:if="{{person.sex==1}}">
         <image src="../../../icon/male.png"></image>

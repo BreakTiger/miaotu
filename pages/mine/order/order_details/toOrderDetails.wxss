@@ -84,7 +84,7 @@ page {
 }
 
 .spell-number {
-  width: 140rpx;
+  width: 200rpx;
   height: 60rpx;
 }
 

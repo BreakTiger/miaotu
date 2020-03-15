@@ -193,3 +193,19 @@ page {
   left: calc((100% - 128rpx)/2);
   z-index: 10;
 }
+
+.scan-line {
+  width: 710rpx;
+  height: 100rpx;
+  margin-bottom: 36rpx;
+}
+
+.scan-line>text {
+  margin-left: 20rpx;
+}
+
+.scan-line>image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 20rpx;
+}

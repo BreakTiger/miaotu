@@ -23,7 +23,7 @@
         </view>
       </view>
     </view>
-    <text class="f32 c-00 f-w4">已砍<text style="font-size:40rpx;color:#FC4224;">{{info.do_price}}元</text>,即还差{{(info.price)-(info.do_price)}}元</text>
+    <text class="f32 c-00 f-w4">已砍<text style="font-size:40rpx;color:#FC4224;">{{info.do_price}}元</text>,即还差{{cha}}元</text>
     <progress class="progress-line" percent="{{percent}}" border-radius="190" activeColor="#FFD304" backgroundColor="#F5F5F5"></progress>
     <!-- 发起人 -->
     <button class="invite c-00 f32 b_r200" open-type="share" wx:if="{{judge}}">喊好友砍一刀</button>

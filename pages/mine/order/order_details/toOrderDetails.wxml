@@ -22,7 +22,8 @@
       <view class="order-title climp3 f28 c-00 f-wb">{{details.title}}</view>
     </view>
 
-    <view class="line flex fl-align f28 c-66">套餐类型：{{order.set_meal}}</view>
+    <view class="line flex fl-align f28 c-66" wx:if="{{order.set_meal}}">套餐类型：{{order.set_meal}}</view>
+    <view class="line flex fl-align f28 c-66" wx:else>套餐类型：无</view>
 
     <view class="line flex fl-align f28 c-66" wx:if="{{order.crowd==0}}">出游人群：成人</view>
     <view class="line flex fl-align f28 c-66" wx:if="{{order.crowd==1}}">出游人群：儿童</view>
@@ -45,7 +46,7 @@
     <text class="f28 c-66">拼单成功，共{{pintuan.length}}人</text>
     <view class="flex fl-align">
       <view class="spell-number flex fl-align fl-jsb">
-        <view class="spell-item" wx:for="{{pintuan}}" wx:key="index" wx:if="{{index<2}}">
+        <view class="spell-item" wx:for="{{pintuan}}" wx:key="index" wx:if="{{index<3}}">
           <image src="{{item.img}}"></image>
           <view class="f18 c-00 b_r200 t-ac" wx:if="{{item.uid==0}}">拼主</view>
         </view>
