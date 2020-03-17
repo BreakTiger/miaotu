@@ -28,7 +28,6 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data
-          // console.log(list)
           // 循环解析富文本
           let arr = []
           for (let i = 0; i < list.length; i++) {
@@ -37,14 +36,11 @@ Page({
               WxParse.wxParseTemArray("WxParseListArr", 'member_introduce', list.length, that);
             }
           }
-          // console.log(list);
-          // console.log(that.data.WxParseListArr);
           let listArr = that.data.WxParseListArr;
           listArr.forEach((item, index) => {
             list[index].contentCopy = item;
             arr.push(list[index])
           })
-          // console.log('list', list)
           that.setData({
             cardlist: list
           })

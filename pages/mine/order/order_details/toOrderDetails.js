@@ -38,7 +38,6 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      // console.log(res.data.data)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -73,7 +72,9 @@ Page({
           that.setData({
             aid: res.data.data.p_id
           })
-          that.getCode()
+          if (that.data.order.new_status == 2) {
+            that.getCode()
+          }
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')

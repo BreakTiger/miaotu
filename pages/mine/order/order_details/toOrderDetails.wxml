@@ -71,7 +71,7 @@
   </view>
 
   <!-- 二维码 -->
-  <view class="code-line b-ff">
+  <view class="code-line b-ff" wx:if="{{order.new_status==2}}">
     <view class="f32 c-00 f-wb">二维码</view>
     <canvas style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas' class="canvas"></canvas>
   </view>
