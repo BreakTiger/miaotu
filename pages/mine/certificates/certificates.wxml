@@ -23,6 +23,7 @@
     </view>
   </view>
 
+  <image src="/resources/invite.png" class="empty" wx:if="{{list.length==0}}"></image>
   <view wx:if="{{list.length==0}}">暂无数据</view>
 
 </view>

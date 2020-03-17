@@ -256,10 +256,9 @@ Page({
   toScan: function() {
     wx.scanCode({
       success(res) {
-        console.log(res)
-      },
-      fail(res) {
-        console.log(res)
+        wx.navigateTo({
+          url: '/pages/mine/scan/scan?id=' + res.result,
+        })
       }
     })
   },

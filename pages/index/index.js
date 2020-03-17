@@ -128,6 +128,7 @@ Page({
             sw_list: res.data.data
           })
           that.getSkill()
+          that.getList(that.data.choice_one)
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -206,7 +207,6 @@ Page({
         });
       }
     }.bind(this), 1000);
-    this.getList(this.data.choice_one)
   },
 
   // 分类列表

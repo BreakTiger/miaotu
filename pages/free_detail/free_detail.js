@@ -13,15 +13,14 @@ Page({
     min: '0',
     sec: '0',
     card: '',
+    logList: [],
     page: 1,
     leftlist: [],
     rightlist: [],
     judge: ''
   },
 
-
   onLoad: function(options) {
-    // console.log(options.id)
     this.setData({
       id: options.id
     })
@@ -35,9 +34,10 @@ Page({
       })
     }
     this.getGoodsInfo()
+    this.getCard()
   },
 
-  // 免单详情
+  // 免单商品详情
   getGoodsInfo: function() {
     let that = this
     let url = app.globalData.api + '/portal/Miandan/info'
@@ -53,9 +53,7 @@ Page({
             info: res.data.data.info
           })
           let opneID = wx.getStorageSync('openid')
-          // console.log('当前登录的openid', opneID)
           let tokens = res.data.data.info.openid
-          // console.log('发起人的openids', tokens)
           if (opneID == tokens) {
             that.setData({
               judge: true
@@ -108,7 +106,30 @@ Page({
         }
       }.bind(this), 1000);
     }
-    this.getCard()
+    this.getNumbers()
+  },
+
+  //助力人员详情
+  getNumbers: function() {
+    let that = this
+    let data = {
+      id: that.data.id
+    }
+    let url = app.globalData.api + '/portal/Miandan/miandan_info'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      console.log(res.data.data)
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            logList: res.data.data
+          })
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   // 瀑布流小卡片
@@ -199,7 +220,7 @@ Page({
     })
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.showToast({
       title: '加载中',
       icon: 'loading',
@@ -259,6 +280,6 @@ Page({
       title: that.data.info.title,
       path: 'pages/free_detail/free_detail?id=' + that.data.id,
     }
-    
+
   }
 })

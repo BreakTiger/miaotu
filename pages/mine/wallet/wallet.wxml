@@ -47,5 +47,7 @@
       <text class="f28 c-38" wx:if="{{item.status==0}}">-{{item.price}}</text>
       <text class="f28" wx:if="{{item.status==1}}">{{item.price}}</text>
     </view>
+    <view wx:if="{{list.length==0}}">暂无数据</view>
+
   </view>
 </view>

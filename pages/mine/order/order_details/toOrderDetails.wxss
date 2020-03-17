@@ -100,7 +100,7 @@ page {
   border-radius: 50%;
 }
 
-.spell-item>view {
+.spell-item>view, .master {
   width: 52rpx;
   height: 24rpx;
   background: rgba(255, 211, 4, 1);
@@ -125,7 +125,7 @@ page {
   position: fixed;
   bottom: 0rpx;
   left: 0rpx;
-  z-index: 200;
+  z-index: 40;
 }
 
 .btn_one {
@@ -154,4 +154,57 @@ page {
   background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
   line-height: 56rpx;
   margin-left: 20rpx !important;
+  margin-right: 40rpx !important;
+}
+
+.shaw {
+  width: 600rpx;
+  position: relative;
+}
+
+.shaw>image {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: -22rpx;
+  right: -22rpx;
+  z-index: 100;
+}
+
+.shaw>text {
+  margin: 25rpx 0;
+}
+
+.join-number {
+  width: 50%;
+  margin-bottom: 30rpx;
+}
+
+.join-number>view {
+  width: 60rpx;
+  height: 60rpx;
+  position: relative;
+}
+
+.join-number>view>image {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20rpx;
+}
+
+.code-line {
+  width: 100%;
+  margin-bottom: 8rpx;
+}
+
+.code-line>view {
+  width: 670rpx;
+  padding-top: 36rpx;
+  padding-bottom: 16rpx;
+  margin-left: 40rpx;
+}
+
+.canvas{
+  margin-left: 40rpx;
+  margin-bottom: 20rpx;
 }

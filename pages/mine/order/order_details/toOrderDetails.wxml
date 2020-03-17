@@ -42,7 +42,7 @@
   </view>
 
   <!-- 拼单 -->
-  <view class="spell-line flex fl-align fl-jsb b-ff" wx:if="{{pintuan.length!=0}}">
+  <view class="spell-line flex fl-align fl-jsb b-ff" wx:if="{{pintuan.length!=0}}" bindtap="toShowAll">
     <text class="f28 c-66">拼单成功，共{{pintuan.length}}人</text>
     <view class="flex fl-align">
       <view class="spell-number flex fl-align fl-jsb">
@@ -70,10 +70,29 @@
     <view class="line flex fl-align f28 c-66">身份证号：{{order.identity}}</view>
   </view>
 
+  <!-- 二维码 -->
+  <view class="code-line b-ff">
+    <view class="f32 c-00 f-wb">二维码</view>
+    <canvas style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;" canvas-id='canvas' class="canvas"></canvas>
+  </view>
+
   <!-- 合计 -->
   <view class="total-line b-ff flex fl-align f32">
     <text class="f-wb c-00">合计：</text>
     <text class="c-38">¥{{order.pay_price}}</text>
+  </view>
+
+  <view class="cover flex col fl-align fl-jse" wx:if="{{cover}}">
+    <view class="shaw b-ff b_r12 flex col fl-align">
+      <image src="/icon/close.png" bindtap="toClose"></image>
+      <text class="f32 c-00 f-w4 t-ac">已拼单成功{{pintuan.length}}人</text>
+      <view class="join-number flex fl-w fl-jsb">
+        <view wx:for="{{pintuan}}" wx:key="index">
+          <image src="{{item.img}}" class="b_rh"></image>
+          <view class="master f18 c-00 b_r200 t-ac" wx:if="{{item.uid==0}}">拼主</view>
+        </view>
+      </view>
+    </view>
   </view>
 
   <view class="last-line b-ff flex fl-align f24">

@@ -1,0 +1,45 @@
+<view class="container flex col fl-align">
+  <!-- 订单信息 -->
+  <view class="line b-ff flex col fl-align">
+    <text>门票标题：{{info.title}}</text>
+  </view>
+  <view class="b-ff flex col fl-align">
+    <text wx:if="{{info.type==0}}">订单类型：普通活动</text>
+    <text wx:if="{{info.type==1}}">订单类型：拼团活动</text>
+    <text wx:if="{{info.type==2}}">订单类型：门票砍价</text>
+    <text wx:if="{{info.type==3}}">订单类型：秒杀活动</text>
+    <text wx:if="{{info.type==4}}">订单类型：助力免单</text>
+    <text wx:if="{{info.type==5}}">订单类型：购买会员</text>
+  </view>
+  <view class="b-ff flex col fl-align" wx:if="{{info.set_meal}}">
+    <text>套餐：{{info.set_meal}}</text>
+  </view>
+  <view class="b-ff flex col fl-align">
+    <text>总价格：{{info.pay_price}}</text>
+  </view>
+  <view class="b-ff flex col fl-align">
+    <text>出发时间：{{info.starttime}}</text>
+  </view>
+
+  <!-- 购票信息 -->
+  <view class="b-ff flex col fl-align">
+    <view class="f32 f-wb c-00">购买人：</view>
+    <view class="line">购票人姓名：{{info.name}}</view>
+    <view class="line">购票人电话：{{info.mobile}}</view>
+    <view class="line">购票人身份证：{{info.identity}}</view>
+  </view>
+
+  <!-- 购票数 -->
+  <view class="b-ff flex col fl-align">
+    <view class="f32 f-wb c-00">购买数：</view>
+    <view class="line">成人票：{{info.ticket_data.adult_num}}</view>
+    <view class="line">儿童票：{{info.ticket_data.child_num}}</view>
+  </view>
+
+  <view class="b-ff flex col fl-align">
+    <text>门票状态：{{info.ticket_status}}</text>
+  </view>
+
+  <view class="sure-btn b-F1 c-ff f32 t-ac b_r12" bindtap="toSure">确定</view>
+
+</view>

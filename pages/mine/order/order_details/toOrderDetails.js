@@ -1,6 +1,9 @@
 const request = require('../../../../api/http.js')
 import modals from '../../../../methods/modal.js'
+const QRCode = require('../../../../utils/qr-core.js')
 const app = getApp()
+
+let qrcode = null;
 
 Page({
 
@@ -9,7 +12,9 @@ Page({
     details: [],
     order: [],
     pintuan: [],
-    aid: ''
+    aid: '',
+    cover: false,
+    qrcodeWidth: 0
   },
 
   onLoad: function(options) {
@@ -33,7 +38,7 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res.data.data)
+      // console.log(res.data.data)
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
@@ -42,11 +47,62 @@ Page({
             order: res.data.data.order,
             pintuan: res.data.data.pintuan
           })
+          if (res.data.data.order.type == 1) {
+            that.getPingID(that.data.oid)
+          }
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
+
+  // 获取拼团活动ID
+  getPingID: function(e) {
+    let that = this
+    let data = {
+      order_id: e,
+      type: 1
+    }
+    let url = app.globalData.api + '/portal/Order/get_pintuan'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            aid: res.data.data.p_id
+          })
+          that.getCode()
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 绘制二维码
+  getCode: function() {
+    let that = this
+    const ctx = wx.createCanvasContext('canvas')
+    const rate = wx.getSystemInfoSync().windowWidth / 750
+    //二维码宽高
+    let qrcodeWidth = rate * 400
+    that.setData({
+      qrcodeWidth: qrcodeWidth
+    })
+    qrcode = new QRCode('canvas', {
+      usingIn: that,
+      width: qrcodeWidth,
+      height: qrcodeWidth,
+      colorDark: "#000000", //前景颜色
+      colorLight: "white", //背景颜色
+      correctLevel: QRCode.CorrectLevel.H,
+    })
+
+    let id = that.data.oid
+    console.log(id)
+    qrcode.makeCode(id)
   },
 
   // 取消+删除订单
@@ -140,65 +196,54 @@ Page({
     })
   },
 
+  // 展示所有拼团人数
+  toShowAll: function() {
+    this.setData({
+      cover: true
+    })
+  },
+
+  // 关闭弹窗
+  toClose: function() {
+    this.setData({
+      cover: false
+    })
+  },
+
   // 立即分享
   onShareAppMessage: function(options) {
     if (options.from === 'button') {
       console.log(this.data.order)
       console.log(this.data.details)
       let order_type = this.data.order.type
-      if (order_type == 0) {
+      if (order_type == 0) { //普通
         return {
           title: this.data.details.title,
           path: '/pages/goods_detail/goods_detail?id=' + this.data.order.detailsId,
         }
-      } else if (order_type == 1) {
-        this.getPingID(this.data.order)
+      } else if (order_type == 1) { //拼团
+        console.log(this.data.aid)
         return {
           title: this.data.details.title,
           path: '/pages/group_detail/group_detail?id=' + this.data.aid,
         }
-      } else if (order_type == 2) {
+      } else if (order_type == 2) { //门票
         return {
           title: '门票砍价',
           path: '/pages/index/tickets/tickets',
         }
-      } else if (order_type == 3) {
+      } else if (order_type == 3) { //秒杀
         let skill = wx.getStorageSync('skill')
         return {
           title: skill.title,
           path: '/pages/seckill_detail/seckill_detail?oid=' + skill.id,
         }
-      } else if (order_type == 4) {
+      } else if (order_type == 4) { //助力
         return {
           title: '助力免单',
           path: '//pages/index/free/free',
         }
       }
     }
-  },
-
-  // 获取拼团活动ID
-  getPingID: function(e) {
-    let that = this
-    let data = {
-      order_id: e.id,
-      type: 1
-    }
-    console.log(data)
-    let url = app.globalData.api + '/portal/Order/get_pintuan'
-    request.sendRequest(url, 'post', data, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      console.log(res.data.data)
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          that.setData({
-            aid: res.data.data.p_id
-          })
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
   }
 })

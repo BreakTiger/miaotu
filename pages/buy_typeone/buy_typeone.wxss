@@ -211,7 +211,6 @@ page {
 
 .coupons-list-item {
   width: 94%;
-  height: 108rpx;
   border-bottom: 2rpx solid #f5f5f5;
   margin: 30rpx auto;
 }

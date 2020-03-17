@@ -33,3 +33,10 @@
 .f72 {
   font-size: 72rpx;
 }
+
+.empty {
+  width: 322rpx;
+  height: 272rpx;
+  margin-top: 100rpx;
+  margin-bottom: 20rpx;
+}

@@ -31,7 +31,10 @@ var getDayCount = function(year, month) {
 };
 
 var pageData = {
-  date: '', //当前日期字符串,
+  year: '', //年
+  month: '', //月
+  day: '', //日
+  date: '', //当前日期:年+月+日,
   time: '', //当前的年，月
   arrIsShow: [], //是否显示此日期
   arrDays: [] //关于几号的信息
@@ -39,6 +42,9 @@ var pageData = {
 
 //刷新全部数据
 var refreshPageData = function(year, month, day, week) {
+  pageData.year = year
+  pageData.month = (month + 1)
+  pageData.day = day
   pageData.date = year + '-' + (month + 1) + '-' + day
   pageData.time = year + '-' + (month + 1)
   var offset = new Date(year, month, 1).getDay();
@@ -90,6 +96,7 @@ Page({
   },
 
   onLoad: function(options) {
+    console.log(this.data.pageData)
     let data = JSON.parse(options.data)
     console.log(data)
     this.setData({
@@ -99,7 +106,7 @@ Page({
     this.getMonthPrice()
   },
 
-  // 获取月份
+  // 获取月份-每日下对应的日期的价位
   getMonthPrice: function() {
     let that = this
     let data = {
@@ -113,9 +120,9 @@ Page({
       if (res.statusCode) {
         if (res.data.status == 1) {
           let list = res.data.data.calendar
-          console.log(res.data.data)
+          // console.log(res.data.data)
           let ishowList = that.data.pageData.arrIsShow
-          console.log(ishowList)
+          // console.log(ishowList)
           let news = []
           for (let i = 0; i < ishowList.length; i++) {
             if (ishowList[i] == true) {
@@ -125,7 +132,7 @@ Page({
               news.push("");
             }
           }
-          console.log(news)
+          // console.log(news)
           that.setData({
             priceList: news,
             child_price: res.data.data.details.child_price
@@ -145,10 +152,8 @@ Page({
     let month = date.getMonth();
     let day = date.getDate()
     let now = year + '-' + (month + 1) + '-' + day
-    console.log('时间一：', now)
     let time = this.data.pageData.date
-    console.log('时间二：', time)
-    // 判断
+    // // 判断
     if (now == time) {
       let daylist = this.data.pageData.arrDays
       let price = this.data.priceList
@@ -206,10 +211,11 @@ Page({
     let time = this.data.pageData.time
     console.log('年月：', time)
     let day = this.data.pageData.arrDays[index]
-    console.log('日：', day)
+    console.log('所选的日：', day)
     let choice = this.data.choice_day
     let times = time + '-' + day
     console.log('年月日:', times)
+
     if (choice != index) {
       this.setData({
         choice_day_index: index,

@@ -33,7 +33,7 @@ Page({
     choice_one: 0,
     page: 1,
     list: [],
-    aid:''
+    aid: ''
   },
 
   onShow: function() {
@@ -52,11 +52,16 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
+      // console.log(res.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          that.setData({
-            list: res.data.data.data
-          })
+          let list = res.data.data.data
+          // console.log(list)
+          that.getPingID(list)
+
+          // that.setData({
+          //   list: res.data.data.data
+          // })
         } else {
           that.setData({
             list: []
@@ -67,6 +72,42 @@ Page({
       }
     })
   },
+
+  //获取活动ID
+  getPingID: function(list) {
+    // 循环数组
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].type == 1 && list[i].new_status == 5) { //拼团
+        // console.log('下标：', i)
+        let data = {
+          order_id: list[i].id,
+          type: 1
+        }
+        let url = app.globalData.api + '/portal/Order/get_pintuan'
+        request.sendRequest(url, 'post', data, {
+          'token': wx.getStorageSync('openid')
+        }).then(function(res) {
+          // console.log(res.data.data)
+          if (res.statusCode == 200) {
+            if (res.data.status == 1) {
+              let pid = res.data.data.p_id
+              console.log(pid)
+              list[i]['aid'] = pid
+            }
+          } else {
+            modals.showToast('系统繁忙，请稍后重试', 'none')
+          }
+        })
+      } else {
+        list[i]['aid'] = ''
+      }
+    }
+    console.log(list)
+    this.setData({
+      list: list
+    })
+  },
+
 
   // 选择分类
   toChoice: function(e) {
@@ -145,9 +186,7 @@ Page({
   // 申请售后
   aftersales: function(e) {
     let that = this
-    console.log(e.currentTarget.dataset.item)
     let id = e.currentTarget.dataset.item.id
-    console.log('订单ID:', id)
     wx.navigateTo({
       url: '/pages/mine/order/apply/apply?id=' + id,
     })
@@ -264,29 +303,28 @@ Page({
     console.log(options.target.dataset.item)
     let order_type = options.target.dataset.item.type
     if (options.from === 'button') {
-      if (order_type == 0) {
+      if (order_type == 0) { //普通
         return {
           title: options.target.dataset.item.title,
           path: '/pages/goods_detail/goods_detail?id=' + options.target.dataset.item.detailsId,
         }
-      } else if (order_type == 1) {
-        this.getPingID(options.target.dataset.item)
+      } else if (order_type == 1) { //拼团
         return {
           title: options.target.dataset.item.title,
-          path: '/pages/group_detail/group_detail?id=' + this.data.aid,
+          path: '/pages/group_detail/group_detail?id=' + options.target.dataset.item.aid,
         }
-      } else if (order_type == 2) {
+      } else if (order_type == 2) { //门票
         return {
           title: '门票砍价',
           path: '/pages/index/tickets/tickets',
         }
-      } else if (order_type == 3) {
+      } else if (order_type == 3) { //秒杀
         let skill = wx.getStorageSync('skill')
         return {
           title: skill.title,
           path: '/pages/seckill_detail/seckill_detail?oid=' + skill.id,
         }
-      } else if (order_type == 4) {
+      } else if (order_type == 4) { //助力
         return {
           title: '助力免单',
           path: '//pages/index/free/free',
@@ -295,28 +333,5 @@ Page({
     }
   },
 
-  // 获取平团活动ID
-  getPingID: function(e) {
-    let that = this
-    let data = {
-      order_id: e.id,
-      type: 1
-    }
-    console.log(data)
-    let url = app.globalData.api + '/portal/Order/get_pintuan'
-    request.sendRequest(url, 'post', data, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      console.log(res.data.data)
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          that.setData({
-            aid: res.data.data.p_id
-          })
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  }
+
 })

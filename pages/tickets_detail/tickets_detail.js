@@ -15,7 +15,7 @@ Page({
     sec: '0',
     logList: [],
     judge: '',
-    cha:'0.00'
+    cha: '0.00'
   },
 
   onLoad: function(options) {
@@ -46,12 +46,20 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let info = res.data.data.info
-          that.setData({
-            info: info,
-            percent: parseFloat(res.data.data.info.do_price) / parseFloat(res.data.data.info.price) * 100
-          })
+          let percent = parseFloat(info.do_price) / parseFloat(info.price) * 100
+          console.log('百分比：', percent)
+          if (percent > 100) {
+            that.setData({
+              percent: 100
+            })
+          } else {
+            that.setData({
+              info: info,
+              percent: percent
+            })
+          }
           let cha = ((info.price) - (info.do_price)).toFixed(2)
-          console.log('还差：',cha)
+          console.log('还差：', cha)
           that.setData({
             cha: cha
           })
@@ -139,7 +147,6 @@ Page({
     })
   },
 
-
   // 好友砍一刀
   cutOne: function() {
     let that = this
@@ -151,7 +158,7 @@ Page({
     request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log('好友分享回调:', res.data)
+      console.log('好友分享回调:', res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           modals.showToast(res.data.msg, 'none')

@@ -16,8 +16,8 @@
         <image src="../../../icon/unknown.png"></image>
         <text class="f24 c-F1">未知</text>
       </view>
-      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">{{person.birthday}}</view>
-      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66">{{person.city}}</view>
+      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66" wx:if="{{person.birthday}}">{{person.birthday}}</view>
+      <view class="laber-two flex fl-align fl-jc b_r200 f24 c-66" wx:if="{{person.city}}">{{person.city}}</view>
     </view>
     <view class="user-last-line flex fl-align">
       <view>

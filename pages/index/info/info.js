@@ -5,12 +5,12 @@ const app = getApp()
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+
   data: {
     page: 1,
-    infoList: []
+    infoList: [],
+    cover: false,
+    info: {}
   },
 
   /**
@@ -47,19 +47,22 @@ Page({
     })
   },
 
-  // 信息已读
+  // 已读消息
   toRead: function(e) {
-    console.log(e.currentTarget.dataset.id)
     let that = this
     let url = app.globalData.api + '/portal/Message/read_message'
     request.sendRequest(url, 'post', {
-      id: e.currentTarget.dataset.id
+      id: e.currentTarget.dataset.item.id
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
       console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
+          that.setData({
+            cover: true,
+            info: e.currentTarget.dataset.item
+          })
           that.getList()
         } else {
           modals.showToast(res.data.msg, 'none')
@@ -67,6 +70,13 @@ Page({
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
+    })
+  },
+
+  // 关闭弹窗
+  toClose: function() {
+    this.setData({
+      cover: false
     })
   },
 
