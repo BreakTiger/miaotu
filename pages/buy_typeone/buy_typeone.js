@@ -2,7 +2,11 @@
 
 const request = require('../../api/http.js')
 import modals from '../../methods/modal.js'
+const WxParse = require('../../wxParse/wxParse.js')
 const app = getApp()
+
+
+
 
 // 获取时间：年，月，日，星期
 var curDate = new Date();
@@ -72,7 +76,7 @@ Page({
     taoPrice: '',
 
     // 票数
-    adult: 0,
+    adult: 1,
     child: 0,
 
     page: 1,

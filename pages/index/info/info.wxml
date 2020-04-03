@@ -1,5 +1,5 @@
-<view class="container flex col fl-align b-ff">
-  <view class="line flex fl-align fl-jsa" wx:for="{{infoList}}" wx:key="index" data-item="{{item}}" bindtap="toRead" style="position: relative;">
+<view class="container flex col fl-align">
+  <view class="line flex fl-align fl-jsa" wx:for="{{infoList}}" wx:key="index" data-item="{{item}}" bindtap="toRead" style="position: relative;" data-index="{{index}}">
     <image class="header" src="{{item.avatar}}"></image>
     <view class="point" wx:if="{{item.status==0}}"></view>
     <view class="flex col fl-align fl-jse">
@@ -11,7 +11,7 @@
       <view class="climp1 f28 c-66">{{item.content}}</view>
     </view>
   </view>
-  <view wx:if="{{infoList.length==0}}" class="f32" style="margin:auto;">暂无数据</view>
+
   <view class="cover flex col fl-align fl-jse" wx:if="{{cover}}">
     <view class="shad b-ff b_r12 flex col fl-align">
       <image src="/icon/close.png" class="close" bindtap="toClose"></image>
@@ -20,4 +20,11 @@
       <text>{{info.content}}</text>
     </view>
   </view>
+
+  <block wx:if="{{infoList.length==0}}">
+    <image src="/resources/invite.png" class="empty"></image>
+    <view class="f32 t-ac">暂无数据</view>
+  </block>
+
+
 </view>

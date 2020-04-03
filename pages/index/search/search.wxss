@@ -79,7 +79,6 @@ page {
 .good-img {
   width: 230rpx;
   height: 230rpx;
-  background: black;
 }
 
 .good-info-conetnt {

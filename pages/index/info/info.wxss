@@ -53,3 +53,10 @@ page {
   padding: 30rpx 0;
   width: 80%;
 }
+
+.empty {
+  width: 322rpx;
+  height: 272rpx;
+  margin-bottom: 30rpx;
+  margin-top: 100rpx;
+}

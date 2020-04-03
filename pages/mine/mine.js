@@ -120,12 +120,14 @@ Page({
     }
   },
 
+  // 去登录
   toLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
     })
   },
 
+  // 进入会员
   toMembers: function() {
     let data = JSON.stringify(this.data.person)
     wx.navigateTo({
@@ -263,6 +265,13 @@ Page({
     })
   },
 
+  // 收藏
+  toCollect: function() {
+    wx.navigateTo({
+      url: '/pages/mine/collect/collect',
+    })
+  },
+
   // 发布
   tosend: function() {
     let openID = wx.getStorageSync('openid') || ''
@@ -307,7 +316,6 @@ Page({
       length: 10,
       type: 7
     }
-    console.log('参数：', data)
     let url = app.globalData.api + '/portal/Home/get_type_details'
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'

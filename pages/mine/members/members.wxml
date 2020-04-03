@@ -5,7 +5,7 @@
     <image class="header" src="{{person.avatar}}"></image>
     <view class="user-info flex col fl-jse">
       <text class="f36 c-00 f-wb">{{person.nickname}}</text>
-      <text>{{person.level_name}}会员</text>
+      <text>{{person.level_name}}</text>
       <view class="flex fl-align fl-jsd f24 c-F1">
         <view class="btn_one t-ac b_r200" bindtap="toIntegral">积分签到</view>
         <view class="btn_one t-ac b_r200" bindtap="toDraw">积分抽奖</view>

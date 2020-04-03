@@ -4,13 +4,16 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -18,8 +21,7 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"enhance": true
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.4",
@@ -54,29 +56,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/mine/order/order",
-					"pathName": "pages/mine/order/order",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/mine/order/order_details/toOrderDetails",
-					"pathName": "pages/mine/order/order_details/toOrderDetails",
-					"query": "oid=193",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/goods_detail/goods_detail",
-					"pathName": "pages/goods_detail/goods_detail",
-					"query": "id=68",
-					"scene": null
-				}
-			]
+			"list": []
 		}
 	}
 }

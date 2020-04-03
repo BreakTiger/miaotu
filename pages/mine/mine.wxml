@@ -32,7 +32,7 @@
       </view>
       <view class="card-content b_r12 flex fl-align fl-jsb" bindtap="toMembers">
         <image src="../../resources/card.png"></image>
-        <text class="level-name f28 f-w5">{{person.level_name}}会员</text>
+        <text class="level-name f28 f-w5">{{person.level_name}}</text>
         <text class="up_member f20 c-66 b_r200 t-ac" bindtap="toUpmembers">升级会员 ></text>
       </view>
     </view>
@@ -54,10 +54,17 @@
     </view>
   </view>
 
+  <view class="scan-line flex fl-align fl-jsb b-ff b_r12" bindtap="toCollect">
+    <text class="f28 c-00">我的收藏</text>
+    <image src="../../icon/go.png"></image>
+  </view>
+
   <view class="scan-line flex fl-align fl-jsb b-ff b_r12" wx:if="{{person.check==1}}" bindtap="toScan">
     <text class="f28 c-00">我的核审</text>
     <image src="../../icon/go.png"></image>
   </view>
+
+
 
   <view class="guess">
     <text>猜你喜欢</text>

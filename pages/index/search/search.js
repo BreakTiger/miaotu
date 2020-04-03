@@ -135,17 +135,28 @@ Page({
 
   // 去到商品详情
   toGoodsDetail: function(e) {
-    console.log(e.currentTarget.dataset.id)
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/goods_detail/goods_detail?id=' + id,
+    })
   },
 
   onPullDownRefresh: function() {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 1000
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+    this.setData({
+      page: 1
+    })
+    this.searchs()
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function() {
-
+    
   }
 })

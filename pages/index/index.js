@@ -128,7 +128,7 @@ Page({
             sw_list: res.data.data
           })
           that.getSkill()
-          that.getList(that.data.choice_one)
+          that.getCard()
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -209,6 +209,28 @@ Page({
     }.bind(this), 1000);
   },
 
+  // 小卡片
+  getCard: function() {
+    let that = this
+    let url = app.globalData.api + '/portal/Home/get_slide_item'
+    request.sendRequest(url, 'post', {
+      tags: 9
+    }, {
+      'content-type': 'application/json'
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.setData({
+            card: res.data.data[0].image
+          })
+          that.getList(that.data.choice_one)
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
   // 分类列表
   getList: function(e) {
     let that = this
@@ -233,29 +255,6 @@ Page({
             })
           }
           that.getCard()
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
-
-  // 小卡片
-  getCard: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Home/get_slide_item'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      tags: 9
-    }, {
-      'content-type': 'application/json'
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          that.setData({
-            card: res.data.data[0].image
-          })
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')

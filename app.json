@@ -41,7 +41,8 @@
     "pages/mine/sign_in/Integral/Integral",
     "pages/rules/rules",
     "pages/mine/draw/myPrize/myPrize",
-    "pages/mine/scan/scan"
+    "pages/mine/scan/scan",
+    "pages/mine/collect/collect"
   ],
   "permission": {
     "scope.userLocation": {
