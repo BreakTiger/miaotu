@@ -56,7 +56,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/mine/collect/collect",
+					"pathName": "pages/mine/collect/collect",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }

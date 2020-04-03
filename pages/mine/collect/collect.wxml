@@ -1,2 +1,11 @@
 <view class="container flex col fl-align">
+
+  <!-- 空 -->
+  <block wx:if="{{list.length==0}}">
+    <image src="/resources/invite.png" class="empty"></image>
+    <text class="f28 c-66">赞无收藏哦</text>
+  </block>
+
+  <view class="list-item flex fl-align"></view>
+
 </view>

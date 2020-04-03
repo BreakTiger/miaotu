@@ -1,5 +1,7 @@
 <!-- 首页 -->
 <view class="container flex col fl-align">
+
+  <!-- 定位 + 搜索 + 消息 -->
   <view class="search-line flex fl-align fl-jsa f28 b-F1">
     <view class="locals flex fl-align c-ff" bindtap="toPlace">{{city}}</view>
     <view class="search-box flex fl-align b-ff b_r200" bindtap="toSearch">
@@ -11,6 +13,8 @@
       <view class="f28 c-ff t-ac" wx:if="{{noread>0}}">{{noread}}</view>
     </view>
   </view>
+
+  <!-- 轮播 -->
   <view class="banner flex col fl-align">
     <swiper class="banner_box" indicator-dots="true" autoplay="true" indicator-active-color="#fff" interval="2000">
       <swiper-item wx:for="{{sw_list}}" wx:key="index" bindtap="toDetaill" data-index="{{index}}">
@@ -18,12 +22,16 @@
       </swiper-item>
     </swiper>
   </view>
+
+  <!-- 导航 -->
   <view class="nav-line flex fl-align fl-jsa">
     <view class="nav-line-item flex col fl-align f22" wx:for="{{na_list}}" wx:key="index" data-url="{{item.path}}" bindtap="toNav">
       <image src="{{item.icon}}"></image>
       <text>{{item.name}}</text>
     </view>
   </view>
+
+  <!-- 秒杀 -->
   <view class="seckill-line flex fl-align" bindtap="toSkill" wx:if="{{skillgoods.length!=0}}" bindtap="toSeckillDetail" data-item="{{skillgoods}}">
     <view class="seckill-left flex col fl-align">
       <view class="seckill-left-line-one" style="position: relative;">
@@ -42,10 +50,14 @@
       <image src="{{skillgoods.banner}}" class="b_r12"></image>
     </view>
   </view>
+
+  <!-- 分类列表 -->
   <view class="goods-list-content b-F5">
     <view class="list-nav flex fl-align fl-jsa c-66 f28">
       <text class="{{choice_one==item.id?'linebottom':''}}" wx:for="{{goodsnav}}" wx:key="index" data-id="{{item.id}}" bindtap="toGetKind">{{item.name}}</text>
     </view>
+    <view class="t-ac f-wb" wx:if="{{leftlist.length==0&&rightlist.length==0}}">暂无数据</view>
+
     <view class="list-content b-F5">
       <view class="left-col" wx:if="{{leftlist.length!=0}}">
         <view class="list-item b-ff b_r16 flex col fl-align" wx:for="{{leftlist}}" wx:key="index" data-id="{{item.id}}" bindtap="toGoodsDetail">
@@ -75,6 +87,7 @@
         </view>
       </view>
     </view>
-    <view class="f-wb c-00 t-ac" wx:if="{{leftlist.length==0&&rightlist.length==0}}">暂无数据</view>
+
   </view>
+
 </view>

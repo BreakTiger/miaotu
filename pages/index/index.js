@@ -1,11 +1,13 @@
-const request = require('../../api/http.js')
-import modals from '../../methods/modal.js'
+const request = require('../../utils/http.js')
+import modals from '../../utils/modal.js'
 const app = getApp()
 
+// 地图组件
 var QQMapWX = require('../../qqmap-wx-jssdk.min.js')
 var demo = new QQMapWX({
   key: 'OSCBZ-J26WX-M6M4B-T6MQM-JC6EQ-HUFDP'
 });
+
 
 Page({
 
@@ -254,7 +256,6 @@ Page({
               rightlist: list.slice(half, len)
             })
           }
-          that.getCard()
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
