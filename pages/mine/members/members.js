@@ -1,5 +1,5 @@
-const request = require('../../../api/http.js')
-import modals from '../../../methods/modal.js'
+const request = require('../../../utils/http.js')
+import modals from '../../../utils/modal.js'
 const app = getApp()
 const WxParse = require('../../../wxParse/wxParse.js')
 
