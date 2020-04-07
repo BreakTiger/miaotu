@@ -1,11 +1,46 @@
 <view class="container flex col fl-align">
 
+  <!-- 切换 -->
+  <view class="switch flex fl-align fl-jsb b-ff">
+    <view class="f28 t-ac {{switchs==0?'c-00 f-wb':'c-66'}}">商品</view>
+    <view class="f28 t-ac {{switchs==1?'c-00 f-wb':'c-66'}}">活动</view>
+  </view>
+
+  <view style="width:100%;height:100rpx;"></view>
+
   <!-- 空 -->
   <block wx:if="{{list.length==0}}">
     <image src="/resources/invite.png" class="empty"></image>
     <text class="f28 c-66">赞无收藏哦</text>
   </block>
 
-  <view class="list-item flex fl-align"></view>
+  <!-- 商品 -->
+  <block wx:if="{{switchs==0}}">
+
+    <view class="list flex col fl-align b-ff">
+
+      <view class="list-item flex fl-align fl-jsb" wx:for="{{list_one}}" wx:key="index" bindtap="toDetail" data-item="{{item}}">
+        <image src="{{item.banner}}" class="b_r12"></image>
+        <view class="flex col fl-jse">
+          <view class="f28 f-wb climp2">{{item.title}}</view>
+          <text class="f28 c-66">总销量：{{item.sell_count}}</text>
+          <text class="f28 c-38">￥{{item.price}}</text>
+        </view>
+      </view>
+
+    </view>
+
+  </block>
+
+  <!-- 活动 -->
+  <block wx:if="{{switchs==1}}">
+
+  </block>
+
+
+
+
+
+
 
 </view>
