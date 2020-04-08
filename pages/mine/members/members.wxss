@@ -50,49 +50,6 @@
   background: rgba(255, 211, 4, 0.7);
 }
 
-.card-list {
-  margin: 35rpx 0;
-}
-
-.card-list-item {
-  width: 100%;
-  position: relative;
-  margin-bottom: 25rpx;
-}
-
-.card-list-item>image {
-  width: 100%;
-  height: 450rpx;
-  border-radius: 24rpx;
-}
-
-.card-info-line-one {
-  width: 100%;
-  position: absolute;
-  top: 30rpx;
-}
-
-.card-info-line-one>view, .card-info-line-two>view {
-  margin-left: 40rpx;
-}
-
-.card-info-line-one>text, .card-info-line-two>view {
-  margin-right: 40rpx;
-}
-
-.card-info-line-two {
-  width: 100%;
-  position: absolute;
-  bottom: 82rpx;
-}
-
-.buy {
-  width: 148rpx;
-  height: 56rpx;
-  line-height: 56rpx;
-  border: 2rpx solid rgba(255, 255, 255, 1);
-}
-
 .f48 {
   font-size: 48rpx;
 }
@@ -124,4 +81,46 @@
   background: linear-gradient(270deg, rgba(65, 216, 249, 1) 0%, rgba(31, 175, 241, 1) 100%);
   margin-right: 40rpx;
   box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(31, 175, 241, 0.1);
+}
+
+.card-list {
+  position: relative;
+  margin: 35rpx 0;
+  height: 1420rpx;
+}
+
+.card-list-item {
+  position: absolute;
+  width: 100%;
+  margin-bottom: 20rpx;
+  /* height: 460rpx; */
+}
+
+.card-list-item>image {
+  width: 100%;
+  height: 450rpx;
+  border-radius: 24rpx;
+}
+
+.card-info {
+  width: 100%;
+  height: 450rpx;
+  position: absolute;
+  top: 0rpx;
+}
+
+.card-info>view {
+  width: 90%;
+}
+
+.line-one {
+  margin-top: 42rpx;
+  margin-bottom: 270rpx;
+}
+
+.buy {
+  width: 148rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border: 2rpx solid rgba(255, 255, 255, 1);
 }

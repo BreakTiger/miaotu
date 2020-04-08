@@ -1,11 +1,13 @@
-<!-- 引入富文本解析组件 -->
 <import src="../../wxParse/wxParse.wxml" />
+
 <view class="container flex col fl-align">
+
   <view class="top-line flex fl-align fl-jc b-ff">
     <view style="width: 60%;" class="flex fl-align fl-jsb">
       <text class="c-00 f28 f-w5" wx:for="{{top}}" wx:key="index">{{item.name}}</text>
     </view>
   </view>
+
   <view class="goods_detail flex col fl-align b-ff">
     <swiper class="good-imgs" autoplay="true" interval="3000">
       <swiper-item wx:for="{{details.pic}}" wx:key="index">
@@ -25,11 +27,13 @@
       <text>{{startTime}}开抢</text>
     </view>
   </view>
+
   <view class="hint-line flex fl-align fl-jsa c-00" wx:if="{{details.twice_submit}}">
     <image src="../../icon/hint.png"></image>
     <view class="f20 f-w5">二次确认</view>
     <view class="climp2 f24 f-w3">{{details.twice_submit}}</view>
   </view>
+
   <view class="review flex col b-ff" wx:if="{{discuss.length>0}}">
     <text class="f32 c-00 f-w5">点评</text>
     <view class="discuss flex fl-jsb">
@@ -38,6 +42,7 @@
     </view>
     <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate" data-id="{{details.id}}">查看全部评价 ></view>
   </view>
+
   <!-- 正在拼单 -->
   <view class="bill-line flex col fl-align b-ff" wx:if="{{len>0}}">
     <view class="titles-line flex fl-align fl-jsb">
@@ -64,6 +69,7 @@
       </swiper>
     </view>
   </view>
+
   <!-- 商铺 -->
   <view class="shop-line flex fl-align fl-jsa b-ff" bindtap="toshop" data-id="{{shop.id}}">
     <image class="b_r12" src="{{shop.avatar}}"></image>
@@ -84,14 +90,14 @@
     </view>
     <image src="../../icon/go.png" class="togos"></image>
   </view>
-  <!-- 简介 -->
+
+  <!-- 富文本 -->
   <view class="abstract flex col fl-align b-ff">
     <view class="f32 c-00 f-w5">产品简介</view>
     <view class="f28 c-66 f-w4">
       <template is="wxParse" data="{{wxParseData:introduce.nodes}}" />
     </view>
   </view>
-  <!-- 交通信息 -->
   <view class="traffic flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">交通信息</text>
     <view class="f20 c-66 f-w3">交通信息仅供参考，最终以供应商确认为准，飞行时长以实际为准</view>
@@ -99,7 +105,6 @@
       <template is="wxParse" data="{{wxParseData:traffic.nodes}}" />
     </view>
   </view>
-  <!-- 景点详情 -->
   <view class="attractions flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">景点详情</text>
     <view>
@@ -110,20 +115,24 @@
       <template is="wxParse" data="{{wxParseData:buy.nodes}}" />
     </view>
   </view>
+
   <view style="height:216rpx;width:750rpx;"></view>
 
+  <!-- 返回顶部 -->
   <image src="/icon/back.png" class="backTop b_rh" wx:if="{{floorstatus}}" bindtap="goTop"></image>
 
+  <!-- 底部栏 -->
   <view class="tabbers flex fl-align fl-jsa b-ff">
+
     <view class="icons flex col fl-align fl-jc">
       <image src="../../icon/talk.png"></image>
       <text class="f20 c-66 f-w4">咨询</text>
     </view>
-    <view class="icons flex col fl-align fl-jc" wx:if="{{!collecttype}}" bindtap="toCollect">
+    <view class="icons flex col fl-align fl-jc" wx:if="{{details.collect_activity==0}}" bindtap="toCollect">
       <image src="../../icon/collect.png"></image>
       <text class="f20 c-66 f-w4">收藏</text>
-    </view>
-    <view class="icons flex col fl-align fl-jc" wx:if="{{collecttype}}" bindtap="toCanel">
+    </view>    
+    <view class="icons flex col fl-align fl-jc" wx:if="{{details.collect_activity==1}}" bindtap="toCanel">
       <image src="../../icon/collects.png"></image>
       <text class="f20 c-66 f-w4">已收藏</text>
     </view>
@@ -133,11 +142,12 @@
     </view>
     <view class="get t-ac f28 c-ff b_r200" bindtap="toOrder">¥{{details.pt_price}}立即预订</view>
   </view>
-  <!-- 咨询 -->
   <button class="consult" plain="true" open-type="contact"></button>
-  <!-- 分享 -->
   <button class="shares" plain="true" open-type="share"></button>
+
+
   <view class="cover flex col fl-align fl-jc" wx:if="{{shad}}" catchtouchmove="ture">
+
     <!-- 单个拼单 -->
     <block wx:if="{{cover_one}}">
       <image class="close" style="top: 20rpx;left: 300rpx;" src="../../icon/close.png" bindtap="toClose_one"></image>
@@ -151,6 +161,7 @@
         <view class="joined-btn t-ac f28 c-ff" bindtap="toJoined">参与拼单</view>
       </view>
     </block>
+
     <!-- 所有拼单列表 -->
     <block wx:if="{{cover_two}}">
       <image class="close" style="top: 25rpx;left: 302rpx;" src="../../icon/close.png" bindtap="toClose_two"></image>
@@ -171,6 +182,6 @@
       </view>
     </block>
 
-
   </view>
+
 </view>

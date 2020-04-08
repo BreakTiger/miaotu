@@ -5,7 +5,6 @@ const app = getApp()
 
 Page({
 
-
   data: {
     top: [{
         name: '商品'
@@ -18,16 +17,19 @@ Page({
       }
     ],
     id: '',
-    details: {},
-    shop: {},
-    packages: [],
+    details: {}, //商品
+    shop: {}, //商铺
+    tao: [], //套餐
+    insurance: {}, //保险
     startTime: '',
     discuss: {},
+
     page: 1,
+
     len: '0',
     group: [],
     list_pelpel: [],
-    collecttype: false,
+
     shad: false,
     all_list: [],
     floorstatus: false,
@@ -35,6 +37,7 @@ Page({
     cover_one: false,
     cover_two: false,
     person: {}
+
   },
 
   onLoad: function(options) {
@@ -47,39 +50,38 @@ Page({
         url: '/pages/login/login'
       })
     }
-    this.getShopInfo()
+    this.getShopInfo(options.id)
   },
 
-  // 获取商品信息
-  getShopInfo: function() {
+  // 商品信息
+  getShopInfo: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/Pintuan/info'
     modals.loading()
     request.sendRequest(url, 'post', {
-      id: that.data.id
+      id: e
     }, {
-      'content-type': 'application/json'
+      'token': wx.getStorageSync('openid')
     }).then(function(res) {
       modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          let details = res.data.data.info
+          let result = res.data.data
+          console.log(result.info)
           that.setData({
-            details: details,
-            shop: res.data.data.shop,
-            packages: res.data.data.setmeal
+            details: result.info,
+            shop: result.shop,
+            tao: result.setmeal,
+            insurance: result.insurance
           })
           // 绑定富文本:
-          // 产品简介
-          let introduce = details.introduce
+          let introduce = result.info.introduce
           WxParse.wxParse('introduce', 'html', introduce, that, 5);
-          // 交通信息
-          let traffic = details.traffic
+          let traffic = result.info.traffic
           WxParse.wxParse('traffic', 'html', traffic, that, 5);
-          // 购买须知
-          let buy = details.buy_notice
+          let buy = result.info.buy_notice
           WxParse.wxParse('buy', 'html', buy, that, 5);
-          that.trailer(details.article_type)
+          that.trailer(result.info.article_type)
         } else {
           modals.showToast(res.data.msg, 'none')
         }
@@ -89,7 +91,7 @@ Page({
     })
   },
 
-  // 活动开始预告
+  // 二次确认
   trailer: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_foreshow'
@@ -115,7 +117,7 @@ Page({
     })
   },
 
-  // 获取评论 
+  // 获取评论
   getReview: function() {
     let that = this
     let data = {
@@ -124,11 +126,9 @@ Page({
       details_id: that.data.details.id
     }
     let url = app.globalData.api + '/portal/home/comment'
-    modals.loading()
     request.sendRequest(url, 'post', data, {
       'content-type': 'application/json'
     }).then(function(res) {
-      modals.loaded()
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           that.setData({
@@ -139,7 +139,6 @@ Page({
         let tokens = wx.getStorageSync('openid')
         if (tokens) {
           that.joinGroup_login()
-          that.collectState()
         } else {
           that.joinGroup_unlogin()
         }
@@ -171,7 +170,7 @@ Page({
           })
           that.reform(res.data.data.data)
         } else {
-          modals.showToast(res.data.status, 'none')
+          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -201,7 +200,7 @@ Page({
           })
           that.reform(res.data.data.data)
         } else {
-          modals.showToast(res.data.status, 'none')
+          modals.showToast(res.data.msg, 'none')
         }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
@@ -238,6 +237,52 @@ Page({
     })
   },
 
+  // 收藏
+  toCollect: function() {
+    let that = this
+    let data = {
+      activity_id: that.data.details.id,
+      type: 1
+    }
+    let url = app.globalData.api + '/portal/Personal/collect_activity_add'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.getShopInfo(that.data.id)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
+  // 取消收藏
+  toCanel: function() {
+    let that = this
+    let data = {
+      activity_id: that.data.details.id,
+      type: 1
+    }
+    let url = app.globalData.api + '/portal/Personal/collect_activity_delete'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          that.getShopInfo(that.data.id)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
+  },
+
   // 提示界面
   hint: function() {
     wx.showModal({
@@ -249,35 +294,6 @@ Page({
             url: '/pages/login/login',
           })
         }
-      }
-    })
-  },
-
-  // 活动收藏状态
-  collectState: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Shop/collect'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          if (res.data.data == 0) { //未收藏
-            that.setData({
-              collecttype: false
-            })
-          } else { //收藏
-            that.setData({
-              collecttype: true
-            })
-          }
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
@@ -334,60 +350,6 @@ Page({
     this.setData({
       shad: false,
       cover_two: false
-    })
-  },
-
-  // 收藏
-  toCollect: function() {
-    let that = this
-    let openID = wx.getStorageSync('openid')
-    if (!openID) {
-      that.hint()
-    } else {
-      let url = app.globalData.api + '/portal/Shop/set_collect'
-      modals.loading()
-      request.sendRequest(url, 'post', {
-        id: that.data.id
-      }, {
-        'token': wx.getStorageSync('openid')
-      }).then(function(res) {
-        modals.loaded()
-        if (res.statusCode == 200) {
-          if (res.data.status == 1) {
-            modals.showToast(res.data.msg, 'none')
-            that.collectState()
-          } else {
-            modals.showToast(res.data.msg, 'none')
-          }
-        } else {
-          modals.showToast('系统繁忙，请稍后重试', 'none')
-        }
-      })
-    }
-
-  },
-
-  // 取消收藏
-  toCanel: function() {
-    let that = this
-    let url = app.globalData.api + '/portal/Shop/out_collect'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
-      'token': wx.getStorageSync('openid')
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          that.collectState()
-        } else {
-          modals.showToast(res.data.msg, 'none')
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
     })
   },
 
@@ -477,18 +439,6 @@ Page({
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
-  },
-
-  onPullDownRefresh: function() {
-    wx.showToast({
-      title: '加载中',
-      icon: 'loading',
-      duration: 1000
-    })
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 1000);
-    this.onLoad();
   },
 
   onShareAppMessage: function(options) {

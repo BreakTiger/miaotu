@@ -17,22 +17,21 @@ Page({
       }
     ],
     id: '',
-    details: {},
-    shop: {},
-    tao: [],
+    details: {}, //商品
+    shop: {}, //商铺
+    tao: [], //套餐
+    insurance: {}, //保险
     startTime: '',
-    discuss: {},
-    collecttype: false,
-    countdown: '',
+    discuss: {}, //评论
+    countdown: '', //倒计时
     floorstatus: false
   },
 
   onLoad: function(options) {
-    console.log(options)
     this.setData({
-      id: options.oid
+      id: options.id
     })
-    this.getShopInfo(options.oid)
+    this.getShopInfo(options.id)
     let openID = wx.getStorageSync('openid') || ''
     if (!openID) {
       wx.navigateTo({
@@ -45,22 +44,20 @@ Page({
   getShopInfo: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/Miaosha/info'
-    modals.loading()
     request.sendRequest(url, 'post', {
       id: e
     }, {
-      'content-type': 'application/json'
+      'token': wx.getStorageSync('openid')
     }).then(function(res) {
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let result = res.data.data
-          console.log(result)
           that.setData({
             details: result.info,
             shop: result.shop,
-            tao: result.setmeal
+            tao: result.setmeal,
+            insurance: result.insurance
           })
-
           let introduce = result.info.introduce
           WxParse.wxParse('introduce', 'html', introduce, that, 5);
           let traffic = result.info.traffic
@@ -68,12 +65,16 @@ Page({
           let buy = result.info.buy_notice
           WxParse.wxParse('buy', 'html', buy, that, 5);
           that.trailer(result.info.article_type)
+        } else {
+          modals.showToast(res.data.msg, 'none')
         }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  // 二次确认
+  //二次确认
   trailer: function(e) {
     let that = this
     let url = app.globalData.api + '/portal/home/get_foreshow';
@@ -165,67 +166,22 @@ Page({
         countdown: '活动即将开始'
       });
     }
-    modals.loaded()
-  },
-
-  // 店铺
-  toShop: function(e) {
-    wx.navigateTo({
-      url: '/pages/shop/shop?sid=' + e.currentTarget.dataset.sid,
-    })
-  },
-
-  onShow: function() {
-    let that = this
-    let openID = wx.getStorageSync('openid') || ''
-    if (openID) {
-      that.collectType(openID)
-    }
-  },
-
-  // 收藏状态
-  collectType: function(openID) {
-    let that = this
-    let url = app.globalData.api + '/portal/Shop/collect'
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
-      'token': openID
-    }).then(function(res) {
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          if (res.data.data == 0) {
-            that.setData({
-              collecttype: false
-            })
-          } else {
-            that.setData({
-              collecttype: true
-            })
-          }
-        } else {
-          modals.showToast(res.data.msg, 'none')
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
   },
 
   // 收藏
   toCollect: function() {
     let that = this
-    let url = app.globalData.api + '/portal/Shop/set_collect'
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
+    let data = {
+      activity_id: that.data.details.id,
+      type: 3
+    }
+    let url = app.globalData.api + '/portal/Personal/collect_activity_add'
+    request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      console.log(res.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          that.collectType(wx.getStorageSync('openid'))
+          that.getShopInfo(that.data.id)
         } else {
           modals.showToast(res.data.msg, 'none')
         }
@@ -238,18 +194,18 @@ Page({
   // 取消收藏
   toCanel: function() {
     let that = this
-    let url = app.globalData.api + '/portal/Shop/out_collect'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      id: that.data.id
-    }, {
+    let data = {
+      activity_id: that.data.details.id,
+      type: 3
+    }
+    let url = app.globalData.api + '/portal/Personal/collect_activity_delete'
+    request.sendRequest(url, 'post', data, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
-      modals.loaded()
+      console.log(res)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
-          modals.showToast(res.data.msg, 'none')
-          that.collectType(wx.getStorageSync('openid'))
+          that.getShopInfo(that.data.id)
         } else {
           modals.showToast(res.data.msg, 'none')
         }
@@ -259,50 +215,11 @@ Page({
     })
   },
 
-  //  下单
-  toOrder: function() {
-    let that = this
-    let openID = wx.getStorageSync('openid') || ''
-    if (openID) {
-      console.log('秒杀活动ID：', that.data.id)
-      let url = app.globalData.api + '/portal/Miaosha/do_miaoshao'
-      modals.loading()
-      request.sendRequest(url, 'post', {
-        id: that.data.id
-      }, {
-        'token': openID
-      }).then(function(res) {
-        modals.loaded()
-        if (res.statusCode == 200) {
-          if (res.data.status == 1) {
-            let data = {
-              id: that.data.id,
-              tao: that.data.tao,
-              price: that.data.details.ms_price
-            }
-            wx.navigateTo({
-              url: '/pages/buy_typethree/buy_typethree?data=' + JSON.stringify(data),
-            })
-          } else {
-            modals.showToast(res.data.msg, 'none')
-          }
-        } else {
-          modals.showToast('系统繁忙，请稍后重试', 'none')
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '您需要授权后，才可进行此项操作',
-        success: function(res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '/pages/login/login',
-            })
-          }
-        }
-      })
-    }
+  // 店铺
+  toShop: function(e) {
+    wx.navigateTo({
+      url: '/pages/shop/shop?sid=' + e.currentTarget.dataset.sid,
+    })
   },
 
   // 监听滚动
@@ -328,6 +245,52 @@ Page({
       wx.showModal({
         title: '提示',
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
+  },
+
+  // 下单 -抢购资格判断
+  toOrder: function() {
+    let that = this
+    let openID = wx.getStorageSync('openid') || ''
+    if (openID) {
+      let url = app.globalData.api + '/portal/Miaosha/do_miaoshao'
+      modals.loading()
+      request.sendRequest(url, 'post', {
+        id: that.data.id
+      }, {
+        'token': openID
+      }).then(function(res) {
+        modals.loaded()
+        console.log(res)
+        if (res.statusCode == 200) {
+          if (res.data.status == 1) {
+            // let data = {
+            //   id: that.data.id,
+            //   tao: that.data.tao,
+            //   price: that.data.details.ms_price
+            // }
+            // wx.navigateTo({
+            //   url: '/pages/buy_typethree/buy_typethree?data=' + JSON.stringify(data),
+            // })
+          } else {
+            modals.showToast(res.data.msg, 'none')
+          }
+        } else {
+          modals.showToast('系统繁忙，请稍后重试', 'none')
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '您需要授权后，才可进行此项操作',
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        }
       })
     }
   },

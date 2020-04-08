@@ -327,10 +327,9 @@ Page({
 
   // 进入秒杀
   toSeckillDetail: function(e) {
-    let oid = e.currentTarget.dataset.item.id
-    console.log(oid)
+    let id = e.currentTarget.dataset.item.id
     wx.navigateTo({
-      url: '/pages/seckill_detail/seckill_detail?oid=' + oid,
+      url: '/pages/seckill_detail/seckill_detail?id=' + id,
     })
   },
 

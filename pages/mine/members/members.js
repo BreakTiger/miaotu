@@ -7,7 +7,7 @@ Page({
 
   data: {
     person: [],
-    cardlist: [],
+    cardlist: []
   },
 
   onLoad: function(options) {
@@ -25,28 +25,84 @@ Page({
     request.sendRequest(url, 'post', {}, {
       'content-type': 'application/json'
     }).then(function(res) {
+      console.log(res.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let list = res.data.data
-          // 循环解析富文本
-          let arr = []
-          for (let i = 0; i < list.length; i++) {
-            WxParse.wxParse('member_introduce' + i, 'html', list[i].member_introduce, that);
-            if (i === list.length - 1) {
-              WxParse.wxParseTemArray("WxParseListArr", 'member_introduce', list.length, that);
-            }
-          }
-          let listArr = that.data.WxParseListArr;
-          listArr.forEach((item, index) => {
-            list[index].contentCopy = item;
-            arr.push(list[index])
+          // 循环增加动画属性 + 顶部距离 + 层次
+          list.forEach(function(item, index) {
+            // console.log(item)
+            item.animation = null //增加动画属性
+            item.top = index * 160 //顶部距离
+            item.tier = index * 20 //层次 
           })
-          that.setData({
-            cardlist: list
-          })
+          that.cycle(list)
+        } else {
+          modals.showToast(res.data.msg, 'none')
         }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
+  },
+
+  // 循环解析富文本
+  cycle: function(list) {
+    console.log(list)
+    let arr = []
+    for (let i = 0; i < list.length; i++) {
+      WxParse.wxParse('member_introduce' + i, 'html', list[i].member_introduce, this);
+      if (i === list.length - 1) {
+        WxParse.wxParseTemArray("WxParseListArr", 'member_introduce', list.length, this);
+      }
+    }
+    let listArr = this.data.WxParseListArr;
+    listArr.forEach((item, index) => {
+      list[index].contentCopy = item;
+      arr.push(list[index])
+    })
+    this.setData({
+      cardlist: list
+    })
+  },
+
+  // 循环增加动画效果 - 对应卡片添加下移动效果
+  choice_card: function(e) {
+    let that = this
+    that.restore() //还原
+    let choice = e.currentTarget.dataset.index
+    console.log(choice)
+    let list = that.data.cardlist
+    for (let i = 0; i < list.length; i++) {
+      let item = list[i]
+      // 判断
+      if (i > choice) {
+        console.log(item)
+        let animation = wx.createAnimation({
+          duration: 600
+        });
+        animation.translateY(180).step();
+        that.setData({
+          ["cardlist[" + i + "].animation"]: animation.export()
+        })
+      }
+    }
+  },
+
+  // 重设属性，还原到动画之前
+  restore: function() {
+    let that = this
+    let list = that.data.cardlist
+    for (let i = 0; i < list.length; i++) {
+      let item = list[i]
+      let animation = wx.createAnimation({
+        duration: 600
+      });
+      animation.translateY(0).step()
+      that.setData({
+        ["cardlist[" + i + "].animation"]: animation.export()
+      })
+    }
   },
 
   // 会员卡购买,续费

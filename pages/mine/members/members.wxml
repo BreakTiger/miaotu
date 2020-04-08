@@ -18,27 +18,40 @@
   </view>
 
   <view class="card-list flex col fl-align">
-    <view class="card-list-item" wx:for="{{cardlist}}" wx:key="index">
+
+    <view class="card-list-item" wx:for="{{cardlist}}" wx:key="index" style="top:{{item.top}}rpx;z-index:{{item.tier}};" bindtap="choice_card" data-index="{{index}}" animation="{{item.animation}}">
+
       <image src="{{item.member_pic}}"></image>
-      <view class="card-info-line-one flex fl-align fl-jsb c-ff f48">
-        <view>
-          <text class="f28">￥</text>
-          <text>{{item.member_price}}</text>
+
+      <!-- 卡片信息 -->
+      <view class="card-info flex col fl-align">
+
+        <view class="line-one flex fl-align fl-jsb c-ff">
+          <text class="f25 ">￥{{item.member_price}}</text>
+          <text class="">{{item.member_name}}</text>
         </view>
-        <text>{{item.member_name}}</text>
-      </view>
-      <view class="card-info-line-two flex fl-jsb c-ff f24">
-        <view class="flex col">
-          <text class="f36">{{item.cardType}}</text>
-          <text>{{item.state}}</text>
+
+        <view class="line-two flex fl-align fl-jsd c-ff f24">
+          <!-- <view class="flex col">
+            <text class="f36">{{item.cardType}}</text>
+            <text>{{item.state}}</text>
+          </view> -->
+          <view class="buy t-ac b_r200" catchtap="toBuy" data-level="{{item.level}}">立即购买</view>
+
         </view>
-        <view class="buy t-ac b_r200" catchtap="toBuy" data-level="{{item.level}}">立即购买</view>
+
       </view>
-      <view class="f24 c-ff">
+
+      <!-- 卡片介绍 -->
+      <view class="f24 c-ff" data-index="{{index}}">
         <template is="wxParse" data="{{wxParseData:item.contentCopy}}" />
       </view>
+
     </view>
+
   </view>
+
+
 
   <text class="c-ff">做任务升等级</text>
 
