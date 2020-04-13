@@ -32,12 +32,7 @@
         </view>
 
         <view class="line-two flex fl-align fl-jsd c-ff f24">
-          <!-- <view class="flex col">
-            <text class="f36">{{item.cardType}}</text>
-            <text>{{item.state}}</text>
-          </view> -->
           <view class="buy t-ac b_r200" catchtap="toBuy" data-level="{{item.level}}">立即购买</view>
-
         </view>
 
       </view>

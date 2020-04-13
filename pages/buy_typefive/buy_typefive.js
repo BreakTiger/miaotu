@@ -8,12 +8,15 @@ Page({
 
   data: {
     id: '',
+
     //出发地
     startPlace: [],
     region: '请选择出发地址',
+
     name: '',
     mobile: '',
     identity: '',
+
     total: '0.00'
   },
 
@@ -22,6 +25,16 @@ Page({
     this.setData({
       id: options.id
     })
+
+    // 判断缓存中是否存在infos
+    let infos = wx.getStorageSync('putInfo') || ''
+    if (infos) {
+      this.setData({
+        name: infos.name,
+        mobile: infos.mobile,
+        identity: infos.identity
+      })
+    }
   },
 
   // 选择出发地
@@ -73,6 +86,14 @@ Page({
     } else if (!identity || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(identity)) {
       modals.showToast('身份证号码有误，请重新输入', 'none')
     } else {
+      // 输入信息缓存
+      let infos = {
+        name: name,
+        mobile: phone,
+        identity: identity
+      }
+      wx.setStorageSync('putInfo', infos)
+
       let data = {
         id: that.data.id,
         name: name,
@@ -84,6 +105,7 @@ Page({
       request.sendRequest(url, 'post', data, {
         'token': wx.getStorageSync('openid')
       }).then(function(res) {
+        console.log('111:', res.data)
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
             modals.showToast('下单完成', 'loading')
@@ -92,6 +114,8 @@ Page({
                 url: '/pages/index/free/free',
               })
             }, 500)
+          } else {
+            modals.showToast(res.data.msg, 'loading')
           }
         } else {
           modals.showToast('系统繁忙，请稍后重试', 'none')

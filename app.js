@@ -36,6 +36,7 @@ App({
     })
   },
   globalData: {
-    api: 'https://mt.dt5555.cn'
+    api: 'https://mt.dt5555.cn',
+    item:{}
   }
 })

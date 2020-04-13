@@ -1,4 +1,15 @@
+<import src="../../wxParse/wxParse.wxml" />
+
 <view class="container flex col fl-align">
+
+  <!-- 套餐类型 -->
+  <view class="type b-ff flex col" wx:if="{{tao.length!=0}}">
+    <text class="f32 c-00 f-w5">套餐类型</text>
+    <view class="type-list flex fl-w">
+      <text class="c-66 b_r12 {{tao[index].id==choice?'type-list-item':''}}" wx:for="{{tao}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
+    </view>
+  </view>
+
   <!-- 出发地 -->
   <view class="depart b-ff flex fl-align fl-jsb">
     <text class="f32 c-00 f-w5">出发地</text>
@@ -6,18 +17,12 @@
       <view class="picker f32 c-66">{{region}}</view>
     </picker>
   </view>
-  <!-- 套餐类型 -->
-  <view class="type b-ff flex col">
-    <text class="f32 c-00 f-w5">套餐类型</text>
-    <view class="type-list flex fl-w">
-      <text class="c-66 b_r12 {{types[index].id==choiceTao?'type-list-item':''}}" wx:for="{{types}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
-    </view>
-  </view>
+
   <!-- 价格日历 -->
   <view class="departure b-ff flex col">
     <text class="f32 c-00 f-w5">出发日期</text>
     <view class="nowDates flex fl-align fl-jsb">
-      <text style="margin-left: 40rpx;">{{pageData.date}}</text>
+      <text style="margin-left: 40rpx;">{{today}}</text>
       <view class="controls flex fl-align fl-jsb">
         <image bindtap="lastMonth" src="../../icon/r_up.png"></image>
         <image bindtap="nextMonth" src="../../icon/r_down.png"></image>
@@ -33,65 +38,116 @@
       <view class="calendar-content-row flex fl-align fl-jsb" wx:for="123456" wx:key="index" wx:for-index="row">
         <!-- 列 -->
         <view class="calendar-content-col" wx:for="1234567" wx:key="index" wx:for-index="col">
-          <view class="calendar-list-item {{choice_day_index==(row * 7 + col)?'choice_item':''}} flex col fl-align f28" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" data-day-index="{{row * 7 + col}}" bindtap="selectDay">
+          <view class="calendar-list-item {{choice_day_index==(row * 7 + col)?'choice_item':''}} flex col fl-align f28" wx:if="{{pageData.arrIsShow[row * 7 + col]}}" bindtap="selectDay" data-y="{{pageData.year}}" data-m="{{pageData.month}}" data-d="{{pageData.arrDays[row * 7 + col]}}"
+            data-index="{{row * 7 + col}}">
             <text>{{pageData.arrDays[row * 7 + col]}}</text>
-            <text style="font-size:15rpx;">￥{{priceList[row * 7 + col]}}</text>
+            <text style="font-size:15rpx;" wx:if="{{priceList[row * 7 + col]!=0}}">￥{{priceList[row * 7 + col]}}</text>
+            <text style="font-size:15rpx;" wx:else>暂无</text>
           </view>
         </view>
       </view>
     </view>
   </view>
-  <!-- 购买数量 -->
-  <view class="buyNums b-ff flex col ">
-    <text class="f32 c-00 f-w5">购买数量</text>
-    <view class="line flex fl-align fl-jsb">
-      <text class="f28 c-66">成人票</text>
-      <view class="number-control flex fl-jsb t-ac">
-        <text bindtap="toTicket_one_minu">-</text>
-        <input type="number" class="t-ac" value="{{adult}}" maxlength="3"></input>
-        <text bindtap="toTicket_one_add">+</text>
+
+  <!-- 参与人 -->
+  <view class="contact b-ff flex col">
+
+    <text class="f28 c-66">参与人</text>
+
+    <view class="contact-box flex fl-w">
+      <view class="member {{item.choice==1?'type-list-item':'c-66'}}" wx:for="{{contact}}" wx:key="index" bindtap="choice_joined" data-item="{{item}}">{{item.name}}</view>
+      <view class="add flex fl-align fl-jse" bindtap="toAdd">
+        <image src="/icon/add.png"></image>
       </view>
     </view>
-    <view class="line flex fl-align fl-jsb">
-      <text class="f28 c-66">儿童票</text>
-      <view class="number-control flex fl-jsb t-ac">
-        <text bindtap="toTicket_two_minu">-</text>
-        <input type="number" class="t-ac" value="{{child}}" maxlength="3"></input>
-        <text bindtap="toTicket_two_add">+</text>
+
+    <view class="contact-line flex fl-align" wx:for="{{choice_contact}}" wx:key="indexs" data-item="{{item}}" bindtap="toChange">
+      <image src="/icon/delete.png" class="del" catchtap="toDelChoice" data-index="{{index}}"></image>
+      <view class="flex col">
+        <text>{{item.name}}</text>
+        <text>身份证： {{item.identity}}</text>
       </view>
     </view>
+
   </view>
-  <!-- 购买人姓名 -->
+
+  <!-- 联系信息 -->
   <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:8rpx;">
-    <text class="f28 c-66">姓名</text>
-    <input placeholder="请输入购买人姓名" class="input-box" bindinput="toGetName"></input>
+    <text class="f28 c-66">联系人</text>
+    <input placeholder="请填写姓名" class="input-box" bindinput="toGetName"></input>
   </view>
-  <!-- 购买人手机 -->
   <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:8rpx;">
-    <text class="f28 c-66">手机号码</text>
-    <input placeholder="请输入购买人手机号" class="input-box" bindinput="toGetPhone"></input>
+    <text class="f28 c-66">手机号</text>
+    <input placeholder="接收活动短信" class="input-box" bindinput="toGetPhone"></input>
   </view>
-  <!-- 购买人身份证 -->
+
+
+  <!-- 出行保险 -->
+  <view class="insurance b-ff flex col">
+
+    <text class="f32 c-00 f-w5">出行保证</text>
+
+    <!-- 出行意外险 -->
+    <view class="flex fl-align" bindtap="toBuy_one" data-item="{{insurance.insurance}}">
+      <view class="flex col" style="width:70%;">
+        <view class="f28">{{insurance.insurance.name}}</view>
+        <view class="f24 c-66 w100 climp1">
+          <template is="wxParse" data="{{wxParseData:insurance_one.nodes}}" />
+        </view>
+      </view>
+      <view class="flex fl-align fl-jsb" style="width:30%;">
+        <text class="f28">￥{{insurance.insurance.price}}/人</text>
+        <icon type="circle" size="20" wx:if="{{choice_one==0}}"></icon>
+        <icon type="success" size="20" color="#1faff1" wx:if="{{choice_one==1}}"></icon>
+      </view>
+    </view>
+
+    <!-- 退款险 -->
+    <view class="flex fl-align" bindtap="toBuy_two" data-item="{{insurance.insurance_refund}}">
+      <view class="flex col" style="width:70%;">
+        <view class="f28">{{insurance.insurance_refund.name}}</view>
+        <view class="f24 c-66 w100 climp1">
+          <template is="wxParse" data="{{wxParseData:insurance_two.nodes}}" />
+        </view>
+      </view>
+      <view class="flex fl-align fl-jsb" style="width:30%;">
+        <text class="f28">￥{{insurance.insurance_refund.price}}/份</text>
+        <icon type="circle" size="20" wx:if="{{choice_two==0}}"></icon>
+        <icon type="success" size="20" color="#1faff1" wx:if="{{choice_two==1}}"></icon>
+      </view>
+    </view>
+
+  </view>
+
   <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:8rpx;">
-    <text class="f28 c-66">身份证号码</text>
-    <input placeholder="请输入购买人身份证" class="input-box" bindinput="toGetIdentity"></input>
+    <text>会员折扣</text>
+    <text class="f28" style="margin-right:20rpx;">{{discount*100}}%</text>
   </view>
+
   <!-- 平台优惠 -->
   <view class="line b-ff flex fl-align fl-jsb" style="margin-bottom:278rpx;" bindtap="toShowCoupons">
     <text class="f28 c-66">平台优惠</text>
     <view class="flex fl-align" style="margin-right:40rpx;">
-      <text>{{choice_coupon}}</text>
+      <text class="f28">优惠{{coupons}}元</text>
       <image class="icon" src="../../icon/go.png"></image>
     </view>
   </view>
+
   <!-- 底部栏 -->
   <view class="bottom-line flex fl-jsb b-ff">
-    <view class="flex fl-align f32">
-      <text class="c-00">合计：</text>
-      <text class="c-38">￥{{total_fina}}</text>
+    <view class="flex fl-align ">
+      <text class="c-00 f28">合计:</text>
+      <text class="c-38 f28">￥{{total}}</text>
     </view>
+
+    <view class="flex fl-align ">
+      <text class="f24">优惠:{{you}}</text>
+    </view>
+
     <view class="sure c-ff f32 b_r200 t-ac" bindtap="toOrder">确定</view>
+
   </view>
+
   <!-- 选择优惠券 -->
   <view class="cover flex col fl-align fl-jsd" wx:if="{{covers}}">
     <view class="coupons b-ff flex col fl-align">
@@ -99,10 +155,10 @@
       <view class="title-line f28 t-ac f-wb">平台优惠</view>
       <view class="coupons-content">
         <scroll-view scroll-y>
-          <view class="coupons-list-item flex fl-align fl-jsb" wx:for="{{list}}" wx:key="index" data-index="{{index}}" bindtap="toChoiceCoupons">
+          <view class="coupons-list-item flex fl-align fl-jsb" wx:for="{{list}}" wx:key="index" data-item="{{item}}" data-index="{{index}}" bindtap="toChoiceCoupons">
             <text class="c-38 f20" style="width:160rpx;">￥<text class="f32">{{item.fullprice}}</text></text>
             <view class="flex col fl-jse f20">
-              <text>{{item.yhq_rule}}</text>
+              <template is="wxParse" data="{{wxParseData:item.contentCopy}}" />
               <text>有效期{{item.yhq_starttime}}~{{item.yhq_endtime}}</text>
               <text class="c-38">{{item.yhq_name}}</text>
             </view>
@@ -114,4 +170,5 @@
       </view>
     </view>
   </view>
+
 </view>

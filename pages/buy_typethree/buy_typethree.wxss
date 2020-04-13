@@ -1,16 +1,18 @@
+@import '../../wxParse/wxParse.wxss';
+
 page {
   background: #f5f5f5;
 }
 
 /* 出发地 + 套餐类型 */
 
-.depart, .type, .imports {
+.depart, .type, .imports, .insurance {
   width: 100%;
   padding: 20rpx 0;
   margin-bottom: 8rpx;
 }
 
-.depart>text, .type>text, .imports>text {
+.depart>text, .type>text, .imports>text, .insurance>text {
   margin-left: 40rpx;
 }
 
@@ -74,8 +76,18 @@ page {
   margin-left: 40rpx;
 }
 
-.buyNums>view{
+.buyNums>view {
   padding: 0 40rpx;
   padding-bottom: 20rpx;
 }
 
+/* 保险 */
+
+.insurance>view {
+  width: 90%;
+  margin: 10rpx auto;
+}
+
+.w100 {
+  width: 100%;
+}

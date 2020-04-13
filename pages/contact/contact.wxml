@@ -1,0 +1,33 @@
+<view class="container flex col">
+
+  <!-- 证件 -->
+  <view class="line flex fl-align fl-jsb">
+    <text class="c-66">证件类型</text>
+    <view>身份证</view>
+  </view>
+
+  <!-- 姓名 -->
+  <view class="line flex fl-align fl-jsb">
+    <text>姓名</text>
+    <input type="text" placeholder="与联系人证件一致" value="{{name}}" bindinput="getname"></input>
+  </view>
+
+  <!-- 证件号码 -->
+  <view class="line flex fl-align fl-jsb">
+    <text>证件号码</text>
+    <input type="idcard" placeholder="与联系人证件一致" value="{{code}}" bindinput="getcode"></input>
+  </view>
+
+  <!-- 手机号码 -->
+  <view class="line flex fl-align fl-jsb">
+    <text>手机号</text>
+    <input type="number" placeholder="用于接收活动通知" value="{{phone}}" bindinput="getphone"></input>
+  </view>
+
+  <!-- 确定 -->
+
+  <view class="add t-ac c-ff" bindtap="toControl">提交</view>
+
+  <view class="del t-ac" bindtap="toDel" wx:if="{{id}}">删除</view>
+
+</view>

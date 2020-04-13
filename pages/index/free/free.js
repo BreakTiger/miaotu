@@ -207,7 +207,7 @@ Page({
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
-    this.onLoad()
+    this.getMyList()
   },
 
   onReachBottom: function() {

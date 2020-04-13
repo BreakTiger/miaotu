@@ -1,10 +1,12 @@
+<import src="../../wxParse/wxParse.wxml" />
+
 <view class="container flex col fl-align">
 
   <!-- 套餐类型 -->
-  <view class="type b-ff flex col" wx:if="{{types.length!=0}}">
+  <view class="type b-ff flex col" wx:if="{{tao.length!=0}}">
     <text class="f32 c-00 f-w5">请选择套餐类型：</text>
     <view class="type-list flex fl-w">
-      <text class="c-66 b_r12 {{types[index].id==choice?'type-list-item':''}}" wx:for="{{types}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
+      <text class="c-66 b_r12 {{tao[index].id==choice?'type-list-item':''}}" wx:for="{{tao}}" wx:key="index" bindtap="toChoices" data-item="{{item}}">{{item.setmeal_name}}</text>
     </view>
   </view>
 
@@ -19,19 +21,56 @@
   <!-- 购买人 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">姓名</text>
-    <input type="text" bindinput="usernames" placeholder="请输入购买人姓名"></input>
+    <input type="text" bindinput="usernames" value="{{name}}" placeholder="请输入购买人姓名"></input>
   </view>
 
   <!-- 手机号 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">手机号</text>
-    <input type="number" bindinput="phones" placeholder="请输入购买人电话"></input>
+    <input type="number" bindinput="phones" value="{{mobile}}" placeholder="请输入购买人电话"></input>
   </view>
 
   <!-- 身份证 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">身份证</text>
-    <input type="idcard" bindinput="identity" placeholder="请输入购买人身份证"></input>
+    <input type="idcard" bindinput="identity" value="{{identity}}" placeholder="请输入购买人身份证"></input>
+  </view>
+
+  <!-- 出行保险 -->
+  <view class="insurance b-ff flex col">
+
+    <text class="f32 c-00 f-w5">出行保证</text>
+
+    <!-- 意外险 -->
+    <view class="flex fl-align" bindtap="toBuy_one" data-item="{{insurance.insurance}}">
+      <view class="flex col" style="width:70%;">
+        <view class="f28">{{insurance.insurance.name}}</view>
+        <view class="f24 c-66 w100 climp1">
+          <template is="wxParse" data="{{wxParseData:insurance_one.nodes}}" />
+        </view>
+      </view>
+      <view class="flex fl-align fl-jsb" style="width:30%;">
+        <text class="f28">￥{{insurance.insurance.price}}/份</text>
+        <icon type="circle" size="20" wx:if="{{choice_one==0}}"></icon>
+        <icon type="success" size="20" color="#1faff1" wx:if="{{choice_one==1}}"></icon>
+      </view>
+    </view>
+
+    <!-- 退款险 -->
+    <view class="flex fl-align" bindtap="toBuy_two" data-item="{{insurance.insurance_refund}}">
+      <view class="flex col" style="width:70%;">
+        <view class="f28">{{insurance.insurance_refund.name}}</view>
+        <view class="f24 c-66 w100 climp1">
+          <template is="wxParse" data="{{wxParseData:insurance_two.nodes}}" />
+        </view>
+      </view>
+      <view class="flex fl-align fl-jsb" style="width:30%;">
+        <text class="f28">￥{{insurance.insurance_refund.price}}/份</text>
+        <icon type="circle" size="20" wx:if="{{choice_two==0}}"></icon>
+        <icon type="success" size="20" color="#1faff1" wx:if="{{choice_two==1}}"></icon>
+      </view>
+    </view>
+
   </view>
 
   <!-- 底部栏 -->
@@ -42,5 +81,5 @@
     </view>
     <view class="sure c-ff f32 b_r200 t-ac" bindtap="toOrder">确定</view>
   </view>
-  
+
 </view>

@@ -1,58 +1,99 @@
 // 拼团下单
-
 const request = require('../../utils/http.js')
 import modals from '../../utils/modal.js'
+const WxParse = require('../../wxParse/wxParse.js')
 const app = getApp()
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-    id: '',
-    uid: '',
-    types: [],
-    choice: null,
+    id: '', //活动ID
+    uid: '', //团战ID
+    tao: [], //套餐
+    insurance: {}, //保险
+    price: '', //商品价
+
+    //套餐
+    choice: null, //选择套餐
+    tprice: '0.00', //套餐价格
+
+    //出发地
     startPlace: [],
     region: '请选择出发地址',
+
+    //信息
     name: '',
-    phone: '',
-    idnum: '',
-    price: '',
-    total: '0.00'
+    mobile: '',
+    identity: '',
+
+    //保险
+    choice_one: 0,
+    price_one: '0.00', //意外险价格
+    choice_two: 0,
+    price_two: '0.00', //退款险价格
+
+    total: '0.00' //总价
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
+
   onLoad: function(options) {
     let data = JSON.parse(options.data)
     console.log(data)
-    // console.log(data.tao[0].id)
     this.setData({
       id: data.id,
       uid: data.uid,
-      types: data.tao,
+      tao: data.tao,
+      insurance: data.insurance,
       price: data.price,
       total: data.price
     })
+
+    // 解析富文本
+    let insurance_one = data.insurance.insurance.rule
+    WxParse.wxParse('insurance_one', 'html', insurance_one, this, 5);
+    let insurance_two = data.insurance.insurance_refund.rule
+    WxParse.wxParse('insurance_two', 'html', insurance_two, this, 5);
+
+    // 判断缓存中是否存在infos
+    let infos = wx.getStorageSync('putInfo') || ''
+    if (infos) {
+      this.setData({
+        name: infos.name,
+        mobile: infos.mobile,
+        identity: infos.identity
+      })
+    }
   },
 
   // 选择套餐
   toChoices: function(e) {
     let item = e.currentTarget.dataset.item
-    let cid = this.data.choice
-    let id = item.id
-    if (cid == id) {
+    // console.log(item)
+    let sprice = parseFloat(item.setmeal_price)
+    // console.log('套餐价：', sprice)
+    let price = parseFloat(this.data.price)
+    // console.log('商品价：', price)
+    let one = parseFloat(this.data.price_one)
+    // console.log('保险1价：', one)
+    let two = parseFloat(this.data.price_two)
+    // console.log('保险2价：', two)
+    let total = parseFloat(this.data.total)
+    // console.log('总价：', total)
+    let id = this.data.choice
+    // 判断
+    if (id == item.id) { //取消选中
+      let a = (total - sprice).toFixed(2)
       this.setData({
         choice: null,
-        total: parseFloat(this.data.price)
+        tprice: '0.00',
+        total: a
       })
-    } else {
+    } else { //选中
+      let a = (price + sprice + one + two).toFixed(2)
       this.setData({
-        choice: id,
-        total: parseFloat(item.setmeal_price) + parseFloat(this.data.price)
+        choice: item.id,
+        tprice: sprice,
+        total: a
       })
     }
   },
@@ -77,7 +118,7 @@ Page({
   phones: function(e) {
     let phone = e.detail.value
     this.setData({
-      phone: phone
+      mobile: phone
     })
   },
 
@@ -85,64 +126,164 @@ Page({
   identity: function(e) {
     let idnum = e.detail.value
     this.setData({
-      idnum: idnum
+      identity: idnum
     })
   },
 
-  // 下单
-  toOrder: function() {
-    let that = this
-    let sid = that.data.choice
-    console.log('套餐ID:', sid)
-    let name = that.data.name
-    console.log('姓名：', name)
-    let phone = that.data.phone
-    console.log('电话：', phone)
-    let code = that.data.idnum
-    console.log('身份证：', code)
-    if (that.data.region == '请选择出发地址') {
-      modals.showToast('请选择出发地址', 'none')
-    } else if (!name) {
-      modals.showToast('请输入姓名！', 'none')
-    } else if (!phone) {
-      modals.showToast('请输入手机号码', 'none')
-    } else if (!(/^1[34578]\d{9}$/.test(phone))) {
-      modals.showToast('手机号码有误，请重新输入', 'none')
-    } else if (!code) {
-      modals.showToast('请输入身份证号码', 'none')
-    } else if (!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(code)) {
-      modals.showToast('身份证号码有误，请重新输入', 'none')
+  //保险
+  //意外险
+  toBuy_one: function(e) {
+    let item = e.currentTarget.dataset.item
+    let one = parseFloat(item.price)
+    let total = parseFloat(this.data.total)
+    let select = this.data.choice_one
+    if (select == 0) {
+      this.setData({
+        choice_one: 1,
+        price_one: one,
+        total: (one + total).toFixed(2)
+      })
     } else {
-      let data = {
-        id: that.data.id,
-        set_meal_id: sid,
-        name: that.data.name,
-        mobile: that.data.phone,
-        identity: that.data.idnum,
-        starting: that.data.region,
-        uid: that.data.uid
-      }
-      console.log('参数：', data);
-      modals.loading()
-      let url = app.globalData.api + '/portal/Pintuan/do_team'
-      request.sendRequest(url, 'post', data, {
-        'token': wx.getStorageSync('openid')
-      }).then(function(res) {
-        modals.loaded()
-        if (res.statusCode == 200) {
-          if (res.data.status == 1) {
-            let oid = res.data.data
-            console.log('订单ID：', oid)
-            console.log('总价：', that.data.total)
-            that.payment(oid)
-          } else {
-            modals.showToast(res.data.msg, 'none')
-          }
-        } else {
-          modals.showToast('系统繁忙，请稍后重试', 'none')
-        }
+      this.setData({
+        choice_one: 0,
+        price_one: '0.00',
+        total: (total - one).toFixed(2)
       })
     }
+  },
+
+  //取消险
+  toBuy_two: function(e) {
+    let item = e.currentTarget.dataset.item
+    let two = parseFloat(item.price)
+    let total = parseFloat(this.data.total)
+    let select = this.data.choice_two
+    if (select == 0) {
+      this.setData({
+        choice_two: 1,
+        price_two: two,
+        total: (two + total).toFixed(2)
+      })
+    } else {
+      this.setData({
+        choice_two: 0,
+        price_two: '0.00',
+        total: (total - two).toFixed(2)
+      })
+    }
+  },
+
+
+  // 确定
+  toOrder: function() {
+    let that = this
+    let choice = that.data.choice //选择套餐
+    let place = that.data.region //出发地
+    let name = that.data.name //姓名
+    let phone = that.data.mobile //电话
+    let identity = that.data.identity //身份证
+    let c_one = that.data.choice_one //意外险
+    let c_two = that.data.choice_two //退款险
+    // 判断
+    if (place == "请选择出发地址") {
+      modals.showToast('请选择您的出发地', 'none')
+    } else if (!name) {
+      modals.showToast('请输入您的姓名', 'none')
+    } else if (!phone) {
+      modals.showToast('请输入您的手机号码', 'none')
+    } else if (!(/^1[34578]\d{9}$/.test(phone))) {
+      modals.showToast('手机号码有误，请重新输入', 'none')
+    } else if (!identity) {
+      modals.showToast('请输入身份证号码', 'none')
+    } else if (!identity || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(identity)) {
+      modals.showToast('身份证号码有误，请重新输入', 'none')
+    } else {
+      // 输入信息缓存
+      let infos = {
+        name: name,
+        mobile: phone,
+        identity: identity
+      }
+      wx.setStorageSync('putInfo', infos)
+
+      // 再判断所选保险
+      if (c_one == 0 && c_two == 0) { // 1.俩种保险都无
+        let data = {
+          id: that.data.id,
+          name: name,
+          mobile: phone,
+          identity: identity,
+          set_meal_id: that.data.choice,
+          starting: place,
+          refund_insurance_status: '',
+          accident_insurance_status: '',
+          total: that.data.total
+        }
+        that.getOrder(data)
+      } else if (c_one == 1 && c_two == 1) { // 2.俩种保险都存在
+        let data = {
+          id: that.data.id,
+          name: name,
+          mobile: phone,
+          identity: identity,
+          set_meal_id: that.data.choice,
+          starting: place,
+          refund_insurance_status: 1,
+          accident_insurance_status: 1,
+          total: that.data.total
+        }
+        that.getOrder(data)
+      } else if (c_one == 1) { // 3.只存在意外险
+        let data = {
+          id: that.data.id,
+          name: name,
+          mobile: phone,
+          identity: identity,
+          set_meal_id: that.data.choice,
+          starting: place,
+          refund_insurance_status: 1,
+          accident_insurance_status: '',
+          total: that.data.total
+        }
+        that.getOrder(data)
+      } else if (c_two == 1) { // 4.只存在退款险
+        let data = {
+          id: that.data.id,
+          name: name,
+          mobile: phone,
+          identity: identity,
+          set_meal_id: that.data.choice,
+          starting: place,
+          refund_insurance_status: '',
+          accident_insurance_status: 1,
+          total: that.data.total
+        }
+        that.getOrder(data)
+      }
+    }
+  },
+
+  // 下单
+  getOrder: function(data) {
+    console.log('参数：', data)
+    let that = this
+    let url = app.globalData.api + '/portal/Pintuan/do_team'
+    request.sendRequest(url, 'post', data, {
+      'token': wx.getStorageSync('openid')
+    }).then(function(res) {
+      if (res.statusCode == 200) {
+        if (res.data.status == 1) {
+          let oid = res.data.data
+          console.log('订单ID：', oid)
+          console.log('总价：', that.data.total)
+          that.payment(oid)
+        } else {
+          modals.showToast(res.data.msg, 'none')
+        }
+      } else {
+        modals.showToast('系统繁忙，请稍后重试', 'none')
+      }
+    })
   },
 
   // 支付
@@ -194,4 +335,5 @@ Page({
       }
     })
   }
+
 })

@@ -72,14 +72,10 @@ Page({
 
   // 拼团详情
   toGoodsDetail: function(e) {
-    let oid = e.currentTarget.dataset.id
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/seckill_detail/seckill_detail?oid=' + oid,
+      url: '/pages/seckill_detail/seckill_detail?id=' + id,
     })
-  },
-
-  onShow: function() {
-
   },
 
   onPullDownRefresh: function() {

@@ -10,7 +10,7 @@
         <text class="labers t-ac c-38 f20">爆款</text>
         <text class="f28 c-38">￥{{item.dprice}}起</text>
         <view class="state flex col fl-align">
-          <text class="c-66 f20">已拼{{item.people_count}}单</text>
+          <text class="c-66 f20">已售{{item.people_count}}单</text>
           <view class="flex col fl-align fl-jse b_r12 c-ff">
             <text class="f24">去秒杀</text>
             <view class="flex fl-align fl-jsa">

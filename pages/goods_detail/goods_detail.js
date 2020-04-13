@@ -5,6 +5,7 @@ const app = getApp()
 
 Page({
 
+
   data: {
     top: [{
         name: '商品'
@@ -17,9 +18,10 @@ Page({
       }
     ],
     id: '',
-    details: {},
-    packages: [],
-    startTime: '',
+    details: {}, //商品数据
+    tao: [], //套餐
+    calendar: [], //当月每日的价格
+    insurance: {}, //保险
     discuss: {},
     collecttype: false,
     floorstatus: false
@@ -38,7 +40,7 @@ Page({
     }
   },
 
-  // 获取商品信息
+  // 商品信息
   getShopInfo: function() {
     let that = this
     let url = app.globalData.api + '/portal/home/get_details_info'
@@ -49,44 +51,26 @@ Page({
       'content-type': 'application/json'
     }).then(function(res) {
       modals.loaded()
+      console.log(res.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let details = res.data.data.details
-          let packages = res.data.data.setmeal
+          let tao = res.data.data.setmeal
           that.setData({
             details: details,
-            packages: packages
+            tao: tao,
+            calendar: res.data.data.calendar,
+            insurance: res.data.data.insurance
           })
+
+          // 解析富文本
           let introduce = details.introduce
           WxParse.wxParse('introduce', 'html', introduce, that, 5);
           let traffic = details.traffic
           WxParse.wxParse('traffic', 'html', traffic, that, 5);
           let buy = details.buy_notice
           WxParse.wxParse('buy', 'html', buy, that, 5);
-          that.trailer(details.article_type)
-        }
-      } else {
-        modals.showToast('系统繁忙，请稍后重试', 'none')
-      }
-    })
-  },
 
-  // 活动预告
-  trailer: function(e) {
-    let that = this
-    let url = app.globalData.api + '/portal/home/get_foreshow'
-    modals.loading()
-    request.sendRequest(url, 'post', {
-      type: e
-    }, {
-      'content-type': 'application/json'
-    }).then(function(res) {
-      modals.loaded()
-      if (res.statusCode == 200) {
-        if (res.data.status == 1) {
-          that.setData({
-            startTime: res.data.data
-          })
           that.getReview()
         }
       } else {
@@ -113,19 +97,17 @@ Page({
             discuss: res.data.data.data
           })
         }
+        let openID = wx.getStorageSync('openid') || ''
+        if (openID) {
+          that.collectType(openID)
+        }
       } else {
         modals.showToast('系统繁忙，请稍后重试', 'none')
       }
     })
   },
 
-  onShow: function() {
-    let that = this
-    let openID = wx.getStorageSync('openid') || ''
-    if (openID) {
-      that.collectType(openID)
-    }
-  },
+
 
   // 收藏状态
   collectType: function(openID) {
@@ -223,13 +205,18 @@ Page({
   toOrder: function() {
     let openID = wx.getStorageSync('openid') || ''
     if (openID) {
-      let data = {
-        id: this.data.details.id,
-        tao: this.data.packages
-      }
       wx.navigateTo({
-        url: '/pages/buy_typeone/buy_typeone?data=' + JSON.stringify(data),
+        url: '/pages/buy_typeone/buy_typeone?id=' + this.data.details.id,
       })
+      // let data = {
+      //   id: this.data.details.id,
+      //   tao: this.data.tao,
+      //   calendar: this.data.calendar,
+      //   insurance: this.data.insurance
+      // }
+      // wx.navigateTo({
+      //   url: '?data=' + JSON.stringify(data) + '&details=' + JSON.stringify(this.data.details),
+      // })
     } else {
       wx.showModal({
         title: '提示',
@@ -272,6 +259,7 @@ Page({
     }
   },
 
+
   onPullDownRefresh: function() {
     wx.showToast({
       title: '加载中',
@@ -281,9 +269,7 @@ Page({
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
-    this.onLoad({
-      id: this.data.id
-    })
+    this.getShopInfo()
   },
 
   onShareAppMessage: function(options) {

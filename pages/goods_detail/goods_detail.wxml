@@ -22,10 +22,7 @@
         <text style="margin-left:10rpx;">已售：{{details.sell_count}}</text>
       </view>
     </view>
-    <view class="hint c-38 f20" wx:if="{{startTime}}">
-      <text class="b_r200 t-ac">秒杀预告</text>
-      <text>{{startTime}}开抢</text>
-    </view>
+    
   </view>
 
   <view class="hint-line flex fl-align fl-jsa c-00" wx:if="{{details.twice_submit}}">
@@ -43,6 +40,7 @@
     <view class="allreview flex fl-align fl-jc f24 c-F1" bindtap="toEvaluate" data-id="{{details.id}}">查看全部评价 ></view>
   </view>
 
+  <!-- 商铺 -->
   <view class="shoop-line flex fl-align fl-jsa b-ff" bindtap="toShop" data-sid="{{details.shop_id}}">
     <image class="b_r12" src="{{details.shop.avatar}}"></image>
     <view class="shop-info flex col fl-jse">
@@ -63,13 +61,13 @@
     <image src="../../icon/go.png" class="togos"></image>
   </view>
 
+  <!-- 富文本 -->
   <view class="abstract flex col fl-align b-ff">
     <view class="f32 c-00 f-w5">产品简介</view>
     <view class="f28 c-66 f-w4">
       <template is="wxParse" data="{{wxParseData:introduce.nodes}}" />
     </view>
   </view>
-
   <view class="traffic flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">交通信息</text>
     <view class="f20 c-66 f-w3">交通信息仅供参考，最终以供应商确认为准，飞行时长以实际为准</view>
@@ -77,7 +75,6 @@
       <template is="wxParse" data="{{wxParseData:traffic.nodes}}" />
     </view>
   </view>
-
   <view class="attractions flex col fl-align b-ff">
     <text class="f32 c-00 f-w5">景点详情</text>
     <view>
@@ -116,5 +113,5 @@
   </view>
   <button class="consult" plain="true" open-type="contact"></button>
   <button class="shares" plain="true" open-type="share"></button>
-  
+
 </view>

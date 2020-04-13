@@ -1,5 +1,4 @@
 // 门票下单
-
 const request = require('../../utils/http.js')
 import modals from '../../utils/modal.js'
 const app = getApp()
@@ -12,9 +11,11 @@ Page({
     //出发地
     startPlace: [],
     region: '请选择出发地址',
+
     name: '',
     mobile: '',
     identity: '',
+
     total: '0.00'
   },
 
@@ -22,6 +23,17 @@ Page({
     this.setData({
       id: options.id
     })
+
+    // 判断缓存中是否存在infos
+    let infos = wx.getStorageSync('putInfo') || ''
+    if (infos) {
+      this.setData({
+        name: infos.name,
+        mobile: infos.mobile,
+        identity: infos.identity
+      })
+    }
+
   },
 
   // 选择出发地
@@ -94,6 +106,8 @@ Page({
                 url: '/pages/tickets_detail/tickets_detail?id=' + res.data.data,
               })
             }, 500)
+          } else {
+            modals.showToast(res.data.msg, 'none')
           }
         } else {
           modals.showToast('系统繁忙，请稍后重试', 'none')

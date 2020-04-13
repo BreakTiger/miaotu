@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "爆款秒杀"
+  "navigationBarTitleText": "爆款秒杀",
+  "enablePullDownRefresh": true
 }

@@ -9,7 +9,7 @@
     <text class="f28 c-ff" wx:if="{{order.new_status==5}}">待分享</text>
     <text class="f28 c-ff" wx:if="{{order.new_status==6}}">商家处理中...</text>
     <text class="f28 c-ff" wx:if="{{order.new_status==7}}">申请失败</text>
-    <text class="f28 c-ff" wx:if="{{order.new_status==8}}">申请成功</text>
+    <text class="f28 c-ff" wx:if="{{order.new_status==8}}">退款成功</text>
   </view>
 
   <!-- 订单信息 -->
@@ -102,11 +102,11 @@
     <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==1}}" bindtap="continuePay">继续付款</view>
 
     <!-- 待出行 -->
-    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==2}}" bindtap="aftersales">申请售后</view>
+    <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==2||order.type!=2||order.type!=4}}" bindtap="aftersales">申请售后</view>
 
     <!-- 待评价 -->
     <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==3}}" bindtap="delOrder">删除订单</view>
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==3}}" bindtap="aftersales">申请售后</view>
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==3||order.type!=2||order.type!=4}}" bindtap="aftersales">申请售后</view>
     <view class="btn_two b_r200 t-ac c-ff" wx:if="{{order.new_status==3}}" bindtap="toReview">立即评价</view>
 
     <!-- 已完成 -->
@@ -116,7 +116,7 @@
 
     <!-- 待分享 -->
     <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==5}}" bindtap="delOrder">删除订单</view>
-    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==5}}" bindtap="aftersales">申请售后</view>
+    <view class="btn_one b_r200 t-ac c-F1" wx:if="{{order.new_status==5||order.type!=2||order.type!=4}}" bindtap="aftersales">申请售后</view>
     <button class="share-btn t-ac c-ff b_r200" open-type="share" wx:if="{{order.new_status==5&&order.type!=5}}">立即分享</button>
 
     <!-- 商家处理中 -->

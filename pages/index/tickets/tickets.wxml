@@ -19,7 +19,7 @@
       <image src="{{item.banner}}"></image>
       <view class="list-item-title climp2 f24">{{item.title}}</view>
       <view class="price-line ">
-        <text class="f28 c-38">￥{{item.kj_floor_price}}起<text class="f28 c-66" style="text-decoration: line-through;">￥{{item.dprice}}</text></text>
+        <text class="f28 c-38">￥{{item.kj_price}}起<text class="f28 c-66" style="text-decoration: line-through;">￥{{item.dprice}}</text></text>
       </view>
       <view class="freeget f28 c-ff t-ac" catchtap="toFreeGet" data-id="{{item.id}}">点击免费拿</view>
     </view>

@@ -67,7 +67,6 @@ Page({
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let result = res.data.data
-          console.log(result.info)
           that.setData({
             details: result.info,
             shop: result.shop,
@@ -359,10 +358,14 @@ Page({
     if (openID) {
       let data = {
         id: this.data.details.id,
-        tao: this.data.packages,
+        tao: this.data.tao,
         uid: '',
-        price: this.data.details.pt_price
+        price: this.data.details.pt_price,
+        insurance: this.data.insurance
       }
+      console.log(data)
+      console.log(JSON.stringify(data))
+
       wx.navigateTo({
         url: '/pages/buy_typetwo/buy_typetwo?data=' + JSON.stringify(data),
       })
@@ -399,9 +402,10 @@ Page({
     let item = this.data.person
     let data = {
       id: this.data.details.id,
-      tao: this.data.packages,
+      tao: this.data.tao,
       uid: item.id,
-      price: this.data.details.pt_price
+      price: this.data.details.pt_price,
+      insurance: this.data.insurance
     }
     console.log('参数：', data)
     wx.navigateTo({

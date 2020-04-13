@@ -1,3 +1,5 @@
+<import src="../../wxParse/wxParse.wxml" />
+
 <view class="container flex col fl-align">
 
   <!-- 套餐类型 -->
@@ -28,20 +30,58 @@
   <!-- 购买人 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">姓名</text>
-    <input type="text" bindinput="toGetName" placeholder="请输入购买人姓名"></input>
+    <input type="text" bindinput="toGetName" value="{{name}}" placeholder="请输入购买人姓名"></input>
   </view>
 
   <!-- 手机号 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">手机号</text>
-    <input type="number" bindinput="toGetPhone" placeholder="请输入购买人电话"></input>
+    <input type="number" bindinput="toGetPhone" value="{{mobile}}" placeholder="请输入购买人电话"></input>
   </view>
 
   <!-- 身份证 -->
   <view class="imports flex fl-align fl-jsb b-ff">
     <text class="f32 c-00 f-w5">身份证</text>
-    <input type="idcard" bindinput="toGetIdentity" placeholder="请输入购买人身份证"></input>
+    <input type="idcard" bindinput="toGetIdentity" value="{{identity}}" placeholder="请输入购买人身份证"></input>
   </view>
+
+  <!-- 出行保险 -->
+  <view class="insurance b-ff flex col">
+
+    <text class="f32 c-00 f-w5">出行保证</text>
+
+    <!-- 意外险 -->
+    <view class="flex fl-align" bindtap="toBuy_one" data-choice="{{choice_one}}" data-item="{{insurance.insurance}}">
+      <view class="flex col" style="width:70%;">
+        <view class="f28">{{insurance.insurance.name}}</view>
+        <view class="f24 c-66 w100 climp1">
+          <template is="wxParse" data="{{wxParseData:insurance_one.nodes}}" />
+        </view>
+      </view>
+      <view class="flex fl-align fl-jsb" style="width:30%;">
+        <text class="f28">￥{{insurance.insurance.price}}/份</text>
+        <icon type="circle" size="20" wx:if="{{choice_one==0}}"></icon>
+        <icon type="success" size="20" color="#1faff1" wx:if="{{choice_one==1}}"></icon>
+      </view>
+    </view>
+
+    <!-- 退款险 -->
+    <view class="flex fl-align" bindtap="toBuy_two" data-choice="{{choice_two}}" data-item="{{insurance.insurance_refund}}">
+      <view class="flex col" style="width:70%;">
+        <view class="f28">{{insurance.insurance_refund.name}}</view>
+        <view class="f24 c-66 w100 climp1">
+          <template is="wxParse" data="{{wxParseData:insurance_two.nodes}}" />
+        </view>
+      </view>
+      <view class="flex fl-align fl-jsb" style="width:30%;">
+        <text class="f28">￥{{insurance.insurance_refund.price}}/份</text>
+        <icon type="circle" size="20" wx:if="{{choice_two==0}}"></icon>
+        <icon type="success" size="20" color="#1faff1" wx:if="{{choice_two==1}}"></icon>
+      </view>
+    </view>
+
+  </view>
+
 
   <!-- 底部栏 -->
   <view class="bottom-line flex fl-jsb b-ff">

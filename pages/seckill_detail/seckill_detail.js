@@ -49,6 +49,7 @@ Page({
     }, {
       'token': wx.getStorageSync('openid')
     }).then(function(res) {
+      console.log(res.data.data)
       if (res.statusCode == 200) {
         if (res.data.status == 1) {
           let result = res.data.data
@@ -262,17 +263,17 @@ Page({
         'token': openID
       }).then(function(res) {
         modals.loaded()
-        console.log(res)
         if (res.statusCode == 200) {
           if (res.data.status == 1) {
-            // let data = {
-            //   id: that.data.id,
-            //   tao: that.data.tao,
-            //   price: that.data.details.ms_price
-            // }
-            // wx.navigateTo({
-            //   url: '/pages/buy_typethree/buy_typethree?data=' + JSON.stringify(data),
-            // })
+            let data = {
+              id: that.data.id,
+              tao: that.data.tao,
+              price: that.data.details.ms_price,
+              insurance: that.data.insurance
+            }
+            wx.navigateTo({
+              url: '/pages/buy_typethree/buy_typethree?data=' + JSON.stringify(data),
+            })
           } else {
             modals.showToast(res.data.msg, 'none')
           }
